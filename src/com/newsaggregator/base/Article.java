@@ -7,15 +7,13 @@ public class Article {
 
     private String title;
     private String body;
-    private String teaserParagraph;
     private String imageUrl;
     private String articleUrl;
     private Outlet source;
 
-    public Article(String title, String body, String teaserParagraph, String imageUrl, String articleUrl, Outlet source) {
+    public Article(String title, String body, String imageUrl, String articleUrl, Outlet source) {
         this.title = title;
         this.body = body;
-        this.teaserParagraph = teaserParagraph;
         this.imageUrl = imageUrl;
         this.articleUrl = articleUrl;
         this.source = source;
@@ -27,10 +25,6 @@ public class Article {
 
     public String getBody() {
         return body;
-    }
-
-    public String getTeaserParagraph() {
-        return teaserParagraph;
     }
 
     public String getImageUrl() {

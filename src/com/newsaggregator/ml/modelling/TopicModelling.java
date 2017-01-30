@@ -4,13 +4,18 @@ package com.newsaggregator.ml.modelling;
 import cc.mallet.pipe.*;
 import cc.mallet.pipe.iterator.StringArrayIterator;
 import cc.mallet.topics.ParallelTopicModel;
+import cc.mallet.types.Alphabet;
+import cc.mallet.types.FeatureSequence;
 import cc.mallet.types.InstanceList;
+import cc.mallet.types.LabelSequence;
 import com.newsaggregator.base.Article;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class TopicModelling {
@@ -22,7 +27,7 @@ public static void trainTopics(List<Article> articleList) throws IOException {
     ArrayList<Pipe> pipeList = new ArrayList<>();
     pipeList.add(new CharSequenceLowercase());
     pipeList.add(new CharSequence2TokenSequence(Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")) );
-    pipeList.add(new TokenSequenceRemoveStopwords(new File("stoplists/en.txt"), "UTF-8", false, false, false));
+    pipeList.add(new TokenSequenceRemoveStopwords(new File("/Users/kunalwagle/Documents/Personal/Imperial/C4/401Project/Code/newsaggregator-backend/src/com/newsaggregator/ml/modelling/stoplists/en.txt"), "UTF-8", false, false, false));
     pipeList.add(new TokenSequence2FeatureSequence());
 
     InstanceList instances = new InstanceList(new SerialPipes(pipeList));
@@ -35,6 +40,16 @@ public static void trainTopics(List<Article> articleList) throws IOException {
     model.setNumIterations(50);
     model.estimate();
 
+    Alphabet dataAlphabet = instances.getDataAlphabet();
+
+    FeatureSequence tokens = (FeatureSequence) model.getData().get(0).instance.getData();
+    LabelSequence topics = model.getData().get(0).topicSequence;
+
+    Formatter out = new Formatter(new StringBuilder(), Locale.US);
+    for (int position = 0; position < tokens.getLength(); position++) {
+        out.format("%s-%d ", dataAlphabet.lookupObject(tokens.getIndexAtPosition(position)), topics.getIndexAtPosition(position));
+    }
+    System.out.println(out);
 }
 
     private static String[] extractArticleText(List<Article> articleList) {
