@@ -2,9 +2,11 @@ package com.newsaggregator.api.outlets;
 
 import com.newsaggregator.base.Article;
 import com.newsaggregator.base.Outlet;
+import com.newsaggregator.base.OutletArticle;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -41,8 +43,8 @@ public class Guardian {
             JSONObject articleJSON = articleJSONArray.getJSONObject(i);
             String title = articleJSON.getString("webTitle");
             String articleURL = articleJSON.getString("webUrl");
-            String body = articleJSON.getJSONObject("fields").getString("body");
-            articles.add(new Article(title, body, null, articleURL, Outlet.Guardian));
+            String body = Jsoup.parse(articleJSON.getJSONObject("fields").getString("body")).text();
+            articles.add(new OutletArticle(title, body, null, articleURL, Outlet.Guardian));
         }
         return articles;
     }

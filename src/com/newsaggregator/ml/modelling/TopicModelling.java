@@ -9,6 +9,7 @@ import cc.mallet.types.FeatureSequence;
 import cc.mallet.types.InstanceList;
 import cc.mallet.types.LabelSequence;
 import com.newsaggregator.base.Article;
+import com.newsaggregator.base.OutletArticle;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class TopicModelling {
 
-public static void trainTopics(List<Article> articleList) throws IOException {
+public static void trainTopics(List<OutletArticle> articleList) throws IOException {
 
     String[] articleBodies = extractArticleText(articleList);
 
@@ -52,11 +53,11 @@ public static void trainTopics(List<Article> articleList) throws IOException {
     System.out.println(out);
 }
 
-    private static String[] extractArticleText(List<Article> articleList) {
+    private static String[] extractArticleText(List<OutletArticle> articleList) {
 
         List<String> articleBodies = new ArrayList<>();
 
-        for (Article article : articleList) {
+        for (OutletArticle article : articleList) {
             articleBodies.add(article.getBody());
         }
 

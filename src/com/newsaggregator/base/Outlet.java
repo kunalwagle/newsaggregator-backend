@@ -6,7 +6,7 @@ package com.newsaggregator.base;
 
 public enum Outlet {
     NYT("New York Times"),
-    Guardian("Guardian");
+    Guardian("Guardian"), Wikipedia("Wikipedia");
 
     private final String sourceString;
 
