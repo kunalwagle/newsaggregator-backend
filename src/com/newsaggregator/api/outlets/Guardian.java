@@ -20,8 +20,8 @@ import java.util.List;
 
 public class Guardian {
 
-    public static List<Article> getArticles() {
-        List<Article> articles = new ArrayList<>();
+    public static List<OutletArticle> getArticles() {
+        List<OutletArticle> articles = new ArrayList<>();
         try {
             int totalPages = getTotalPages();
             for (int i=0; i<totalPages; i++) {
@@ -35,8 +35,8 @@ public class Guardian {
         return articles;
     }
 
-    private static List<Article> fetchBatchArticles(int pageNumber) throws IOException {
-        List<Article> articles = new ArrayList<>();
+    private static List<OutletArticle> fetchBatchArticles(int pageNumber) throws IOException {
+        List<OutletArticle> articles = new ArrayList<>();
         JSONObject articleBatch = getResponse(pageNumber);
         JSONArray articleJSONArray = articleBatch.getJSONArray("results");
         for (int i = 0; i < articleJSONArray.length(); i++) {

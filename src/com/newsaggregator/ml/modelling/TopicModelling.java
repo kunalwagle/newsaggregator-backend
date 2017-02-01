@@ -38,7 +38,7 @@ public static void trainTopics(List<OutletArticle> articleList) throws IOExcepti
     ParallelTopicModel model = new ParallelTopicModel(numTopics, 1.0, 0.01);
     model.addInstances(instances);
     model.setNumThreads(2);
-    model.setNumIterations(50);
+    model.setNumIterations(1000);
     model.estimate();
 
     Alphabet dataAlphabet = instances.getDataAlphabet();
