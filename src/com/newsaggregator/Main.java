@@ -1,6 +1,6 @@
 package com.newsaggregator;
 
-import com.newsaggregator.api.outlets.SkySportsNews;
+import com.newsaggregator.api.outlets.Telegraph;
 import com.newsaggregator.base.OutletArticle;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            SkySportsNews ap = new SkySportsNews();
+            Telegraph ap = new Telegraph();
             List<OutletArticle> articles = new ArrayList<>(ap.getArticles());
             for (OutletArticle article : articles) {
                 System.out.println(article.getBody());
