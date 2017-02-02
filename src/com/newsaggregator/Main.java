@@ -1,10 +1,7 @@
 package com.newsaggregator;
 
-import com.newsaggregator.api.Wikipedia;
-import com.newsaggregator.api.outlets.*;
+import com.newsaggregator.api.outlets.Newsweek;
 import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.base.WikipediaArticle;
-import com.newsaggregator.ml.modelling.TopicModelling;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            Mirror ap = new Mirror();
+            Newsweek ap = new Newsweek();
             List<OutletArticle> articles = new ArrayList<>(ap.getArticles());
             for (OutletArticle article : articles) {
                 System.out.println(article.getBody());
