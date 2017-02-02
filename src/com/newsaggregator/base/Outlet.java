@@ -5,10 +5,21 @@ package com.newsaggregator.base;
  */
 
 public enum Outlet {
-    NYT("the-new-york-times", "latest"),
     Guardian("the-guardian-uk", "latest"),
     Wikipedia("wikipedia", "latest"),
-    Independent("independent", "top"), AssociatedPress("associated-press", "latest");
+    Independent("independent", "top"),
+    AssociatedPress("associated-press", "latest"),
+    Reuters("reuters", "latest"),
+    BusinessInsiderUK("business-insider-uk", "latest"),
+    DailyMail("daily-mail", "latest"),
+    Cricinfo("espn-cric-info", "latest"),
+    Metro("metro", "latest"),
+    Mirror("mirror", "latest"),
+    Newsweek("newsweek", "latest"),
+    SkySportsNews("sky-sports-news", "latest"),
+    Telegraph("the-telegraph", "latest"),
+    TOI("the-times-of-india", "latest");
+
 
     private final String sourceString;
     private final String type;
