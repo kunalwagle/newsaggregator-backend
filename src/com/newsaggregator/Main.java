@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            Metro ap = new Metro();
+            Mirror ap = new Mirror();
             List<OutletArticle> articles = new ArrayList<>(ap.getArticles());
             for (OutletArticle article : articles) {
                 System.out.println(article.getBody());
