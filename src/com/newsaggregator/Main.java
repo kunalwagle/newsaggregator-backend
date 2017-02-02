@@ -1,8 +1,10 @@
 package com.newsaggregator;
 
 import com.newsaggregator.api.Wikipedia;
+import com.newsaggregator.api.outlets.AssociatedPress;
 import com.newsaggregator.api.outlets.Guardian;
 import com.newsaggregator.api.outlets.Independent;
+import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.WikipediaArticle;
 import com.newsaggregator.ml.modelling.TopicModelling;
 
@@ -13,11 +15,13 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            Independent independent = new Independent();
-            independent.getArticles();
+            AssociatedPress ap = new AssociatedPress();
+            List<OutletArticle> articles = new ArrayList<>(ap.getArticles());
+            articles.addAll(Guardian.getArticles());
+            articles.addAll(new Independent().getArticles());
 //            List<WikipediaArticle> wikipediaArticleList = new ArrayList<>(Wikipedia.getArticles("Tim Cook"));
 //            wikipediaArticleList.stream().forEach(wikipediaArticle -> System.out.println(wikipediaArticle.getTitle() + ": " + wikipediaArticle.getExtract()));
-//            TopicModelling.trainTopics(Guardian.getArticles());
+            TopicModelling.trainTopics(articles);
         } catch (Exception e) {
             System.out.println(e.toString());
         }

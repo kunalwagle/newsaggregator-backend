@@ -8,7 +8,7 @@ public enum Outlet {
     NYT("the-new-york-times", "latest"),
     Guardian("the-guardian-uk", "latest"),
     Wikipedia("wikipedia", "latest"),
-    Independent("independent", "top");
+    Independent("independent", "top"), AssociatedPress("associated-press", "latest");
 
     private final String sourceString;
     private final String type;

@@ -4,6 +4,7 @@ import com.newsaggregator.base.Outlet;
 import com.newsaggregator.base.OutletArticle;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -44,7 +45,12 @@ public abstract class NewsAPI {
             JSONObject articleJSON = response.getJSONObject(i);
             String title = articleJSON.getString("title");
             String articleURL = articleJSON.getString("url");
-            String imageURL = articleJSON.getString("urlToImage");
+            String imageURL;
+            try {
+                imageURL = articleJSON.getString("urlToImage");
+            } catch (JSONException e) {
+                imageURL = "";
+            }
             result.add(getArticle(title, articleURL, imageURL));
         }
         return result;
