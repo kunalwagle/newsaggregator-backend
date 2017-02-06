@@ -15,7 +15,7 @@ public class SkySportsNews extends NewsAPI {
     }
 
     @Override
-    protected String extractArticleText(Document page) {
+    protected String extractArticleText(Document page) throws IndexOutOfBoundsException {
         Elements elements = page.getElementsByClass("article__body");
         Element content = elements.get(0);
         Elements articleBody = content.getElementsByTag("p");

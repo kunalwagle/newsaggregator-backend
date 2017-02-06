@@ -1,6 +1,5 @@
 package com.newsaggregator.api.outlets;
 
-import com.newsaggregator.base.Article;
 import com.newsaggregator.base.Outlet;
 import com.newsaggregator.base.OutletArticle;
 import org.apache.commons.io.IOUtils;
@@ -44,7 +43,7 @@ public class Guardian {
             String title = articleJSON.getString("webTitle");
             String articleURL = articleJSON.getString("webUrl");
             String body = Jsoup.parse(articleJSON.getJSONObject("fields").getString("body")).text();
-            articles.add(new OutletArticle(title, body, null, articleURL, Outlet.Guardian));
+            articles.add(new OutletArticle(title, body, null, articleURL, Outlet.Guardian.getSourceString()));
         }
         return articles;
     }

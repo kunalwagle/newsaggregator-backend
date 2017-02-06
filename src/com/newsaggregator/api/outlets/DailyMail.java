@@ -15,7 +15,7 @@ public class DailyMail extends NewsAPI {
     }
 
     @Override
-    protected String extractArticleText(Document page) {
+    protected String extractArticleText(Document page) throws IndexOutOfBoundsException {
         Elements articleBodyElements = page.getElementsByAttributeValue("itemprop", "articleBody");
         Element articleBody = articleBodyElements.get(0);
         return articleBody.text();

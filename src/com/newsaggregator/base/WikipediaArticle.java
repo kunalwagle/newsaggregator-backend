@@ -7,7 +7,7 @@ public class WikipediaArticle extends Article {
 
     private String extract;
 
-    public WikipediaArticle(Outlet source, String title, String extract) {
+    public WikipediaArticle(String source, String title, String extract) {
         super(source, title);
         this.extract = extract;
     }

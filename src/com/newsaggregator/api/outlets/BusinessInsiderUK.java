@@ -15,7 +15,7 @@ public class BusinessInsiderUK extends NewsAPI {
     }
 
     @Override
-    protected String extractArticleText(Document page) {
+    protected String extractArticleText(Document page) throws NullPointerException {
         Elements articleBodyElements = page.getElementsByClass("post-content");
         Element articleBody = articleBodyElements.get(0);
         return articleBody.text();

@@ -5,9 +5,9 @@ package com.newsaggregator.base;
  */
 public class Article {
     protected String title;
-    protected Outlet source;
+    protected String source;
 
-    public Article(Outlet source, String title) {
+    public Article(String source, String title) {
         this.source = source;
         this.title = title;
     }

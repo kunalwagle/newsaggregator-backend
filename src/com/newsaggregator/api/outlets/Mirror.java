@@ -15,7 +15,7 @@ public class Mirror extends NewsAPI {
     }
 
     @Override
-    protected String extractArticleText(Document page) {
+    protected String extractArticleText(Document page) throws IndexOutOfBoundsException {
         Elements elements = page.getElementsByClass("article-body");
         Element content = elements.get(0);
         Elements articleBody = content.getElementsByTag("p");

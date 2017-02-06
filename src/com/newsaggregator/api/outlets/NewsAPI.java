@@ -9,9 +9,7 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
@@ -51,15 +49,19 @@ public abstract class NewsAPI {
             } catch (JSONException e) {
                 imageURL = "";
             }
-            result.add(getArticle(title, articleURL, imageURL));
+            try {
+                result.add(getArticle(title, articleURL, imageURL));
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
 
-    private OutletArticle getArticle(String title, String articleURL, String imageURL) throws IOException {
+    private OutletArticle getArticle(String title, String articleURL, String imageURL) throws IOException, IndexOutOfBoundsException {
         Document document = Jsoup.connect(articleURL).get();
         String articleBody = extractArticleText(document);
-        return new OutletArticle(title, articleBody, imageURL, articleURL, outletName);
+        return new OutletArticle(title, articleBody, imageURL, articleURL, outletName.getSourceString());
     }
 
     private JSONArray fetchArticles() throws IOException {
@@ -71,5 +73,5 @@ public abstract class NewsAPI {
         return new JSONObject(IOUtils.toString(newsApiConnection.getInputStream(), Charset.forName("UTF-8"))).getJSONArray("articles");
     }
 
-    protected abstract String extractArticleText(Document page);
+    protected abstract String extractArticleText(Document page) throws NullPointerException;
 }

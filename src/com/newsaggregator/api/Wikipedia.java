@@ -1,6 +1,5 @@
 package com.newsaggregator.api;
 
-import com.newsaggregator.base.Article;
 import com.newsaggregator.base.Outlet;
 import com.newsaggregator.base.WikipediaArticle;
 import org.apache.commons.io.IOUtils;
@@ -27,7 +26,7 @@ public class Wikipedia {
                 String title = article.getString("title");
                 String extract = article.getString("extract");
                 if (!title.contains("(disambiguation)")) {
-                    articles.add(new WikipediaArticle(Outlet.Wikipedia, title, extract));
+                    articles.add(new WikipediaArticle(Outlet.Wikipedia.getSourceString(), title, extract));
                 }
             }
         } catch (Exception e) {

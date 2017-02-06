@@ -1,7 +1,6 @@
 package com.newsaggregator.api.outlets;
 
 import com.newsaggregator.base.Outlet;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -17,7 +16,7 @@ public class Independent extends NewsAPI {
     }
 
     @Override
-    protected String extractArticleText(Document page) {
+    protected String extractArticleText(Document page) throws IndexOutOfBoundsException {
         Elements articleBodyElements = page.getElementsByAttributeValue("itemprop", "articleBody");
         Element articleBody = articleBodyElements.get(0);
         return articleBody.text();

@@ -1,5 +1,7 @@
 package com.newsaggregator.base;
 
+import org.bson.Document;
+
 /**
  * Created by kunalwagle on 30/01/2017.
  */
@@ -9,7 +11,7 @@ public class OutletArticle extends Article {
     private String imageUrl;
     private String articleUrl;
 
-    public OutletArticle(String title, String body, String imageUrl, String articleUrl, Outlet source) {
+    public OutletArticle(String title, String body, String imageUrl, String articleUrl, String source) {
         super(source, title);
         this.body = body;
         this.imageUrl = imageUrl;
@@ -28,7 +30,15 @@ public class OutletArticle extends Article {
         return articleUrl;
     }
 
-    public Outlet getSource() {
-        return source;
+    public Document outletArticleToDoc() {
+        Document doc = new Document();
+
+        doc.put("Title", title);
+        doc.put("Body", body);
+        doc.put("ImageURL", imageUrl);
+        doc.put("ArticleURL", articleUrl);
+        doc.put("Source", source);
+
+        return doc;
     }
 }

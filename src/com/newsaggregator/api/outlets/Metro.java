@@ -15,7 +15,7 @@ public class Metro extends NewsAPI {
     }
 
     @Override
-    protected String extractArticleText(Document page) {
+    protected String extractArticleText(Document page) throws IndexOutOfBoundsException {
         Elements elements = page.getElementsByClass("article-body");
         Element articleBody = elements.get(0);
         return articleBody.text();

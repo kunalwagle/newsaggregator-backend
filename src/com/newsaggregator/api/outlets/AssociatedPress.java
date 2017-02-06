@@ -16,7 +16,7 @@ public class AssociatedPress extends NewsAPI {
     }
 
     @Override
-    protected String extractArticleText(Document page) {
+    protected String extractArticleText(Document page) throws NullPointerException {
         Elements articleBodyElements = page.getElementsByClass("field-items");
         Element articleBody = articleBodyElements.get(2);
         return articleBody.text();
