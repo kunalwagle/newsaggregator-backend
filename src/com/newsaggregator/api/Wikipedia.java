@@ -9,11 +9,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Wikipedia {
 
-    public static List<WikipediaArticle> getArticles(String searchTerm) {
+    public static ArrayList<WikipediaArticle> getArticles(String searchTerm) {
         ArrayList<WikipediaArticle> articles = new ArrayList<>();
         try {
             searchTerm = searchTerm.replace(' ', '+');
