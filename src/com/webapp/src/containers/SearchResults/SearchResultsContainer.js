@@ -7,7 +7,7 @@ import {SearchResults} from "../../components/SearchResults/SearchResult";
 const mapStateToProps = (state) => {
     return {
         searchResults: state.searchBar.searchResults,
-        fetchInProgress: true //state.searchBar.fetchInProgress
+        fetchInProgress: state.searchBar.fetchInProgress
     }
 };
 
@@ -15,7 +15,9 @@ const mapDispatchToProps = (dispatch) => {
     return {}
 };
 
-export default SearchResultsContainer = connect(
+const SearchResultsContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(SearchResults);
+
+export default SearchResultsContainer;

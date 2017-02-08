@@ -16,6 +16,7 @@ public class Wikipedia {
         ArrayList<WikipediaArticle> articles = new ArrayList<>();
         try {
             searchTerm = searchTerm.replace(' ', '+');
+            searchTerm = searchTerm.replace("%20", "+");
             URL wikipediaURL = new URL("https://www.wikipedia.org/w/api.php?action=query&format=json&errorformat=raw&prop=extracts&list=&meta=&generator=search&utf8=1&exlimit=max&exintro=1&explaintext=1&exsectionformat=plain&excontinue=&gsrlimit=10&gsrsearch=" + searchTerm);
             URLConnection wikipediaURLConnection = wikipediaURL.openConnection();
             wikipediaURLConnection.connect();

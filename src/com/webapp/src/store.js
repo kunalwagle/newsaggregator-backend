@@ -5,7 +5,9 @@
 export const initialState = () => {
     return {
         searchBar: {
-            searchValue: ""
+            searchValue: "",
+            fetchInProgress: false,
+            searchResults: []
         }
     }
 };

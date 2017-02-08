@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/webapp/src/ExtraStyle.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResult.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResultPage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/webapp/src/containers/SearchResults/SearchResultsContainer.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/webapp/src/components/Home/NavBar.js" afterPath="$PROJECT_DIR$/src/com/webapp/src/components/Home/SearchBar.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/webapp/src/components/Home/SearchBar.js" afterPath="$PROJECT_DIR$/src/com/webapp/src/components/Home/SearchBarJumbotron.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/webapp/public/index.html" afterPath="$PROJECT_DIR$/src/com/webapp/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/webapp/src/index.js" afterPath="$PROJECT_DIR$/src/com/webapp/src/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newsaggregator/api/Wikipedia.java" afterPath="$PROJECT_DIR$/src/com/newsaggregator/api/Wikipedia.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResult.js" afterPath="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResult.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResultPage.js" afterPath="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResultPage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/webapp/src/containers/SearchResults/SearchResultsContainer.js" afterPath="$PROJECT_DIR$/src/com/webapp/src/containers/SearchResults/SearchResultsContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/webapp/src/store.js" afterPath="$PROJECT_DIR$/src/com/webapp/src/store.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,35 +23,46 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SearchResult.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResult.js">
+      <file leaf-file-name="OutletArticle.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/base/OutletArticle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+            <state relative-caret-position="70">
+              <caret line="22" column="5" lean-forward="false" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
               <folding>
-                <element signature="e#49#114#0" expanded="true" />
+                <element signature="e#571#572#0" expanded="true" />
+                <element signature="e#602#603#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/webapp/public/index.html">
+      <file leaf-file-name="Wikipedia.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/api/Wikipedia.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+            <state relative-caret-position="165">
+              <caret line="19" column="55" lean-forward="false" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="store.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/webapp/src/store.js">
+      <file leaf-file-name="Article.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/base/Article.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <caret line="9" column="46" lean-forward="false" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SearchResult.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResult.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="47" column="12" lean-forward="false" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="12" />
               <folding>
-                <element signature="e#0#47#0" expanded="false" />
+                <element signature="e#48#124#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,21 +72,22 @@
         <entry file="file://$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResultPage.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+              <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
               <folding>
-                <element signature="e#49#117#0" expanded="true" />
+                <element signature="e#48#117#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchResultsContainer.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SearchResultsContainer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/webapp/src/containers/SearchResults/SearchResultsContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="23" column="17" lean-forward="true" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+            <state relative-caret-position="300">
+              <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
               <folding>
-                <element signature="e#49#84#0" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#48#84#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,8 +106,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/webapp/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="24" column="36" lean-forward="false" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+            <state relative-caret-position="195">
+              <caret line="13" column="64" lean-forward="false" selection-start-line="13" selection-start-column="64" selection-end-line="13" selection-end-column="64" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -106,26 +115,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchBarContainer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/webapp/src/containers/Home/SearchBarContainer.js">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/webapp/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding>
-                <element signature="e#48#84#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SearchBar.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/webapp/src/components/Home/SearchBar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="17" column="83" lean-forward="false" selection-start-line="17" selection-start-column="83" selection-end-line="17" selection-end-column="83" />
-              <folding>
-                <element signature="e#49#75#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="90">
+              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -164,16 +159,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/newsaggregator/api/outlets/OutletAPI.java" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/api/outlets/FinancialTimes.java" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/api/outlets/AP.java" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/base/Outlet.java" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/Mirror.java" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/server/ArticleFetch.java" />
-        <option value="$PROJECT_DIR$/src/com/newsaggregator/base/Article.java" />
-        <option value="$PROJECT_DIR$/src/com/newsaggregator/base/OutletArticle.java" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/api/outlets/Guardian.java" />
-        <option value="$PROJECT_DIR$/src/com/newsaggregator/base/WikipediaArticle.java" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/api/outlets/AssociatedPress.java" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/api/outlets/BusinessInsiderUK.java" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/api/outlets/SkySportsNews.java" />
@@ -193,11 +184,9 @@
         <option value="$PROJECT_DIR$/src/com/webapp/js/components/Home/SearchBar.js" />
         <option value="$PROJECT_DIR$/src/com/webapp/js/index.js" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/routes/Router.java" />
-        <option value="$PROJECT_DIR$/src/com/newsaggregator/api/Wikipedia.java" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/routes/WikipediaSearchResource.java" />
         <option value="$PROJECT_DIR$/src/com/webapp/package.json" />
         <option value="$PROJECT_DIR$/src/com/webapp/src/reducers/Home/SearchBarActions.js" />
-        <option value="$PROJECT_DIR$/src/com/webapp/src/store.js" />
         <option value="$PROJECT_DIR$/src/com/webapp/src/App.js" />
         <option value="$PROJECT_DIR$/src/com/webapp/src/reducers/Home/SearchBarReducers.js" />
         <option value="$PROJECT_DIR$/src/com/newsaggregator/Main.java" />
@@ -212,8 +201,14 @@
         <option value="$PROJECT_DIR$/src/com/webapp/src/containers/Home/SearchResultsContainer.js" />
         <option value="$PROJECT_DIR$/src/com/webapp/src/ExtraStyle.css" />
         <option value="$PROJECT_DIR$/src/com/webapp/public/index.html" />
-        <option value="$PROJECT_DIR$/src/com/webapp/src/containers/SearchResults/SearchResultsContainer.js" />
+        <option value="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResultsContainer.js" />
         <option value="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResultPage.js" />
+        <option value="$PROJECT_DIR$/src/com/webapp/src/containers/SearchResults/SearchResultsContainer.js" />
+        <option value="$PROJECT_DIR$/src/com/webapp/src/store.js" />
+        <option value="$PROJECT_DIR$/src/com/newsaggregator/base/Article.java" />
+        <option value="$PROJECT_DIR$/src/com/newsaggregator/base/OutletArticle.java" />
+        <option value="$PROJECT_DIR$/src/com/newsaggregator/base/WikipediaArticle.java" />
+        <option value="$PROJECT_DIR$/src/com/newsaggregator/api/Wikipedia.java" />
         <option value="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResult.js" />
       </list>
     </option>
@@ -489,6 +484,40 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Home" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -536,6 +565,62 @@
               <option name="myItemId" value="com" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -565,6 +650,7 @@
       <recent name="com.newsaggregator.api.outlets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults" />
       <recent name="$PROJECT_DIR$/src/com/webapp/src/containers/SearchResults" />
       <recent name="$PROJECT_DIR$/src/com/webapp/src/components/" />
       <recent name="$PROJECT_DIR$/src/com/webapp/public" />
@@ -1101,7 +1187,7 @@
       <updated>1485686473226</updated>
       <workItem from="1485686476708" duration="16528000" />
       <workItem from="1485904081184" duration="24522000" />
-      <workItem from="1486388593350" duration="26982000" />
+      <workItem from="1486388593350" duration="33480000" />
     </task>
     <task id="LOCAL-00001" summary="Created base classes for Articles and News Outlets; Also created basic Topic Modelling method">
       <created>1485801799171</created>
@@ -1229,11 +1315,18 @@
       <option name="project" value="LOCAL" />
       <updated>1486504792785</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Basic Search Results page">
+      <created>1486509242784</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1486509242784</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68032000" />
+    <option name="totallyTimeSpent" value="74530000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1296,13 +1389,14 @@
     <MESSAGE value="Return search results for wikipedia pages" />
     <MESSAGE value="Performs basic search on home page" />
     <MESSAGE value="Added dummy navigation bar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added dummy navigation bar" />
+    <MESSAGE value="Basic Search Results page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic Search Results page" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="41" />
+      <option name="time" value="43" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1315,6 +1409,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1349,6 +1444,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1360,13 +1458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/base/Article.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="28" lean-forward="true" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/api/outlets/Guardian.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
@@ -1374,14 +1465,6 @@
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/base/WikipediaArticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1532,36 +1615,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/api/Wikipedia.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Downloads/restlet-jee-2.3.9/lib/org.restlet.jar!/org/restlet/resource/ServerResource.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
           <caret line="39" column="219" lean-forward="false" selection-start-line="39" selection-start-column="219" selection-end-line="39" selection-end-column="219" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/base/OutletArticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="42" column="5" lean-forward="false" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/webapp/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="23" column="4" lean-forward="false" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1596,14 +1653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/webapp/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/webapp/src/reducers/Home/SearchBarReducers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1626,19 +1675,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-          <folding>
-            <element signature="e#48#74#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/webapp/src/components/Home/SearchBar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
-          <caret line="17" column="83" lean-forward="false" selection-start-line="17" selection-start-column="83" selection-end-line="17" selection-end-column="83" />
-          <folding>
-            <element signature="e#49#75#0" expanded="true" />
-          </folding>
+          <caret line="16" column="83" lean-forward="false" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1647,7 +1692,7 @@
         <state relative-caret-position="405">
           <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
-            <element signature="e#48#84#0" expanded="true" />
+            <element signature="e#48#84#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1662,18 +1707,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/webapp/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+        <state relative-caret-position="180">
+          <caret line="12" column="7" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/webapp/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/webapp/src/store.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding>
             <element signature="e#0#47#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/webapp/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/webapp/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="64" lean-forward="false" selection-start-line="13" selection-start-column="64" selection-end-line="13" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResultPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+          <folding>
+            <element signature="e#48#117#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1686,42 +1767,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/webapp/src/index.js">
+    <entry file="file://$PROJECT_DIR$/src/com/webapp/src/containers/SearchResults/SearchResultsContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="24" column="36" lean-forward="false" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+        <state relative-caret-position="300">
+          <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#48#84#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResultPage.js">
+    <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/base/Article.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="46" lean-forward="false" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/base/OutletArticle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="22" column="5" lean-forward="false" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+          <folding>
+            <element signature="e#571#572#0" expanded="true" />
+            <element signature="e#602#603#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/base/WikipediaArticle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-          <folding>
-            <element signature="e#49#117#0" expanded="true" />
-          </folding>
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newsaggregator/api/Wikipedia.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="19" column="55" lean-forward="false" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResult.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-          <folding>
-            <element signature="e#49#114#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/webapp/src/containers/SearchResults/SearchResultsContainer.js">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="23" column="17" lean-forward="true" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <caret line="47" column="12" lean-forward="false" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="12" />
           <folding>
-            <element signature="e#49#84#0" expanded="true" />
+            <element signature="e#48#124#0" expanded="true" />
           </folding>
         </state>
       </provider>

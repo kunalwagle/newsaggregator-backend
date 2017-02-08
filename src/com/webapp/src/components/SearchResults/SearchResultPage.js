@@ -2,7 +2,7 @@
  * Created by kunalwagle on 07/02/2017.
  */
 import {Form, FormGroup, FormControl, Button} from "react-bootstrap";
-import {SearchResults} from "./SearchResult";
+import SearchResultsContainer from "../../containers/SearchResults/SearchResultsContainer";
 import SearchBarContainer from "../../containers/Home/SearchBarContainer";
 import React from "react";
 
@@ -13,7 +13,7 @@ export const SearchResultPage = () => (
         </div>
         <br/><br/><br/>
         <div>
-            <SearchResults/>
+            <SearchResultsContainer/>
         </div>
     </div>
 );
