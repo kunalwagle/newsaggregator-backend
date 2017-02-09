@@ -8,7 +8,6 @@ import cc.mallet.types.Alphabet;
 import cc.mallet.types.FeatureSequence;
 import cc.mallet.types.InstanceList;
 import cc.mallet.types.LabelSequence;
-import com.newsaggregator.base.Article;
 import com.newsaggregator.base.OutletArticle;
 
 import java.io.File;
@@ -34,7 +33,7 @@ public static void trainTopics(List<OutletArticle> articleList) throws IOExcepti
     InstanceList instances = new InstanceList(new SerialPipes(pipeList));
     instances.addThruPipe(new StringArrayIterator(articleBodies));
 
-    int numTopics = 100;
+    int numTopics = 40;
     ParallelTopicModel model = new ParallelTopicModel(numTopics, 1.0, 0.01);
     model.addInstances(instances);
     model.setNumThreads(2);

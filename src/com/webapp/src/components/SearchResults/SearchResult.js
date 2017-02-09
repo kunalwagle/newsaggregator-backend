@@ -13,7 +13,7 @@ const thumbnails = (carousel) => {
                         return (
                             <Col md={3}>
                                 <Thumbnail
-                                    src="https://pbs.twimg.com/profile_images/378800000483764274/ebce94fb34c055f3dc238627a576d251.jpeg"
+                                    src={searchResult.imageUrl}
                                     key={searchResult.title}>
                                     <h3>{searchResult.title}</h3>
                                     <p>{searchResult.extract.substring(0, 600) + "..."}</p>

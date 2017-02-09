@@ -3,6 +3,7 @@ package com.newsaggregator.api;
 import com.newsaggregator.base.Outlet;
 import com.newsaggregator.base.WikipediaArticle;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
@@ -17,7 +18,7 @@ public class Wikipedia {
         try {
             searchTerm = searchTerm.replace(' ', '+');
             searchTerm = searchTerm.replace("%20", "+");
-            URL wikipediaURL = new URL("https://www.wikipedia.org/w/api.php?action=query&format=json&errorformat=raw&prop=extracts&list=&meta=&generator=search&utf8=1&exlimit=max&exintro=1&explaintext=1&exsectionformat=plain&excontinue=&gsrlimit=10&gsrsearch=" + searchTerm);
+            URL wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&piprop=original&pilimit=max&exintro&explaintext&exsentences=3&exlimit=max&gsrsearch=" + searchTerm);
             URLConnection wikipediaURLConnection = wikipediaURL.openConnection();
             wikipediaURLConnection.connect();
             JSONObject response = new JSONObject(IOUtils.toString(wikipediaURLConnection.getInputStream(), Charset.forName("UTF-8"))).getJSONObject("query").getJSONObject("pages");
@@ -25,8 +26,14 @@ public class Wikipedia {
                 JSONObject article = response.getJSONObject(key);
                 String title = article.getString("title");
                 String extract = article.getString("extract");
+                String imageUrl = "http://larics.fer.hr/wp-content/uploads/2016/04/default-placeholder.png";
+                try {
+                    imageUrl = article.getJSONObject("thumbnail").getString("original");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 if (!title.contains("(disambiguation)")) {
-                    articles.add(new WikipediaArticle(Outlet.Wikipedia.getSourceString(), title, extract));
+                    articles.add(new WikipediaArticle(Outlet.Wikipedia.getSourceString(), title, extract, imageUrl));
                 }
             }
         } catch (Exception e) {

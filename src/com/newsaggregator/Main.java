@@ -1,8 +1,15 @@
 package com.newsaggregator;
 
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+import com.newsaggregator.base.OutletArticle;
+import com.newsaggregator.db.Articles;
+import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.routes.RouterApplication;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
+
+import java.util.List;
 
 public class Main {
 
@@ -17,19 +24,18 @@ public class Main {
         component.start();
 
 
-//        try {
-//            MongoClient mongoClient = new MongoClient("localhost", 27017);
-//
-//            MongoDatabase db = mongoClient.getDatabase("NewsAggregator");
-//
-//            Articles articleCollection = new Articles(db);
-//
-//            articleCollection.saveArticles(ArticleFetch.fetchArticles());
-//            List<OutletArticle> articles = articleCollection.getAllArticles();
-//
-//            System.out.println("Obtained articles: " + articles.size());
-//
-//
+        try {
+            MongoClient mongoClient = new MongoClient("localhost", 27017);
+
+            MongoDatabase db = mongoClient.getDatabase("NewsAggregator");
+
+            Articles articleCollection = new Articles(db);
+
+            List<OutletArticle> articles = articleCollection.getAllArticles();
+
+            TopicModelling.trainTopics(articles);
+
+
 ////            TOI ap = new TOI();
 ////            List<OutletArticle> articles = new ArrayList<>(ap.getArticles());
 ////            for (OutletArticle article : articles) {
@@ -40,8 +46,8 @@ public class Main {
 ////            List<WikipediaArticle> wikipediaArticleList = new ArrayList<>(Wikipedia.getArticles("Tim Cook"));
 ////            wikipediaArticleList.stream().forEach(wikipediaArticle -> System.out.println(wikipediaArticle.getTitle() + ": " + wikipediaArticle.getExtract()));
 //            //TopicModelling.trainTopics(articles);
-//        } catch (Exception e) {
-//            System.out.println(e.toString());
-//        }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 }

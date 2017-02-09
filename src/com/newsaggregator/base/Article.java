@@ -6,13 +6,23 @@ package com.newsaggregator.base;
 public class Article {
     protected String title;
     protected String source;
+    protected String imageUrl;
 
-    public Article(String source, String title) {
+    public Article(String source, String title, String imageUrl) {
         this.source = source;
         this.title = title;
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

@@ -8,22 +8,16 @@ import org.bson.Document;
 public class OutletArticle extends Article {
 
     private String body;
-    private String imageUrl;
     private String articleUrl;
 
     public OutletArticle(String title, String body, String imageUrl, String articleUrl, String source) {
-        super(source, title);
+        super(source, title, imageUrl);
         this.body = body;
-        this.imageUrl = imageUrl;
         this.articleUrl = articleUrl;
     }
 
     public String getBody() {
         return body;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
     }
 
     public String getArticleUrl() {
