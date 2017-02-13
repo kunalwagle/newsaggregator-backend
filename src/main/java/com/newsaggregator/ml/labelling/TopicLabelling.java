@@ -59,8 +59,18 @@ public class TopicLabelling {
     }
 
     private static List<String> isolateNounChunks(String primaryLabel) {
-
-        return null;
+        String[] result = primaryLabel.split("\\s");
+        List<String> nounChunks = new ArrayList<>();
+        for (int i = 0; i < result.length; i++) {
+            int j = i + 1;
+            String currentString = result[i];
+            while (j < result.length) {
+                currentString = currentString + " " + result[j];
+                nounChunks.add(currentString);
+                j++;
+            }
+        }
+        return nounChunks;
     }
 
     private static List<String> extractTitles(ArrayList<WikipediaArticle> articles) {

@@ -3,7 +3,9 @@ package com.newsaggregator;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.base.OutletArticle;
+import com.newsaggregator.base.Topic;
 import com.newsaggregator.db.Articles;
+import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.routes.RouterApplication;
 import org.restlet.Component;
@@ -33,8 +35,9 @@ public class Main {
 
             List<OutletArticle> articles = articleCollection.getAllArticles();
 
-            TopicModelling.trainTopics(articles);
+            List<Topic> topics = TopicModelling.trainTopics(articles);
 
+            TopicLabelling.generateTopicLabel(topics.get(0));
 
 ////            TOI ap = new TOI();
 ////            List<OutletArticle> articles = new ArrayList<>(ap.getArticles());
