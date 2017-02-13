@@ -13,4 +13,7 @@ public class Topic {
         this.topWords = topWords;
     }
 
+    public List<TopicWord> getTopWords() {
+        return topWords;
+    }
 }

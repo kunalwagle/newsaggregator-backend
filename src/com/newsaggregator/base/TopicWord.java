@@ -13,4 +13,11 @@ public class TopicWord {
         this.distribution = distribution;
     }
 
+    public String getWord() {
+        return word;
+    }
+
+    public double getDistribution() {
+        return distribution;
+    }
 }
