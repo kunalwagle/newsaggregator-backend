@@ -1,4 +1,4 @@
-package test.java;
+package java;
 
 import com.newsaggregator.base.Topic;
 import com.newsaggregator.ml.labelling.TopicLabelling;
