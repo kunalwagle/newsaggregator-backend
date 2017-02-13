@@ -17,4 +17,9 @@ public class TopicLabellingTest {
         TopicLabelling.generateTopicLabel(topic);
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void checksWikipediaTitles() throws Exception {
+        TopicLabelling.generateTopicLabel(topic);
+    }
+
 }
