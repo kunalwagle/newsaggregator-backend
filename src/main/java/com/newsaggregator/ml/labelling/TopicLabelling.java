@@ -29,11 +29,7 @@ public class TopicLabelling {
             secondaryLabels.addAll(isolateNounChunks(primaryLabel));
         }
 
-        for (String secondaryLabel : secondaryLabels) {
-            if (!isWikipediaArticle(secondaryLabel) || racoScore(secondaryLabel, primaryLabels) < 0.1) {
-                secondaryLabels.remove(secondaryLabel);
-            }
-        }
+        secondaryLabels = secondaryLabels.stream().filter(secondaryLabel -> secondaryLabelViable(primaryLabels, secondaryLabel)).collect(Collectors.toList());
 
         primaryLabels.addAll(secondaryLabels);
 
@@ -46,6 +42,10 @@ public class TopicLabelling {
         return new TopicLabel(label, model);
     }
 
+    private static boolean secondaryLabelViable(List<String> primaryLabels, String secondaryLabel) {
+        return !isWikipediaArticle(secondaryLabel) || racoScore(secondaryLabel, primaryLabels) > 0.1;
+    }
+
     private static String performCandidateRanking(List<String> primaryLabels) {
         return null;
     }
@@ -55,7 +55,8 @@ public class TopicLabelling {
     }
 
     private static boolean isWikipediaArticle(String secondaryLabel) {
-        return false;
+        WikipediaArticle article = Wikipedia.getNearMatchArticle(secondaryLabel);
+        return article != null;
     }
 
     private static List<String> isolateNounChunks(String primaryLabel) {

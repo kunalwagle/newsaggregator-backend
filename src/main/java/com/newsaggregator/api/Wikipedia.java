@@ -10,14 +10,30 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Wikipedia {
 
     public static ArrayList<WikipediaArticle> getArticles(String searchTerm) {
+        return queryAndParseArticles(searchTerm, null);
+    }
+
+    public static WikipediaArticle getNearMatchArticle(String searchTerm) {
+        List<WikipediaArticle> articles = queryAndParseArticles(searchTerm, "nearmatch");
+        if (articles.size() > 0) {
+            return articles.get(0);
+        }
+        return null;
+    }
+
+    private static ArrayList<WikipediaArticle> queryAndParseArticles(String searchTerm, String searchType) {
         ArrayList<WikipediaArticle> articles = new ArrayList<>();
         try {
             searchTerm = searchTerm.replace(' ', '+');
             searchTerm = searchTerm.replace("%20", "+");
+            if (searchType != null) {
+                searchTerm = searchTerm + "&gsrwhat=" + searchType;
+            }
             URL wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&piprop=original&pilimit=max&exintro&explaintext&exsentences=3&exlimit=max&gsrsearch=" + searchTerm);
             URLConnection wikipediaURLConnection = wikipediaURL.openConnection();
             wikipediaURLConnection.connect();
@@ -39,7 +55,6 @@ public class Wikipedia {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return articles;
     }
 
