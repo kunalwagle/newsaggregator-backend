@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by kunalwagle on 08/02/2017.
- */
 public class TopicLabelling {
 
     public static TopicLabel generateTopicLabel(Topic model) {
@@ -51,6 +48,16 @@ public class TopicLabelling {
     }
 
     private static double racoScore(String secondaryLabel, List<String> primaryLabels) {
+        double runningTotal = 0;
+
+        for (String primaryLabel : primaryLabels) {
+            runningTotal += individualRacoScore(secondaryLabel, primaryLabel);
+        }
+
+        return runningTotal / primaryLabels.size();
+    }
+
+    private static double individualRacoScore(String secondaryLabel, String primaryLabel) {
         return 0;
     }
 
