@@ -6,16 +6,11 @@ import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.document.utils.NameMap;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.dynamodbv2.model.ReturnValue;
-import com.amazonaws.services.dynamodbv2.model.ScanRequest;
-import com.amazonaws.services.dynamodbv2.model.ScanResult;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.base.OutletArticle;
-import org.bson.Document;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kunalwagle on 04/02/2017.
@@ -99,7 +94,8 @@ public class Articles {
             String body = (String) info.get("Body");
             String imageUrl = (String) info.get("ImageUrl");
             String source = (String) info.get("Source");
-            articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source));
+            String datePublished = (String) info.get("DatePublished");
+            articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished));
         }
         return articles;
     }

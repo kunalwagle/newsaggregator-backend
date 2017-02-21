@@ -42,8 +42,9 @@ public class Guardian {
             JSONObject articleJSON = articleJSONArray.getJSONObject(i);
             String title = articleJSON.getString("webTitle");
             String articleURL = articleJSON.getString("webUrl");
+            String lastPublished = articleJSON.getString("webPublicationDate");
             String body = Jsoup.parse(articleJSON.getJSONObject("fields").getString("body")).text();
-            articles.add(new OutletArticle(title, body, null, articleURL, Outlet.Guardian.getSourceString()));
+            articles.add(new OutletArticle(title, body, null, articleURL, Outlet.Guardian.getSourceString(), lastPublished));
         }
         return articles;
     }

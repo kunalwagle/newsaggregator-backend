@@ -11,11 +11,13 @@ public class OutletArticle extends Article implements DatabaseStorage {
 
     private String body;
     private String articleUrl;
+    private String lastPublished;
 
-    public OutletArticle(String title, String body, String imageUrl, String articleUrl, String source) {
+    public OutletArticle(String title, String body, String imageUrl, String articleUrl, String source, String lastPublished) {
         super(source, title, imageUrl);
         this.body = body;
         this.articleUrl = articleUrl;
+        this.lastPublished = lastPublished;
     }
 
     public String getBody() {
@@ -24,6 +26,10 @@ public class OutletArticle extends Article implements DatabaseStorage {
 
     public String getArticleUrl() {
         return articleUrl;
+    }
+
+    public String getLastPublished() {
+        return lastPublished;
     }
 
     public Document outletArticleToDoc() {

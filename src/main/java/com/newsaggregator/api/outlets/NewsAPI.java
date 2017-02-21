@@ -43,14 +43,15 @@ public abstract class NewsAPI {
             JSONObject articleJSON = response.getJSONObject(i);
             String title = articleJSON.getString("title");
             String articleURL = articleJSON.getString("url");
+            String datePublished = articleJSON.getString("publishedAt");
             String imageURL;
             try {
                 imageURL = articleJSON.getString("urlToImage");
             } catch (JSONException e) {
-                imageURL = "";
+                imageURL = "null";
             }
             try {
-                result.add(getArticle(title, articleURL, imageURL));
+                result.add(getArticle(title, articleURL, imageURL, datePublished));
             } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();
             }
@@ -58,10 +59,10 @@ public abstract class NewsAPI {
         return result;
     }
 
-    private OutletArticle getArticle(String title, String articleURL, String imageURL) throws IOException, IndexOutOfBoundsException {
+    private OutletArticle getArticle(String title, String articleURL, String imageURL, String lastPublished) throws IOException, IndexOutOfBoundsException {
         Document document = Jsoup.connect(articleURL).get();
         String articleBody = extractArticleText(document);
-        return new OutletArticle(title, articleBody, imageURL, articleURL, outletName.getSourceString());
+        return new OutletArticle(title, articleBody, imageURL, articleURL, outletName.getSourceString(), lastPublished);
     }
 
     private JSONArray fetchArticles() throws IOException {
