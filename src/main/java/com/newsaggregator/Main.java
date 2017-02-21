@@ -1,16 +1,12 @@
 package com.newsaggregator;
 
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.db.Articles;
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.ArticleFetch;
+import com.newsaggregator.server.jobs.ArticleFetchRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
+import org.restlet.service.TaskService;
 
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -28,9 +24,11 @@ public class Main {
 
         try {
 
+            TaskService scheduleManager = new TaskService();
 
+            scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 60L, 600L, TimeUnit.SECONDS);
 
-            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
+//            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
 //            Articles articles = new Articles(db);
 //            articles.getAllArticles();
 //
@@ -46,12 +44,12 @@ public class Main {
 //                    .withMap("info", article.createNonPrimaryHashMap()));
 //
 //            System.out.println("PutItem succeeded:\n" + outcome.getPutItemResult());
-            System.out.println("Fetching articles");
-            List<OutletArticle> articleList = ArticleFetch.fetchArticles();
-            Articles articleManager = new Articles(db);
-            System.out.println("Sending articles");
-            articleManager.saveArticles(articleList);
-            System.out.println("Done");
+//            System.out.println("Fetching articles");
+//            List<OutletArticle> articleList = ArticleFetch.fetchArticles();
+//            Articles articleManager = new Articles(db);
+//            System.out.println("Sending articles");
+//            articleManager.saveArticles(articleList);
+//            System.out.println("Done");
 
 //            MongoClient mongoClient = new MongoClient("localhost", 27017);
 //

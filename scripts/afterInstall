@@ -1,0 +1,4 @@
+#!/bin/bash
+mvn clean install
+mvn package
+java -jar target/newsaggregator-backend-1.0-SNAPSHOT.jar
