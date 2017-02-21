@@ -1,7 +1,7 @@
 package com.newsaggregator.db;
 
 import com.amazonaws.services.dynamodbv2.document.*;
-import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
+import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.document.utils.NameMap;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
@@ -9,6 +9,7 @@ import com.amazonaws.services.dynamodbv2.model.ReturnValue;
 import com.newsaggregator.base.OutletArticle;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public class Articles {
     private void updateArticle(OutletArticle article) {
         UpdateItemSpec updateItemSpec = new UpdateItemSpec()
                 .withPrimaryKey("articleUrl", article.getArticleUrl(), "DatePublished", article.getLastPublished())
-                .withUpdateExpression("set #i=:val1 set #t=:val2 set #b=:val3 set #s=:val4")
+                .withUpdateExpression("set #i=:val1, #t=:val2, #b=:val3, #s=:val4")
                 .withNameMap(new NameMap()
                         .with("#i", "ImageUrl")
                         .with("#t", "Title")
@@ -73,15 +74,17 @@ public class Articles {
     }
 
     private boolean articleExists(OutletArticle article) {
-        GetItemSpec spec = new GetItemSpec()
-                .withPrimaryKey("articleUrl", article.getArticleUrl());
-        Item outcome;
         try {
-            outcome = table.getItem(spec);
+            QuerySpec spec = new QuerySpec()
+                    .withKeyConditionExpression("articleUrl = :a_url")
+                    .withValueMap(new ValueMap()
+                            .withString(":a_url", article.getArticleUrl()));
+            ItemCollection<QueryOutcome> items = table.query(spec);
+            Iterator<Item> iterator = items.iterator();
+            return iterator.next() != null;
         } catch (Exception e) {
             return false;
         }
-        return outcome != null;
     }
 
     public List<OutletArticle> getAllArticles() {
