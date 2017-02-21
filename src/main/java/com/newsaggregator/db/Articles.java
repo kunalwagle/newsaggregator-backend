@@ -1,23 +1,20 @@
 package com.newsaggregator.db;
 
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
-import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.document.utils.NameMap;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.dynamodbv2.model.ReturnValue;
+import com.amazonaws.services.dynamodbv2.model.ScanRequest;
+import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.base.OutletArticle;
 import org.bson.Document;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -92,14 +89,19 @@ public class Articles {
     }
 
     public List<OutletArticle> getAllArticles() {
-//        Table articleCollection = getCollection();
-//        FindIterable<Document> articles = articleCollection.find();
-//        ArrayList<OutletArticle> result = new ArrayList<>();
-//        for (Document article : articles) {
-//            result.add(new OutletArticle(article.getString("Title"), article.getString("Body"), article.getString("ImageURL"), article.getString("ArticleURL"), article.getString("Source")));
-//        }
-//        return result;
-        return null;
+        List<OutletArticle> articles = new ArrayList<>();
+        ItemCollection<ScanOutcome> items = table.scan();
+        for (Item nextItem : items) {
+            Map<String, Object> item = nextItem.asMap();
+            String articleUrl = (String) item.get("articleUrl");
+            Map<String, Object> info = (Map<String, Object>) item.get("info");
+            String title = (String) info.get("Title");
+            String body = (String) info.get("Body");
+            String imageUrl = (String) info.get("ImageUrl");
+            String source = (String) info.get("Source");
+            articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source));
+        }
+        return articles;
     }
 
     private Table getCollection() {
