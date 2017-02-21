@@ -43,7 +43,12 @@ public abstract class NewsAPI {
             JSONObject articleJSON = response.getJSONObject(i);
             String title = articleJSON.getString("title");
             String articleURL = articleJSON.getString("url");
-            String datePublished = articleJSON.getString("publishedAt");
+            String datePublished;
+            try {
+                datePublished = articleJSON.getString("publishedAt");
+            } catch (JSONException e) {
+                datePublished = "";
+            }
             String imageURL;
             try {
                 imageURL = articleJSON.getString("urlToImage");
@@ -51,7 +56,9 @@ public abstract class NewsAPI {
                 imageURL = "null";
             }
             try {
-                result.add(getArticle(title, articleURL, imageURL, datePublished));
+                if (!datePublished.equals("")) {
+                    result.add(getArticle(title, articleURL, imageURL, datePublished));
+                }
             } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();
             }

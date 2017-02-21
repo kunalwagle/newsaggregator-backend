@@ -42,7 +42,8 @@ public class Articles {
     private void writeArticle(OutletArticle article) {
         try {
             table.putItem(new Item()
-                    .withPrimaryKey("articleUrl", article.getArticleUrl())
+                    .withPrimaryKey("articleUrl", article.getArticleUrl(), "DatePublished", article.getLastPublished())
+
                     .withMap("info", article.createNonPrimaryHashMap()));
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,13 +52,13 @@ public class Articles {
 
     private void updateArticle(OutletArticle article) {
         UpdateItemSpec updateItemSpec = new UpdateItemSpec()
-                .withPrimaryKey("articleUrl", article.getArticleUrl())
+                .withPrimaryKey("articleUrl", article.getArticleUrl(), "DatePublished", article.getLastPublished())
                 .withUpdateExpression("set #i=:val1 set #t=:val2 set #b=:val3 set #s=:val4")
                 .withNameMap(new NameMap()
-                        .with("#i", "imageUrl")
-                        .with("#t", "title")
-                        .with("#b", "body")
-                        .with("#s", "source"))
+                        .with("#i", "ImageUrl")
+                        .with("#t", "Title")
+                        .with("#b", "Body")
+                        .with("#s", "Source"))
                 .withValueMap(new ValueMap()
                         .withString(":val1", article.getImageUrl())
                         .withString(":val2", article.getTitle())

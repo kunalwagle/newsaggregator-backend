@@ -1,23 +1,10 @@
 package com.newsaggregator;
 
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClient;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
-import com.amazonaws.services.dynamodbv2.document.Table;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoDatabase;
-import com.newsaggregator.base.Outlet;
 import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.base.Topic;
 import com.newsaggregator.db.Articles;
-import com.newsaggregator.ml.labelling.TopicLabelling;
-import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.routes.RouterApplication;
 import com.newsaggregator.server.ArticleFetch;
 import org.restlet.Component;
@@ -44,8 +31,8 @@ public class Main {
 
 
             DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
-            Articles articles = new Articles(db);
-            articles.getAllArticles();
+//            Articles articles = new Articles(db);
+//            articles.getAllArticles();
 //
 //            Table table = db.getTable("Articles");
 //
@@ -59,12 +46,12 @@ public class Main {
 //                    .withMap("info", article.createNonPrimaryHashMap()));
 //
 //            System.out.println("PutItem succeeded:\n" + outcome.getPutItemResult());
-//            System.out.println("Fetching articles");
-//            List<OutletArticle> articleList = ArticleFetch.fetchArticles();
-//            Articles articleManager = new Articles(db);
-//            System.out.println("Sending articles");
-//            articleManager.saveArticles(articleList);
-//            System.out.println("Done");
+            System.out.println("Fetching articles");
+            List<OutletArticle> articleList = ArticleFetch.fetchArticles();
+            Articles articleManager = new Articles(db);
+            System.out.println("Sending articles");
+            articleManager.saveArticles(articleList);
+            System.out.println("Done");
 
 //            MongoClient mongoClient = new MongoClient("localhost", 27017);
 //
@@ -89,7 +76,7 @@ public class Main {
 ////            wikipediaArticleList.stream().forEach(wikipediaArticle -> System.out.println(wikipediaArticle.getTitle() + ": " + wikipediaArticle.getExtract()));
 //            //TopicModelling.trainTopics(articles);
         } catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
     }
 }
