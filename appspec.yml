@@ -3,7 +3,6 @@ os: linux
 files:
   - source: ./
     destination: ./application
-
 hooks:
   AfterInstall:
   - location: scripts/afterInstall
