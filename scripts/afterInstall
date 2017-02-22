@@ -1,5 +1,2 @@
-#!/bin/bash
 /var/myservice/scripts/run > /dev/null 2> /dev/null < /dev/null &
-mvn clean install
-mvn package
-java -jar target/newsaggregator-backend-1.0-SNAPSHOT.jar
+java -jar application/myapp-1.0-SNAPSHOT.jar

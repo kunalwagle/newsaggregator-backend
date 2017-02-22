@@ -1,9 +1,9 @@
 version: 0.0
 os: linux
 files:
-  - source: ./
-    destination: ./application
+  - source: ./my-app-1.0-SNAPSHOT.jar
+    destination: /application
 hooks:
   ApplicationStart:
   - location: scripts/afterInstall
-        timeout: 300
+        timeout: 30
