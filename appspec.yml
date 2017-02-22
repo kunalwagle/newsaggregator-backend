@@ -4,6 +4,6 @@ files:
   - source: ./
     destination: ./application
 hooks:
-  AfterInstall:
+  ApplicationStart:
   - location: scripts/afterInstall
         timeout: 300
