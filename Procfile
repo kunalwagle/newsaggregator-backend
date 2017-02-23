@@ -1,0 +1,1 @@
+web: java -jar newsaggregator-backend-1.0-SNAPSHOT.jar -Xmms:256m
