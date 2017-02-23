@@ -1,2 +1,2 @@
-/var/myservice/scripts/run > /dev/null 2> /dev/null < /dev/null &
-java -jar /temp/newsaggregator-backend-1.0-SNAPSHOT.jar
+#!/bin/bash
+nohup java -jar /tmp/newsaggregator-backend-1.0-SNAPSHOT.jar  2>&1 >> logfile.log &
