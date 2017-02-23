@@ -4,6 +4,6 @@ files:
   - source: ./newsaggregator-backend-1.0-SNAPSHOT.jar
     destination: /tmp
 hooks:
-  ApplicationStart:
+  AfterInstall:
   - location: scripts/afterInstall
         timeout: 30
