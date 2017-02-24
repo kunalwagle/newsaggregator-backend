@@ -1,8 +1,10 @@
 package com.newsaggregator.api;
 
 import com.newsaggregator.base.Outlet;
+import com.newsaggregator.base.Outlink;
 import com.newsaggregator.base.WikipediaArticle;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +26,51 @@ public class Wikipedia {
             return articles.get(0);
         }
         return null;
+    }
+
+    public static List<Outlink> getOutlinksAndCategories(String searchTerm) {
+        try {
+            searchTerm = searchTerm.replace(' ', '+');
+            searchTerm = searchTerm.replace("%20", "+");
+            URL wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&generator=links&prop=categories&gpllimit=20&cllimit=max&redirects=1&titles=" + searchTerm);
+            URLConnection wikipediaURLConnection = wikipediaURL.openConnection();
+            wikipediaURLConnection.connect();
+            JSONObject response = new JSONObject(IOUtils.toString(wikipediaURLConnection.getInputStream(), Charset.forName("UTF-8")));
+            boolean finished = false;
+            List<Outlink> outlinks = new ArrayList<>();
+            do {
+                outlinks.addAll(getOutlinks(response.getJSONObject("query").getJSONObject("pages")));
+                if (response.has("continue")) {
+                    wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&generator=links&prop=categories&gpllimit=20&redirects=1&cllimit=max&titles=" + searchTerm + "&gplcontinue=" + response.getJSONObject("continue").getString("gplcontinue"));
+                    wikipediaURLConnection = wikipediaURL.openConnection();
+                    wikipediaURLConnection.connect();
+                    response = new JSONObject(IOUtils.toString(wikipediaURLConnection.getInputStream(), Charset.forName("UTF-8")));
+                } else {
+                    finished = true;
+                }
+            } while (!finished);
+            return outlinks;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private static List<Outlink> getOutlinks(JSONObject response) {
+        List<Outlink> outlinks = new ArrayList<>();
+        for (String key : response.keySet()) {
+            JSONObject outlink = response.getJSONObject(key);
+            String title = outlink.getString("title");
+            JSONArray categories = outlink.getJSONArray("categories");
+            List<String> cats = new ArrayList<>();
+            for (int i = 0; i < categories.length(); i++) {
+                JSONObject cat = categories.getJSONObject(i);
+                cats.add(cat.getString("title"));
+            }
+            outlinks.add(new Outlink(title, cats));
+        }
+        return outlinks;
     }
 
     private static ArrayList<WikipediaArticle> queryAndParseArticles(String searchTerm, String searchType) {

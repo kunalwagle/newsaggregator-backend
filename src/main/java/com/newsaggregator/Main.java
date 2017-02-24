@@ -1,12 +1,10 @@
 package com.newsaggregator;
 
+import com.newsaggregator.api.Wikipedia;
+import com.newsaggregator.base.CandidateLabel;
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.jobs.ArticleFetchRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
-import org.restlet.service.TaskService;
-
-import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -24,9 +22,13 @@ public class Main {
 
         try {
 
-            TaskService scheduleManager = new TaskService();
+            CandidateLabel label = Wikipedia.getOutlinksAndCategories("Moose_Jaw_Civic_Centre");
 
-            scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 60L, 600L, TimeUnit.SECONDS);
+            System.out.println(label);
+
+//            TaskService scheduleManager = new TaskService();
+
+//            scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 60L, 600L, TimeUnit.SECONDS);
 
 //            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
 //            Articles articles = new Articles(db);
