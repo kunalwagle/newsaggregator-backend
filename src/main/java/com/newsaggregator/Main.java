@@ -1,10 +1,16 @@
 package com.newsaggregator;
 
-import com.newsaggregator.api.Wikipedia;
-import com.newsaggregator.base.CandidateLabel;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.newsaggregator.base.TopicLabel;
+import com.newsaggregator.db.Topics;
+import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.routes.RouterApplication;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
+
+import java.util.List;
 
 
 public class Main {
@@ -22,17 +28,17 @@ public class Main {
 
         try {
 
-            CandidateLabel label = Wikipedia.getOutlinksAndCategories("Moose_Jaw_Civic_Centre");
+            //CandidateLabel label = Wikipedia.getOutlinksAndCategories("Moose_Jaw_Civic_Centre");
 
-            System.out.println(label);
+            // System.out.println(label);
 
 //            TaskService scheduleManager = new TaskService();
 
 //            scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 60L, 600L, TimeUnit.SECONDS);
 
-//            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
+            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
 //            Articles articles = new Articles(db);
-//            articles.getAllArticles();
+//            articles.getAllTopics();
 //
 //            Table table = db.getTable("Articles");
 //
@@ -59,11 +65,14 @@ public class Main {
 //
 //            Articles articleCollection = new Articles(db);
 //
-//            List<OutletArticle> articles = articleCollection.getAllArticles();
-//
-//            List<Topic> topics = TopicModelling.trainTopics(articles);
-//
-//            TopicLabelling.generateTopicLabel(topics.get(0));
+//            List<OutletArticle> articles = articleCollection.getAllTopics();
+//            System.out.println("Starting modelling");
+//            List<TopicLabel> topics = TopicModelling.trainTopics(articles);
+//            System.out.println("Finished modelling");
+            Topics topicDB = new Topics(db);
+            List<TopicLabel> labels = topicDB.getAllTopics();
+//            topicDB.saveTopics(topics);
+            TopicLabelling.generateTopicLabel(labels.get(0).getTopic());
 
 ////            TOI ap = new TOI();
 ////            List<OutletArticle> articles = new ArrayList<>(ap.getArticles());

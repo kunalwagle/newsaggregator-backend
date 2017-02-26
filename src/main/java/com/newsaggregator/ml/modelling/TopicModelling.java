@@ -7,6 +7,7 @@ import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.types.*;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.Topic;
+import com.newsaggregator.base.TopicLabel;
 import com.newsaggregator.base.TopicWord;
 
 import java.io.File;
@@ -16,7 +17,7 @@ import java.util.regex.Pattern;
 
 public class TopicModelling {
 
-    public static List<Topic> trainTopics(List<OutletArticle> articleList) throws IOException {
+    public static List<TopicLabel> trainTopics(List<OutletArticle> articleList) throws IOException {
 
         String[] articleBodies = extractArticleText(articleList);
 
@@ -41,7 +42,7 @@ public class TopicModelling {
         FeatureSequence tokens = (FeatureSequence) model.getData().get(0).instance.getData();
         LabelSequence topics = model.getData().get(0).topicSequence;
 
-        List<Topic> topicList = generateTopics(model.getSortedWords(), numTopics, dataAlphabet);
+        List<TopicLabel> topicList = generateTopics(model.getSortedWords(), numTopics, dataAlphabet);
 
 
         Formatter out = new Formatter(new StringBuilder(), Locale.US);
@@ -67,9 +68,9 @@ public class TopicModelling {
         return result;
     }
 
-    private static List<Topic> generateTopics(List<TreeSet<IDSorter>> sortedWords, int numTopics, Alphabet dataAlphabet) {
+    private static List<TopicLabel> generateTopics(List<TreeSet<IDSorter>> sortedWords, int numTopics, Alphabet dataAlphabet) {
 
-        List<Topic> topics = new ArrayList<>();
+        List<TopicLabel> topics = new ArrayList<>();
 
         for (int topic = 0; topic < numTopics; topic++) {
             Iterator<IDSorter> iterator = sortedWords.get(topic).iterator();
@@ -80,7 +81,7 @@ public class TopicModelling {
                 topicWords.add(new TopicWord((String) dataAlphabet.lookupObject(idCountPair.getID()), idCountPair.getWeight()));
                 rank++;
             }
-            topics.add(new Topic(topicWords));
+            topics.add(new TopicLabel("Topic" + topic, new Topic(topicWords)));
         }
 
         return topics;

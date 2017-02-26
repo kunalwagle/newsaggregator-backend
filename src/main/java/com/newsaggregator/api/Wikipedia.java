@@ -60,15 +60,19 @@ public class Wikipedia {
     private static List<Outlink> getOutlinks(JSONObject response) {
         List<Outlink> outlinks = new ArrayList<>();
         for (String key : response.keySet()) {
-            JSONObject outlink = response.getJSONObject(key);
-            String title = outlink.getString("title");
-            JSONArray categories = outlink.getJSONArray("categories");
-            List<String> cats = new ArrayList<>();
-            for (int i = 0; i < categories.length(); i++) {
-                JSONObject cat = categories.getJSONObject(i);
-                cats.add(cat.getString("title"));
+            try {
+                JSONObject outlink = response.getJSONObject(key);
+                String title = outlink.getString("title");
+                JSONArray categories = outlink.getJSONArray("categories");
+                List<String> cats = new ArrayList<>();
+                for (int i = 0; i < categories.length(); i++) {
+                    JSONObject cat = categories.getJSONObject(i);
+                    cats.add(cat.getString("title"));
+                }
+                outlinks.add(new Outlink(title, cats));
+            } catch (JSONException e) {
+
             }
-            outlinks.add(new Outlink(title, cats));
         }
         return outlinks;
     }

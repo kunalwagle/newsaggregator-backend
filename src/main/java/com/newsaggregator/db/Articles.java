@@ -91,15 +91,19 @@ public class Articles {
         List<OutletArticle> articles = new ArrayList<>();
         ItemCollection<ScanOutcome> items = table.scan();
         for (Item nextItem : items) {
-            Map<String, Object> item = nextItem.asMap();
-            String articleUrl = (String) item.get("articleUrl");
-            Map<String, Object> info = (Map<String, Object>) item.get("info");
-            String title = (String) info.get("Title");
-            String body = (String) info.get("Body");
-            String imageUrl = (String) info.get("ImageUrl");
-            String source = (String) info.get("Source");
-            String datePublished = (String) info.get("DatePublished");
-            articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished));
+            try {
+                Map<String, Object> item = nextItem.asMap();
+                String articleUrl = (String) item.get("articleUrl");
+                Map<String, Object> info = (Map<String, Object>) item.get("info");
+                String title = (String) info.get("Title");
+                String body = (String) info.get("Body");
+                String imageUrl = (String) info.get("ImageUrl");
+                String source = (String) info.get("Source");
+                String datePublished = (String) info.get("DatePublished");
+                articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished));
+            } catch (Exception e) {
+                System.out.println("Caught an exception, but still chugging along");
+            }
         }
         return articles;
     }
