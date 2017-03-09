@@ -9,9 +9,23 @@ public class CandidateLabel {
 
     private String label;
     private List<Outlink> outlinks;
+    private String articleBody;
 
-    public CandidateLabel(String label, List<Outlink> outlinks) {
+    public CandidateLabel(String label, WikipediaArticle wikipediaArticle, List<Outlink> outlinks) {
         this.label = label;
         this.outlinks = outlinks;
+        this.articleBody = wikipediaArticle.getExtract();
+    }
+
+    public List<Outlink> getOutlinks() {
+        return outlinks;
+    }
+
+    public String getArticleBody() {
+        return articleBody;
+    }
+
+    public String getLabel() {
+        return label;
     }
 }

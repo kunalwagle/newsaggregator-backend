@@ -2,14 +2,16 @@ package com.newsaggregator.ml.labelling;
 
 import com.newsaggregator.api.Wikipedia;
 import com.newsaggregator.base.*;
+import com.newsaggregator.ml.TfIdf;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TopicLabelling {
 
-    public static TopicLabel generateTopicLabel(Topic model) {
+    public static List<String> generateTopicLabel(Topic model) {
 
         List<String> primaryLabels = new ArrayList<>();
         List<String> secondaryLabels = new ArrayList<>();
@@ -19,33 +21,41 @@ public class TopicLabelling {
             primaryLabels.addAll(extractTitles(Wikipedia.getArticles(topicWord.getWord())));
         }
 
-        List<CandidateLabel> primaryCandidates = primaryLabels.stream().map(label -> new CandidateLabel(label, Wikipedia.getOutlinksAndCategories(label))).collect(Collectors.toList());
+        List<CandidateLabel> primaryCandidates = primaryLabels.parallelStream().map(label -> new CandidateLabel(label, Wikipedia.getNearMatchArticle(label), Wikipedia.getOutlinksAndCategories(label))).collect(Collectors.toList());
 
         for (String primaryLabel : primaryLabels) {
             secondaryLabels.addAll(isolateNounChunks(primaryLabel));
         }
 
-        secondaryLabels = secondaryLabels.stream().filter(secondaryLabel -> isWikipediaArticle(secondaryLabel)).collect(Collectors.toList());
+        secondaryLabels = secondaryLabels.parallelStream().filter(TopicLabelling::isWikipediaArticle).filter(primaryLabels::contains).collect(Collectors.toList());
 
-        List<CandidateLabel> secondaryCandidates = secondaryLabels.stream().map(label -> new CandidateLabel(label, Wikipedia.getOutlinksAndCategories(label))).filter(candidate -> secondaryLabelViable(primaryCandidates, candidate)).collect(Collectors.toList());
+        List<CandidateLabel> secondaryCandidates = secondaryLabels.parallelStream().map(label -> new CandidateLabel(label, Wikipedia.getNearMatchArticle(label), Wikipedia.getOutlinksAndCategories(label))).collect(Collectors.toList());
+
+        secondaryCandidates = secondaryCandidates.stream().filter(candidate -> secondaryLabelViable(primaryCandidates, candidate)).collect(Collectors.toList());
 
         primaryCandidates.addAll(secondaryCandidates);
 
-        for (int i = 0; i < 5; i++) {
-            primaryLabels.add(topicWords.get(i).getWord());
-        }
 
-        String label = performCandidateRanking(primaryLabels);
-
-        return new TopicLabel(label, model);
+        return performCandidateRanking(primaryCandidates, topicWords);
     }
 
     private static boolean secondaryLabelViable(List<CandidateLabel> primaryCandidates, CandidateLabel secondaryCandidate) {
         return racoScore(secondaryCandidate, primaryCandidates) > 0.1;
     }
 
-    private static String performCandidateRanking(List<String> primaryLabels) {
-        return null;
+    private static List<String> performCandidateRanking(List<CandidateLabel> labels, List<TopicWord> topicWords) {
+
+        TfIdf tfIdf = new TfIdf(labels.stream().map(CandidateLabel::getArticleBody).collect(Collectors.toList()));
+
+        List<TfIdfScores> potentialLabels = new ArrayList<>();
+
+        for (CandidateLabel label : labels) {
+            double calc = topicWords.stream().mapToDouble(term -> tfIdf.performTfIdf(label.getArticleBody(), term.getWord())).sum();
+            potentialLabels.add(new TfIdfScores(label.getLabel(), calc));
+        }
+
+        return potentialLabels.stream().sorted(Comparator.comparing(TfIdfScores::getCalculation).reversed()).map(TfIdfScores::getLabel).distinct().limit(10).collect(Collectors.toList());
+
     }
 
     private static double racoScore(CandidateLabel secondaryLabel, List<CandidateLabel> primaryLabels) {
@@ -59,6 +69,23 @@ public class TopicLabelling {
     }
 
     private static double individualRacoScore(CandidateLabel secondaryLabel, CandidateLabel primaryLabel) {
+        try {
+            List<Outlink> primaryOutlinks = primaryLabel.getOutlinks();
+            List<Outlink> secondaryOutlinks = secondaryLabel.getOutlinks();
+            int categoryOverlap = 0;
+            int primarySize = primaryOutlinks.stream().mapToInt(Outlink::categorySize).sum();
+            int secondarySize = secondaryOutlinks.stream().mapToInt(Outlink::categorySize).sum();
+            for (Outlink primaryOutlink : primaryOutlinks) {
+                for (Outlink secondaryOutlink : secondaryOutlinks) {
+                    ArrayList<String> intersection = new ArrayList<>(primaryOutlink.getCategories());
+                    intersection.retainAll(secondaryOutlink.getCategories());
+                    categoryOverlap += intersection.size();
+                }
+            }
+            return (2 * categoryOverlap) / (primarySize + secondarySize);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
@@ -84,6 +111,25 @@ public class TopicLabelling {
 
     private static List<String> extractTitles(ArrayList<WikipediaArticle> articles) {
         return articles.stream().map(WikipediaArticle::getTitle).collect(Collectors.toList());
+    }
+
+    private static class TfIdfScores {
+
+        private String label;
+        private double calculation;
+
+        public TfIdfScores(String label, double calculation) {
+            this.label = label;
+            this.calculation = calculation;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public double getCalculation() {
+            return calculation;
+        }
     }
 
 }

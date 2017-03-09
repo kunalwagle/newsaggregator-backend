@@ -20,4 +20,8 @@ public class TopicWord {
     public double getDistribution() {
         return distribution;
     }
+
+    public void setDistribution(double multiplyingFactor) {
+        distribution *= multiplyingFactor;
+    }
 }

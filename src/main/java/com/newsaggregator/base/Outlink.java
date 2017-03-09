@@ -14,4 +14,15 @@ public class Outlink {
         this.outlink = outlink;
         this.categories = categories;
     }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public static int categorySize(Outlink outlink) {
+        if (outlink != null && outlink.getCategories() != null) {
+            return outlink.getCategories().size();
+        }
+        return 0;
+    }
 }
