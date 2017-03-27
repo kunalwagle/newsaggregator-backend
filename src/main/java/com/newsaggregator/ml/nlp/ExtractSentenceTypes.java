@@ -18,12 +18,15 @@ public class ExtractSentenceTypes {
     }
 
     public String nounifyDocument(String document) {
+        List<String> nouns = individualNouns(document);
+        return String.join(" ", nouns);
+    }
+
+    public List<String> individualNouns(String document) {
         String[] sentences = sentenceDetector.detectSentences(document);
         List<String> tokens = tokeniser.findTokens(sentences);
         String[] tags = tagger.tagWords(tokens);
-        List<String> nouns = tagger.filterNouns(tokens, tags);
-
-        return String.join(" ", nouns);
+        return tagger.filterNouns(tokens, tags);
     }
 
 }

@@ -2,7 +2,8 @@ package com.newsaggregator.ml.labelling;
 
 import com.newsaggregator.api.Wikipedia;
 import com.newsaggregator.base.*;
-import com.newsaggregator.ml.TfIdf;
+import com.newsaggregator.ml.tfidf.TfIdf;
+import com.newsaggregator.ml.tfidf.TfIdfScores;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -44,12 +45,13 @@ public class TopicLabelling {
     }
 
     private static List<String> performCandidateRanking(List<CandidateLabel> labels, List<TopicWord> topicWords) {
-
+        //TODO Attempt with nounified candidate labels - perhaps nounify at the very beginning
         TfIdf tfIdf = new TfIdf(labels.stream().map(CandidateLabel::getArticleBody).collect(Collectors.toList()));
 
         List<TfIdfScores> potentialLabels = new ArrayList<>();
 
         for (CandidateLabel label : labels) {
+            //TODO Attempt with nounified document
             double calc = topicWords.stream().mapToDouble(term -> tfIdf.performTfIdf(label.getArticleBody(), term.getWord())).sum();
             potentialLabels.add(new TfIdfScores(label.getLabel(), calc));
         }
@@ -111,25 +113,6 @@ public class TopicLabelling {
 
     private static List<String> extractTitles(ArrayList<WikipediaArticle> articles) {
         return articles.stream().map(WikipediaArticle::getTitle).collect(Collectors.toList());
-    }
-
-    private static class TfIdfScores {
-
-        private String label;
-        private double calculation;
-
-        public TfIdfScores(String label, double calculation) {
-            this.label = label;
-            this.calculation = calculation;
-        }
-
-        public String getLabel() {
-            return label;
-        }
-
-        public double getCalculation() {
-            return calculation;
-        }
     }
 
 }

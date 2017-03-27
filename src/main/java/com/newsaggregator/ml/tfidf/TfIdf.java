@@ -1,4 +1,4 @@
-package com.newsaggregator.ml;
+package com.newsaggregator.ml.tfidf;
 
 import java.util.ArrayList;
 import java.util.Collections;
