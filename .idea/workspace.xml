@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/stoplists/README" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/stoplists/README" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/stoplists/de.txt" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/stoplists/de.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/stoplists/en.txt" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/stoplists/en.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/stoplists/fi.txt" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/stoplists/fi.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/stoplists/fr.txt" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/stoplists/fr.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/stoplists/jp.txt" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/stoplists/jp.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/POSTagger.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/POSTagger.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/SentenceDetection.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/SentenceDetection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/Tokenisation.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/Tokenisation.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -82,7 +73,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/webapp/src/components/SearchResults/SearchResultPage.js" />
         <option value="$PROJECT_DIR$/src/com/webapp/src/containers/SearchResults/SearchResultsContainer.js" />
         <option value="$PROJECT_DIR$/src/com/webapp/src/store.js" />
         <option value="$PROJECT_DIR$/src/com/webapp/src/components/Home/SearchBar.js" />
@@ -132,6 +122,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/Tokenisation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/POSTagger.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" />
       </list>
     </option>
@@ -1182,14 +1173,7 @@
       <workItem from="1487883216849" duration="19041000" />
       <workItem from="1488231650678" duration="37395000" />
       <workItem from="1489057867627" duration="15151000" />
-      <workItem from="1490640587176" duration="94000" />
-    </task>
-    <task id="LOCAL-00015" summary="Finished adding API connections, and created save and fetch methods for articles in the database">
-      <created>1486382739652</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1486382739652</updated>
+      <workItem from="1490640587176" duration="377000" />
     </task>
     <task id="LOCAL-00016" summary="Return search results for wikipedia pages">
       <created>1486405721721</created>
@@ -1527,7 +1511,14 @@
       <option name="project" value="LOCAL" />
       <updated>1489067960623</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Adjusted NLP files">
+      <created>1490640701850</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1490640701854</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1560,7 +1551,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197087000" />
+    <option name="totallyTimeSpent" value="197370000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1615,7 +1606,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Adding restlet" />
     <MESSAGE value="MongoDB converted to maven import" />
     <MESSAGE value="Maven: Jackson core, databind and apache commons" />
     <MESSAGE value="Updated restlet" />
@@ -1640,7 +1630,8 @@
     <MESSAGE value="Completed topic labelling" />
     <MESSAGE value="Completed nlp pre-processing" />
     <MESSAGE value="Committing resource files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Committing resource files" />
+    <MESSAGE value="Adjusted NLP files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjusted NLP files" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1672,13 +1663,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/ExtraStyle.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1922,6 +1906,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
           <caret line="381" column="29" lean-forward="false" selection-start-line="381" selection-start-column="29" selection-end-line="381" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1997,16 +1982,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/POSTagger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1425">
@@ -2061,11 +2036,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/POSTagger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="106" column="35" lean-forward="false" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="1530">
+          <caret line="122" column="0" lean-forward="true" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+          <folding>
+            <element signature="e#1006#1007#0" expanded="true" />
+            <element signature="e#1060#1061#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -10,9 +10,7 @@ import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.Topic;
 import com.newsaggregator.base.TopicLabel;
 import com.newsaggregator.base.TopicWord;
-import com.newsaggregator.ml.nlp.POSTagger;
-import com.newsaggregator.ml.nlp.SentenceDetection;
-import com.newsaggregator.ml.nlp.Tokenisation;
+import com.newsaggregator.ml.nlp.ExtractSentenceTypes;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,14 +24,10 @@ public class TopicModelling {
     private Alphabet dataAlphabet;
     private final int numTopics = 100;
     private InstanceList instances = getInstances();
-    private Tokenisation tokeniser;
-    private SentenceDetection sentenceDetector;
-    private POSTagger tagger;
+    private ExtractSentenceTypes nounifier;
 
     public TopicModelling() {
-        tokeniser = new Tokenisation();
-        sentenceDetector = new SentenceDetection();
-        tagger = new POSTagger();
+        nounifier = new ExtractSentenceTypes();
     }
 
     public List<TopicLabel> trainTopics(List<OutletArticle> articleList) throws IOException {
@@ -79,9 +73,9 @@ public class TopicModelling {
 
         String document = article.getBody();
 
-        String title = nounifyDocument(article.getTitle());
+        String title = nounifier.nounifyDocument(article.getTitle());
 
-        String nounifiedDocument = nounifyDocument(document);
+        String nounifiedDocument = nounifier.nounifyDocument(document);
 
         InstanceList testing = new InstanceList(instances.getPipe());
         testing.addThruPipe(new Instance(nounifiedDocument, null, "document", null));
@@ -108,15 +102,6 @@ public class TopicModelling {
         return new Topic(finalWords);
     }
 
-    private String nounifyDocument(String document) {
-        String[] sentences = sentenceDetector.detectSentences(document);
-        List<String> tokens = tokeniser.findTokens(sentences);
-        String[] tags = tagger.tagWords(tokens);
-        List<String> nouns = tagger.filterNouns(tokens, tags);
-
-        return String.join(" ", nouns);
-    }
-
     private boolean isInArticle(String word, String document) {
         return document.contains(word);
     }
@@ -138,7 +123,7 @@ public class TopicModelling {
         for (OutletArticle article : articleList) {
             System.out.println(i + " out of " + articleList.size());
             i++;
-            articleBodies.add(nounifyDocument(article.getBody()));
+            articleBodies.add(nounifier.nounifyDocument(article.getBody()));
         }
 
         String[] result = new String[articleBodies.size()];
