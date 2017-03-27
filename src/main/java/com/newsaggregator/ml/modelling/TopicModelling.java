@@ -10,6 +10,9 @@ import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.Topic;
 import com.newsaggregator.base.TopicLabel;
 import com.newsaggregator.base.TopicWord;
+import com.newsaggregator.ml.nlp.POSTagger;
+import com.newsaggregator.ml.nlp.SentenceDetection;
+import com.newsaggregator.ml.nlp.Tokenisation;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,10 +24,16 @@ public class TopicModelling {
 
     private ParallelTopicModel model;
     private Alphabet dataAlphabet;
-    private final int numTopics = 300;
+    private final int numTopics = 100;
     private InstanceList instances = getInstances();
+    private Tokenisation tokeniser;
+    private SentenceDetection sentenceDetector;
+    private POSTagger tagger;
 
     public TopicModelling() {
+        tokeniser = new Tokenisation();
+        sentenceDetector = new SentenceDetection();
+        tagger = new POSTagger();
     }
 
     public List<TopicLabel> trainTopics(List<OutletArticle> articleList) throws IOException {
@@ -36,7 +45,7 @@ public class TopicModelling {
         this.model = new ParallelTopicModel(numTopics, 1.0, 0.01);
         model.addInstances(instances);
         model.setNumThreads(2);
-        model.setNumIterations(1500);
+        model.setNumIterations(1000);
         model.estimate();
 
         dataAlphabet = instances.getDataAlphabet();
@@ -66,9 +75,16 @@ public class TopicModelling {
         return new InstanceList(new SerialPipes(pipeList));
     }
 
-    public Topic getModel(String document) {
+    public Topic getModel(OutletArticle article) {
+
+        String document = article.getBody();
+
+        String title = nounifyDocument(article.getTitle());
+
+        String nounifiedDocument = nounifyDocument(document);
+
         InstanceList testing = new InstanceList(instances.getPipe());
-        testing.addThruPipe(new Instance(document, null, "document", null));
+        testing.addThruPipe(new Instance(nounifiedDocument, null, "document", null));
 
         TopicInferencer inferencer = model.getInferencer();
         double[] testProbabilities = inferencer.getSampledDistribution(testing.get(0), 2500, 40, 50);
@@ -80,10 +96,25 @@ public class TopicModelling {
         }
         List<TopicWord> allWords = getAllWords(labels);
         List<TopicWord> topWords = allWords.stream().filter(topicWord -> isInArticle(topicWord.getWord(), document)).sorted(Comparator.comparing(TopicWord::getDistribution).reversed()).limit(10).collect(Collectors.toList());
-        for (TopicWord word : topWords) {
+
+        List<TopicWord> titleWords = Arrays.stream(title.split(" ")).map(string -> new TopicWord(string, topWords.get(0).getDistribution() * 2)).collect(Collectors.toList());
+        titleWords.addAll(topWords);
+
+        List<TopicWord> finalWords = titleWords.stream().limit(10).collect(Collectors.toList());
+
+        for (TopicWord word : finalWords) {
             System.out.println(word.getWord());
         }
-        return new Topic(topWords);
+        return new Topic(finalWords);
+    }
+
+    private String nounifyDocument(String document) {
+        String[] sentences = sentenceDetector.detectSentences(document);
+        List<String> tokens = tokeniser.findTokens(sentences);
+        String[] tags = tagger.tagWords(tokens);
+        List<String> nouns = tagger.filterNouns(tokens, tags);
+
+        return String.join(" ", nouns);
     }
 
     private boolean isInArticle(String word, String document) {
@@ -98,12 +129,16 @@ public class TopicModelling {
         return words;
     }
 
-    private static String[] extractArticleText(List<OutletArticle> articleList) {
+    private String[] extractArticleText(List<OutletArticle> articleList) {
 
         List<String> articleBodies = new ArrayList<>();
 
+        int i = 0;
+
         for (OutletArticle article : articleList) {
-            articleBodies.add(article.getBody());
+            System.out.println(i + " out of " + articleList.size());
+            i++;
+            articleBodies.add(nounifyDocument(article.getBody()));
         }
 
         String[] result = new String[articleBodies.size()];

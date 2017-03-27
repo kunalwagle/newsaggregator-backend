@@ -1,12 +1,23 @@
 package com.newsaggregator;
 
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.newsaggregator.api.outlets.Reuters;
+import com.newsaggregator.base.LabelledArticle;
 import com.newsaggregator.base.OutletArticle;
+import com.newsaggregator.base.Topic;
+import com.newsaggregator.base.TopicLabel;
+import com.newsaggregator.db.Articles;
+import com.newsaggregator.ml.labelling.TopicLabelling;
+import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.routes.RouterApplication;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class Main {
@@ -32,7 +43,7 @@ public class Main {
 
 //            scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 60L, 600L, TimeUnit.SECONDS);
 
-//            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
+            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
 //            Articles articles = new Articles(db);
 //            articles.getAllTopics();
 //
@@ -62,39 +73,38 @@ public class Main {
 //
 //            MongoDatabase db = mongoClient.getDatabase("NewsAggregator");
 //
-//            Articles articleCollection = new Articles(db);
+            Articles articleCollection = new Articles(db);
 //
-//            List<OutletArticle> articles = articleCollection.getAllArticles();
-//            System.out.println("Starting modelling");
-//            TopicModelling modelling = new TopicModelling();
-//            List<TopicLabel> topics = modelling.trainTopics(articles);
+            List<OutletArticle> articles = articleCollection.getAllArticles();
+            System.out.println("Starting modelling");
+            TopicModelling modelling = new TopicModelling();
+            List<TopicLabel> topics = modelling.trainTopics(articles);
 //            modelling.getModel(articleList.get(0).getBody());
-//            System.out.println("Finished modelling");
+            System.out.println("Finished modelling");
 //           Topics topicDB = new Topics(db);
 //            List<TopicLabel> labels = topicDB.getAllTopics();
 //            topicDB.saveTopics(topics);
 
 
-//            List<LabelledArticle> labelledArticleList = new ArrayList<>();
-//
-//            Random rand = new Random();
-//
-//            for (int i = 0; i < 15; i++) {
-//                System.out.println("Now on article " + i);
-//                int index = rand.nextInt(articles.size());
-//                Topic topic = modelling.getModel(articles.get(index).getBody());
-//                List<String> topicLabel = TopicLabelling.generateTopicLabel(topic);
-//                System.out.println("Article Title: " + articles.get(index).getTitle());
-//                System.out.println("Article Body: " + articles.get(index).getBody());
-//                System.out.println("");
-//                System.out.println("Labels:");
-//                for (String s : topicLabel) {
-//                    System.out.print(s + ",");
-//                }
-//                System.out.println("");
-//                System.out.println("");
-//                labelledArticleList.add(new LabelledArticle(topicLabel, articles.get(index)));
-//            }
+            List<LabelledArticle> labelledArticleList = new ArrayList<>();
+
+            Random rand = new Random();
+
+            for (int i = 0; i < 5; i++) {
+                System.out.println("Now on article " + i);
+                int index = rand.nextInt(articles.size());
+                Topic topic = modelling.getModel(articles.get(index));
+                List<String> topicLabel = TopicLabelling.generateTopicLabel(topic);
+                labelledArticleList.add(new LabelledArticle(topicLabel, articles.get(index)));
+            }
+
+            for (int i = 0; i < 5; i++) {
+                System.out.println("Article Title: " + labelledArticleList.get(i).getArticle().getTitle());
+                System.out.println("Article Body: " + labelledArticleList.get(i).getArticle().getBody());
+                System.out.println("");
+                System.out.print("Labels: ");
+                System.out.println(labelledArticleList.get(i).getLabels().toString());
+            }
 
 
 ////            TOI ap = new TOI();

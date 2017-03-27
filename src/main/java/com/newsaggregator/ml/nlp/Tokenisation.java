@@ -15,11 +15,10 @@ import java.util.stream.Collectors;
  */
 public class Tokenisation {
 
-    public List<String> findTokens(String[] sentences) {
+    private Tokenizer tokeniser;
 
-        List<String> sentenceList = Arrays.asList(sentences);
-
-        Tokenizer tokeniser = null;
+    public Tokenisation() {
+        tokeniser = null;
 
         InputStream modelIn = null;
         try {
@@ -40,6 +39,11 @@ public class Tokenisation {
                 }
             }
         }
+    }
+
+    public List<String> findTokens(String[] sentences) {
+
+        List<String> sentenceList = Arrays.asList(sentences);
 
         Tokenizer finalTokeniser = tokeniser;
         if (finalTokeniser != null) {

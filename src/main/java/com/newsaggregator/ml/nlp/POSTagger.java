@@ -13,9 +13,10 @@ import java.util.List;
  */
 public class POSTagger {
 
-    public String[] tagWords(List<String> tokens) {
+    private POSTaggerME posTagger;
 
-        POSTaggerME posTagger = null;
+    public POSTagger() {
+        posTagger = null;
 
         InputStream modelIn = null;
         try {
@@ -37,6 +38,9 @@ public class POSTagger {
                 }
             }
         }
+    }
+
+    public String[] tagWords(List<String> tokens) {
 
         String[] tokenArray = new String[tokens.size()];
 

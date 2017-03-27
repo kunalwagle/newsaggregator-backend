@@ -12,8 +12,10 @@ import java.io.InputStream;
  */
 public class SentenceDetection {
 
-    public String[] detectSentences(String content) {
-        SentenceDetector sentenceDetector = null;
+    private SentenceDetector sentenceDetector;
+
+    public SentenceDetection() {
+        sentenceDetector = null;
 
         InputStream modelIn = null;
         try {
@@ -34,6 +36,10 @@ public class SentenceDetection {
                 }
             }
         }
+
+    }
+
+    public String[] detectSentences(String content) {
 
         if (sentenceDetector != null) {
             return sentenceDetector.sentDetect(content);
