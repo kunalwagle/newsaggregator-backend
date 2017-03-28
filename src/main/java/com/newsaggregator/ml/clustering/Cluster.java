@@ -15,4 +15,11 @@ public class Cluster<E> {
         clusterItems.add(initialItem);
     }
 
+    public double getSimilarity(Cluster secondCluster) {
+        return 0;
+    }
+
+    public void combine(Cluster secondCluster) {
+
+    }
 }
