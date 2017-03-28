@@ -7,4 +7,6 @@ public interface ClusterItem {
 
     double getSimilarityScore(ClusterItem otherItem);
 
+    VectorScore getVector();
+
 }

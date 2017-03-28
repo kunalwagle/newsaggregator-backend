@@ -34,7 +34,7 @@ public class Clusterer {
         boolean clusterChanged;
         do {
             double[][] similarityMatrix = generateSimilarityMatrix();
-            ScoreAddress closeClusterAddresses = findHighestScoreAddress(similarityMatrix);
+            ScoreAddress closeClusterAddresses = findLowestScoreAddress(similarityMatrix);
             clusterChanged = combineIfPossible(closeClusterAddresses);
         }
         while (clusterChanged);
@@ -43,7 +43,7 @@ public class Clusterer {
     }
 
     private boolean combineIfPossible(ScoreAddress score) {
-        if (score.getScore() > 0.5) {
+        if (score.getScore() < 0.05) {
             Cluster firstCluster = clusters.get(score.getI());
             Cluster secondCluster = clusters.get(score.getJ());
             firstCluster.combine(secondCluster);
@@ -53,20 +53,20 @@ public class Clusterer {
         return false;
     }
 
-    private ScoreAddress findHighestScoreAddress(double[][] similarityMatrix) {
-        int iMax = -1;
-        int jMax = -1;
-        double scoreMax = -1;
+    private ScoreAddress findLowestScoreAddress(double[][] similarityMatrix) {
+        int iMin = -1;
+        int jMin = -1;
+        double scoreMin = 1;
         for (int i = 0; i < similarityMatrix.length; i++) {
             for (int j = 0; j < similarityMatrix.length; j++) {
-                if (similarityMatrix[i][j] > scoreMax) {
-                    scoreMax = similarityMatrix[i][j];
-                    iMax = i;
-                    jMax = j;
+                if (similarityMatrix[i][j] > scoreMin) {
+                    scoreMin = similarityMatrix[i][j];
+                    iMin = i;
+                    jMin = j;
                 }
             }
         }
-        return new ScoreAddress(iMax, jMax, scoreMax);
+        return new ScoreAddress(iMin, jMin, scoreMin);
     }
 
     private double[][] generateSimilarityMatrix() {
@@ -84,7 +84,7 @@ public class Clusterer {
                 }
             }
         }
-        return new double[0][];
+        return similarityMatrix;
     }
 
     private double findSimilarity(int i, int j) {
@@ -99,8 +99,8 @@ public class Clusterer {
         for (String noun : nouns) {
             nounScores.add(new TfIdfScores(noun, tfIdf.performTfIdf(article.getBody(), noun)));
         }
-        double timeStampScore = generateTimeStampScore(article.getLastPublished());
-        VectorScore vectorScore = new VectorScore(nounScores, timeStampScore);
+        //double timeStampScore = generateTimeStampScore(article.getLastPublished());
+        VectorScore vectorScore = new VectorScore(nounScores, 0.0);
         Cluster<ArticleVector> cluster = new Cluster<>(new ArticleVector(article, vectorScore));
         clusters.add(cluster);
     }

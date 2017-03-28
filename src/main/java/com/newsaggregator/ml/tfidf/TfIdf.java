@@ -31,7 +31,10 @@ public class TfIdf {
     }
 
     private double calculateIdf(String term) {
-        int numberOfDocumentsWithTerm = corpusSizes.stream().filter(map -> map.containsKey(term.toLowerCase())).collect(Collectors.toList()).size() + 1;
+        int numberOfDocumentsWithTerm = corpusSizes.stream().filter(map -> map.containsKey(term.toLowerCase())).collect(Collectors.toList()).size();
+        if (numberOfDocumentsWithTerm == 0) {
+            numberOfDocumentsWithTerm++;
+        }
         double inverse = (float) corpusSize / numberOfDocumentsWithTerm;
         return Math.log(inverse);
     }

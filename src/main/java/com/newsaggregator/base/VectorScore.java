@@ -25,4 +25,8 @@ public class VectorScore {
         return timeStampScore;
     }
 
+    public double getTotalTfIdfScore() {
+        return nounScores.stream().mapToDouble(TfIdfScores::getCalculation).sum();
+    }
+
 }
