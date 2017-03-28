@@ -22,12 +22,16 @@ public class ArticleVector implements ClusterItem {
         double result;
         VectorScore otherVectorScore = otherItem.getVector();
         result = findSimilarities(otherVectorScore);
-        result += factorInTimeStamp(otherVectorScore);
-        return result;
+        if (result > 0.001) {
+            return result / factorInTimeStamp(otherVectorScore);
+        }
+        return -1;
     }
 
     private double factorInTimeStamp(VectorScore otherVectorScore) {
-        return 0;
+        double timestamp1 = vectorScore.getTimeStampScore() / (1000 * 60 * 60);
+        double timestamp2 = otherVectorScore.getTimeStampScore() / (1000 * 60 * 60);
+        return Math.abs(timestamp1 - timestamp2);
     }
 
     private double findSimilarities(VectorScore otherVectorScore) {
@@ -58,8 +62,11 @@ public class ArticleVector implements ClusterItem {
         //differenceRunningTotal = differenceRunningTotal / total;
         double multiplicationFactor = totalSimilarWords / averageWords;
         similarityRunningTotal = Math.pow(similarityRunningTotal, 0.5) * multiplicationFactor;
-        System.out.println("Total: " + similarityRunningTotal / differenceRunningTotal);
         return similarityRunningTotal / differenceRunningTotal;
+    }
+
+    public OutletArticle getArticle() {
+        return article;
     }
 
     @Override

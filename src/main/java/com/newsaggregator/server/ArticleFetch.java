@@ -17,7 +17,7 @@ public class ArticleFetch {
         articles.addAll(fetchBusinessInsiderArticles());
         articles.addAll(fetchCricinfoArticles());
         articles.addAll(fetchDailyMailArticles());
-        articles.addAll(fetchGuardianArticles());
+//        articles.addAll(fetchGuardianArticles());
         articles.addAll(fetchIndependentArticles());
         articles.addAll(fetchMetroArticles());
         articles.addAll(fetchMirrorArticles());

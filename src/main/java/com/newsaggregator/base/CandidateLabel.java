@@ -17,6 +17,11 @@ public class CandidateLabel {
         this.articleBody = wikipediaArticle.getExtract();
     }
 
+    public CandidateLabel(String label, WikipediaArticle wikipediaArticle) {
+        this.label = label;
+        this.articleBody = wikipediaArticle.getExtract();
+    }
+
     public List<Outlink> getOutlinks() {
         return outlinks;
     }

@@ -2,6 +2,7 @@ package com.newsaggregator.ml.labelling;
 
 import com.newsaggregator.api.Wikipedia;
 import com.newsaggregator.base.*;
+import com.newsaggregator.ml.nlp.ExtractSentenceTypes;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
 
@@ -24,17 +25,17 @@ public class TopicLabelling {
 
         List<CandidateLabel> primaryCandidates = primaryLabels.parallelStream().map(label -> new CandidateLabel(label, Wikipedia.getNearMatchArticle(label), Wikipedia.getOutlinksAndCategories(label))).collect(Collectors.toList());
 
-        for (String primaryLabel : primaryLabels) {
-            secondaryLabels.addAll(isolateNounChunks(primaryLabel));
-        }
-
-        secondaryLabels = secondaryLabels.parallelStream().filter(TopicLabelling::isWikipediaArticle).filter(primaryLabels::contains).collect(Collectors.toList());
-
-        List<CandidateLabel> secondaryCandidates = secondaryLabels.parallelStream().map(label -> new CandidateLabel(label, Wikipedia.getNearMatchArticle(label), Wikipedia.getOutlinksAndCategories(label))).collect(Collectors.toList());
-
-        secondaryCandidates = secondaryCandidates.stream().filter(candidate -> secondaryLabelViable(primaryCandidates, candidate)).collect(Collectors.toList());
-
-        primaryCandidates.addAll(secondaryCandidates);
+//        for (String primaryLabel : primaryLabels) {
+//            secondaryLabels.addAll(isolateNounChunks(primaryLabel));
+//        }
+//
+//        secondaryLabels = secondaryLabels.parallelStream().filter(TopicLabelling::isWikipediaArticle).filter(primaryLabels::contains).collect(Collectors.toList());
+//
+//        List<CandidateLabel> secondaryCandidates = secondaryLabels.parallelStream().map(label -> new CandidateLabel(label, Wikipedia.getNearMatchArticle(label), Wikipedia.getOutlinksAndCategories(label))).collect(Collectors.toList());
+//
+//        secondaryCandidates = secondaryCandidates.stream().filter(candidate -> secondaryLabelViable(primaryCandidates, candidate)).collect(Collectors.toList());
+//
+//        primaryCandidates.addAll(secondaryCandidates);
 
 
         return performCandidateRanking(primaryCandidates, topicWords);
@@ -45,19 +46,23 @@ public class TopicLabelling {
     }
 
     private static List<String> performCandidateRanking(List<CandidateLabel> labels, List<TopicWord> topicWords) {
-        //TODO Attempt with nounified candidate labels - perhaps nounify at the very beginning
-        TfIdf tfIdf = new TfIdf(labels.stream().map(CandidateLabel::getArticleBody).collect(Collectors.toList()));
+        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+        TfIdf tfIdf = new TfIdf(labels.stream().map(label -> stripArticleBodies(label, extractSentenceTypes)).collect(Collectors.toList()));
 
         List<TfIdfScores> potentialLabels = new ArrayList<>();
 
         for (CandidateLabel label : labels) {
-            //TODO Attempt with nounified document
-            double calc = topicWords.stream().mapToDouble(term -> tfIdf.performTfIdf(label.getArticleBody(), term.getWord())).sum();
+            String strippedBody = stripArticleBodies(label, extractSentenceTypes);
+            double calc = topicWords.stream().mapToDouble(term -> tfIdf.performTfIdf(strippedBody, term.getWord())).sum();
             potentialLabels.add(new TfIdfScores(label.getLabel(), calc));
         }
 
         return potentialLabels.stream().sorted(Comparator.comparing(TfIdfScores::getCalculation).reversed()).map(TfIdfScores::getLabel).distinct().limit(10).collect(Collectors.toList());
 
+    }
+
+    private static String stripArticleBodies(CandidateLabel label, ExtractSentenceTypes extractor) {
+        return extractor.nounifyDocument(label.getArticleBody());
     }
 
     private static double racoScore(CandidateLabel secondaryLabel, List<CandidateLabel> primaryLabels) {
