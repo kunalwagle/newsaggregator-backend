@@ -23,6 +23,7 @@ public class Clusterer {
     public Clusterer(List<OutletArticle> articles) {
         //TODO: Create Corpus - potentially with nouns only
         tfIdf = new TfIdf(articles.stream().map(OutletArticle::getBody).collect(Collectors.toList()));
+        articles.forEach(this::calculateVectorScore);
     }
 
     private void calculateVectorScore(OutletArticle article) {
@@ -53,7 +54,7 @@ public class Clusterer {
         private List<TfIdfScores> nounScores;
         private double timeStampScore;
 
-        public VectorScore(List<TfIdfScores> nounScores, double timeStampScore) {
+        VectorScore(List<TfIdfScores> nounScores, double timeStampScore) {
             this.timeStampScore = timeStampScore;
             this.nounScores = nounScores;
         }
