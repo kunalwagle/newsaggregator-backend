@@ -10,6 +10,7 @@ public class CandidateLabel {
     private String label;
     private List<Outlink> outlinks;
     private String articleBody;
+    private double calc;
 
     public CandidateLabel(String label, WikipediaArticle wikipediaArticle, List<Outlink> outlinks) {
         this.label = label;
@@ -17,9 +18,10 @@ public class CandidateLabel {
         this.articleBody = wikipediaArticle.getExtract();
     }
 
-    public CandidateLabel(String label, WikipediaArticle wikipediaArticle) {
+    public CandidateLabel(String label, WikipediaArticle wikipediaArticle, double calc) {
         this.label = label;
         this.articleBody = wikipediaArticle.getExtract();
+        this.calc = calc;
     }
 
     public List<Outlink> getOutlinks() {
@@ -32,5 +34,9 @@ public class CandidateLabel {
 
     public String getLabel() {
         return label;
+    }
+
+    public double getCalc() {
+        return calc;
     }
 }

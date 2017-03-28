@@ -32,7 +32,7 @@ public class SentenceDetection {
                 try {
                     modelIn.close();
                 } catch (final IOException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
         }

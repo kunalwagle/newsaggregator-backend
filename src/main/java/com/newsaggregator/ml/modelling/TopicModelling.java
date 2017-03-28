@@ -96,9 +96,9 @@ public class TopicModelling {
 
         List<TopicWord> finalWords = titleWords.stream().limit(10).collect(Collectors.toList());
 
-        for (TopicWord word : finalWords) {
-            System.out.println(word.getWord());
-        }
+//        for (TopicWord word : finalWords) {
+//            System.out.println(word.getWord());
+//        }
         return new Topic(finalWords);
     }
 

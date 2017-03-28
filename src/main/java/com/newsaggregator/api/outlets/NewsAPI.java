@@ -32,7 +32,7 @@ public abstract class NewsAPI {
             JSONArray response = fetchArticles();
             return parseAndCollectArticles(response);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return null;
     }
@@ -60,7 +60,7 @@ public abstract class NewsAPI {
                     result.add(getArticle(title, articleURL, imageURL, datePublished));
                 }
             } catch (IndexOutOfBoundsException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         return result;

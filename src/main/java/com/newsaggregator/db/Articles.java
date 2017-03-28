@@ -35,7 +35,7 @@ public class Articles {
                     writeArticle(article);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }
@@ -47,7 +47,7 @@ public class Articles {
 
                     .withMap("info", article.createNonPrimaryHashMap()));
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -69,7 +69,7 @@ public class Articles {
         try {
             table.updateItem(updateItemSpec);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 

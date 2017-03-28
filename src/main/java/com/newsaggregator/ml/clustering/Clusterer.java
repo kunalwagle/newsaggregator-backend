@@ -112,7 +112,7 @@ public class Clusterer {
         try {
             date = dateFormat.parse(lastPublished);
         } catch (ParseException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return date.getTime();
     }

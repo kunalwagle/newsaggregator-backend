@@ -51,7 +51,7 @@ public class Wikipedia {
             } while (!finished);
             return outlinks;
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         return null;
@@ -85,7 +85,7 @@ public class Wikipedia {
             if (searchType != null) {
                 searchTerm = searchTerm + "&gsrwhat=" + searchType;
             }
-            URL wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&piprop=original&pilimit=max&exintro&explaintext&exsentences=3&exlimit=max&gsrsearch=" + searchTerm);
+            URL wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&piprop=original&pilimit=max&exintro&explaintext&exsentences=3&exlimit=max&gsrsearch=intitle:" + searchTerm);
             URLConnection wikipediaURLConnection = wikipediaURL.openConnection();
             wikipediaURLConnection.connect();
             JSONObject response = new JSONObject(IOUtils.toString(wikipediaURLConnection.getInputStream(), Charset.forName("UTF-8"))).getJSONObject("query").getJSONObject("pages");
@@ -97,14 +97,14 @@ public class Wikipedia {
                 try {
                     imageUrl = article.getJSONObject("thumbnail").getString("original");
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
                 if (!title.contains("(disambiguation)")) {
                     articles.add(new WikipediaArticle(Outlet.Wikipedia.getSourceString(), title, extract, imageUrl));
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return articles;
     }

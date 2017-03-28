@@ -27,7 +27,7 @@ public class Topics {
                 table.putItem(new Item().withPrimaryKey("Label", topic.getLabel())
                         .withList("Words", words));
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }

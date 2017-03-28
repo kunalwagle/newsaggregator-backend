@@ -13,7 +13,10 @@ import com.newsaggregator.server.ArticleFetch;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Main {
@@ -132,20 +135,42 @@ public class Main {
             List<OutletArticle> outletArticles = ArticleFetch.fetchArticles();
             TopicModelling modelling = new TopicModelling();
             List<TopicLabel> topics = modelling.trainTopics(outletArticles);
-            Topic topic = modelling.getModel(outletArticles.get(0));
-            List<String> topicLabel = TopicLabelling.generateTopicLabel(topic);
-
-            Clusterer clusterer = new Clusterer(outletArticles);
-            List<Cluster<ArticleVector>> clusters = clusterer.cluster();
-            for (Cluster<ArticleVector> cluster : clusters) {
-                System.out.println("New Cluster:");
-                for (ArticleVector vector : cluster.getClusterItems()) {
-                    System.out.println(vector.getArticle().getTitle());
+            Map<String, List<OutletArticle>> articleMap = new HashMap<>();
+            int i = 0;
+            for (OutletArticle article : outletArticles) {
+                System.out.println("Now on article number " + i + "out of " + outletArticles.size());
+                if (!article.getBody().equals("")) {
+                    Topic topic = modelling.getModel(article);
+                    List<String> topicLabel = TopicLabelling.generateTopicLabel(topic, article);
+                    for (String label : topicLabel) {
+                        if (articleMap.containsKey(label)) {
+                            List<OutletArticle> articles = articleMap.get(label);
+                            articles.add(article);
+                        } else {
+                            List<OutletArticle> articles = new ArrayList<>();
+                            articles.add(article);
+                            articleMap.put(label, articles);
+                        }
+                    }
                 }
-                System.out.println("Cluster size: " + cluster.getClusterItems().size());
+                i++;
+            }
+            for (Map.Entry<String, List<OutletArticle>> entry : articleMap.entrySet()) {
+                Clusterer clusterer = new Clusterer(entry.getValue());
+                List<Cluster<ArticleVector>> clusters = clusterer.cluster();
+                System.out.println("Now doing clustering for label " + entry.getKey());
+                for (Cluster<ArticleVector> cluster : clusters) {
+                    System.out.println("New Cluster:");
+                    for (ArticleVector vector : cluster.getClusterItems()) {
+                        System.out.println(vector.getArticle().getTitle());
+                    }
+                    System.out.println("Cluster size: " + cluster.getClusterItems().size());
+                    System.out.println("");
+                }
+                System.out.println("Total number of clusters: " + clusters.size());
                 System.out.println("");
             }
-            System.out.println("Total number of clusters: " + clusters.size());
+
 
 
         } catch (Exception e) {

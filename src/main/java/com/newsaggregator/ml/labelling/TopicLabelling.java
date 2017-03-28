@@ -13,17 +13,22 @@ import java.util.stream.Collectors;
 
 public class TopicLabelling {
 
-    public static List<String> generateTopicLabel(Topic model) {
+    public static List<String> generateTopicLabel(Topic model, OutletArticle outletArticle) {
 
         List<String> primaryLabels = new ArrayList<>();
         List<String> secondaryLabels = new ArrayList<>();
         List<TopicWord> topicWords = model.getTopWords();
+        List<CandidateLabel> primaryCandidates = new ArrayList<>();
 
         for (TopicWord topicWord : topicWords) {
-            primaryLabels.addAll(extractTitles(Wikipedia.getArticles(topicWord.getWord())));
+            List<WikipediaArticle> articles = Wikipedia.getArticles(topicWord.getWord());
+            for (WikipediaArticle article : articles) {
+                primaryCandidates.add(new CandidateLabel(article.getTitle(), article, topicWord.getDistribution()));
+            }
+            //primaryLabels.addAll(extractTitles(Wikipedia.getArticles(topicWord.getWord())));
         }
 
-        List<CandidateLabel> primaryCandidates = primaryLabels.parallelStream().map(label -> new CandidateLabel(label, Wikipedia.getNearMatchArticle(label), Wikipedia.getOutlinksAndCategories(label))).collect(Collectors.toList());
+        //List<CandidateLabel> primaryCandidates = primaryLabels.parallelStream().map(label -> new CandidateLabel(label, Wikipedia.getNearMatchArticle(label))).collect(Collectors.toList());
 
 //        for (String primaryLabel : primaryLabels) {
 //            secondaryLabels.addAll(isolateNounChunks(primaryLabel));
@@ -38,14 +43,14 @@ public class TopicLabelling {
 //        primaryCandidates.addAll(secondaryCandidates);
 
 
-        return performCandidateRanking(primaryCandidates, topicWords);
+        return performCandidateRanking(primaryCandidates, topicWords, outletArticle);
     }
 
     private static boolean secondaryLabelViable(List<CandidateLabel> primaryCandidates, CandidateLabel secondaryCandidate) {
         return racoScore(secondaryCandidate, primaryCandidates) > 0.1;
     }
 
-    private static List<String> performCandidateRanking(List<CandidateLabel> labels, List<TopicWord> topicWords) {
+    private static List<String> performCandidateRanking(List<CandidateLabel> labels, List<TopicWord> topicWords, OutletArticle outletArticle) {
         ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
         TfIdf tfIdf = new TfIdf(labels.stream().map(label -> stripArticleBodies(label, extractSentenceTypes)).collect(Collectors.toList()));
 
@@ -54,6 +59,17 @@ public class TopicLabelling {
         for (CandidateLabel label : labels) {
             String strippedBody = stripArticleBodies(label, extractSentenceTypes);
             double calc = topicWords.stream().mapToDouble(term -> tfIdf.performTfIdf(strippedBody, term.getWord())).sum();
+            calc *= label.getCalc();
+            List<String> articleNouns = extractSentenceTypes.individualNouns(outletArticle.getBody());
+            List<String> wikipediaArticleNouns = extractSentenceTypes.individualNouns(label.getArticleBody());
+            double crossover = 0.0;
+            for (String string : articleNouns) {
+                if (wikipediaArticleNouns.contains(string)) {
+                    crossover++;
+                }
+            }
+            crossover /= (wikipediaArticleNouns.size() + articleNouns.size());
+            calc *= crossover;
             potentialLabels.add(new TfIdfScores(label.getLabel(), calc));
         }
 
@@ -91,7 +107,7 @@ public class TopicLabelling {
             }
             return (2 * categoryOverlap) / (primarySize + secondarySize);
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            ////e.printStackTrace();
         }
         return 0;
     }
