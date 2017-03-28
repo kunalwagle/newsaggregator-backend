@@ -1,6 +1,8 @@
 package com.newsaggregator.ml.clustering;
 
+import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.OutletArticle;
+import com.newsaggregator.base.VectorScore;
 import com.newsaggregator.ml.nlp.ExtractSentenceTypes;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
@@ -8,7 +10,10 @@ import com.newsaggregator.ml.tfidf.TfIdfScores;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 /**
@@ -16,17 +21,16 @@ import java.util.stream.Collectors;
  */
 public class Clusterer {
 
-    private HashMap<OutletArticle, VectorScore> articleVectorScoreHashMap = new HashMap<>();
+    private List<Cluster<ArticleVector>> clusters = new ArrayList<>();
     private ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
     private TfIdf tfIdf;
 
     public Clusterer(List<OutletArticle> articles) {
-        //TODO: Create Corpus - potentially with nouns only
         tfIdf = new TfIdf(articles.stream().map(OutletArticle::getBody).collect(Collectors.toList()));
-        articles.forEach(this::calculateVectorScore);
+        articles.forEach(this::createNewClusterFromArticle);
     }
 
-    private void calculateVectorScore(OutletArticle article) {
+    private void createNewClusterFromArticle(OutletArticle article) {
         List<String> nouns = extractSentenceTypes.individualNouns(article.getBody());
         List<TfIdfScores> nounScores = new ArrayList<>();
         for (String noun : nouns) {
@@ -34,7 +38,8 @@ public class Clusterer {
         }
         double timeStampScore = generateTimeStampScore(article.getLastPublished());
         VectorScore vectorScore = new VectorScore(nounScores, timeStampScore);
-        articleVectorScoreHashMap.put(article, vectorScore);
+        Cluster<ArticleVector> cluster = new Cluster<>(new ArticleVector(article, vectorScore));
+        clusters.add(cluster);
     }
 
     private double generateTimeStampScore(String lastPublished) {
@@ -47,25 +52,6 @@ public class Clusterer {
             e.printStackTrace();
         }
         return date.getTime();
-    }
-
-    private class VectorScore {
-
-        private List<TfIdfScores> nounScores;
-        private double timeStampScore;
-
-        VectorScore(List<TfIdfScores> nounScores, double timeStampScore) {
-            this.timeStampScore = timeStampScore;
-            this.nounScores = nounScores;
-        }
-
-        public List<TfIdfScores> getNounScores() {
-            return nounScores;
-        }
-
-        public double getTimeStampScore() {
-            return timeStampScore;
-        }
     }
 
 
