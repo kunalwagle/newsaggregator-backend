@@ -8,10 +8,12 @@ import java.util.List;
 public class SummarisedArticle extends Article {
 
     private List<String> originalArticles;
+    private String articleBody;
 
-    public SummarisedArticle(String title, String imageUrl, List<String> originalArticles) {
+    public SummarisedArticle(String title, String imageUrl, String articleBody, List<String> originalArticles) {
         super("Summarised", title, imageUrl);
         this.originalArticles = originalArticles;
+        this.articleBody = articleBody;
     }
 
 

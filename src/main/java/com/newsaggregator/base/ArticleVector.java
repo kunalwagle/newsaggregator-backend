@@ -79,4 +79,9 @@ public class ArticleVector implements ClusterItem {
         return article.getBody();
     }
 
+    @Override
+    public String getIdentifier() {
+        return article.getArticleUrl();
+    }
+
 }

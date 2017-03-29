@@ -7,7 +7,7 @@ public class Abstractive implements Summarisation {
 
     @Override
     public String summarise(String text) {
-        return null;
+        return text;
     }
 
 }

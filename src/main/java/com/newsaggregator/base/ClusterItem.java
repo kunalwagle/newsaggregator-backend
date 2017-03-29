@@ -11,4 +11,6 @@ public interface ClusterItem {
 
     String getText();
 
+    String getIdentifier();
+
 }
