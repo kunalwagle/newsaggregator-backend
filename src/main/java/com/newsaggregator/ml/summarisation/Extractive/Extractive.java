@@ -1,7 +1,9 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
+import com.newsaggregator.ml.nlp.SentenceDetection;
 import com.newsaggregator.ml.summarisation.Summarisation;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,6 +38,12 @@ public class Extractive implements Summarisation {
     }
 
     private Graph createGraph(String text) {
-        return null;
+        List<String> sentences = splitToSentences(text);
+        return new Graph(sentences);
+    }
+
+    private List<String> splitToSentences(String text) {
+        SentenceDetection sentenceDetection = new SentenceDetection();
+        return Arrays.asList(sentenceDetection.detectSentences(text));
     }
 }
