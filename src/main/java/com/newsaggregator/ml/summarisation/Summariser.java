@@ -1,5 +1,6 @@
 package com.newsaggregator.ml.summarisation;
 
+import com.newsaggregator.base.SummarisedArticle;
 import com.newsaggregator.ml.clustering.Cluster;
 
 /**
@@ -7,7 +8,8 @@ import com.newsaggregator.ml.clustering.Cluster;
  */
 public class Summariser {
 
-    public static String summarise(Cluster cluster) {
+    public static SummarisedArticle summarise(Cluster cluster) {
+
         return null;
     }
 
