@@ -1,10 +1,13 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
 import com.newsaggregator.ml.nlp.SentenceDetection;
+import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.summarisation.Summarisation;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 29/03/2017.
@@ -13,39 +16,44 @@ public class Extractive implements Summarisation {
 
 
     @Override
-    public String summarise(String text) {
-        Graph graph = createGraph(text);
-        graph = applyCosineSimilarities(graph);
+    public String summarise(List<String> texts) {
+        List<String> sentences = splitToSentences(texts);
+        Graph graph = createGraph(sentences);
+        graph = applyCosineSimilarities(graph, texts);
         graph = filterGraph(graph);
-        List<String> finalStrings = applyPageRank(graph, text);
+        List<String> finalStrings = applyPageRank(graph, sentences);
         return generateFinalStringFromList(finalStrings);
     }
 
     private String generateFinalStringFromList(List<String> finalStrings) {
-        return null;
+        return Combiner.combineStrings(finalStrings.stream().limit(5).collect(Collectors.toList()));
     }
 
-    private List<String> applyPageRank(Graph graph, String text) {
-        return PageRank.applyPageRank(graph, splitToSentences(text));
+    private List<String> applyPageRank(Graph graph, List<String> texts) {
+        return PageRank.applyPageRank(graph, texts);
     }
 
     private Graph filterGraph(Graph graph) {
-        graph.filterOutConnections(0.5);
+        graph.filterOutConnections(1.7);
         return graph;
     }
 
-    private Graph applyCosineSimilarities(Graph graph) {
-        graph.applyCosineSimilarities();
+    private Graph applyCosineSimilarities(Graph graph, List<String> texts) {
+        graph.applyCosineSimilarities(texts);
         return graph;
     }
 
-    private Graph createGraph(String text) {
-        List<String> sentences = splitToSentences(text);
-        return new Graph(sentences);
+    private Graph createGraph(List<String> texts) {
+        return new Graph(texts);
     }
 
-    private List<String> splitToSentences(String text) {
+    private List<String> splitToSentences(List<String> texts) {
         SentenceDetection sentenceDetection = new SentenceDetection();
-        return Arrays.asList(sentenceDetection.detectSentences(text));
+        List<String> sentences = new ArrayList<>();
+        for (String text : texts) {
+            sentences.addAll(Arrays.asList(sentenceDetection.detectSentences(text)));
+        }
+
+        return sentences;
     }
 }

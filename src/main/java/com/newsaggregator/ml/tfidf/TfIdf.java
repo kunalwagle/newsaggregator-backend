@@ -30,12 +30,9 @@ public class TfIdf {
         return tf * idf;
     }
 
-    public static double performTfIdfCosineSimilarities(String sentence1, String sentence2) {
+    public double performTfIdfCosineSimilarities(String sentence1, String sentence2) {
         Map<String, Long> sentence1Freq = calculateFrequencies(sentence1);
         Map<String, Long> sentence2Freq = calculateFrequencies(sentence2);
-        List<Map<String, Long>> corpusSizes = new ArrayList<>();
-        corpusSizes.add(sentence1Freq);
-        corpusSizes.add(sentence2Freq);
         double topHalfTotal = 0;
         double bottomFirstSentenceTotal = 0;
         double bottomSecondSentenceTotal = 0;
@@ -56,14 +53,14 @@ public class TfIdf {
         return topHalfTotal / (bottomFirstSentenceTotal * bottomSecondSentenceTotal);
     }
 
-    private static double completeTopHalf(String word, List<Map<String, Long>> corpusSizes) {
+    private double completeTopHalf(String word, List<Map<String, Long>> corpusSizes) {
         double s1TF = calculateTf(corpusSizes.get(0), word);
         double s2TF = calculateTf(corpusSizes.get(1), word);
         double idf = idfCalculation(word, corpusSizes, 2);
         return s1TF * s2TF * Math.pow(idf, 2);
     }
 
-    private static double bottomHalf(String word, List<Map<String, Long>> corpusSizes) {
+    private double bottomHalf(String word, List<Map<String, Long>> corpusSizes) {
         double TF = calculateTf(corpusSizes.get(0), word);
         double IDF = idfCalculation(word, corpusSizes, 2);
         return Math.pow((TF * IDF), 2);
@@ -73,7 +70,7 @@ public class TfIdf {
         return idfCalculation(term, this.corpusSizes, this.corpusSize);
     }
 
-    private static double idfCalculation(String term, List<Map<String, Long>> corpusSizes, int corpusSize) {
+    private double idfCalculation(String term, List<Map<String, Long>> corpusSizes, int corpusSize) {
         int numberOfDocumentsWithTerm = corpusSizes.stream().filter(map -> map.containsKey(term.toLowerCase())).collect(Collectors.toList()).size();
         if (numberOfDocumentsWithTerm == 0) {
             numberOfDocumentsWithTerm++;
@@ -82,7 +79,7 @@ public class TfIdf {
         return Math.log(inverse);
     }
 
-    private static double calculateTf(Map<String, Long> frequencies, String term) {
+    private double calculateTf(Map<String, Long> frequencies, String term) {
         if (frequencies.containsKey(term.toLowerCase())) {
             long termFrequency = frequencies.get(term.toLowerCase());
             long maxFrequency = Collections.max(frequencies.entrySet(), Map.Entry.comparingByValue()).getValue();
@@ -91,7 +88,7 @@ public class TfIdf {
         return 0;
     }
 
-    private static Map<String, Long> calculateFrequencies(String document) {
+    private Map<String, Long> calculateFrequencies(String document) {
         Stream<String> stream = Stream.of(document.toLowerCase().split("\\W+")).parallel();
 
         return stream

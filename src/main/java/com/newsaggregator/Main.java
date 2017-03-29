@@ -1,22 +1,11 @@
 package com.newsaggregator;
 
-import com.newsaggregator.base.ArticleVector;
-import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.base.Topic;
-import com.newsaggregator.base.TopicLabel;
-import com.newsaggregator.ml.clustering.Cluster;
-import com.newsaggregator.ml.clustering.Clusterer;
-import com.newsaggregator.ml.labelling.TopicLabelling;
-import com.newsaggregator.ml.modelling.TopicModelling;
+import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.ArticleFetch;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class Main {
@@ -132,44 +121,52 @@ public class Main {
 //            outletArticles.add(indiaGuardian);
 //            outletArticles.add(nzMinisterBBC);
 //            outletArticles.add(icelandMine);
-            List<OutletArticle> outletArticles = ArticleFetch.fetchArticles();
-            TopicModelling modelling = new TopicModelling();
-            List<TopicLabel> topics = modelling.trainTopics(outletArticles);
-            Map<String, List<OutletArticle>> articleMap = new HashMap<>();
-            int i = 0;
-            for (OutletArticle article : outletArticles) {
-                System.out.println("Now on article number " + i + "out of " + outletArticles.size());
-                if (!article.getBody().equals("")) {
-                    Topic topic = modelling.getModel(article);
-                    List<String> topicLabel = TopicLabelling.generateTopicLabel(topic, article);
-                    for (String label : topicLabel) {
-                        if (articleMap.containsKey(label)) {
-                            List<OutletArticle> articles = articleMap.get(label);
-                            articles.add(article);
-                        } else {
-                            List<OutletArticle> articles = new ArrayList<>();
-                            articles.add(article);
-                            articleMap.put(label, articles);
-                        }
-                    }
-                }
-                i++;
-            }
-            for (Map.Entry<String, List<OutletArticle>> entry : articleMap.entrySet()) {
-                Clusterer clusterer = new Clusterer(entry.getValue());
-                List<Cluster<ArticleVector>> clusters = clusterer.cluster();
-                System.out.println("Now doing clustering for label " + entry.getKey());
-                for (Cluster<ArticleVector> cluster : clusters) {
-                    System.out.println("New Cluster:");
-                    for (ArticleVector vector : cluster.getClusterItems()) {
-                        System.out.println(vector.getArticle().getTitle());
-                    }
-                    System.out.println("Cluster size: " + cluster.getClusterItems().size());
-                    System.out.println("");
-                }
-                System.out.println("Total number of clusters: " + clusters.size());
-                System.out.println("");
-            }
+//            List<OutletArticle> outletArticles = ArticleFetch.fetchArticles();
+//            TopicModelling modelling = new TopicModelling();
+//            List<TopicLabel> topics = modelling.trainTopics(outletArticles);
+//            Map<String, List<OutletArticle>> articleMap = new HashMap<>();
+//            int i = 0;
+//            for (OutletArticle article : outletArticles) {
+//                System.out.println("Now on article number " + i + "out of " + outletArticles.size());
+//                if (!article.getBody().equals("")) {
+//                    Topic topic = modelling.getModel(article);
+//                    List<String> topicLabel = TopicLabelling.generateTopicLabel(topic, article);
+//                    for (String label : topicLabel) {
+//                        if (articleMap.containsKey(label)) {
+//                            List<OutletArticle> articles = articleMap.get(label);
+//                            articles.add(article);
+//                        } else {
+//                            List<OutletArticle> articles = new ArrayList<>();
+//                            articles.add(article);
+//                            articleMap.put(label, articles);
+//                        }
+//                    }
+//                }
+//                i++;
+//            }
+//            for (Map.Entry<String, List<OutletArticle>> entry : articleMap.entrySet()) {
+//                Clusterer clusterer = new Clusterer(entry.getValue());
+//                List<Cluster<ArticleVector>> clusters = clusterer.cluster();
+//                System.out.println("Now doing clustering for label " + entry.getKey());
+//                for (Cluster<ArticleVector> cluster : clusters) {
+//                    System.out.println("New Cluster:");
+//                    for (ArticleVector vector : cluster.getClusterItems()) {
+//                        System.out.println(vector.getArticle().getTitle());
+//                    }
+//                    System.out.println("Cluster size: " + cluster.getClusterItems().size());
+//                    System.out.println("");
+//                }
+//                System.out.println("Total number of clusters: " + clusters.size());
+//                System.out.println("");
+//            }
+
+            Extractive extractive = new Extractive();
+            ArrayList<String> articleTests = new ArrayList<>();
+            articleTests.add("New Zealand's environment minister has been challenged to a fist fight by a conservationist over the government's \"swimmable rivers\" policy. Conservation trust manager Greg Byrnes posted an advert in the local paper calling on Dr Nick Smith to meet him for a boxing match at a swimming hole, the New Zealand Herald reports. Mr Byrnes says the spot is badly polluted, but still classed as suitable to swimming. In February, Dr Smith announced a new policy of making 90% of New Zealand's waterways safe for swimming by 2040, but it included changes to water quality standards. Critics say that means water previously considered not suitable for swimming would be labelled as safe under the new measures. The classified advert took a dig at that policy with its wording. \"The loser to frolic in the water hole for no less than 5 minutes,\" the advert reads. \"This is in line with my target to make 90% of all Members of the NZ Parliament believable by 2020.\" Mr Byrne says he isn't expecting an answer, but took out the ad to make a point. \"We've got a fantastic country, but we're fast-tracking it to not a nice place,\" he tells the paper. \"I can't imagine what the Canterbury plains will be like in 15 years, unless we do something.\" The likelihood of seeing any fisticuffs is slim, as a spokesman for the minister says he won't be responding to the challenge. In a statement Dr Smith said that the policy would require 1,000 km (620 miles) of waterways to be improved each year.");
+            articleTests.add("A New Zealand environmentalist has challenged his country's environment minister to a fist fight.  Greg Byrnes, general manager of the Te Kohaka o Tuhaitara conservation trust, issued the challenge to Nick Smith in a newspaper classified ad. He asked the minister to meet him in Christchurch for a boxing match with \"Queensberry Rules.\" The loser has to \"frolic\" in a local swimming hole that Greg Byrnes says is no longer fit for swimming.");
+            articleTests.add("A conservation trust manager angry at Environment Minister Nick Smith's swimmable river stance has challenged him to a boxing match - with the loser to \"frolic\" in one of Christchurch's most polluted swimming holes. Greg Byrnes posted a classified advert on Wednesday challenging Dr Smith to a \"Queensbury Rules fist fight\". He asked Dr Smith to meet him at the Otukaikino Swimming Hole, which he said was one of Christchurch's most polluted waterways, but was still officially called a swimming hole. \"The loser to frolic in the water hole for no less than 5 minutes. This is in line with my target to make 90% of all members of the NZ Parliament believable by 2020,\" he said in the advert. It was sparked by Dr Smith's new swimmable rivers policy, which aims to have 90 per cent of lakes and rivers swimmable by 2040 - but has lower standards for what is considered swimmable. Mr Byrnes is general manager of the Te Kōhaka o Tūhaitara conservation trust and a former Environment Canterbury planner, and said he saw the effect of pollution on Christchurch's waterways every day. Earlier this month Dr Smith took a dip in the Manawatu River, in front of gathered reporters, after the river was labelled the worst in the western world and an accord was signed to improve it. He was challenged to swim in the river by Rangitaane kaumatua Wiremu Kingi Te Awe Awe, who said he was looking forward to seeing the MP in speedos. He did not expect Dr Smith to respond to his advert, but posted it because he believed the Government policy treated people \"like idiots\". \"Most people will hear that and think they're doing something, and they're not,\" he said.");
+            String summary = extractive.summarise(articleTests);
+            System.out.println(summary);
 
 
 

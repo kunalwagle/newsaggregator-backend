@@ -20,4 +20,13 @@ public class Combiner {
         return combinedString;
     }
 
+    public static String combineStrings(List<String> strings) {
+        String combinedString = "";
+        for (String string : strings) {
+            combinedString += string;
+            combinedString += " ";
+        }
+        return combinedString;
+    }
+
 }

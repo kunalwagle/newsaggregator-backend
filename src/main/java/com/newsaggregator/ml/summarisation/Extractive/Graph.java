@@ -1,10 +1,12 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
+import com.newsaggregator.ml.nlp.ExtractSentenceTypes;
 import com.newsaggregator.ml.tfidf.TfIdf;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 29/03/2017.
@@ -40,11 +42,14 @@ public class Graph {
         return connections;
     }
 
-    public void applyCosineSimilarities() {
+    public void applyCosineSimilarities(List<String> texts) {
+        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+        List<String> nounifiedTexts = texts.stream().map(extractSentenceTypes::nounifyDocument).collect(Collectors.toList());
+        TfIdf tfIdf = new TfIdf(nounifiedTexts);
         for (Connection connection : connections) {
-            Node firstNode = connection.getFirstNode();
-            Node secondNode = connection.getSecondNode();
-            connection.setDistance(TfIdf.performTfIdfCosineSimilarities(firstNode.getSentence(), secondNode.getSentence()));
+            String nounifiedFirstSentence = extractSentenceTypes.nounifyDocument(connection.getFirstNode().getSentence());
+            String nounifiedSecondSentence = extractSentenceTypes.nounifyDocument(connection.getSecondNode().getSentence());
+            connection.setDistance(tfIdf.performTfIdfCosineSimilarities(nounifiedFirstSentence, nounifiedSecondSentence));
         }
     }
 

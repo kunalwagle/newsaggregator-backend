@@ -1,8 +1,8 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 /**
  * Created by kunalwagle on 29/03/2017.
@@ -14,20 +14,24 @@ public class PageRank {
         double[] timeT = new double[N];
         double[] T1 = new double[N];
         for (int i = 0; i < timeT.length; i++) {
-            timeT[i] = 1.0 / N;
+            T1[i] = 1.0 / N;
         }
         List<List<Node>> nodeConnections = graph.getNodeConnections();
         do {
+            timeT = T1;
+            T1 = new double[N];
             for (int i = 0; i < timeT.length; i++) {
                 T1[i] = (0.15 / N) + 0.85 * (summationCalculation(nodeConnections, timeT, i));
             }
         } while (!pageRankFinished(timeT, T1));
-        int[] sortedIndices = IntStream.range(0, T1.length)
-                .boxed().sorted((i, j) -> T1[i] > T1[j] ? 1 : 0)
-                .mapToInt(ele -> ele).toArray();
+        Pair[] pairs = new Pair[T1.length];
+        for (int i = 0; i < T1.length; i++) {
+            pairs[i] = new Pair(i, T1[i]);
+        }
+        Arrays.sort(pairs);
         ArrayList<String> result = new ArrayList<>();
-        for (int i = 0; i < sortedIndices.length; i++) {
-            result.add(sentences.get(sortedIndices[i]));
+        for (int i = 0; i < pairs.length; i++) {
+            result.add(sentences.get(pairs[i].index));
         }
         return result;
     }
@@ -47,6 +51,22 @@ public class PageRank {
             total += Math.abs(T1[i] - timeT[i]);
         }
         return total < 0.005;
+    }
+
+    private static class Pair implements Comparable<Pair> {
+        public final int index;
+        public final double value;
+
+        public Pair(int index, double value) {
+            this.index = index;
+            this.value = value;
+        }
+
+        @Override
+        public int compareTo(Pair other) {
+            //multiplied to -1 as the author need descending sort order
+            return -1 * Double.valueOf(this.value).compareTo(other.value);
+        }
     }
 
 }
