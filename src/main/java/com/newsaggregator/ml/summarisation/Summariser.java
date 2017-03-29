@@ -3,6 +3,7 @@ package com.newsaggregator.ml.summarisation;
 import com.newsaggregator.base.ClusterItem;
 import com.newsaggregator.base.SummarisedArticle;
 import com.newsaggregator.ml.clustering.Cluster;
+import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 
 import java.util.List;
 import java.util.stream.Collectors;

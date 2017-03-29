@@ -1,0 +1,41 @@
+package com.newsaggregator.ml.summarisation.Extractive;
+
+import com.newsaggregator.ml.summarisation.Summarisation;
+
+import java.util.List;
+
+/**
+ * Created by kunalwagle on 29/03/2017.
+ */
+public class Extractive implements Summarisation {
+
+
+    @Override
+    public String summarise(String text) {
+        Graph graph = createGraph(text);
+        graph = applyCosineSimilarities(graph);
+        graph = filterGraph(graph);
+        List<String> finalStrings = applyPageRank(graph);
+        return generateFinalStringFromList(finalStrings);
+    }
+
+    private String generateFinalStringFromList(List<String> finalStrings) {
+        return null;
+    }
+
+    private List<String> applyPageRank(Graph graph) {
+        return null;
+    }
+
+    private Graph filterGraph(Graph graph) {
+        return null;
+    }
+
+    private Graph applyCosineSimilarities(Graph graph) {
+        return null;
+    }
+
+    private Graph createGraph(String text) {
+        return null;
+    }
+}
