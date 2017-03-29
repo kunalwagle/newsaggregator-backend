@@ -74,4 +74,9 @@ public class ArticleVector implements ClusterItem {
         return vectorScore;
     }
 
+    @Override
+    public String getText() {
+        return article.getBody();
+    }
+
 }

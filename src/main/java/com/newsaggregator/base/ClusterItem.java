@@ -9,4 +9,6 @@ public interface ClusterItem {
 
     VectorScore getVector();
 
+    String getText();
+
 }
