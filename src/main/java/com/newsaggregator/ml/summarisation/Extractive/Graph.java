@@ -1,6 +1,9 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
+import com.newsaggregator.ml.tfidf.TfIdf;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,7 +42,18 @@ public class Graph {
         for (Connection connection : connections) {
             Node firstNode = connection.getFirstNode();
             Node secondNode = connection.getSecondNode();
+            connection.setDistance(TfIdf.performTfIdfCosineSimilarities(firstNode.getSentence(), secondNode.getSentence()));
+        }
+    }
 
+    public void filterOutConnections(double threshold) {
+        Iterator iterator = connections.iterator();
+        while (iterator.hasNext()) {
+            Connection connection = (Connection) iterator.next();
+            double distance = connection.getDistance();
+            if (distance < threshold) {
+                iterator.remove();
+            }
         }
     }
 }

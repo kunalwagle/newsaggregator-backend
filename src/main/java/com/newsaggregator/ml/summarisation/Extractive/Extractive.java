@@ -26,11 +26,13 @@ public class Extractive implements Summarisation {
     }
 
     private List<String> applyPageRank(Graph graph) {
+
         return null;
     }
 
     private Graph filterGraph(Graph graph) {
-        return null;
+        graph.filterOutConnections(0.5);
+        return graph;
     }
 
     private Graph applyCosineSimilarities(Graph graph) {

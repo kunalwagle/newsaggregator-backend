@@ -16,4 +16,8 @@ public class Node {
     public int getIdentifier() {
         return identifier;
     }
+
+    public String getSentence() {
+        return sentence;
+    }
 }
