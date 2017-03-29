@@ -1,9 +1,11 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
 import com.newsaggregator.ml.nlp.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.SentenceDetection;
 import com.newsaggregator.ml.tfidf.TfIdf;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,19 +19,24 @@ public class Graph {
     private List<Connection> connections;
     private List<Node> nodes;
 
-    public Graph(List<String> sentences) {
-        this.connections = generateConnectionsFromSentences(sentences);
+    public Graph(List<String> texts) {
+        this.nodes = new ArrayList<>();
+        int i = 0;
+        for (String text : texts) {
+            List<String> sentences = splitToSentences(text);
+            int j = 0;
+            for (String sentence : sentences) {
+                nodes.add(new Node(sentence, j, i));
+                j++;
+                i++;
+            }
+        }
+        this.connections = generateConnections();
     }
 
-    private List<Connection> generateConnectionsFromSentences(List<String> sentences) {
+    private List<Connection> generateConnections() {
         List<Connection> connections = new ArrayList<>();
-        List<Node> nodes = new ArrayList<>();
-        int i = 0;
-        for (String sentence : sentences) {
-            nodes.add(new Node(sentence, i));
-            i++;
-        }
-        for (i = 0; i < nodes.size(); i++) {
+        for (int i = 0; i < nodes.size(); i++) {
             for (int j = 0; j < nodes.size(); j++) {
                 int finalI = i;
                 int finalJ = j;
@@ -38,7 +45,6 @@ public class Graph {
                 }
             }
         }
-        this.nodes = nodes;
         return connections;
     }
 
@@ -76,5 +82,15 @@ public class Graph {
             result.get(node2.getIdentifier()).add(node1);
         }
         return result;
+    }
+
+    public List<Node> getNodes() {
+        return nodes;
+    }
+
+    private List<String> splitToSentences(String text) {
+        SentenceDetection sentenceDetection = new SentenceDetection();
+
+        return Arrays.asList(sentenceDetection.detectSentences(text));
     }
 }

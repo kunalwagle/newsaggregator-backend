@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class PageRank {
 
-    public static List<String> applyPageRank(Graph graph, List<String> sentences) {
-        int N = sentences.size();
+    public static List<Node> applyPageRank(Graph graph) {
+        int N = graph.getNodes().size();
         double[] timeT = new double[N];
         double[] T1 = new double[N];
         for (int i = 0; i < timeT.length; i++) {
@@ -29,9 +29,9 @@ public class PageRank {
             pairs[i] = new Pair(i, T1[i]);
         }
         Arrays.sort(pairs);
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<Node> result = new ArrayList<>();
         for (int i = 0; i < pairs.length; i++) {
-            result.add(sentences.get(pairs[i].index));
+            result.add(graph.getNodes().get(pairs[i].index));
         }
         return result;
     }
