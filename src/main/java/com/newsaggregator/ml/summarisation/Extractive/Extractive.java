@@ -34,7 +34,8 @@ public class Extractive implements Summarisation {
     }
 
     private Graph applyCosineSimilarities(Graph graph) {
-        return null;
+        graph.applyCosineSimilarities();
+        return graph;
     }
 
     private Graph createGraph(String text) {

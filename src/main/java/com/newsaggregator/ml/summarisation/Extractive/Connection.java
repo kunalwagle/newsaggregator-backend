@@ -27,4 +27,15 @@ public class Connection {
         return (fn == n1 || fn == n2) && (sn == n1 || sn == n2);
     }
 
+    public Node getFirstNode() {
+        return firstNode;
+    }
+
+    public Node getSecondNode() {
+        return secondNode;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
 }

@@ -34,4 +34,12 @@ public class Graph {
         }
         return connections;
     }
+
+    public void applyCosineSimilarities() {
+        for (Connection connection : connections) {
+            Node firstNode = connection.getFirstNode();
+            Node secondNode = connection.getSecondNode();
+
+        }
+    }
 }
