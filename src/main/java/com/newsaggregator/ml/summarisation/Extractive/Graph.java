@@ -13,6 +13,7 @@ import java.util.List;
 public class Graph {
 
     private List<Connection> connections;
+    private List<Node> nodes;
 
     public Graph(List<String> sentences) {
         this.connections = generateConnectionsFromSentences(sentences);
@@ -35,6 +36,7 @@ public class Graph {
                 }
             }
         }
+        this.nodes = nodes;
         return connections;
     }
 
@@ -55,5 +57,19 @@ public class Graph {
                 iterator.remove();
             }
         }
+    }
+
+    public List<List<Node>> getNodeConnections() {
+        List<List<Node>> result = new ArrayList<>();
+        for (Node ignored : nodes) {
+            result.add(new ArrayList<>());
+        }
+        for (Connection connection : connections) {
+            Node node1 = connection.getFirstNode();
+            Node node2 = connection.getSecondNode();
+            result.get(node1.getIdentifier()).add(node2);
+            result.get(node2.getIdentifier()).add(node1);
+        }
+        return result;
     }
 }

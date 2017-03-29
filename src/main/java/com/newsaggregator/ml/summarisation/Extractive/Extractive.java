@@ -17,7 +17,7 @@ public class Extractive implements Summarisation {
         Graph graph = createGraph(text);
         graph = applyCosineSimilarities(graph);
         graph = filterGraph(graph);
-        List<String> finalStrings = applyPageRank(graph);
+        List<String> finalStrings = applyPageRank(graph, text);
         return generateFinalStringFromList(finalStrings);
     }
 
@@ -25,9 +25,8 @@ public class Extractive implements Summarisation {
         return null;
     }
 
-    private List<String> applyPageRank(Graph graph) {
-
-        return null;
+    private List<String> applyPageRank(Graph graph, String text) {
+        return PageRank.applyPageRank(graph, splitToSentences(text));
     }
 
     private Graph filterGraph(Graph graph) {
