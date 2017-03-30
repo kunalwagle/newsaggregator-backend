@@ -24,9 +24,9 @@ public class Graph {
         int i = 0;
         for (String text : texts) {
             List<String> sentences = splitToSentences(text);
-            int j = 0;
+            double j = 0.0;
             for (String sentence : sentences) {
-                nodes.add(new Node(sentence, j, i));
+                nodes.add(new Node(sentence, j / sentences.size(), i));
                 j++;
                 i++;
             }
@@ -55,7 +55,10 @@ public class Graph {
         for (Connection connection : connections) {
             String nounifiedFirstSentence = extractSentenceTypes.nounifyDocument(connection.getFirstNode().getSentence());
             String nounifiedSecondSentence = extractSentenceTypes.nounifyDocument(connection.getSecondNode().getSentence());
-            connection.setDistance(tfIdf.performTfIdfCosineSimilarities(nounifiedFirstSentence, nounifiedSecondSentence));
+            double cosineSimilarity = tfIdf.performTfIdfCosineSimilarities(nounifiedFirstSentence, nounifiedSecondSentence);
+            double sentencePositionDifference = 1 - Math.abs(connection.getFirstNode().getSentencePosition() - connection.getSecondNode().getSentencePosition());
+            cosineSimilarity *= sentencePositionDifference;
+            connection.setDistance(cosineSimilarity);
         }
     }
 

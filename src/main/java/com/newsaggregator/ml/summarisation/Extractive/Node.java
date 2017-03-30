@@ -6,10 +6,10 @@ package com.newsaggregator.ml.summarisation.Extractive;
 public class Node {
 
     private String sentence;
-    private int sentencePosition;
+    private double sentencePosition;
     private int identifier;
 
-    public Node(String sentence, int sentencePosition, int identifier) {
+    public Node(String sentence, double sentencePosition, int identifier) {
         this.sentence = sentence;
         this.sentencePosition = sentencePosition;
         this.identifier = identifier;
@@ -23,7 +23,7 @@ public class Node {
         return sentence;
     }
 
-    public int getSentencePosition() {
+    public double getSentencePosition() {
         return sentencePosition;
     }
 }
