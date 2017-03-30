@@ -18,7 +18,17 @@ public class Summary {
         this.graph = graph;
         this.text = text;
         this.articles = articles;
-
     }
 
+    public Graph getGraph() {
+        return graph;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public List<OutletArticle> getArticles() {
+        return articles;
+    }
 }
