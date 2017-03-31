@@ -1,7 +1,9 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
+import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.summarisation.Summarisation;
+import com.newsaggregator.ml.summarisation.Summary;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,14 +14,22 @@ import java.util.stream.Collectors;
  */
 public class Extractive implements Summarisation {
 
+    private List<OutletArticle> articles;
+    private List<String> texts;
+
+    public Extractive(List<OutletArticle> articles) {
+        this.articles = articles;
+        this.texts = articles.stream().map(OutletArticle::getBody).collect(Collectors.toList());
+    }
 
     @Override
-    public String summarise(List<String> texts) {
+    public Summary summarise() {
         Graph graph = createGraph(texts);
         graph = applyCosineSimilarities(graph, texts);
         graph = filterGraph(graph);
         List<Node> finalNodes = applyPageRank(graph);
-        return generateFinalStringFromList(finalNodes, texts.size());
+        String finalString = generateFinalStringFromList(finalNodes, texts.size());
+        return new Summary(graph, finalString, articles);
     }
 
     private String generateFinalStringFromList(List<Node> finalNodes, int textSize) {
