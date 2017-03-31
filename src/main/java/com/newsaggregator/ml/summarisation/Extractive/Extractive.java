@@ -43,7 +43,7 @@ public class Extractive implements Summarisation {
     }
 
     private Graph filterGraph(Graph graph) {
-        graph.filterOutConnections(2);
+        graph.filterOutConnections(0.8);
         return graph;
     }
 
