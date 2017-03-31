@@ -108,4 +108,8 @@ public class Graph {
 
         return Arrays.asList(sentenceDetection.detectSentences(text));
     }
+
+    public List<Connection> getConnections() {
+        return connections;
+    }
 }
