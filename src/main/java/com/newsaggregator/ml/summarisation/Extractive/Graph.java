@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class Graph {
 
     private List<Connection> connections;
-    private List<Node> nodes;
+    protected List<Node> nodes;
 
     public Graph(List<String> texts) {
         this.nodes = new ArrayList<>();
@@ -32,6 +32,9 @@ public class Graph {
             }
         }
         this.connections = generateConnections();
+    }
+
+    public Graph() {
     }
 
     private List<Connection> generateConnections() {

@@ -29,4 +29,9 @@ public class ExtractSentenceTypes {
         return tagger.filterNouns(tokens, tags);
     }
 
+    public List<String> allWords(String document) {
+        String[] sentences = sentenceDetector.detectSentences(document);
+        return tokeniser.findTokens(sentences);
+    }
+
 }
