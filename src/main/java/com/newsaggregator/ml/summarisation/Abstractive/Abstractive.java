@@ -31,15 +31,18 @@ public class Abstractive implements Summarisation {
 
     private void preProcessPronouns(List<String> sentences) {
         Graph graph = createNewGraphFromSentences(sentences);
+        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+        for (Node node : graph.getNodes()) {
+
+        }
     }
 
     private Graph createNewGraphFromSentences(List<String> sentences) {
         List<Node> nodesToKeep = new ArrayList<>();
         nodesToKeep.addAll(sentences.stream().map(initialSummary.getGraph()::getNodeForSentence).collect(Collectors.toList()));
-        for (Node node : nodesToKeep) {
-
-        }
-        return null;
+        Graph graph = new Graph();
+        graph.addNodes(nodesToKeep);
+        return graph;
     }
 
     private Summary createSummary(List<String> strippedSentences) {

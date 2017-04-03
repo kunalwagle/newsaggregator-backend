@@ -62,4 +62,14 @@ public class POSTagger {
         return result;
     }
 
+    public List<String> filterPronouns(List<String> tokens, String[] tags) {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < tags.length; i++) {
+            if (tags[i].startsWith("PR")) {
+                result.add(tokens.get(i));
+            }
+        }
+        return result;
+    }
+
 }

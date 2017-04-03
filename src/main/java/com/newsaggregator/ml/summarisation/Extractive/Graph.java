@@ -39,6 +39,11 @@ public class Graph {
     public Graph() {
     }
 
+    public void addNodes(List<Node> nodes) {
+        this.nodes = nodes;
+        this.connections = generateConnections();
+    }
+
     private List<Connection> generateConnections() {
         List<Connection> connections = new ArrayList<>();
         for (int i = 0; i < nodes.size(); i++) {
