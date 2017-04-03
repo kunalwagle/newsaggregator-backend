@@ -24,7 +24,7 @@ public class Extractive implements Summarisation {
 
     @Override
     public Summary summarise() {
-        Graph graph = createGraph(texts);
+        Graph graph = createGraph();
         graph = applyCosineSimilarities(graph, texts);
         graph = filterGraph(graph);
         List<Node> finalNodes = applyPageRank(graph);
@@ -52,7 +52,7 @@ public class Extractive implements Summarisation {
         return graph;
     }
 
-    private Graph createGraph(List<String> texts) {
-        return new Graph(texts);
+    private Graph createGraph() {
+        return new Graph(articles);
     }
 }

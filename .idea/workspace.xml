@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Graph.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Graph.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,7 +29,7 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
+            <state relative-caret-position="351">
               <caret line="187" column="34" lean-forward="false" selection-start-line="187" selection-start-column="34" selection-end-line="187" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -41,28 +41,51 @@
       <file leaf-file-name="Graph.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Graph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1319">
-              <caret line="114" column="46" lean-forward="false" selection-start-line="114" selection-start-column="46" selection-end-line="114" selection-end-column="46" />
+            <state relative-caret-position="285">
+              <caret line="30" column="89" lean-forward="false" selection-start-line="30" selection-start-column="89" selection-end-line="30" selection-end-column="89" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4214#4215#0" expanded="true" />
+                <element signature="e#4477#4478#0" expanded="true" />
+                <element signature="e#4511#4512#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Abstractive.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
+      <file leaf-file-name="Extractive.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="39" column="8" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
+            <state relative-caret-position="225">
+              <caret line="26" column="34" lean-forward="false" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#806#807#0" expanded="true" />
-                <element signature="e#858#859#0" expanded="true" />
-                <element signature="e#1140#1141#0" expanded="true" />
-                <element signature="e#1208#1209#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Abstractive.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="38" column="16" lean-forward="false" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#692#693#0" expanded="true" />
+                <element signature="e#744#745#0" expanded="true" />
+                <element signature="e#1026#1027#0" expanded="true" />
+                <element signature="e#1094#1095#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="29" lean-forward="false" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -205,15 +228,15 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/tfidf/TfIdf.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Summariser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/PageRank.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Summary.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Summarisation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Graph.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Graph.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java" />
       </list>
     </option>
   </component>
@@ -1728,14 +1751,7 @@
       <workItem from="1488231650678" duration="37395000" />
       <workItem from="1489057867627" duration="15151000" />
       <workItem from="1490640587176" duration="13915000" />
-      <workItem from="1490695952010" duration="38363000" />
-    </task>
-    <task id="LOCAL-00044" summary="Adding restlet library">
-      <created>1487430800191</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1487430800191</updated>
+      <workItem from="1490695952010" duration="39972000" />
     </task>
     <task id="LOCAL-00045" summary="Updated maven pom file">
       <created>1487431809878</created>
@@ -2073,7 +2089,14 @@
       <option name="project" value="LOCAL" />
       <updated>1490961808200</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Stripping sentences and setting up new Graph">
+      <created>1491216271984</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1491216271984</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2106,7 +2129,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="249271000" />
+    <option name="totallyTimeSpent" value="250880000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2161,7 +2184,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Add date time stamp score to clusterer" />
     <MESSAGE value="Added new base classes for clusterer" />
     <MESSAGE value="Added basic cluster methods" />
     <MESSAGE value="Basic testing for clustering" />
@@ -2186,7 +2208,8 @@
     <MESSAGE value="Normalise distances in extractive" />
     <MESSAGE value="Changed testing data" />
     <MESSAGE value="Stripping sentences" />
-    <option name="LAST_COMMIT_MESSAGE" value="Stripping sentences" />
+    <MESSAGE value="Stripping sentences and setting up new Graph" />
+    <option name="LAST_COMMIT_MESSAGE" value="Stripping sentences and setting up new Graph" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2473,19 +2496,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="e#525#526#0" expanded="true" />
-            <element signature="e#556#557#0" expanded="true" />
-            <element signature="e#599#600#0" expanded="true" />
-            <element signature="e#638#639#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/tfidf/TfIdf.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -2575,16 +2585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="45" column="38" lean-forward="false" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1259">
@@ -2639,7 +2639,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
+        <state relative-caret-position="351">
           <caret line="187" column="34" lean-forward="false" selection-start-line="187" selection-start-column="34" selection-end-line="187" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2647,27 +2647,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Graph.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1319">
-          <caret line="114" column="46" lean-forward="false" selection-start-line="114" selection-start-column="46" selection-end-line="114" selection-end-column="46" />
+        <state relative-caret-position="330">
+          <caret line="38" column="16" lean-forward="false" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4214#4215#0" expanded="true" />
+            <element signature="e#692#693#0" expanded="true" />
+            <element signature="e#744#745#0" expanded="true" />
+            <element signature="e#1026#1027#0" expanded="true" />
+            <element signature="e#1094#1095#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="39" column="8" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
+        <state relative-caret-position="240">
+          <caret line="16" column="29" lean-forward="false" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="30" column="89" lean-forward="false" selection-start-line="30" selection-start-column="89" selection-end-line="30" selection-end-column="89" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#806#807#0" expanded="true" />
-            <element signature="e#858#859#0" expanded="true" />
-            <element signature="e#1140#1141#0" expanded="true" />
-            <element signature="e#1208#1209#0" expanded="true" />
+            <element signature="e#4477#4478#0" expanded="true" />
+            <element signature="e#4511#4512#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="26" column="34" lean-forward="false" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

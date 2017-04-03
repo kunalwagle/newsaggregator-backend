@@ -1,5 +1,6 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
+import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.nlp.ExtractSentenceTypes;
 import com.newsaggregator.ml.nlp.SentenceDetection;
 import com.newsaggregator.ml.tfidf.TfIdf;
@@ -19,14 +20,15 @@ public class Graph {
     private List<Connection> connections;
     protected List<Node> nodes;
 
-    public Graph(List<String> texts) {
+    public Graph(List<OutletArticle> articles) {
         this.nodes = new ArrayList<>();
         int i = 0;
-        for (String text : texts) {
+        for (OutletArticle article : articles) {
+            String text = article.getBody();
             List<String> sentences = splitToSentences(text);
             double j = 0.0;
             for (String sentence : sentences) {
-                nodes.add(new Node(sentence, j / sentences.size(), i));
+                nodes.add(new Node(sentence, j / sentences.size(), i, article.getSource()));
                 j++;
                 i++;
             }
@@ -86,6 +88,10 @@ public class Graph {
                 iterator.remove();
             }
         }
+    }
+
+    public Node getNodeForSentence(String sentence) {
+        return nodes.stream().filter(node -> node.getSentence().equals(sentence)).findFirst().get();
     }
 
     public List<List<Node>> getNodeConnections() {

@@ -8,10 +8,8 @@ import com.newsaggregator.ml.summarisation.Extractive.Node;
 import com.newsaggregator.ml.summarisation.Summarisation;
 import com.newsaggregator.ml.summarisation.Summary;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 29/03/2017.
@@ -36,7 +34,11 @@ public class Abstractive implements Summarisation {
     }
 
     private Graph createNewGraphFromSentences(List<String> sentences) {
+        List<Node> nodesToKeep = new ArrayList<>();
+        nodesToKeep.addAll(sentences.stream().map(initialSummary.getGraph()::getNodeForSentence).collect(Collectors.toList()));
+        for (Node node : nodesToKeep) {
 
+        }
         return null;
     }
 
