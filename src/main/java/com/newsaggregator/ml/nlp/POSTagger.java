@@ -72,4 +72,13 @@ public class POSTagger {
         return result;
     }
 
+    public boolean pronounsExist(String[] tags) {
+        for (int i = 0; i < tags.length; i++) {
+            if (tags[i].startsWith("PR")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

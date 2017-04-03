@@ -29,6 +29,20 @@ public class ExtractSentenceTypes {
         return tagger.filterNouns(tokens, tags);
     }
 
+    public List<String> individualPronouns(String document) {
+        String[] sentences = sentenceDetector.detectSentences(document);
+        List<String> tokens = tokeniser.findTokens(sentences);
+        String[] tags = tagger.tagWords(tokens);
+        return tagger.filterPronouns(tokens, tags);
+    }
+
+    public boolean pronounsExist(String document) {
+        String[] sentences = sentenceDetector.detectSentences(document);
+        List<String> tokens = tokeniser.findTokens(sentences);
+        String[] tags = tagger.tagWords(tokens);
+        return tagger.pronounsExist(tags);
+    }
+
     public List<String> allWords(String document) {
         String[] sentences = sentenceDetector.detectSentences(document);
         return tokeniser.findTokens(sentences);

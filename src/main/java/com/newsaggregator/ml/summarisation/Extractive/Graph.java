@@ -126,4 +126,8 @@ public class Graph {
     public List<Connection> getConnections() {
         return connections;
     }
+
+    public List<Node> getAllSentencesForASingleSource(String source) {
+        return nodes.stream().filter(node -> node.getSource().equals(source)).collect(Collectors.toList());
+    }
 }

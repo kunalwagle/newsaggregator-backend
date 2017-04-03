@@ -28,4 +28,8 @@ public class Node {
     public double getSentencePosition() {
         return sentencePosition;
     }
+
+    public String getSource() {
+        return source;
+    }
 }
