@@ -26,6 +26,7 @@ const render = () => {
                 <Router history={browserHistory}>
                     <Route path="/" component={SearchBarJumbotron}/>
                     <Route path="/searchResults" component={SearchResultPage}/>
+                    <Route path="/summaryEvaluation" component={SummaryEvaluationPage}/>
                 </Router>
             </Provider>
         ),
