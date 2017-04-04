@@ -9,6 +9,7 @@ import "babel-polyfill";
 import thunk from "redux-thunk";
 import {NavBarComponent} from "./components/NavBar";
 import {SearchResultPage} from "./components/SearchResults/SearchResultPage";
+import {SummaryEvaluation} from "./components/SummaryEvaluation/SummaryEvaluation";
 //import {reducers} from './reducers'
 
 const store = createStore(App, compose(applyMiddleware(thunk)));
@@ -26,7 +27,7 @@ const render = () => {
                 <Router history={browserHistory}>
                     <Route path="/" component={SearchBarJumbotron}/>
                     <Route path="/searchResults" component={SearchResultPage}/>
-                    <Route path="/summaryEvaluation" component={SummaryEvaluationPage}/>
+                    <Route path="/summaryEvaluation" component={SummaryEvaluation}/>
                 </Router>
             </Provider>
         ),

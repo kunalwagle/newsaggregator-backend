@@ -12,28 +12,38 @@ export const SUMMARY_RESULTS_RECEIVED = 'SUMMARY_RESULTS_RECEIVED';
 export function firstChanged(newValue) {
     return {
         type: FIRST_CHANGED,
-        searchValue
+        newValue
     }
 }
 
 export function secondChanged(newValue) {
     return {
         type: SECOND_CHANGED,
-        searchValue
+        newValue
     }
 }
 
 export function thirdChanged(newValue) {
     return {
         type: THIRD_CHANGED,
-        searchValue
+        newValue
     }
 }
 
 export function summarise() {
     return (dispatch, getState) => {
         dispatch(summariseStarted());
-        return fetch('http://localhost:8182/api/wikipedia/' + getState().searchBar.searchTerm)
+        const value = {
+            "first": getState().summaryEvaluation.firstBoxText,
+            "second": getState().summaryEvaluation.secondBoxText,
+            "third": getState().summaryEvaluation.thirdBoxText
+        };
+        let data = new FormData();
+        data.append("json", JSON.stringify(value));
+        return fetch('http://localhost:8182/api/summarise/', {
+            method: "POST",
+            body: data
+        })
             .then(response => response.json())
             .then(json => dispatch(summaryResultsReceived(json)))
     }

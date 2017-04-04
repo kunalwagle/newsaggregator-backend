@@ -66,6 +66,11 @@ public abstract class NewsAPI {
         return result;
     }
 
+    public String getSingleArticle(String articleURL) throws IOException {
+        Document document = Jsoup.connect(articleURL).get();
+        return extractArticleText(document);
+    }
+
     private OutletArticle getArticle(String title, String articleURL, String imageURL, String lastPublished) throws IOException, IndexOutOfBoundsException {
         Document document = Jsoup.connect(articleURL).get();
         String articleBody = extractArticleText(document);

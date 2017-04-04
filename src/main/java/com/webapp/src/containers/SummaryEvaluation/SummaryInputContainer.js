@@ -3,6 +3,12 @@
  */
 import {connect} from "react-redux";
 import {SummaryInput} from "../../components/SummaryEvaluation/SummaryInput";
+import {
+    secondChanged,
+    firstChanged,
+    thirdChanged,
+    summarise
+} from "../../actions/SummaryEvaluation/SummaryEvaluationActions";
 
 const mapStateToProps = (state) => {
     return {
@@ -15,16 +21,16 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleFirstChange: (event) => {
-            dispatch(firstBoxChange(event.target.value))
+            dispatch(firstChanged(event.target.value))
         },
         handleSecondChange: (event) => {
-            dispatch(secondBoxChange(event.target.value))
+            dispatch(secondChanged(event.target.value))
         },
         handleThirdChange: (event) => {
-            dispatch(thirdBoxChange(event.target.value))
+            dispatch(thirdChanged(event.target.value))
         },
         handleSubmit: () => {
-            dispatch(submit())
+            dispatch(summarise())
         }
     }
 };
