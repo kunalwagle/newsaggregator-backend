@@ -26,6 +26,7 @@ public class RouterApplication extends Application {
     public synchronized Restlet createInboundRoot() {
         Router router = new Router(getContext());
         router.attach("/wikipedia/{searchTerm}", WikipediaSearchResource.class);
+        router.attach("/summarise/first={first}/second={second}/third={third}", SummaryEvaluationResource.class);
         return router;
     }
 }
