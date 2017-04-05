@@ -38,9 +38,9 @@ public class Extractive implements Summarisation {
     }
 
     private String generateFinalStringFromList(List<Node> finalNodes, int textSize) {
-        List<Node> strippedNodes = finalNodes.stream().sorted(Comparator.comparing(Node::getSentencePosition)).collect(Collectors.toList());
+        List<Node> strippedNodes = finalNodes.stream().limit(finalNodes.size() / textSize).collect(Collectors.toList());
+        strippedNodes = strippedNodes.stream().sorted(Comparator.comparing(Node::getSentencePosition)).collect(Collectors.toList());
         strippedNodes = fixQuotationOrdering(strippedNodes);
-        strippedNodes = strippedNodes.stream().limit(finalNodes.size() / textSize).collect(Collectors.toList());
         List<String> finalStrings = stripClausesAndSentences(strippedNodes, strippedNodes.stream().map(Node::getSentence).collect(Collectors.toList()));
         return Combiner.combineStrings(finalStrings);
     }
@@ -50,7 +50,7 @@ public class Extractive implements Summarisation {
         for (int i = 0; i < nodes.size(); i++) {
             Node currentNode = nodes.get(i);
             String currentSentence = currentNode.getSentence();
-            int numberOfQuotationMarks = Utils.numberOfTimesACharacterOccursInAString(currentSentence, (char) 8220) + Utils.numberOfTimesACharacterOccursInAString(currentSentence, (char) 8221);
+            int numberOfQuotationMarks = numberOfQuotationMarks(currentSentence);
             if (numberOfQuotationMarks % 2 == 1) {
                 boolean quotationResolved = false;
                 int incrementJ;
@@ -89,13 +89,28 @@ public class Extractive implements Summarisation {
         List<Node> sourceNodes = nodes.stream().filter(node -> node.getSource().equals(source)).collect(Collectors.toList());
         int startingIndex = sourceNodes.indexOf(currentNode);
         int absoluteSentenceNumber = currentNode.getAbsoluteSentencePosition();
-        if (startingIndex == 0 || (startingIndex > 0 && sourceNodes.get(startingIndex - 1).getAbsoluteSentencePosition() == absoluteSentenceNumber - 1)
+        if (startingIndex > 0 && sourceNodes.get(startingIndex - 1).getAbsoluteSentencePosition() == absoluteSentenceNumber - 1)
         {
             return true;
         }
         OutletArticle article = articles.stream().filter(outletArticle -> outletArticle.getSource().equals(source)).findFirst().get();
+        String[] sentences = new SentenceDetection().detectSentences(article.getBody());
+        for (int i = absoluteSentenceNumber - 1; i >= 0; i--) {
+            String currentSentence = sentences[i];
+            int numberOfQuotationMarks = numberOfQuotationMarks(currentSentence);
+            if (numberOfQuotationMarks > 0 && numberOfQuotationMarks % 2 == 0) {
+                break;
+            } else if (numberOfQuotationMarks % 2 == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-        return false;
+    private int numberOfQuotationMarks(String sentence) {
+        return Utils.numberOfTimesACharacterOccursInAString(sentence, (char) 8220)
+                + Utils.numberOfTimesACharacterOccursInAString(sentence, (char) 8221)
+                + Utils.numberOfTimesACharacterOccursInAString(sentence, (char) 34);
     }
 
     private List<Node> applyPageRank(Graph graph) {
@@ -119,7 +134,6 @@ public class Extractive implements Summarisation {
     private List<String> stripClausesAndSentences(List<Node> nodes, List<String> summaryStrings) {
         ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
         Iterator<Node> nodeIterator = nodes.iterator();
-        SentenceDetection sentenceDetection = new SentenceDetection();
         while (nodeIterator.hasNext()) {
             Node firstNode = nodeIterator.next();
             boolean removeNode = false;
