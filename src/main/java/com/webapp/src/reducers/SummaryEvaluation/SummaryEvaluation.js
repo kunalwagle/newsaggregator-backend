@@ -41,7 +41,8 @@ export default function summaryEvaluation(state, action) {
         case SUMMARY_RESULTS_RECEIVED:
             return Object.assign({}, state, {
                 fetchInProgress: false,
-                searchResults: action.json
+                extractive: action.json.extractive,
+                abstractive: action.json.abstractive
             })
     }
 

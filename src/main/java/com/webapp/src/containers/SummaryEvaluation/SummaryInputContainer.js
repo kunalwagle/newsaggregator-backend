@@ -15,6 +15,8 @@ const mapStateToProps = (state) => {
         firstBoxText: state.summaryEvaluation.firstBoxText,
         secondBoxText: state.summaryEvaluation.secondBoxText,
         thirdBoxText: state.summaryEvaluation.thirdBoxText,
+        extractive: state.summaryEvaluation.extractive,
+        abstractive: state.summaryEvaluation.abstractive
     }
 };
 
