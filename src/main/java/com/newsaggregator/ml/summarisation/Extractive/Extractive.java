@@ -33,14 +33,20 @@ public class Extractive implements Summarisation {
         graph = applyCosineSimilarities(graph, texts);
         graph = filterGraph(graph);
         List<Node> finalNodes = applyPageRank(graph);
-        String finalString = generateFinalStringFromList(finalNodes, texts.size() * 2);
-        return new Summary(graph, finalString, articles);
+        List<Node> strippedNodes = generateFinalStringFromList(finalNodes, texts.size());
+        graph = new Graph();
+        graph.addNodes(strippedNodes);
+        return new Summary(graph.getNodes(), generateFinalString(strippedNodes), articles);
     }
 
-    private String generateFinalStringFromList(List<Node> finalNodes, int textSize) {
+    private List<Node> generateFinalStringFromList(List<Node> finalNodes, int textSize) {
         List<Node> strippedNodes = finalNodes.stream().limit(finalNodes.size() / textSize).collect(Collectors.toList());
         strippedNodes = strippedNodes.stream().sorted(Comparator.comparing(Node::getSentencePosition)).collect(Collectors.toList());
         strippedNodes = fixQuotationOrdering(strippedNodes);
+        return strippedNodes;
+    }
+
+    private String generateFinalString(List<Node> strippedNodes) {
         List<String> finalStrings = stripClausesAndSentences(strippedNodes, strippedNodes.stream().map(Node::getSentence).collect(Collectors.toList()));
         return Combiner.combineStrings(finalStrings);
     }

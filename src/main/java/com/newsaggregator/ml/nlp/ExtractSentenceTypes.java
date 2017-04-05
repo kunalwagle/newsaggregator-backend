@@ -45,15 +45,27 @@ public class ExtractSentenceTypes {
         return tagger.pronounsExist(tags);
     }
 
+    public boolean isPronoun(String word) {
+        return tagger.pronounsExist(new String[]{word});
+    }
+
     public List<String> allWords(String document) {
         String[] sentences = sentenceDetector.detectSentences(document);
         return tokeniser.findTokens(sentences);
     }
 
+    public String[] tag(String document) {
+        return tagger.tagWords(allWords(document));
+    }
 
     public String[] chunk(String string) {
         List<String> tokens = tokeniser.findTokens(new String[]{string});
         String[] pos = tagger.tagWords(tokens);
         return chunker.chunk(tokens.toArray(new String[tokens.size()]), pos);
+    }
+
+
+    public boolean isPossessivePronoun(String pronoun) {
+        return pronoun.contains("$");
     }
 }

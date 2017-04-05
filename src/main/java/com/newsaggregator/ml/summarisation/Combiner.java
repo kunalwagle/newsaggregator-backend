@@ -24,7 +24,9 @@ public class Combiner {
         String combinedString = "";
         for (String string : strings) {
             combinedString += string;
-            combinedString += " ";
+            if (!(string.length() == 1 && !Character.isLetter(string.charAt(0)))) {
+                combinedString += " ";
+            }
         }
         return combinedString;
     }

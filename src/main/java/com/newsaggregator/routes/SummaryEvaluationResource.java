@@ -5,6 +5,7 @@ import com.newsaggregator.api.outlets.Independent;
 import com.newsaggregator.api.outlets.Reuters;
 import com.newsaggregator.api.outlets.Telegraph;
 import com.newsaggregator.base.OutletArticle;
+import com.newsaggregator.ml.summarisation.Abstractive.Abstractive;
 import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.ml.summarisation.Summary;
 import org.json.JSONObject;
@@ -39,9 +40,10 @@ public class SummaryEvaluationResource extends ServerResource {
             templateArticles.add(new OutletArticle("Second", secondBody, null, secondUrl, "Second", null));
             templateArticles.add(new OutletArticle("Third", thirdBody, null, thirdUrl, "Third", null));
             Summary extractiveSummary = new Extractive(templateArticles).summarise();
-//            Summary abstractiveSummary = new Abstractive(extractiveSummary).summarise();
+            Summary abstractiveSummary = new Abstractive(extractiveSummary).summarise();
             Map<String, String> summaryMap = new HashMap<>();
             summaryMap.put("extractive", extractiveSummary.getText());
+            summaryMap.put("abstractive", abstractiveSummary.getText());
             return new ObjectMapper().writeValueAsString(summaryMap);
         } catch (Exception e) {
             e.printStackTrace();

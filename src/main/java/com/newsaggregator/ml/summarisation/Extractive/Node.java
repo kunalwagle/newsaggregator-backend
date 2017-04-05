@@ -42,4 +42,8 @@ public class Node {
     public void setSentence(String sentence) {
         this.sentence = sentence;
     }
+
+    public void setAbsoluteSentencePosition(int absoluteSentencePosition) {
+        this.absoluteSentencePosition = absoluteSentencePosition;
+    }
 }

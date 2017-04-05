@@ -25,12 +25,12 @@ public class Abstractive implements Summarisation {
 
     @Override
     public Summary summarise() {
-        List<String> strippedSentences = new ArrayList<>();// = stripClausesAndSentences();
-        preProcessPronouns();
-        return createSummary(strippedSentences);
+        //List<String> strippedSentences = new ArrayList<>();// = stripClausesAndSentences();
+        List<Node> nodes = preProcessPronouns();
+        return createSummary(nodes);
     }
 
-    private void preProcessPronouns() {
+    private List<Node> preProcessPronouns() {
 
         Graph graph = createNewGraphFromSentences();
         List<Node> nodes = combineNodesIfFromSameArticle(graph);
@@ -52,12 +52,29 @@ public class Abstractive implements Summarisation {
                 int position = node.getAbsoluteSentencePosition();
                 String startingString = articleSentences[position];
                 if (extractSentenceTypes.pronounsExist(startingString)) {
-                    if (pronounsInSubject(startingString, extractSentenceTypes)) {
-
+//                    if (position != 0 && pronounsInSubject(startingString, extractSentenceTypes)) {
+//                        String nounPhrase = obtainNounPhraseFromPreviousSentence(articleSentences[position-1], extractSentenceTypes);
+//                        String sentence = replacePronounWithNounPhrase(nounPhrase, startingString, extractSentenceTypes);
+//                        articleSentences[position] = sentence;
+//                        String[] sentences = sentenceDetection.detectSentences(node.getSentence());
+//                        sentences[0] = sentence;
+//                        node.setSentence(Combiner.combineStrings(Arrays.asList(sentences)));
+//                    }
+                    if (position != 0) {
+                        String previousSentence = articleSentences[position - 1];
+                        String currentSentence = node.getSentence();
+                        previousSentence += " " + currentSentence;
+                        node.setSentence(previousSentence);
+                        node.setAbsoluteSentencePosition(position - 1);
                     }
                 }
             }
         }
+
+        graph = createNewGraphFromSentences();
+        nodes = combineNodesIfFromSameArticle(graph);
+
+        return nodes;
 
 
 //        Graph graph = createNewGraphFromSentences();
@@ -111,15 +128,82 @@ public class Abstractive implements Summarisation {
 //        }
     }
 
+    private String replacePronounWithNounPhrase(String nounPhrase, String string, ExtractSentenceTypes extractSentenceTypes) {
+        String[] chunks = extractSentenceTypes.chunk(string);
+        String[] pos = extractSentenceTypes.tag(string);
+        List<String> words = extractSentenceTypes.allWords(string);
+        for (int i = findStartingPointForSubject(chunks); i < chunks.length; i++) {
+            if (extractSentenceTypes.isPronoun(pos[i])) {
+                if (extractSentenceTypes.isPossessivePronoun(pos[i])) {
+                    if (nounPhrase.endsWith("s")) {
+                        nounPhrase += "\'";
+                    } else {
+                        nounPhrase += "\'s";
+                    }
+                }
+                words.set(i, nounPhrase);
+            }
+            if (chunks[i].contains("VP")) {
+                break;
+            }
+        }
+        return Combiner.combineStrings(words);
+    }
+
+    private String obtainNounPhraseFromPreviousSentence(String articleSentence, ExtractSentenceTypes extractSentenceTypes) {
+        String[] chunks = extractSentenceTypes.chunk(articleSentence);
+        List<String> tokens = extractSentenceTypes.allWords(articleSentence);
+        String result;
+        int endPoint = findStartingPointForSubject(chunks);
+        if (endPoint == 0) {
+            for (int i = endPoint; i < chunks.length; i++) {
+                if (chunks[i].contains("VP")) {
+                    endPoint = i;
+                    break;
+                }
+            }
+        }
+        result = Combiner.combineStrings(tokens.subList(0, endPoint));
+
+        return result.length() > 0 ? result.substring(1) : result;
+    }
+
     private boolean pronounsInSubject(String startingString, ExtractSentenceTypes extractSentenceTypes) {
-        extractSentenceTypes.chunk(startingString);
+        String[] chunks = extractSentenceTypes.chunk(startingString);
+        String[] pos = extractSentenceTypes.tag(startingString);
+        for (int i = findStartingPointForSubject(chunks); i < chunks.length; i++) {
+            if (chunks[i].contains("VP")) {
+                break;
+            }
+            if (extractSentenceTypes.isPronoun(pos[i])) {
+                return true;
+            }
+        }
         return false;
+    }
+
+    private int findStartingPointForSubject(String[] chunks) {
+        int startingI = 0;
+        String lookingFor = "O";
+        if (chunks[0].contains("VP")) {
+            for (int i = 1; i < chunks.length; i++) {
+                if (chunks[i].contains(lookingFor)) {
+                    if (lookingFor.equals("O") && chunks[i + 1].contains("NP")) {
+                        lookingFor = "VP";
+                    } else {
+                        startingI = i + 1;
+                        break;
+                    }
+                }
+            }
+        }
+        return startingI;
     }
 
     private List<Node> combineNodesIfFromSameArticle(Graph graph) {
         List<Node> nodes = initialSummary.getNodes();
         int incrementI;
-        for (int i = 0; i < nodes.size(); i += incrementI) {
+        for (int i = 0; i < nodes.size() - 1; i += incrementI) {
             Node node = nodes.get(i);
             int startingIndex = node.getAbsoluteSentencePosition();
             List<Node> nodesForArticle = graph.getAllSentencesForASingleSource(node.getSource());
@@ -144,8 +228,12 @@ public class Abstractive implements Summarisation {
         return graph;
     }
 
-    private Summary createSummary(List<String> strippedSentences) {
-        return new Summary(null, Combiner.combineStrings(strippedSentences), initialSummary.getArticles());
+    private Summary createSummary(List<Node> nodes) {
+        String articleText = "";
+        for (Node node : nodes) {
+            articleText += node.getSentence() + "\n";
+        }
+        return new Summary(nodes, articleText, initialSummary.getArticles());
     }
 
 }

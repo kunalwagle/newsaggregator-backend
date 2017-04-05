@@ -41,7 +41,7 @@ public class Graph {
 
     public void addNodes(List<Node> nodes) {
         this.nodes = nodes;
-        this.connections = generateConnections();
+        //this.connections = generateConnections();
     }
 
     private List<Connection> generateConnections() {

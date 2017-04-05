@@ -18,7 +18,7 @@ public class Chunker {
 
         try {
             // Loading tokenizer model
-            modelIn = getClass().getResourceAsStream("/en-pos-maxent.bin");
+            modelIn = getClass().getResourceAsStream("/en-chunker.bin");
             final ChunkerModel chunker = new ChunkerModel(modelIn);
             modelIn.close();
 
