@@ -44,13 +44,17 @@ public class Abstractive implements Summarisation {
             splitNodes.add(graph.getAllSentencesForASingleSource(article.getSource()));
         }
 
-        for (List<Node> articleNodes : splitNodes) {
-            for (int i = 0; i < articleNodes.size(); i++) {
-                Node node = articleNodes.get(i);
-                if (extractSentenceTypes.pronounsExist(node.getSentence())) {
-                    int absoluteSentencePosition = node.getAbsoluteSentencePosition();
-                    OutletArticle article = articles.get(i);
+        for (int i = 0; i < splitNodes.size(); i++) {
+            OutletArticle article = articles.get(i);
+            List<Node> articleNodes = splitNodes.get(i);
+            String[] articleSentences = sentenceDetection.detectSentences(article.getBody());
+            for (Node node : articleNodes) {
+                int position = node.getAbsoluteSentencePosition();
+                String startingString = articleSentences[position];
+                if (extractSentenceTypes.pronounsExist(startingString)) {
+                    if (pronounsInSubject(startingString)) {
 
+                    }
                 }
             }
         }
@@ -107,16 +111,30 @@ public class Abstractive implements Summarisation {
 //        }
     }
 
+    private boolean pronounsInSubject(String startingString) {
+        return false;
+    }
+
     private List<Node> combineNodesIfFromSameArticle(Graph graph) {
         List<Node> nodes = initialSummary.getNodes();
-        for (int i = 0; i < nodes.size(); i++) {
+        int incrementI;
+        for (int i = 0; i < nodes.size(); i += incrementI) {
             Node node = nodes.get(i);
             int startingIndex = node.getAbsoluteSentencePosition();
             List<Node> nodesForArticle = graph.getAllSentencesForASingleSource(node.getSource());
             SentenceDetection sentenceDetection = new SentenceDetection();
-
+            int numberOfSentences = sentenceDetection.detectSentences(node.getSentence()).length;
+            int index = nodesForArticle.indexOf(node);
+            Node nextNode = nodes.get(index + 1);
+            if (nextNode.getAbsoluteSentencePosition() == startingIndex + numberOfSentences) {
+                node.setSentence(node.getSentence() + " " + nextNode.getSentence());
+                incrementI = 0;
+                nodes.remove(nextNode);
+            } else {
+                incrementI = 1;
+            }
         }
-        return null;
+        return nodes;
     }
 
     private Graph createNewGraphFromSentences() {

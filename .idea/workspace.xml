@@ -4,7 +4,6 @@
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Summary.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Summary.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -68,11 +67,14 @@
       <file leaf-file-name="Abstractive.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="118" column="12" lean-forward="false" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
+            <state relative-caret-position="164">
+              <caret line="114" column="8" lean-forward="false" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="21" />
               <folding>
                 <element signature="method#summarise#0;class#Abstractive#0" expanded="true" />
                 <element signature="method#preProcessPronouns#0;class#Abstractive#0" expanded="true" />
+                <element signature="e#5166#5167#0" expanded="true" />
+                <element signature="e#5194#5195#0" expanded="true" />
+                <element signature="method#combineNodesIfFromSameArticle#0;class#Abstractive#0" expanded="true" />
                 <element signature="method#createNewGraphFromSentences#0;class#Abstractive#0" expanded="true" />
               </folding>
             </state>
@@ -1831,14 +1833,7 @@
       <workItem from="1488231650678" duration="37395000" />
       <workItem from="1489057867627" duration="15151000" />
       <workItem from="1490640587176" duration="13915000" />
-      <workItem from="1490695952010" duration="71059000" />
-    </task>
-    <task id="LOCAL-00058" summary="Adding Procfile">
-      <created>1487883412734</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1487883412734</updated>
+      <workItem from="1490695952010" duration="72265000" />
     </task>
     <task id="LOCAL-00059" summary="Getting outlinks and categories">
       <created>1487925390400</created>
@@ -2176,7 +2171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491412787122</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="Writing helper methods for Abstraction">
+      <created>1491413937638</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1491413937638</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2209,7 +2211,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="281967000" />
+    <option name="totallyTimeSpent" value="283173000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2264,7 +2266,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Graph creation" />
     <MESSAGE value="TfIdf cosine similarities and initial graph methods" />
     <MESSAGE value="Applied filtering" />
     <MESSAGE value="PageRank" />
@@ -2289,7 +2290,8 @@
     <MESSAGE value="Added absolute sentence position" />
     <MESSAGE value="Examining Quotation" />
     <MESSAGE value="Extractive complete and ready for demo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Extractive complete and ready for demo" />
+    <MESSAGE value="Writing helper methods for Abstraction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Writing helper methods for Abstraction" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2799,10 +2801,10 @@
         <state relative-caret-position="165">
           <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="method#Summary#0;class#Summary#0" expanded="true" />
-            <element signature="e#618#619#0" expanded="true" />
-            <element signature="e#646#647#0" expanded="true" />
+            <element signature="e#557#558#0" expanded="true" />
+            <element signature="e#585#586#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2821,11 +2823,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="118" column="12" lean-forward="false" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
+        <state relative-caret-position="164">
+          <caret line="114" column="8" lean-forward="false" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="21" />
           <folding>
             <element signature="method#summarise#0;class#Abstractive#0" expanded="true" />
             <element signature="method#preProcessPronouns#0;class#Abstractive#0" expanded="true" />
+            <element signature="e#5166#5167#0" expanded="true" />
+            <element signature="e#5194#5195#0" expanded="true" />
+            <element signature="method#combineNodesIfFromSameArticle#0;class#Abstractive#0" expanded="true" />
             <element signature="method#createNewGraphFromSentences#0;class#Abstractive#0" expanded="true" />
           </folding>
         </state>
