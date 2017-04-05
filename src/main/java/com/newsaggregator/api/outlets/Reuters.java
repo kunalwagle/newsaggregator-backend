@@ -23,7 +23,7 @@ public class Reuters extends NewsAPI {
         Iterator<Element> iterator = articleBody.iterator();
         while (iterator.hasNext()) {
             Element element = iterator.next();
-            if (element.text().contains("Additional reporting") || element.id().equals("article-byline")) {
+            if (element.text().contains("Additional reporting") || element.text().contains("editing by") || element.text().contains("Reporting by") || element.id().equals("article-byline")) {
                 iterator.remove();
             }
         }

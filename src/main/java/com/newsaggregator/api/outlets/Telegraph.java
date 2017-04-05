@@ -17,8 +17,12 @@ public class Telegraph extends NewsAPI {
     @Override
     protected String extractArticleText(Document page) throws IndexOutOfBoundsException {
         Elements elements = page.getElementsByClass("articleBodyText");
-        Element content = elements.get(0);
-        Elements articleBody = content.getElementsByTag("p");
-        return articleBody.text();
+        String result = "";
+        for (Element content : elements) {
+            Elements articleBody = content.getElementsByTag("p");
+            result += articleBody.text() + " ";
+        }
+
+        return result;
     }
 }

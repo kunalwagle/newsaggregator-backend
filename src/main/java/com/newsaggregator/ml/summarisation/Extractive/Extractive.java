@@ -28,7 +28,7 @@ public class Extractive implements Summarisation {
         graph = applyCosineSimilarities(graph, texts);
         graph = filterGraph(graph);
         List<Node> finalNodes = applyPageRank(graph);
-        String finalString = generateFinalStringFromList(finalNodes, texts.size());
+        String finalString = generateFinalStringFromList(finalNodes, texts.size() * 2);
         return new Summary(graph, finalString, articles);
     }
 
