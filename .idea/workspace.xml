@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/Chunker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -64,18 +66,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Abstractive.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Abstractive.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="114" column="8" lean-forward="false" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="21" />
+            <state relative-caret-position="299">
+              <caret line="114" column="31" lean-forward="true" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="31" />
               <folding>
                 <element signature="method#summarise#0;class#Abstractive#0" expanded="true" />
                 <element signature="method#preProcessPronouns#0;class#Abstractive#0" expanded="true" />
-                <element signature="e#5166#5167#0" expanded="true" />
-                <element signature="e#5194#5195#0" expanded="true" />
                 <element signature="method#combineNodesIfFromSameArticle#0;class#Abstractive#0" expanded="true" />
                 <element signature="method#createNewGraphFromSentences#0;class#Abstractive#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Chunker.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/Chunker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="314">
+              <caret line="45" column="47" lean-forward="false" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#Chunker#0;class#Chunker#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExtractSentenceTypes.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="314">
+              <caret line="56" column="77" lean-forward="false" selection-start-line="56" selection-start-column="77" selection-end-line="56" selection-end-column="77" />
+              <folding>
+                <element signature="method#ExtractSentenceTypes#0;class#ExtractSentenceTypes#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="POSTagger.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/POSTagger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-301">
+              <caret line="32" column="34" lean-forward="true" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+              <folding>
+                <element signature="method#tagWords#0;class#POSTagger#0" expanded="true" />
+                <element signature="method#filterPronouns#0;class#POSTagger#0" expanded="true" />
+                <element signature="method#pronounsExist#0;class#POSTagger#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,23 +155,6 @@
               <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
                 <element signature="method#extractArticleText#0;class#Telegraph#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SummaryInputContainer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SummaryEvaluation/SummaryInputContainer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding>
-                <element signature="e#344#661#0" expanded="true" />
-                <element signature="e#705#1121#0" expanded="true" />
-                <element signature="e#758#824#0" expanded="true" />
-                <element signature="e#865#932#0" expanded="true" />
-                <element signature="e#972#1038#0" expanded="true" />
-                <element signature="e#1068#1113#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -183,7 +205,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/VectorScore.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/ClusterItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Cluster.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/VectorScore.java" />
@@ -211,7 +232,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Summarisation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/POSTagger.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/SummaryEvaluation/SummaryInputForm.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/App.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/index.js" />
@@ -234,6 +254,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Summary.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/Chunker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" />
       </list>
     </option>
   </component>
@@ -325,6 +347,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1134,6 +1160,44 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="ml" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nlp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1833,14 +1897,7 @@
       <workItem from="1488231650678" duration="37395000" />
       <workItem from="1489057867627" duration="15151000" />
       <workItem from="1490640587176" duration="13915000" />
-      <workItem from="1490695952010" duration="72265000" />
-    </task>
-    <task id="LOCAL-00059" summary="Getting outlinks and categories">
-      <created>1487925390400</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1487925390400</updated>
+      <workItem from="1490695952010" duration="73345000" />
     </task>
     <task id="LOCAL-00060" summary="Database methods and Wikipedia searching for topic labelling">
       <created>1488107795459</created>
@@ -2178,7 +2235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491413937638</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="Continuing with pronoun extraction">
+      <created>1491423955569</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1491423955569</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2211,7 +2275,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="283173000" />
+    <option name="totallyTimeSpent" value="284253000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2266,7 +2330,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="TfIdf cosine similarities and initial graph methods" />
     <MESSAGE value="Applied filtering" />
     <MESSAGE value="PageRank" />
     <MESSAGE value="Initial Summarisation" />
@@ -2291,7 +2354,8 @@
     <MESSAGE value="Examining Quotation" />
     <MESSAGE value="Extractive complete and ready for demo" />
     <MESSAGE value="Writing helper methods for Abstraction" />
-    <option name="LAST_COMMIT_MESSAGE" value="Writing helper methods for Abstraction" />
+    <MESSAGE value="Continuing with pronoun extraction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Continuing with pronoun extraction" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2306,7 +2370,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="329" />
+      <option name="time" value="330" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2315,14 +2379,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/SummarisedArticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="39" lean-forward="false" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/SentenceDetection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -2455,22 +2511,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
           <caret line="37" column="20" lean-forward="false" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/POSTagger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="75" column="9" lean-forward="false" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -2821,17 +2861,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/POSTagger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-301">
+          <caret line="32" column="34" lean-forward="true" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+          <folding>
+            <element signature="method#tagWords#0;class#POSTagger#0" expanded="true" />
+            <element signature="method#filterPronouns#0;class#POSTagger#0" expanded="true" />
+            <element signature="method#pronounsExist#0;class#POSTagger#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="114" column="8" lean-forward="false" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="21" />
+        <state relative-caret-position="299">
+          <caret line="114" column="31" lean-forward="true" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="31" />
           <folding>
             <element signature="method#summarise#0;class#Abstractive#0" expanded="true" />
             <element signature="method#preProcessPronouns#0;class#Abstractive#0" expanded="true" />
-            <element signature="e#5166#5167#0" expanded="true" />
-            <element signature="e#5194#5195#0" expanded="true" />
             <element signature="method#combineNodesIfFromSameArticle#0;class#Abstractive#0" expanded="true" />
             <element signature="method#createNewGraphFromSentences#0;class#Abstractive#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="56" column="77" lean-forward="false" selection-start-line="56" selection-start-column="77" selection-end-line="56" selection-end-column="77" />
+          <folding>
+            <element signature="method#ExtractSentenceTypes#0;class#ExtractSentenceTypes#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/Chunker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="45" column="47" lean-forward="false" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Chunker#0;class#Chunker#0" expanded="true" />
           </folding>
         </state>
       </provider>

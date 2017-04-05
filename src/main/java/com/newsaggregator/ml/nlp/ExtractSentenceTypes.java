@@ -10,11 +10,13 @@ public class ExtractSentenceTypes {
     private Tokenisation tokeniser;
     private SentenceDetection sentenceDetector;
     private POSTagger tagger;
+    private Chunker chunker;
 
     public ExtractSentenceTypes() {
         tokeniser = new Tokenisation();
         sentenceDetector = new SentenceDetection();
         tagger = new POSTagger();
+        chunker = new Chunker();
     }
 
     public String nounifyDocument(String document) {
@@ -48,4 +50,10 @@ public class ExtractSentenceTypes {
         return tokeniser.findTokens(sentences);
     }
 
+
+    public String[] chunk(String string) {
+        List<String> tokens = tokeniser.findTokens(new String[]{string});
+        String[] pos = tagger.tagWords(tokens);
+        return chunker.chunk(tokens.toArray(new String[tokens.size()]), pos);
+    }
 }

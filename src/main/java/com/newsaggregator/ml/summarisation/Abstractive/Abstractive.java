@@ -52,7 +52,7 @@ public class Abstractive implements Summarisation {
                 int position = node.getAbsoluteSentencePosition();
                 String startingString = articleSentences[position];
                 if (extractSentenceTypes.pronounsExist(startingString)) {
-                    if (pronounsInSubject(startingString)) {
+                    if (pronounsInSubject(startingString, extractSentenceTypes)) {
 
                     }
                 }
@@ -111,7 +111,8 @@ public class Abstractive implements Summarisation {
 //        }
     }
 
-    private boolean pronounsInSubject(String startingString) {
+    private boolean pronounsInSubject(String startingString, ExtractSentenceTypes extractSentenceTypes) {
+        extractSentenceTypes.chunk(startingString);
         return false;
     }
 
