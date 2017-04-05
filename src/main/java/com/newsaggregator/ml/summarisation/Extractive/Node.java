@@ -38,4 +38,8 @@ public class Node {
     public int getAbsoluteSentencePosition() {
         return absoluteSentencePosition;
     }
+
+    public void setSentence(String sentence) {
+        this.sentence = sentence;
+    }
 }
