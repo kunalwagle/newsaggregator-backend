@@ -28,7 +28,7 @@ public class Graph {
             List<String> sentences = splitToSentences(text);
             double j = 0.0;
             for (String sentence : sentences) {
-                nodes.add(new Node(sentence, j / sentences.size(), i, article.getSource()));
+                nodes.add(new Node(sentence, j / sentences.size(), (int) j, i, article.getSource()));
                 j++;
                 i++;
             }
