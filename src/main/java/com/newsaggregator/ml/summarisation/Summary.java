@@ -1,7 +1,7 @@
 package com.newsaggregator.ml.summarisation;
 
 import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.ml.summarisation.Extractive.Graph;
+import com.newsaggregator.ml.summarisation.Extractive.Node;
 
 import java.util.List;
 
@@ -10,18 +10,18 @@ import java.util.List;
  */
 public class Summary {
 
-    private Graph graph;
+    private List<Node> nodes;
     private String text;
     private List<OutletArticle> articles;
 
-    public Summary(Graph graph, String text, List<OutletArticle> articles) {
-        this.graph = graph;
+    public Summary(List<Node> nodes, String text, List<OutletArticle> articles) {
+        this.nodes = nodes;
         this.text = text;
         this.articles = articles;
     }
 
-    public Graph getGraph() {
-        return graph;
+    public List<Node> getNodes() {
+        return nodes;
     }
 
     public String getText() {
