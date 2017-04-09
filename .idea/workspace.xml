@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_8_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_16.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/Chunker.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/Chunker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/newsaggregator-backend.iml" afterPath="$PROJECT_DIR$/newsaggregator-backend.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Combiner.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Combiner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Graph.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Graph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SummaryEvaluationResource.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SummaryEvaluationResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/SummaryEvaluation/SummaryInput.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/SummaryEvaluation/SummaryInput.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SummaryEvaluation/SummaryInputContainer.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SummaryEvaluation/SummaryInputContainer.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -35,14 +30,14 @@
       <file leaf-file-name="Extractive.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-945">
-              <caret line="35" column="87" lean-forward="false" selection-start-line="35" selection-start-column="87" selection-end-line="35" selection-end-column="87" />
+            <state relative-caret-position="29">
+              <caret line="95" column="39" lean-forward="false" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#summarise#0;class#Extractive#0" expanded="true" />
                 <element signature="method#generateFinalStringFromList#0;class#Extractive#0" expanded="true" />
                 <element signature="method#generateFinalString#0;class#Extractive#0" expanded="true" />
                 <element signature="method#fixQuotationOrdering#0;class#Extractive#0" expanded="true" />
-                <element signature="method#examineQuotation#0;class#Extractive#0" expanded="true" />
                 <element signature="method#numberOfQuotationMarks#0;class#Extractive#0" expanded="true" />
                 <element signature="method#stripClausesAndSentences#0;class#Extractive#0" expanded="true" />
               </folding>
@@ -50,21 +45,80 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Abstractive.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Abstractive.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="206" column="42" lean-forward="false" selection-start-line="206" selection-start-column="42" selection-end-line="206" selection-end-column="42" />
+            <state relative-caret-position="254">
+              <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding>
                 <element signature="method#summarise#0;class#Abstractive#0" expanded="true" />
+                <element signature="e#1258#1259#0" expanded="true" />
+                <element signature="e#1285#1286#0" expanded="true" />
+                <element signature="method#reduceRichSemanticGraphs#0;class#Abstractive#0" expanded="true" />
+                <element signature="method#createRichSemanticGraphs#0;class#Abstractive#0" expanded="true" />
+                <element signature="e#1838#1839#0" expanded="true" />
+                <element signature="e#1865#1866#0" expanded="true" />
+                <element signature="e#1931#1932#0" expanded="true" />
+                <element signature="e#1958#1959#0" expanded="true" />
                 <element signature="method#preProcessPronouns#0;class#Abstractive#0" expanded="true" />
                 <element signature="method#replacePronounWithNounPhrase#0;class#Abstractive#0" expanded="true" />
                 <element signature="method#obtainNounPhraseFromPreviousSentence#0;class#Abstractive#0" expanded="true" />
                 <element signature="method#pronounsInSubject#0;class#Abstractive#0" expanded="true" />
                 <element signature="method#findStartingPointForSubject#0;class#Abstractive#0" expanded="true" />
+                <element signature="method#combineNodesIfFromSameArticle#0;class#Abstractive#0" expanded="true" />
                 <element signature="method#createNewGraphFromSentences#0;class#Abstractive#0" expanded="true" />
                 <element signature="method#createSummary#0;class#Abstractive#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="141" column="10" lean-forward="false" selection-start-line="141" selection-start-column="10" selection-end-line="141" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BusinessInsiderUK.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/BusinessInsiderUK.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DailyMail.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/DailyMail.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Guardian.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Guardian.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Metro.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Metro.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,7 +129,9 @@
             <state relative-caret-position="75">
               <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
               <folding>
-                <element signature="e#48#154#0" expanded="true" />
+                <marker date="1491433670000" expanded="true" signature="233:493" ph="{...}" />
+                <marker date="1491433670000" expanded="true" signature="692:2974" ph="&lt;div/&gt;" />
+                <marker date="1491433670000" expanded="true" signature="2277:2963" ph="&lt;div/&gt;" />
               </folding>
             </state>
           </provider>
@@ -86,7 +142,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
               <caret line="19" column="64" lean-forward="false" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="64" />
-              <folding />
+              <folding>
+                <marker date="1491432335000" expanded="true" signature="344:727" ph="{...}" />
+                <marker date="1491432335000" expanded="true" signature="357:725" ph="{&quot;firstBoxText&quot;: state.summaryEvaluation.firstBoxText...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -97,83 +156,6 @@
             <state relative-caret-position="225">
               <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Graph.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="41" column="44" lean-forward="true" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#Graph#0;class#Graph#0" expanded="true" />
-                <element signature="method#getAllSentencesForASingleSource#0;class#Graph#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SummaryEvaluationResource.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SummaryEvaluationResource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="45" column="60" lean-forward="false" selection-start-line="45" selection-start-column="60" selection-end-line="45" selection-end-column="60" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;class#SummaryEvaluationResource#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Chunker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/Chunker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#chunk#0;class#Chunker#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExtractSentenceTypes.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/ExtractSentenceTypes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-              <folding>
-                <element signature="method#ExtractSentenceTypes#0;class#ExtractSentenceTypes#0" expanded="true" />
-                <element signature="method#pronounsExist#0;class#ExtractSentenceTypes#0" expanded="true" />
-                <element signature="e#1582#1583#0" expanded="true" />
-                <element signature="e#1645#1646#0" expanded="true" />
-                <element signature="method#allWords#0;class#ExtractSentenceTypes#0" expanded="true" />
-                <element signature="e#1869#1870#0" expanded="true" />
-                <element signature="e#1927#1928#0" expanded="true" />
-                <element signature="method#chunk#0;class#ExtractSentenceTypes#0" expanded="true" />
-                <element signature="e#2280#2281#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="45" column="75" lean-forward="false" selection-start-line="45" selection-start-column="75" selection-end-line="45" selection-end-column="75" />
-              <folding>
-                <element signature="docComment;class#Node#0" expanded="true" />
-                <element signature="method#Node#0;class#Node#0" expanded="true" />
-                <element signature="e#958#959#0" expanded="true" />
-                <element signature="e#1005#1006#0" expanded="true" />
-                <element signature="e#1053#1054#0" expanded="true" />
-                <element signature="e#1093#1094#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -223,7 +205,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/ClusterItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Cluster.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/VectorScore.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" />
@@ -272,8 +253,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Node.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SummaryEvaluation/SummaryInputContainer.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/SummaryEvaluation/SummaryInput.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -1915,14 +1897,7 @@
       <workItem from="1488231650678" duration="37395000" />
       <workItem from="1489057867627" duration="15151000" />
       <workItem from="1490640587176" duration="13915000" />
-      <workItem from="1490695952010" duration="81056000" />
-    </task>
-    <task id="LOCAL-00061" summary="Completed topic labelling">
-      <created>1489058654480</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1489058654480</updated>
+      <workItem from="1490695952010" duration="84187000" />
     </task>
     <task id="LOCAL-00062" summary="Completed nlp pre-processing">
       <created>1489067891131</created>
@@ -2260,7 +2235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491425131641</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="Finished phase 1 of abstraction">
+      <created>1491433672462</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1491433672462</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2293,7 +2275,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="291964000" />
+    <option name="totallyTimeSpent" value="295095000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2348,7 +2330,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="PageRank" />
     <MESSAGE value="Initial Summarisation" />
     <MESSAGE value="Added some optimisations" />
     <MESSAGE value="Summarisation India test" />
@@ -2373,7 +2354,8 @@
     <MESSAGE value="Writing helper methods for Abstraction" />
     <MESSAGE value="Continuing with pronoun extraction" />
     <MESSAGE value="Created chunker" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created chunker" />
+    <MESSAGE value="Finished phase 1 of abstraction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished phase 1 of abstraction" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2388,7 +2370,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="348" />
+      <option name="time" value="350" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2397,51 +2379,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/SentenceDetection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="34" column="20" lean-forward="false" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/PageRank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="34" column="9" lean-forward="true" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/tfidf/TfIdf.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="34" column="74" lean-forward="false" selection-start-line="34" selection-start-column="74" selection-end-line="34" selection-end-column="74" />
-          <folding>
-            <element signature="e#2572#2573#0" expanded="false" />
-            <element signature="e#2650#2651#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/ClusterItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="79" column="54" lean-forward="true" selection-start-line="79" selection-start-column="54" selection-end-line="79" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/VectorScore.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -2689,8 +2626,8 @@
         <state relative-caret-position="323">
           <caret line="28" column="34" lean-forward="false" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
           <folding>
-            <element signature="docComment;class#RouterApplication#0" expanded="true" />
-            <element signature="method#RouterApplication#0;class#RouterApplication#0" expanded="true" />
+            <element signature="docComment;class#RouterApplication#0" expanded="false" />
+            <element signature="method#RouterApplication#0;class#RouterApplication#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2758,9 +2695,9 @@
         <state relative-caret-position="329">
           <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#Independent#0" expanded="true" />
-            <element signature="method#extractArticleText#0;class#Independent#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#Independent#0" expanded="false" />
+            <element signature="method#extractArticleText#0;class#Independent#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2770,7 +2707,7 @@
         <state relative-caret-position="315">
           <caret line="25" column="148" lean-forward="false" selection-start-line="25" selection-start-column="148" selection-end-line="25" selection-end-column="148" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2801,9 +2738,9 @@
         <state relative-caret-position="-301">
           <caret line="32" column="34" lean-forward="true" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
           <folding>
-            <element signature="method#tagWords#0;class#POSTagger#0" expanded="true" />
-            <element signature="method#filterPronouns#0;class#POSTagger#0" expanded="true" />
-            <element signature="method#pronounsExist#0;class#POSTagger#0" expanded="true" />
+            <element signature="method#tagWords#0;class#POSTagger#0" expanded="false" />
+            <element signature="method#filterPronouns#0;class#POSTagger#0" expanded="false" />
+            <element signature="method#pronounsExist#0;class#POSTagger#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2813,8 +2750,8 @@
         <state relative-caret-position="323">
           <caret line="45" column="60" lean-forward="false" selection-start-line="45" selection-start-column="60" selection-end-line="45" selection-end-column="60" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#SummaryEvaluationResource#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#SummaryEvaluationResource#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2824,8 +2761,8 @@
         <state relative-caret-position="254">
           <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#chunk#0;class#Chunker#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="method#chunk#0;class#Chunker#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2847,15 +2784,15 @@
         <state relative-caret-position="344">
           <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding>
-            <element signature="method#ExtractSentenceTypes#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#pronounsExist#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="e#1582#1583#0" expanded="true" />
-            <element signature="e#1645#1646#0" expanded="true" />
-            <element signature="method#allWords#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="e#1869#1870#0" expanded="true" />
-            <element signature="e#1927#1928#0" expanded="true" />
-            <element signature="method#chunk#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="e#2280#2281#0" expanded="true" />
+            <element signature="method#ExtractSentenceTypes#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="method#pronounsExist#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="e#1582#1583#0" expanded="false" />
+            <element signature="e#1645#1646#0" expanded="false" />
+            <element signature="method#allWords#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="e#1869#1870#0" expanded="false" />
+            <element signature="e#1927#1928#0" expanded="false" />
+            <element signature="method#chunk#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="e#2280#2281#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2887,7 +2824,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="19" column="64" lean-forward="false" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="64" />
-          <folding />
+          <folding>
+            <marker date="1491432335000" expanded="true" signature="344:727" ph="{...}" />
+            <marker date="1491432335000" expanded="true" signature="357:725" ph="{&quot;firstBoxText&quot;: state.summaryEvaluation.firstBoxText...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2896,21 +2836,55 @@
         <state relative-caret-position="75">
           <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
           <folding>
-            <element signature="e#48#154#0" expanded="true" />
+            <marker date="1491433670000" expanded="true" signature="233:493" ph="{...}" />
+            <marker date="1491433670000" expanded="true" signature="692:2974" ph="&lt;div/&gt;" />
+            <marker date="1491433670000" expanded="true" signature="2277:2963" ph="&lt;div/&gt;" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/BusinessInsiderUK.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/DailyMail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Guardian.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Metro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Extractive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-945">
-          <caret line="35" column="87" lean-forward="false" selection-start-line="35" selection-start-column="87" selection-end-line="35" selection-end-column="87" />
+        <state relative-caret-position="29">
+          <caret line="95" column="39" lean-forward="false" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#summarise#0;class#Extractive#0" expanded="true" />
             <element signature="method#generateFinalStringFromList#0;class#Extractive#0" expanded="true" />
             <element signature="method#generateFinalString#0;class#Extractive#0" expanded="true" />
             <element signature="method#fixQuotationOrdering#0;class#Extractive#0" expanded="true" />
-            <element signature="method#examineQuotation#0;class#Extractive#0" expanded="true" />
             <element signature="method#numberOfQuotationMarks#0;class#Extractive#0" expanded="true" />
             <element signature="method#stripClausesAndSentences#0;class#Extractive#0" expanded="true" />
           </folding>
@@ -2919,18 +2893,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="206" column="42" lean-forward="false" selection-start-line="206" selection-start-column="42" selection-end-line="206" selection-end-column="42" />
+        <state relative-caret-position="254">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding>
             <element signature="method#summarise#0;class#Abstractive#0" expanded="true" />
+            <element signature="e#1258#1259#0" expanded="true" />
+            <element signature="e#1285#1286#0" expanded="true" />
+            <element signature="method#reduceRichSemanticGraphs#0;class#Abstractive#0" expanded="true" />
+            <element signature="method#createRichSemanticGraphs#0;class#Abstractive#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#1931#1932#0" expanded="true" />
+            <element signature="e#1958#1959#0" expanded="true" />
             <element signature="method#preProcessPronouns#0;class#Abstractive#0" expanded="true" />
             <element signature="method#replacePronounWithNounPhrase#0;class#Abstractive#0" expanded="true" />
             <element signature="method#obtainNounPhraseFromPreviousSentence#0;class#Abstractive#0" expanded="true" />
             <element signature="method#pronounsInSubject#0;class#Abstractive#0" expanded="true" />
             <element signature="method#findStartingPointForSubject#0;class#Abstractive#0" expanded="true" />
+            <element signature="method#combineNodesIfFromSameArticle#0;class#Abstractive#0" expanded="true" />
             <element signature="method#createNewGraphFromSentences#0;class#Abstractive#0" expanded="true" />
             <element signature="method#createSummary#0;class#Abstractive#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="141" column="10" lean-forward="false" selection-start-line="141" selection-start-column="10" selection-end-line="141" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>

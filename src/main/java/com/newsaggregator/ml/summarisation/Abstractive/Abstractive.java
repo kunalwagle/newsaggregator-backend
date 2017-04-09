@@ -27,7 +27,39 @@ public class Abstractive implements Summarisation {
     public Summary summarise() {
         //List<String> strippedSentences = new ArrayList<>();// = stripClausesAndSentences();
         List<Node> nodes = preProcessPronouns();
+        List<Graph> subGraphs = createRichSemanticGraphs(nodes);
+        subGraphs = reduceRichSemanticGraphs(subGraphs);
+        nodes = generateSummaryText(subGraphs);
         return createSummary(nodes);
+    }
+
+    private List<Node> generateSummaryText(List<Graph> subGraphs) {
+        return null;
+    }
+
+    private List<Graph> reduceRichSemanticGraphs(List<Graph> subGraphs) {
+
+        return null;
+    }
+
+    private List<Graph> createRichSemanticGraphs(List<Node> nodes) {
+        List<Node> preProcessedNodes = preProcessing(nodes);
+        List<Graph> subGraphs = subGraphGeneration(preProcessedNodes);
+        List<Graph> graphs = graphGeneration(subGraphs);
+        return graphs;
+    }
+
+    private List<Node> preProcessing(List<Node> nodes) {
+
+        return null;
+    }
+
+    private List<Graph> subGraphGeneration(List<Node> preProcessedNodes) {
+        return null;
+    }
+
+    private List<Graph> graphGeneration(List<Graph> subGraphs) {
+        return null;
     }
 
     private List<Node> preProcessPronouns() {
