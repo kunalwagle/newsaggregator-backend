@@ -10,7 +10,7 @@ import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.Topic;
 import com.newsaggregator.base.TopicLabel;
 import com.newsaggregator.base.TopicWord;
-import com.newsaggregator.ml.nlp.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 
 import java.io.File;
 import java.io.IOException;

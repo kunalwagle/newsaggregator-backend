@@ -1,4 +1,4 @@
-package com.newsaggregator.ml.nlp;
+package com.newsaggregator.ml.nlp.apache;
 
 import opennlp.tools.chunker.ChunkerME;
 import opennlp.tools.chunker.ChunkerModel;

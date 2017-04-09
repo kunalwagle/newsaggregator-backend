@@ -2,7 +2,7 @@ package com.newsaggregator.ml.labelling;
 
 import com.newsaggregator.api.Wikipedia;
 import com.newsaggregator.base.*;
-import com.newsaggregator.ml.nlp.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
 

@@ -1,4 +1,4 @@
-package com.newsaggregator.ml.nlp;
+package com.newsaggregator.ml.nlp.apache;
 
 import opennlp.tools.sentdetect.SentenceDetector;
 import opennlp.tools.sentdetect.SentenceDetectorME;

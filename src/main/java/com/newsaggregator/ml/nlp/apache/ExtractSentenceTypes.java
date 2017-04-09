@@ -1,4 +1,4 @@
-package com.newsaggregator.ml.nlp;
+package com.newsaggregator.ml.nlp.apache;
 
 import java.util.List;
 

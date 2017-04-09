@@ -1,4 +1,4 @@
-package com.newsaggregator.ml.nlp;
+package com.newsaggregator.ml.nlp.apache;
 
 import opennlp.tools.tokenize.Tokenizer;
 import opennlp.tools.tokenize.TokenizerME;

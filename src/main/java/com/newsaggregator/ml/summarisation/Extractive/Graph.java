@@ -1,8 +1,8 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
 import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.ml.nlp.ExtractSentenceTypes;
-import com.newsaggregator.ml.nlp.SentenceDetection;
+import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.apache.SentenceDetection;
 import com.newsaggregator.ml.tfidf.TfIdf;
 
 import java.util.ArrayList;

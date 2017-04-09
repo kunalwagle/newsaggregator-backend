@@ -3,7 +3,7 @@ package com.newsaggregator.ml.clustering;
 import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.VectorScore;
-import com.newsaggregator.ml.nlp.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
 
