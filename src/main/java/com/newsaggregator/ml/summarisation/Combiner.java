@@ -28,7 +28,7 @@ public class Combiner {
                 combinedString += " ";
             }
         }
-        return combinedString;
+        return combinedString.trim();
     }
 
 }

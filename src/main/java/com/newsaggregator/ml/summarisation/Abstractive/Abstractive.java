@@ -3,11 +3,14 @@ package com.newsaggregator.ml.summarisation.Abstractive;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import com.newsaggregator.ml.nlp.apache.SentenceDetection;
+import com.newsaggregator.ml.nlp.stanford.StanfordAnalysis;
+import com.newsaggregator.ml.nlp.stanford.StanfordNLP;
 import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.summarisation.Extractive.Graph;
 import com.newsaggregator.ml.summarisation.Extractive.Node;
 import com.newsaggregator.ml.summarisation.Summarisation;
 import com.newsaggregator.ml.summarisation.Summary;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,7 @@ import java.util.List;
 public class Abstractive implements Summarisation {
 
     private Summary initialSummary;
+    private List<StanfordAnalysis> stanfordAnalyses;
 
     public Abstractive(Summary initialSummary) {
         this.initialSummary = initialSummary;
@@ -26,7 +30,8 @@ public class Abstractive implements Summarisation {
     @Override
     public Summary summarise() {
         //List<String> strippedSentences = new ArrayList<>();// = stripClausesAndSentences();
-        List<Node> nodes = preProcessPronouns();
+        //List<Node> nodes = preProcessPronouns();
+        List<Node> nodes = initialSummary.getNodes();
         List<Graph> subGraphs = createRichSemanticGraphs(nodes);
         subGraphs = reduceRichSemanticGraphs(subGraphs);
         nodes = generateSummaryText(subGraphs);
@@ -43,6 +48,7 @@ public class Abstractive implements Summarisation {
     }
 
     private List<Graph> createRichSemanticGraphs(List<Node> nodes) {
+        //stanfordAnalyses = initialSummary.getArticles().stream().map(StanfordNLP::performAnalysis).collect(Collectors.toList());
         List<Node> preProcessedNodes = preProcessing(nodes);
         List<Graph> subGraphs = subGraphGeneration(preProcessedNodes);
         List<Graph> graphs = graphGeneration(subGraphs);
@@ -50,7 +56,12 @@ public class Abstractive implements Summarisation {
     }
 
     private List<Node> preProcessing(List<Node> nodes) {
-
+        StanfordCoreNLP coreNLP = StanfordNLP.getCoreNLP();
+        stanfordAnalyses = new ArrayList<>();
+        for (OutletArticle article : initialSummary.getArticles()) {
+            stanfordAnalyses.add(new StanfordNLP(coreNLP, article).performAnalysis());
+        }
+        StanfordNLP.performPronounResolution(nodes, stanfordAnalyses);
         return null;
     }
 
