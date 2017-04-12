@@ -2,15 +2,14 @@ package com.newsaggregator.ml.nlp.stanford;
 
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
-import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.summarisation.Extractive.Node;
 import edu.stanford.nlp.coref.CorefCoreAnnotations;
 import edu.stanford.nlp.coref.data.CorefChain;
+import edu.stanford.nlp.coref.data.Dictionaries;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -59,19 +58,36 @@ public class StanfordNLP {
                     mentionString = representativeMention.mentionSpan;
                 }
                 for (CorefChain.CorefMention mention : corefChain.getMentionsInTextualOrder()) {
-                    if (!mention.equals(representativeMention)) {
-                        if (mention.sentNum - 1 == node.getAbsoluteSentencePosition()) {
+                    if (!mention.equals(representativeMention) && (representativeMention.mentionType.equals(Dictionaries.MentionType.NOMINAL) || representativeMention.mentionType.equals(Dictionaries.MentionType.PROPER))) {
+                        if (nodes.stream().anyMatch(node -> mentionInNodeSentence(node, mention.sentNum, stanfordAnalysis.getSource(), representativeMention.sentNum))) {
+                            Node node = nodes.stream().filter(node1 -> mentionInNodeSentence(node1, mention.sentNum, stanfordAnalysis.getSource(), representativeMention.sentNum)).findFirst().get();
+                            String sentence = node.getSentence();
+                            List<String> words = extractSentenceTypes.allWords(sentence);
                             String[] tokens = extractSentenceTypes.tag(sentence);
-                            if (extractSentenceTypes.isPronoun(tokens[mention.startIndex - 1])) {
-                                tokens[mention.startIndex - 1] = mentionString;
+                            if (extractSentenceTypes.isNonFirstPersonPronoun(tokens[mention.startIndex - 1], words.get(mention.startIndex - 1))) {
+                                String mentionStringCopy = mentionString;
+                                if (extractSentenceTypes.isPossessivePronoun(tokens[mention.startIndex - 1])) {
+                                    if (mentionString.endsWith("s")) {
+                                        mentionStringCopy += "\'";
+                                    } else {
+                                        mentionStringCopy += "\'s";
+                                    }
+                                }
+                                sentence = sentence.replaceAll("\\b" + mention.mentionSpan + "\\b", mentionStringCopy);
                             }
-                            node.setSentence(Combiner.combineStrings(Arrays.asList(tokens)));
+                            node.setSentence(sentence);
                         }
                     }
                 }
             }
         }
         return nodes;
+    }
+
+    private static boolean mentionInNodeSentence(Node node, int sentNum, String source, int originalSentNum) {
+        return (node.getAbsoluteSentencePosition() == sentNum - 1) &&
+                (node.getSource().equals(source)) &&
+                (originalSentNum != sentNum);
     }
 
     public Annotation getDocument() {

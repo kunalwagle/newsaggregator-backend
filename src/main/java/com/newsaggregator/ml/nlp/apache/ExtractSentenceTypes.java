@@ -68,4 +68,8 @@ public class ExtractSentenceTypes {
     public boolean isPossessivePronoun(String pronoun) {
         return pronoun.contains("$");
     }
+
+    public boolean isNonFirstPersonPronoun(String token, String s) {
+        return isPronoun(token) && !s.toLowerCase().equals("i") && !s.toLowerCase().equals("we");
+    }
 }

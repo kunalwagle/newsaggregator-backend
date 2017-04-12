@@ -24,7 +24,7 @@ public class Independent extends NewsAPI {
         Iterator<Element> iterator = articleBody.iterator();
         while (iterator.hasNext()) {
             Element element = iterator.next();
-            if (element.hasClass("inline-block") || element.hasClass("relatedlinkslist") || element.hasClass("inline-pipes-list") || element.hasClass("syndication-btn")) {
+            if (element.hasClass("inline-block") || element.hasClass("relatedlinkslist") || element.hasClass("inline-pipes-list") || element.hasClass("type-gallery") || element.hasClass("syndication-btn")) {
                 iterator.remove();
             }
         }
