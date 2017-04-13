@@ -1,5 +1,6 @@
 package com.newsaggregator.ml.summarisation.Abstractive;
 
+import com.google.common.collect.Sets;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import com.newsaggregator.ml.nlp.apache.SentenceDetection;
@@ -21,6 +22,7 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -42,7 +44,7 @@ public class Abstractive implements Summarisation {
         //List<Node> nodes = preProcessPronouns();
         List<Node> nodes = initialSummary.getNodes();
 //        nodes = preProcessing(nodes);
-        List<Graph> subGraphs = createRichSemanticGraphs(nodes);
+        RSGraph subGraphs = createRichSemanticGraphs(nodes);
 //        subGraphs = reduceRichSemanticGraphs(subGraphs);
 //        nodes = generateSummaryText(subGraphs);
         return createSummary(nodes);
@@ -57,12 +59,11 @@ public class Abstractive implements Summarisation {
         return null;
     }
 
-    private List<Graph> createRichSemanticGraphs(List<Node> nodes) {
+    private RSGraph createRichSemanticGraphs(List<Node> nodes) {
         //stanfordAnalyses = initialSummary.getArticles().stream().map(StanfordNLP::performAnalysis).collect(Collectors.toList());
         List<Node> preProcessedNodes = preProcessing(nodes);
         List<RSSubGraph> subGraphs = subGraphGeneration(preProcessedNodes);
-        List<Graph> graphs = graphGeneration(subGraphs);
-        return graphs;
+        return graphGeneration(subGraphs);
     }
 
     private List<Node> preProcessing(List<Node> nodes) {
@@ -95,24 +96,30 @@ public class Abstractive implements Summarisation {
                 }
                 wordNetWords.add(wordnet.getWord(word, pos));
             }
-            List<List<RSWord>> senses = new ArrayList<>();
+            List<Set<RSWord>> senses = new ArrayList<>();
             for (IIndexWord indexWord : wordNetWords) {
                 List<IWordID> iWordIDS = indexWord.getWordIDs();
                 int size = iWordIDS.size();
-                senses.add(iWordIDS.stream().map(iWord -> generateRSWord(iWord, size)).collect(Collectors.toList());
+                senses.add(iWordIDS.stream().map(iWord -> generateRSWord(iWord, size)).collect(Collectors.toSet()));
             }
-
+            Set<List<RSWord>> sets = Sets.cartesianProduct(senses);
+            List<RSNode> rsNodes = new ArrayList<>();
+            for (List<RSWord> rsWords : sets) {
+                RSNode rsNode = new RSNode(rsWords);
+                rsNodes.add(rsNode);
+            }
+            subGraphs.add(new RSSubGraph(rsNodes));
         }
-        return null;
+        return subGraphs;
     }
 
     private RSWord generateRSWord(IWordID iWord, int size) {
         IWord word = wordnet.getWord(iWord);
-        return new RSWord(word.getLemma(), word.getSynset(), size);
+        return new RSWord(word.getLemma(), word, size, wordnet);
     }
 
-    private List<Graph> graphGeneration(List<RSSubGraph> subGraphs) {
-        return null;
+    private RSGraph graphGeneration(List<RSSubGraph> subGraphs) {
+        return new RSGraph(subGraphs.stream().map(RSSubGraph::filterNodes).collect(Collectors.toList()));
     }
 
     private List<Node> preProcessPronouns() {

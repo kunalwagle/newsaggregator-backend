@@ -33,4 +33,9 @@ public class Wordnet {
     public IWord getWord(IWordID iWord) {
         return dict.getWord(iWord);
     }
+
+    public int getFrequency(IWord word) {
+        return dict.getSenseEntry(word.getSenseKey()).getTagCount();
+    }
+
 }
