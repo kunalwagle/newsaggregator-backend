@@ -5,15 +5,23 @@ import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import com.newsaggregator.ml.nlp.apache.SentenceDetection;
 import com.newsaggregator.ml.nlp.stanford.StanfordAnalysis;
 import com.newsaggregator.ml.nlp.stanford.StanfordNLP;
+import com.newsaggregator.ml.nlp.wordnet.Wordnet;
+import com.newsaggregator.ml.nlp.wordnet.WordnetFailedToOpenException;
 import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.summarisation.Extractive.Graph;
 import com.newsaggregator.ml.summarisation.Extractive.Node;
 import com.newsaggregator.ml.summarisation.Summarisation;
 import com.newsaggregator.ml.summarisation.Summary;
+import edu.mit.jwi.item.IIndexWord;
+import edu.mit.jwi.item.IWord;
+import edu.mit.jwi.item.IWordID;
+import edu.mit.jwi.item.POS;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 29/03/2017.
@@ -22,8 +30,9 @@ public class Abstractive implements Summarisation {
 
     private Summary initialSummary;
     private List<StanfordAnalysis> stanfordAnalyses;
+    private Wordnet wordnet = new Wordnet();
 
-    public Abstractive(Summary initialSummary) {
+    public Abstractive(Summary initialSummary) throws IOException, WordnetFailedToOpenException {
         this.initialSummary = initialSummary;
     }
 
@@ -51,7 +60,7 @@ public class Abstractive implements Summarisation {
     private List<Graph> createRichSemanticGraphs(List<Node> nodes) {
         //stanfordAnalyses = initialSummary.getArticles().stream().map(StanfordNLP::performAnalysis).collect(Collectors.toList());
         List<Node> preProcessedNodes = preProcessing(nodes);
-        List<Graph> subGraphs = subGraphGeneration(preProcessedNodes);
+        List<RSSubGraph> subGraphs = subGraphGeneration(preProcessedNodes);
         List<Graph> graphs = graphGeneration(subGraphs);
         return graphs;
     }
@@ -66,13 +75,43 @@ public class Abstractive implements Summarisation {
         return nodes;
     }
 
-    private List<Graph> subGraphGeneration(List<Node> preProcessedNodes) {
-        
+    private List<RSSubGraph> subGraphGeneration(List<Node> preProcessedNodes) {
+        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+        List<RSSubGraph> subGraphs = new ArrayList<>();
+        for (Node node : preProcessedNodes) {
+            String sentence = node.getSentence();
+            List<String> words = extractSentenceTypes.allWords(sentence);
+            String[] tags = extractSentenceTypes.tag(sentence);
+            ArrayList<IIndexWord> wordNetWords = new ArrayList<>();
+            for (int i = 0; i < tags.length; i++) {
+                String word = words.get(i);
+                POS pos;
+                if (extractSentenceTypes.isNoun(tags[i])) {
+                    pos = POS.NOUN;
+                } else if (extractSentenceTypes.isVerb(tags[i])) {
+                    pos = POS.VERB;
+                } else {
+                    continue;
+                }
+                wordNetWords.add(wordnet.getWord(word, pos));
+            }
+            List<List<RSWord>> senses = new ArrayList<>();
+            for (IIndexWord indexWord : wordNetWords) {
+                List<IWordID> iWordIDS = indexWord.getWordIDs();
+                int size = iWordIDS.size();
+                senses.add(iWordIDS.stream().map(iWord -> generateRSWord(iWord, size)).collect(Collectors.toList());
+            }
 
+        }
         return null;
     }
 
-    private List<Graph> graphGeneration(List<Graph> subGraphs) {
+    private RSWord generateRSWord(IWordID iWord, int size) {
+        IWord word = wordnet.getWord(iWord);
+        return new RSWord(word.getLemma(), word.getSynset(), size);
+    }
+
+    private List<Graph> graphGeneration(List<RSSubGraph> subGraphs) {
         return null;
     }
 

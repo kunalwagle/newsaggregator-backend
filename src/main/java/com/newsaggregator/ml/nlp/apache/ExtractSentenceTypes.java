@@ -72,4 +72,12 @@ public class ExtractSentenceTypes {
     public boolean isNonFirstPersonPronoun(String token, String s) {
         return isPronoun(token) && !s.toLowerCase().equals("i") && !s.toLowerCase().equals("we");
     }
+
+    public boolean isNoun(String tag) {
+        return tag.startsWith("N");
+    }
+
+    public boolean isVerb(String tag) {
+        return tag.startsWith("V");
+    }
 }

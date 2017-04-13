@@ -3,6 +3,8 @@ package com.newsaggregator.ml.nlp.wordnet;
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.IDictionary;
 import edu.mit.jwi.item.IIndexWord;
+import edu.mit.jwi.item.IWord;
+import edu.mit.jwi.item.IWordID;
 import edu.mit.jwi.item.POS;
 
 import java.io.IOException;
@@ -28,4 +30,7 @@ public class Wordnet {
         return dict.getIndexWord(word, syntax);
     }
 
+    public IWord getWord(IWordID iWord) {
+        return dict.getWord(iWord);
+    }
 }
