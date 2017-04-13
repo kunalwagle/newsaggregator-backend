@@ -67,7 +67,7 @@ public class Abstractive implements Summarisation {
     }
 
     private List<Graph> subGraphGeneration(List<Node> preProcessedNodes) {
-
+        
 
         return null;
     }

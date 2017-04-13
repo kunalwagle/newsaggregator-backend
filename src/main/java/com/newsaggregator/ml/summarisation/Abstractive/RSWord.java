@@ -1,7 +1,8 @@
 package com.newsaggregator.ml.summarisation.Abstractive;
 
 /**
- * Created by kunalwagle on 10/04/2017.
+ * Created by kunalwagle on 13/04/2017.
  */
-public class RSGraph {
+public class RSWord {
+
 }
