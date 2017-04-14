@@ -57,8 +57,8 @@ public class Abstractive implements Summarisation {
     }
 
     private RSGraph reduceRichSemanticGraphs(RSGraph subGraph) {
-
-        return null;
+        subGraph.applyHeuristics();
+        return subGraph;
     }
 
     private RSGraph createRichSemanticGraphs(List<Node> nodes) {
