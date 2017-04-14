@@ -1,5 +1,8 @@
 package com.newsaggregator.ml.summarisation.Abstractive;
 
+import edu.stanford.nlp.trees.TypedDependency;
+
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -8,10 +11,12 @@ import java.util.List;
 public class RSNode {
 
     private List<RSWord> words;
+    private Collection<TypedDependency> typedDependencies;
     private double calculation;
 
-    public RSNode(List<RSWord> words) {
+    public RSNode(List<RSWord> words, Collection<TypedDependency> typedDependencies) {
         this.words = words;
+        this.typedDependencies = typedDependencies;
         this.calculation = performCalculation(words);
     }
 

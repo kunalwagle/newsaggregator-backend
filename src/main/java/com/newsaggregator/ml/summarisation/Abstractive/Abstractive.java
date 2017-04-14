@@ -18,9 +18,11 @@ import edu.mit.jwi.item.IWord;
 import edu.mit.jwi.item.IWordID;
 import edu.mit.jwi.item.POS;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.trees.TypedDependency;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -44,8 +46,8 @@ public class Abstractive implements Summarisation {
         //List<Node> nodes = preProcessPronouns();
         List<Node> nodes = initialSummary.getNodes();
 //        nodes = preProcessing(nodes);
-        RSGraph subGraphs = createRichSemanticGraphs(nodes);
-//        subGraphs = reduceRichSemanticGraphs(subGraphs);
+        RSGraph subGraph = createRichSemanticGraphs(nodes);
+        subGraph = reduceRichSemanticGraphs(subGraph);
 //        nodes = generateSummaryText(subGraphs);
         return createSummary(nodes);
     }
@@ -54,7 +56,7 @@ public class Abstractive implements Summarisation {
         return null;
     }
 
-    private List<Graph> reduceRichSemanticGraphs(List<Graph> subGraphs) {
+    private RSGraph reduceRichSemanticGraphs(RSGraph subGraph) {
 
         return null;
     }
@@ -79,6 +81,7 @@ public class Abstractive implements Summarisation {
     private List<RSSubGraph> subGraphGeneration(List<Node> preProcessedNodes) {
         ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
         List<RSSubGraph> subGraphs = new ArrayList<>();
+        List<Collection<TypedDependency>> typedDependencies = StanfordNLP.getTypedDependencies(preProcessedNodes, stanfordAnalyses);
         for (Node node : preProcessedNodes) {
             String sentence = node.getSentence();
             List<String> words = extractSentenceTypes.allWords(sentence);
@@ -105,7 +108,7 @@ public class Abstractive implements Summarisation {
             Set<List<RSWord>> sets = Sets.cartesianProduct(senses);
             List<RSNode> rsNodes = new ArrayList<>();
             for (List<RSWord> rsWords : sets) {
-                RSNode rsNode = new RSNode(rsWords);
+                RSNode rsNode = new RSNode(rsWords, typedDependencies.get(preProcessedNodes.indexOf(node)));
                 rsNodes.add(rsNode);
             }
             subGraphs.add(new RSSubGraph(rsNodes));

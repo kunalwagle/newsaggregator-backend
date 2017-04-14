@@ -8,11 +8,10 @@ import edu.stanford.nlp.coref.data.CorefChain;
 import edu.stanford.nlp.coref.data.Dictionaries;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.trees.*;
 import edu.stanford.nlp.util.CoreMap;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Created by kunalwagle on 09/04/2017.
@@ -50,7 +49,6 @@ public class StanfordNLP {
 
         for (StanfordAnalysis stanfordAnalysis : stanfordAnalyses) {
             Map<Integer, CorefChain> graph = stanfordAnalysis.getAnnotation().get(CorefCoreAnnotations.CorefChainAnnotation.class);
-            List<CoreMap> sentences = stanfordAnalysis.getSentences();
             for (CorefChain corefChain : graph.values()) {
                 CorefChain.CorefMention representativeMention = corefChain.getRepresentativeMention();
                 String mentionString = "";
@@ -88,6 +86,20 @@ public class StanfordNLP {
         return (node.getAbsoluteSentencePosition() == sentNum - 1) &&
                 (node.getSource().equals(source)) &&
                 (originalSentNum != sentNum);
+    }
+
+    public static List<Collection<TypedDependency>> getTypedDependencies(List<Node> nodes, List<StanfordAnalysis> stanfordAnalyses) {
+        List<Collection<TypedDependency>> result = new ArrayList<>();
+        TreebankLanguagePack tlp = new PennTreebankLanguagePack();
+        GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
+        for (Node node : nodes) {
+            StanfordAnalysis stanfordAnalysis = stanfordAnalyses.stream().filter(stanford -> stanford.getSource().equals(node.getSource())).findFirst().get();
+            CoreMap sentence = stanfordAnalysis.getSentences().get(node.getAbsoluteSentencePosition());
+            Tree tree = sentence.get(TreeCoreAnnotations.TreeAnnotation.class);
+            GrammaticalStructure gs = gsf.newGrammaticalStructure(tree);
+            result.add(gs.typedDependenciesCollapsed());
+        }
+        return result;
     }
 
     public Annotation getDocument() {
