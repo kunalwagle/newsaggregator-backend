@@ -1,6 +1,7 @@
 package com.newsaggregator.ml.summarisation.Abstractive;
 
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
+import edu.mit.jwi.item.ISynsetID;
 import edu.stanford.nlp.ie.util.RelationTriple;
 
 import java.util.ArrayList;
@@ -35,22 +36,27 @@ public class RSGraph {
     }
 
     private void heuristics(RSNode currentNode, RSNode secondNode, ExtractSentenceTypes extractSentenceTypes) {
-//        Syntax currentSyntax = generateSyntax(currentNode);
-//        Syntax secondSyntax = generateSyntax(secondNode);
         Collection<RelationTriple> currentNodeRelationTriples = currentNode.getRelationTriples();
         Collection<RelationTriple> secondNodeRelationTriples = secondNode.getRelationTriples();
         List<Syntax> currentNodeSyntax = currentNodeRelationTriples.stream().map(rt -> generateSyntax(extractSentenceTypes, rt, currentNode.getWords())).collect(Collectors.toList());
-        List<Syntax> secondNodeSyntax = currentNodeRelationTriples.stream().map(rt -> generateSyntax(extractSentenceTypes, rt, currentNode.getWords())).collect(Collectors.toList());
-        for (Syntax currentSyntax : currentNodeSyntax) {
+        List<Syntax> secondNodeSyntax = secondNodeRelationTriples.stream().map(rt -> generateSyntax(extractSentenceTypes, rt, currentNode.getWords())).collect(Collectors.toList());
+        Iterator<Syntax> currentSyntaxIterator = currentNodeSyntax.iterator();
+        while (currentSyntaxIterator.hasNext()) {
+            Syntax currentSyntax = currentSyntaxIterator.next();
             for (Syntax secondSyntax : secondNodeSyntax) {
-                if (firstHeuristic(currentSyntax, secondSyntax)) {
-
-                } else if (secondHeuristic(currentSyntax, secondSyntax)) {
-
-                } else if (thirdHeuristic(currentSyntax, secondSyntax)) {
-
-                } else if (fourthHeuristic(currentSyntax, secondSyntax)) {
-
+                if (allSimilar(currentSyntax, secondSyntax)) {
+                    currentNodeRelationTriples.removeIf(rt -> currentSyntax.equals(generateSyntax(extractSentenceTypes, rt, currentNode.getWords())));
+                    currentSyntaxIterator.remove();
+                } else if (onlyObjectDifferent(currentSyntax, secondSyntax)) {
+                    RelationTriple toMove = currentNodeRelationTriples.stream().filter(rt -> currentSyntax.equals(generateSyntax(extractSentenceTypes, rt, currentNode.getWords()))).findFirst().get();
+                    currentNodeRelationTriples.remove(toMove);
+                    secondNodeRelationTriples.add(toMove);
+                    currentSyntaxIterator.remove();
+                } else if (verbAndObjectDifferent(currentSyntax, secondSyntax)) {
+                    RelationTriple toMove = currentNodeRelationTriples.stream().filter(rt -> currentSyntax.equals(generateSyntax(extractSentenceTypes, rt, currentNode.getWords()))).findFirst().get();
+                    currentNodeRelationTriples.remove(toMove);
+                    secondNodeRelationTriples.add(toMove);
+                    currentSyntaxIterator.remove();
                 }
             }
         }
@@ -58,23 +64,51 @@ public class RSGraph {
 
     }
 
-    private boolean firstHeuristic(Syntax first, Syntax second) {
-
+    private boolean allSimilar(Syntax first, Syntax second) {
+        if (similar(first.getSubject(), second.getSubject())) {
+            if (similar(first.getVerb(), second.getVerb())) {
+                if (similar(first.getObject(), second.getObject())) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
-    private boolean secondHeuristic(Syntax first, Syntax second) {
-
+    private boolean onlyObjectDifferent(Syntax first, Syntax second) {
+        if (similar(first.getSubject(), second.getSubject())) {
+            if (similar(first.getVerb(), second.getVerb())) {
+                if (!similar(first.getObject(), second.getObject())) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
-    private boolean thirdHeuristic(Syntax first, Syntax second) {
-
+    private boolean verbAndObjectDifferent(Syntax first, Syntax second) {
+        if (similar(first.getSubject(), second.getSubject())) {
+            if (!similar(first.getVerb(), second.getVerb())) {
+                if (!similar(first.getObject(), second.getObject())) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
-    private boolean fourthHeuristic(Syntax first, Syntax second) {
+//    private boolean fourthHeuristic(Syntax first, Syntax second) {
+//
+//        return false;
+//    }
 
+    private boolean similar(List<RSWord> first, List<RSWord> second) {
+        for (RSWord s1 : first) {
+            List<Integer> s1words = s1.getWordSense().getSynset().getRelatedSynsets().stream().map(ISynsetID::getOffset).collect(Collectors.toList());
+            if (second.stream().anyMatch(word -> s1words.contains(word.getWordSense().getSynset().getID().getOffset()))) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -110,6 +144,26 @@ public class RSGraph {
 
         public List<RSWord> getVerb() {
             return verb;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            Syntax other = (Syntax) o;
+            List<String> firstList = subject.stream().map(RSWord::getLemma).collect(Collectors.toList());
+            firstList.addAll(object.stream().map(RSWord::getLemma).collect(Collectors.toList()));
+            firstList.addAll(verb.stream().map(RSWord::getLemma).collect(Collectors.toList()));
+            List<String> secondList = other.getSubject().stream().map(RSWord::getLemma).collect(Collectors.toList());
+            secondList.addAll(other.getObject().stream().map(RSWord::getLemma).collect(Collectors.toList()));
+            secondList.addAll(other.getVerb().stream().map(RSWord::getLemma).collect(Collectors.toList()));
+            return firstList.stream().allMatch(secondList::contains);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = subject != null ? subject.hashCode() : 0;
+            result = 31 * result + (object != null ? object.hashCode() : 0);
+            result = 31 * result + (verb != null ? verb.hashCode() : 0);
+            return result;
         }
     }
 }

@@ -36,4 +36,7 @@ public class RSWord {
         return wordnet.getFrequency(wordSense);
     }
 
+    public Wordnet getWordnet() {
+        return wordnet;
+    }
 }
