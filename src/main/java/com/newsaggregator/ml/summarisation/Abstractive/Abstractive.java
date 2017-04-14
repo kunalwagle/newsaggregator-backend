@@ -17,8 +17,8 @@ import edu.mit.jwi.item.IIndexWord;
 import edu.mit.jwi.item.IWord;
 import edu.mit.jwi.item.IWordID;
 import edu.mit.jwi.item.POS;
+import edu.stanford.nlp.ie.util.RelationTriple;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.trees.TypedDependency;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ public class Abstractive implements Summarisation {
     private List<RSSubGraph> subGraphGeneration(List<Node> preProcessedNodes) {
         ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
         List<RSSubGraph> subGraphs = new ArrayList<>();
-        List<Collection<TypedDependency>> typedDependencies = StanfordNLP.getTypedDependencies(preProcessedNodes, stanfordAnalyses);
+        List<Collection<RelationTriple>> relationTriples = StanfordNLP.getRelationTriples(preProcessedNodes, stanfordAnalyses);
         for (Node node : preProcessedNodes) {
             String sentence = node.getSentence();
             List<String> words = extractSentenceTypes.allWords(sentence);
@@ -108,7 +108,7 @@ public class Abstractive implements Summarisation {
             Set<List<RSWord>> sets = Sets.cartesianProduct(senses);
             List<RSNode> rsNodes = new ArrayList<>();
             for (List<RSWord> rsWords : sets) {
-                RSNode rsNode = new RSNode(rsWords, typedDependencies.get(preProcessedNodes.indexOf(node)));
+                RSNode rsNode = new RSNode(rsWords, relationTriples.get(preProcessedNodes.indexOf(node)));
                 rsNodes.add(rsNode);
             }
             subGraphs.add(new RSSubGraph(rsNodes));

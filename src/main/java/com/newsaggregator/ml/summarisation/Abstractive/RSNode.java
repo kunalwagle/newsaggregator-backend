@@ -1,11 +1,9 @@
 package com.newsaggregator.ml.summarisation.Abstractive;
 
-import edu.mit.jwi.item.POS;
-import edu.stanford.nlp.trees.TypedDependency;
+import edu.stanford.nlp.ie.util.RelationTriple;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 10/04/2017.
@@ -13,12 +11,12 @@ import java.util.stream.Collectors;
 public class RSNode {
 
     private List<RSWord> words;
-    private Collection<TypedDependency> typedDependencies;
+    private Collection<RelationTriple> relationTriples;
     private double calculation;
 
-    public RSNode(List<RSWord> words, Collection<TypedDependency> typedDependencies) {
+    public RSNode(List<RSWord> words, Collection<RelationTriple> relationTriples) {
         this.words = words;
-        this.typedDependencies = typedDependencies;
+        this.relationTriples = relationTriples;
         this.calculation = performCalculation(words);
     }
 
@@ -35,20 +33,9 @@ public class RSNode {
         return words;
     }
 
-    public List<RSWord> getNounSubject() {
-        List<String> list = typedDependencies.stream().filter(dep -> dep.reln().getShortName().equals("nsubj")).map(dep -> dep.dep().lemma()).collect(Collectors.toList());
-        return words.stream().filter(word -> list.contains(word.getLemma())).collect(Collectors.toList());
+    public Collection<RelationTriple> getRelationTriples() {
+        return relationTriples;
     }
-
-    public List<RSWord> getNounObject() {
-        List<String> list = typedDependencies.stream().filter(dep -> dep.reln().getShortName().equals("dobj")).map(dep -> dep.dep().lemma()).collect(Collectors.toList());
-        return words.stream().filter(word -> list.contains(word.getLemma())).collect(Collectors.toList());
-    }
-
-    public List<RSWord> getVerb() {
-        return words.stream().filter(word -> word.getWordSense().getPOS().equals(POS.VERB)).collect(Collectors.toList());
-    }
-
 
     public double getCalculation() {
         return calculation;

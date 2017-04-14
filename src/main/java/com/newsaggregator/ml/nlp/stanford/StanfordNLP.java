@@ -6,6 +6,8 @@ import com.newsaggregator.ml.summarisation.Extractive.Node;
 import edu.stanford.nlp.coref.CorefCoreAnnotations;
 import edu.stanford.nlp.coref.data.CorefChain;
 import edu.stanford.nlp.coref.data.Dictionaries;
+import edu.stanford.nlp.ie.util.RelationTriple;
+import edu.stanford.nlp.naturalli.NaturalLogicAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.trees.*;
@@ -98,6 +100,16 @@ public class StanfordNLP {
             Tree tree = sentence.get(TreeCoreAnnotations.TreeAnnotation.class);
             GrammaticalStructure gs = gsf.newGrammaticalStructure(tree);
             result.add(gs.typedDependenciesCollapsed());
+        }
+        return result;
+    }
+
+    public static List<Collection<RelationTriple>> getRelationTriples(List<Node> nodes, List<StanfordAnalysis> stanfordAnalyses) {
+        List<Collection<RelationTriple>> result = new ArrayList<>();
+        for (Node node : nodes) {
+            StanfordAnalysis stanfordAnalysis = stanfordAnalyses.stream().filter(stanford -> stanford.getSource().equals(node.getSource())).findFirst().get();
+            CoreMap sentence = stanfordAnalysis.getSentences().get(node.getAbsoluteSentencePosition());
+            result.add(sentence.get(NaturalLogicAnnotations.RelationTriplesAnnotation.class));
         }
         return result;
     }
