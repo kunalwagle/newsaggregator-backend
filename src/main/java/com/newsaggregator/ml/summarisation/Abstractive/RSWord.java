@@ -9,6 +9,7 @@ import edu.mit.jwi.item.IWord;
 public class RSWord {
 
     private String lemma;
+    private String synonym;
     private IWord wordSense;
     private int numSenses;
     private Wordnet wordnet;
@@ -18,6 +19,7 @@ public class RSWord {
         this.wordSense = wordSense;
         this.numSenses = numSenses;
         this.wordnet = wordnet;
+        this.synonym = lemma;
     }
 
     public String getLemma() {
@@ -36,7 +38,15 @@ public class RSWord {
         return wordnet.getFrequency(wordSense);
     }
 
+    public String getSynonym() {
+        return synonym;
+    }
+
     public Wordnet getWordnet() {
         return wordnet;
+    }
+
+    public void setSynonym(String synonym) {
+        this.synonym = synonym;
     }
 }

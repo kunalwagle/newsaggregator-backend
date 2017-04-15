@@ -40,4 +40,8 @@ public class RSNode {
     public double getCalculation() {
         return calculation;
     }
+
+    public void addWords(List<RSWord> allWords) {
+        words.addAll(allWords);
+    }
 }

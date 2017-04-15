@@ -48,11 +48,11 @@ public class Abstractive implements Summarisation {
 //        nodes = preProcessing(nodes);
         RSGraph subGraph = createRichSemanticGraphs(nodes);
         subGraph = reduceRichSemanticGraphs(subGraph);
-//        nodes = generateSummaryText(subGraphs);
+        nodes = generateSummaryText(subGraph);
         return createSummary(nodes);
     }
 
-    private List<Node> generateSummaryText(List<Graph> subGraphs) {
+    private List<Node> generateSummaryText(RSGraph graph) {
         return null;
     }
 

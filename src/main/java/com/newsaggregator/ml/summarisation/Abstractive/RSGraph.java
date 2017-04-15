@@ -1,13 +1,12 @@
 package com.newsaggregator.ml.summarisation.Abstractive;
 
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.wordnet.Wordnet;
 import edu.mit.jwi.item.ISynsetID;
+import edu.mit.jwi.item.IWord;
 import edu.stanford.nlp.ie.util.RelationTriple;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -19,6 +18,37 @@ public class RSGraph {
 
     public RSGraph(List<RSNode> nodes) {
         this.nodes = nodes;
+    }
+
+    public void synonymisation() {
+        List<String> lemmas = generateAllLemmas();
+        for (RSNode node : nodes) {
+            for (RSWord word : node.getWords()) {
+                List<IWord> synsets = word.getWordSense().getSynset().getWords();
+                Wordnet wordnet = word.getWordnet();
+                double total = synsets.stream().mapToInt(wordnet::getFrequency).sum();
+                double currentHighest = 0.0;
+                IWord maxWord = synsets.get(0);
+                for (IWord w : synsets) {
+                    double frequency = wordnet.getFrequency(w);
+                    int occurrences = Collections.frequency(lemmas, w.getLemma());
+                    double calculation = (occurrences / lemmas.size()) + (1 - (frequency / total));
+                    if (calculation > currentHighest) {
+                        currentHighest = calculation;
+                        maxWord = w;
+                    }
+                }
+                word.setSynonym(maxWord.getLemma());
+            }
+        }
+    }
+
+    private List<String> generateAllLemmas() {
+        List<String> result = new ArrayList<>();
+        for (RSNode node : nodes) {
+            result.addAll(node.getWords().stream().map(RSWord::getLemma).collect(Collectors.toList()));
+        }
+        return result;
     }
 
     public void applyHeuristics() {
@@ -51,6 +81,7 @@ public class RSGraph {
                     RelationTriple toMove = currentNodeRelationTriples.stream().filter(rt -> currentSyntax.equals(generateSyntax(extractSentenceTypes, rt, currentNode.getWords()))).findFirst().get();
                     currentNodeRelationTriples.remove(toMove);
                     secondNodeRelationTriples.add(toMove);
+                    addWordsToNode(secondNode, currentSyntax);
                     currentSyntaxIterator.remove();
                 } else if (verbAndObjectDifferent(currentSyntax, secondSyntax)) {
                     RelationTriple toMove = currentNodeRelationTriples.stream().filter(rt -> currentSyntax.equals(generateSyntax(extractSentenceTypes, rt, currentNode.getWords()))).findFirst().get();
@@ -62,6 +93,10 @@ public class RSGraph {
         }
 
 
+    }
+
+    private void addWordsToNode(RSNode secondNode, Syntax currentSyntax) {
+        secondNode.addWords(currentSyntax.getAllWords());
     }
 
     private boolean allSimilar(Syntax first, Syntax second) {
@@ -144,6 +179,14 @@ public class RSGraph {
 
         public List<RSWord> getVerb() {
             return verb;
+        }
+
+        public List<RSWord> getAllWords() {
+            List<RSWord> result = new ArrayList<>();
+            result.addAll(subject);
+            result.addAll(object);
+            result.addAll(verb);
+            return result;
         }
 
         @Override
