@@ -18,13 +18,21 @@ import edu.mit.jwi.item.IWord;
 import edu.mit.jwi.item.IWordID;
 import edu.mit.jwi.item.POS;
 import edu.stanford.nlp.ie.util.RelationTriple;
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.util.CoreMap;
+import simplenlg.features.Feature;
+import simplenlg.features.Tense;
+import simplenlg.framework.NLGFactory;
+import simplenlg.lexicon.Lexicon;
+import simplenlg.phrasespec.NPPhraseSpec;
+import simplenlg.phrasespec.SPhraseSpec;
+import simplenlg.phrasespec.VPPhraseSpec;
+import simplenlg.realiser.english.Realiser;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -48,12 +56,50 @@ public class Abstractive implements Summarisation {
 //        nodes = preProcessing(nodes);
         RSGraph subGraph = createRichSemanticGraphs(nodes);
         subGraph = reduceRichSemanticGraphs(subGraph);
-        nodes = generateSummaryText(subGraph);
-        return createSummary(nodes);
+        List<String> sentences = generateSummaryText(subGraph);
+        return createSummary(nodes, sentences);
     }
 
-    private List<Node> generateSummaryText(RSGraph graph) {
-        return null;
+    private List<String> generateSummaryText(RSGraph graph) {
+        Lexicon lexicon = Lexicon.getDefaultLexicon();
+        NLGFactory factory = new NLGFactory(lexicon);
+        Realiser realiser = new Realiser(lexicon);
+        graph.synonymisation();
+        List<String> sentences = new ArrayList<>();
+        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+        for (RSNode node : graph.getNodes()) {
+            Collection<RelationTriple> triples = node.getRelationTriples();
+            List<RSWord> words = node.getWords();
+            Iterator<RelationTriple> relationTripleIterator = triples.iterator();
+            while (relationTripleIterator.hasNext()) {
+                RelationTriple triple = relationTripleIterator.next();
+                List<CoreLabel> label = triple.asSentence();
+                List<String> subject = synonymReplacer(extractSentenceTypes.allWords(triple.subjectLemmaGloss()), words);
+                List<String> verb = synonymReplacer(extractSentenceTypes.allWords(triple.relationLemmaGloss()), words);
+                List<String> object = synonymReplacer(extractSentenceTypes.allWords(triple.objectLemmaGloss()), words);
+                NPPhraseSpec s = factory.createNounPhrase(Combiner.combineStrings(subject));
+                VPPhraseSpec v = factory.createVerbPhrase(Combiner.combineStrings(verb));
+                NPPhraseSpec o = factory.createNounPhrase(Combiner.combineStrings(object));
+                SPhraseSpec phrase = factory.createClause();
+                phrase.setSubject(s);
+                phrase.setObject(o);
+                phrase.setVerb(v);
+                phrase.setFeature(Feature.TENSE, Tense.PAST);
+                sentences.add(realiser.realiseSentence(phrase));
+            }
+        }
+        return sentences;
+    }
+
+    private List<String> synonymReplacer(List<String> strings, List<RSWord> words) {
+        List<String> newStrings = new ArrayList<>();
+        for (String string : strings) {
+            boolean wordExists = words.stream().anyMatch(w -> w.getLemma().equals(string));
+            if (wordExists) {
+                newStrings.add(words.stream().filter(w -> w.getLemma().equals(string)).findAny().get().getSynonym());
+            }
+        }
+        return newStrings;
     }
 
     private RSGraph reduceRichSemanticGraphs(RSGraph subGraph) {
@@ -84,11 +130,13 @@ public class Abstractive implements Summarisation {
         List<Collection<RelationTriple>> relationTriples = StanfordNLP.getRelationTriples(preProcessedNodes, stanfordAnalyses);
         for (Node node : preProcessedNodes) {
             String sentence = node.getSentence();
-            List<String> words = extractSentenceTypes.allWords(sentence);
+            StanfordAnalysis stanfordAnalysis = stanfordAnalyses.stream().filter(stanford -> stanford.getSource().equals(node.getSource())).findFirst().get();
+            CoreMap sent = stanfordAnalysis.getSentences().get(node.getAbsoluteSentencePosition());
+            List<CoreLabel> words = sent.get(CoreAnnotations.TokensAnnotation.class);
             String[] tags = extractSentenceTypes.tag(sentence);
             ArrayList<IIndexWord> wordNetWords = new ArrayList<>();
             for (int i = 0; i < tags.length; i++) {
-                String word = words.get(i);
+                String word = words.get(i).lemma();
                 POS pos;
                 if (extractSentenceTypes.isNoun(tags[i])) {
                     pos = POS.NOUN;
@@ -97,7 +145,10 @@ public class Abstractive implements Summarisation {
                 } else {
                     continue;
                 }
-                wordNetWords.add(wordnet.getWord(word, pos));
+                IIndexWord w = wordnet.getWord(word, pos);
+                if (w != null) {
+                    wordNetWords.add(w);
+                }
             }
             List<Set<RSWord>> senses = new ArrayList<>();
             for (IIndexWord indexWord : wordNetWords) {
@@ -323,10 +374,10 @@ public class Abstractive implements Summarisation {
         return graph;
     }
 
-    private Summary createSummary(List<Node> nodes) {
+    private Summary createSummary(List<Node> nodes, List<String> sentences) {
         String articleText = "";
-        for (Node node : nodes) {
-            articleText += node.getSentence() + "\n";
+        for (String node : sentences) {
+            articleText += node + "\n";
         }
         return new Summary(nodes, articleText, initialSummary.getArticles());
     }

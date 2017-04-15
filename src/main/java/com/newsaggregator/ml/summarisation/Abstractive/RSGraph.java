@@ -157,6 +157,10 @@ public class RSGraph {
         return new Syntax(firstSubjectWords, firstObjectWords, firstVerbWords);
     }
 
+    public List<RSNode> getNodes() {
+        return nodes;
+    }
+
     private class Syntax {
 
         private List<RSWord> subject;

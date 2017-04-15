@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 04/02/2017.
@@ -40,12 +41,18 @@ public class Articles {
         }
     }
 
+    public List<OutletArticle> articlesToAdd(List<OutletArticle> articles) {
+        return articles.stream().filter(article -> !articleExists(article)).collect(Collectors.toList());
+    }
+
     private void writeArticle(OutletArticle article) {
         try {
             table.putItem(new Item()
                     .withPrimaryKey("articleUrl", article.getArticleUrl(), "DatePublished", article.getLastPublished())
-
-                    .withMap("info", article.createNonPrimaryHashMap()));
+                    .withString("Body", article.getBody())
+                    .withString("ImageUrl", article.getImageUrl())
+                    .withString("Title", article.getTitle())
+                    .withString("Source", article.getSource());
         } catch (Exception e) {
             //e.printStackTrace();
         }
