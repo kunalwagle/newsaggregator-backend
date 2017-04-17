@@ -1,12 +1,8 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.jobs.ArticleFetchRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
-import org.restlet.service.TaskService;
-
-import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -28,9 +24,11 @@ public class Main {
 
             // System.out.println(label);
 
-            TaskService scheduleManager = new TaskService();
+            throw new Exception();
 
-            scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 60L, 600L, TimeUnit.SECONDS);
+//            TaskService scheduleManager = new TaskService();
+//
+//            scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 60L, 600L, TimeUnit.SECONDS);
 
 //            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
 ////            Articles articles = new Articles(db);
@@ -216,6 +214,7 @@ public class Main {
 
 
         } catch (Exception e) {
+            Utils.sendExceptionEmail(e);
             e.printStackTrace();
         }
     }
