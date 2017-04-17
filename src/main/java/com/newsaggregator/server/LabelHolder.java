@@ -100,4 +100,8 @@ public class LabelHolder {
         }
         return false;
     }
+
+    public void addCluster(List<OutletArticle> articlesForSummary) {
+        clusters.add(articlesForSummary);
+    }
 }

@@ -3,6 +3,7 @@ package com.newsaggregator.server.jobs;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.newsaggregator.Utils;
 import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.Topic;
@@ -18,7 +19,6 @@ import com.newsaggregator.server.ArticleFetch;
 import com.newsaggregator.server.LabelHolder;
 import com.newsaggregator.server.LabelString;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,8 +39,6 @@ public class ArticleFetchRunnable implements Runnable {
         Topics topicManager = new Topics(db);
         articleList = articleManager.articlesToAdd(articleList);
         System.out.println("Sending articles");
-        articleManager.saveArticles(articleList);
-        System.out.println("Articles saved");
         System.out.println("Starting topic modelling and labelling");
         List<OutletArticle> allArticles = articleManager.getAllArticles();
         Map<String, LabelString> allLabels = topicManager.getAllTopics();
@@ -66,6 +64,9 @@ public class ArticleFetchRunnable implements Runnable {
 
         TopicModelling topicModelling = new TopicModelling();
         try {
+            if (allArticles.size() == 0) {
+                allArticles = articleList;
+            }
             topicModelling.trainTopics(allArticles);
             for (OutletArticle article : articleList) {
                 System.out.println("Modelling and labelling article " + articleList.indexOf(article) + " out of " + articleList.size());
@@ -98,12 +99,16 @@ public class ArticleFetchRunnable implements Runnable {
                     List<OutletArticle> articlesForSummary = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
                     Extractive extractive = new Extractive(articlesForSummary);
                     Summary summary = extractive.summarise();
+                    topicLabel.getValue().addCluster(articlesForSummary);
                     topicLabel.getValue().addSummary(summary);
                 }
                 counter++;
             }
-
-        } catch (IOException e) {
+            topicManager.saveTopics(topicLabelMap);
+            articleManager.saveArticles(articleList);
+            System.out.println("Articles and topics saved");
+        } catch (Exception e) {
+            Utils.sendExceptionEmail(e);
             e.printStackTrace();
         }
 
