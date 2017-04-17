@@ -3,13 +3,13 @@ package com.newsaggregator.db;
 import com.amazonaws.services.dynamodbv2.document.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.base.Topic;
-import com.newsaggregator.base.TopicLabel;
-import com.newsaggregator.base.TopicWord;
+import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.LabelHolder;
+import com.newsaggregator.server.LabelString;
 
-import java.math.BigDecimal;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,31 +34,51 @@ public class Topics {
 
                 ObjectMapper objectMapper = new ObjectMapper();
 
-                String articleString = objectMapper.writeValueAsString(labelHolder.getArticles());
+                List<String> articleClusters = new ArrayList<>();
+                for (List<OutletArticle> articles : labelHolder.getClusters()) {
+                    List<String> urls = articles.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
+                    articleClusters.add(objectMapper.writeValueAsString(urls));
+                }
 
-//                List<Map> words = topic.getTopic().generateWordMap();
-//                table.putItem(new Item().withPrimaryKey("Label", topic.getLabel())
-//                        .withList("Words", words));
+                List<String> articleSummaries = new ArrayList<>();
+                for (Summary summary : labelHolder.getSummaries()) {
+                    articleSummaries.add(objectMapper.writeValueAsString(summary));
+                }
+
+                table.putItem(new Item().withPrimaryKey("Label", topic.getKey())
+                        .withList("Articles", articleUrls)
+                        .withList("Clusters", articleClusters)
+                        .withList("Summaries", articleSummaries)
+                );
+
             } catch (Exception e) {
-                //e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
 
-    public List<TopicLabel> getAllTopics() {
-        List<TopicLabel> topicLabels = new ArrayList<>();
+    public Map<String, LabelString> getAllTopics() {
+        Map<String, LabelString> topicLabels = new HashMap<>();
         ItemCollection<ScanOutcome> items = table.scan();
         for (Item nextItem : items) {
             try {
                 Map<String, Object> item = nextItem.asMap();
                 String label = (String) item.get("Label");
-                List<Map<String, Object>> words = (List<Map<String, Object>>) item.get("Words");
-                List<TopicWord> wordList = new ArrayList<>();
-                for (Map word : words) {
-                    BigDecimal decimal = (BigDecimal) word.get("distribution");
-                    wordList.add(new TopicWord((String) word.get("word"), decimal.doubleValue()));
+                List<String> articles = (List<String>) item.get("Articles");
+                List<String> clusters = (List<String>) item.get("Clusters");
+                List<String> summaries = (List<String>) item.get("Summaries");
+                ObjectMapper objectMapper = new ObjectMapper();
+                List<Summary> summs = new ArrayList<>();
+                for (String sum : summaries) {
+                    try {
+                        summs.add(objectMapper.readValue(sum, Summary.class));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-                topicLabels.add(new TopicLabel(label, new Topic(wordList)));
+                LabelString labelString = new LabelString(articles, clusters, summs);
+                topicLabels.put(label, labelString);
+
             } catch (Exception e) {
                 System.out.println("Caught an exception, but still chugging along");
             }
