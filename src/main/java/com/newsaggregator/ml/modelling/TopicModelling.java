@@ -12,7 +12,6 @@ import com.newsaggregator.base.TopicLabel;
 import com.newsaggregator.base.TopicWord;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -63,7 +62,7 @@ public class TopicModelling {
         ArrayList<Pipe> pipeList = new ArrayList<>();
         pipeList.add(new CharSequenceLowercase());
         pipeList.add(new CharSequence2TokenSequence(Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")));
-        pipeList.add(new TokenSequenceRemoveStopwords(new File("/Users/kunalwagle/Documents/Personal/Imperial/C4/401Project/Code/newsaggregator-backend/src/main/java/com/newsaggregator/ml/modelling/stoplists/en.txt"), "UTF-8", false, false, false));
+        //pipeList.add(new TokenSequenceRemoveStopwords(new File("/Users/kunalwagle/Documents/Personal/Imperial/C4/401Project/Code/newsaggregator-backend/src/main/java/com/newsaggregator/ml/modelling/stoplists/en.txt"), "UTF-8", false, false, false));
         pipeList.add(new TokenSequence2FeatureSequence());
 
         return new InstanceList(new SerialPipes(pipeList));
