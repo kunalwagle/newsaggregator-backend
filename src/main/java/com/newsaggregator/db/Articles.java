@@ -52,7 +52,7 @@ public class Articles {
                     .withString("Body", article.getBody())
                     .withString("ImageUrl", article.getImageUrl())
                     .withString("Title", article.getTitle())
-                    .withString("Source", article.getSource());
+                    .withString("Source", article.getSource()));
         } catch (Exception e) {
             //e.printStackTrace();
         }

@@ -31,4 +31,17 @@ public class Summary {
     public List<OutletArticle> getArticles() {
         return articles;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        List<OutletArticle> others = ((Summary) o).getArticles();
+        if (others.size() == articles.size()) {
+            for (OutletArticle article : articles) {
+                if (others.stream().noneMatch(art -> art.getArticleUrl().equals(article.getArticleUrl()))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
