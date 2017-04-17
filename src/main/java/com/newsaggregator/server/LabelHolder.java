@@ -1,6 +1,7 @@
 package com.newsaggregator.server;
 
 import com.newsaggregator.base.OutletArticle;
+import com.newsaggregator.ml.clustering.Cluster;
 import com.newsaggregator.ml.summarisation.Summary;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class LabelHolder {
     private String label;
     private List<Summary> summaries;
     private List<OutletArticle> articles;
+    private List<Cluster> clusters;
 
     public LabelHolder(String label) {
         this.label = label;
@@ -51,5 +53,13 @@ public class LabelHolder {
 
     public List<OutletArticle> getArticles() {
         return articles;
+    }
+
+    public List<Cluster> getClusters() {
+        return clusters;
+    }
+
+    public List<Summary> getSummaries() {
+        return summaries;
     }
 }

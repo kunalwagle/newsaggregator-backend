@@ -1,14 +1,18 @@
 package com.newsaggregator.db;
 
 import com.amazonaws.services.dynamodbv2.document.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.Topic;
 import com.newsaggregator.base.TopicLabel;
 import com.newsaggregator.base.TopicWord;
+import com.newsaggregator.server.LabelHolder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Topics {
 
@@ -20,12 +24,21 @@ public class Topics {
         this.table = getCollection();
     }
 
-    public void saveTopics(List<TopicLabel> topics) {
-        for (TopicLabel topic : topics) {
+    public void saveTopics(Map<String, LabelHolder> topics) {
+        for (Map.Entry<String, LabelHolder> topic : topics.entrySet()) {
             try {
-                List<Map> words = topic.getTopic().generateWordMap();
-                table.putItem(new Item().withPrimaryKey("Label", topic.getLabel())
-                        .withList("Words", words));
+
+                LabelHolder labelHolder = topic.getValue();
+
+                List<String> articleUrls = labelHolder.getArticles().stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
+
+                ObjectMapper objectMapper = new ObjectMapper();
+
+                String articleString = objectMapper.writeValueAsString(labelHolder.getArticles());
+
+//                List<Map> words = topic.getTopic().generateWordMap();
+//                table.putItem(new Item().withPrimaryKey("Label", topic.getLabel())
+//                        .withList("Words", words));
             } catch (Exception e) {
                 //e.printStackTrace();
             }

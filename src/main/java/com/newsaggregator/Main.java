@@ -1,8 +1,13 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
+import com.newsaggregator.server.jobs.ArticleFetchRunnable;
+import com.newsaggregator.server.jobs.SendEmailRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
+import org.restlet.service.TaskService;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -17,18 +22,26 @@ public class Main {
 
         component.start();
 
+        boolean serverInitialised = false;
 
-        try {
+        while (!serverInitialised) {
 
-            //CandidateLabel label = Wikipedia.getOutlinksAndCategories("Moose_Jaw_Civic_Centre");
+            try {
 
-            // System.out.println(label);
+                //CandidateLabel label = Wikipedia.getOutlinksAndCategories("Moose_Jaw_Civic_Centre");
 
-            throw new Exception();
+                // System.out.println(label);
 
-//            TaskService scheduleManager = new TaskService();
-//
-//            scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 60L, 600L, TimeUnit.SECONDS);
+//            throw new Exception();
+
+
+                TaskService scheduleManager = new TaskService();
+
+                scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 60L, 600L, TimeUnit.SECONDS);
+                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 1L, TimeUnit.HOURS);
+
+                serverInitialised = true;
+
 
 //            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
 ////            Articles articles = new Articles(db);
@@ -213,9 +226,11 @@ public class Main {
 // Both sentence and token offsets start at 1!
 
 
-        } catch (Exception e) {
-            Utils.sendExceptionEmail(e);
-            e.printStackTrace();
+            } catch (Exception e) {
+                Utils.sendExceptionEmail(e);
+                e.printStackTrace();
+            }
+
         }
     }
 }
