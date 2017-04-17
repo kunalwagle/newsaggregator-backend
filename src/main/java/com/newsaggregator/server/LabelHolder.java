@@ -23,6 +23,13 @@ public class LabelHolder {
         this.label = label;
     }
 
+    public LabelHolder(String label, List<Summary> summaries, List<OutletArticle> articles, List<List<OutletArticle>> clusters) {
+        this.label = label;
+        this.summaries = summaries;
+        this.articles = articles;
+        this.clusters = clusters;
+    }
+
     public void setArticles(List<OutletArticle> articles) {
         this.articles = articles;
     }
@@ -78,6 +85,16 @@ public class LabelHolder {
     private boolean articleInList(List<OutletArticle> otherArticles, OutletArticle article) {
         for (OutletArticle art : otherArticles) {
             if (art.getArticleUrl().equals(article.getArticleUrl())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean alreadyClustered(List<String> clusterUrls) {
+        for (List<OutletArticle> articles : clusters) {
+            List<String> urls = articles.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
+            if (urls.size() == clusterUrls.size() && urls.stream().allMatch(clusterUrls::contains)) {
                 return true;
             }
         }

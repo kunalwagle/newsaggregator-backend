@@ -67,6 +67,7 @@ public class Topics {
                 List<String> articles = (List<String>) item.get("Articles");
                 List<String> clusters = (List<String>) item.get("Clusters");
                 List<String> summaries = (List<String>) item.get("Summaries");
+                List<List<String>> finalClusters = new ArrayList<>();
                 ObjectMapper objectMapper = new ObjectMapper();
                 List<Summary> summs = new ArrayList<>();
                 for (String sum : summaries) {
@@ -76,7 +77,11 @@ public class Topics {
                         e.printStackTrace();
                     }
                 }
-                LabelString labelString = new LabelString(articles, clusters, summs);
+                for (String cluster : clusters) {
+                    finalClusters.add(objectMapper.readValue(cluster, List.class));
+                }
+
+                LabelString labelString = new LabelString(articles, finalClusters, summs);
                 topicLabels.put(label, labelString);
 
             } catch (Exception e) {
