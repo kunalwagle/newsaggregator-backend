@@ -12,7 +12,9 @@ import com.newsaggregator.base.TopicLabel;
 import com.newsaggregator.base.TopicWord;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -25,7 +27,7 @@ public class TopicModelling {
     private InstanceList instances = getInstances();
     private ExtractSentenceTypes nounifier;
 
-    public TopicModelling() {
+    public TopicModelling() throws URISyntaxException {
         nounifier = new ExtractSentenceTypes();
     }
 
@@ -58,11 +60,11 @@ public class TopicModelling {
         return topicList;
     }
 
-    private static InstanceList getInstances() {
+    private InstanceList getInstances() throws URISyntaxException {
         ArrayList<Pipe> pipeList = new ArrayList<>();
         pipeList.add(new CharSequenceLowercase());
         pipeList.add(new CharSequence2TokenSequence(Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")));
-        //pipeList.add(new TokenSequenceRemoveStopwords(new File("/Users/kunalwagle/Documents/Personal/Imperial/C4/401Project/Code/newsaggregator-backend/src/main/java/com/newsaggregator/ml/modelling/stoplists/en.txt"), "UTF-8", false, false, false));
+        pipeList.add(new TokenSequenceRemoveStopwords(new File(getClass().getClassLoader().getResource("en.txt").toURI()), "UTF-8", false, false, false));
         pipeList.add(new TokenSequence2FeatureSequence());
 
         return new InstanceList(new SerialPipes(pipeList));

@@ -62,45 +62,57 @@ public class ArticleFetchRunnable implements Runnable {
             topicLabelMap.put(labelName, new LabelHolder(labelName, labelString.getSummaries(), articles, clusters));
         }
 
-        TopicModelling topicModelling = new TopicModelling();
         try {
+            TopicModelling topicModelling = new TopicModelling();
             if (allArticles.size() == 0) {
                 allArticles = articleList;
             }
             topicModelling.trainTopics(allArticles);
             for (OutletArticle article : articleList) {
-                System.out.println("Modelling and labelling article " + articleList.indexOf(article) + " out of " + articleList.size());
-                Topic topic = topicModelling.getModel(article);
-                List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
-                for (String topicLabel : topicLabels) {
-                    if (topicLabelMap.containsKey(topicLabel)) {
-                        topicLabelMap.get(topicLabel).addArticle(article);
-                    } else {
-                        LabelHolder newLabelHolder = new LabelHolder(topicLabel);
-                        newLabelHolder.addArticle(article);
-                        topicLabelMap.put(topicLabel, newLabelHolder);
+                try {
+                    System.out.println("Modelling and labelling article " + articleList.indexOf(article) + " out of " + articleList.size());
+                    Topic topic = topicModelling.getModel(article);
+                    List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
+                    for (String topicLabel : topicLabels) {
+                        if (topicLabelMap.containsKey(topicLabel)) {
+                            topicLabelMap.get(topicLabel).addArticle(article);
+                        } else {
+                            LabelHolder newLabelHolder = new LabelHolder(topicLabel);
+                            newLabelHolder.addArticle(article);
+                            topicLabelMap.put(topicLabel, newLabelHolder);
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
             System.out.println("Completed topic labelling.");
             System.out.println("Starting clustering and summarising");
             int counter = 0;
             for (Map.Entry<String, LabelHolder> topicLabel : topicLabelMap.entrySet()) {
-                System.out.println("Clustering topic " + counter + " out of " + topicLabelMap.size());
-                List<OutletArticle> articles = topicLabel.getValue().getArticles();
-                Clusterer clusterer = new Clusterer(articles);
-                List<Cluster<ArticleVector>> clusters = clusterer.cluster();
-                for (Cluster<ArticleVector> cluster : clusters) {
-                    List<String> clusterUrls = cluster.getClusterItems().stream().map(vector -> vector.getArticle().getArticleUrl()).collect(Collectors.toList());
-                    if (topicLabel.getValue().alreadyClustered(clusterUrls)) {
-                        continue;
+                try {
+                    System.out.println("Clustering topic " + counter + " out of " + topicLabelMap.size());
+                    List<OutletArticle> articles = topicLabel.getValue().getArticles();
+                    Clusterer clusterer = new Clusterer(articles);
+                    List<Cluster<ArticleVector>> clusters = clusterer.cluster();
+                    for (Cluster<ArticleVector> cluster : clusters) {
+                        try {
+                            List<String> clusterUrls = cluster.getClusterItems().stream().map(vector -> vector.getArticle().getArticleUrl()).collect(Collectors.toList());
+                            if (topicLabel.getValue().alreadyClustered(clusterUrls)) {
+                                continue;
+                            }
+                            System.out.println("Summarising cluster " + clusters.indexOf(cluster) + " out of " + clusters.size());
+                            List<OutletArticle> articlesForSummary = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
+                            Extractive extractive = new Extractive(articlesForSummary);
+                            Summary summary = extractive.summarise();
+                            topicLabel.getValue().addCluster(articlesForSummary);
+                            topicLabel.getValue().addSummary(summary);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                    System.out.println("Summarising cluster " + clusters.indexOf(cluster) + " out of " + clusters.size());
-                    List<OutletArticle> articlesForSummary = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
-                    Extractive extractive = new Extractive(articlesForSummary);
-                    Summary summary = extractive.summarise();
-                    topicLabel.getValue().addCluster(articlesForSummary);
-                    topicLabel.getValue().addSummary(summary);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 counter++;
             }
