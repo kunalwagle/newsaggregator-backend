@@ -38,11 +38,12 @@ public class ArticleFetchRunnable implements Runnable {
         Articles articleManager = new Articles(db);
         Topics topicManager = new Topics(db);
         articleList = articleManager.articlesToAdd(articleList);
-        System.out.println("Sending articles");
-        System.out.println("Starting topic modelling and labelling");
+        System.out.println("Getting database articles");
         List<OutletArticle> allArticles = articleManager.getAllArticles();
+        System.out.println("Getting database topics");
         Map<String, LabelString> allLabels = topicManager.getAllTopics();
         Map<String, LabelHolder> topicLabelMap = new HashMap<>();
+        System.out.println("Starting topic modelling and labelling");
 
         for (Map.Entry<String, LabelString> label : allLabels.entrySet()) {
             String labelName = label.getKey();
