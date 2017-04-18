@@ -22,6 +22,9 @@ public class Main {
 
         component.start();
 
+        System.setProperty("aws.accessKeyId", "AKIAJTQREEILP5BCRQAA");
+        System.setProperty("aws.secretKey", "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");
+
         boolean serverInitialised = false;
 
         while (!serverInitialised) {

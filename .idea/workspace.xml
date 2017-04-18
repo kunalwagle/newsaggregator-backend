@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -27,8 +26,20 @@
       <file leaf-file-name="ArticleFetchRunnable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="46" column="64" lean-forward="false" selection-start-line="46" selection-start-column="64" selection-end-line="46" selection-end-column="64" />
+            <state relative-caret-position="-1149">
+              <caret line="37" column="59" lean-forward="true" selection-start-line="37" selection-start-column="59" selection-end-line="37" selection-end-column="59" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="24" column="67" lean-forward="false" selection-start-line="24" selection-start-column="67" selection-end-line="24" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -48,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Topics.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Topics.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="96" column="51" lean-forward="false" selection-start-line="96" selection-start-column="51" selection-end-line="96" selection-end-column="51" />
+            <state relative-caret-position="1260">
+              <caret line="97" column="9" lean-forward="true" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
               <folding>
                 <element signature="method#Topics#0;class#Topics#0" expanded="true" />
                 <element signature="method#saveTopics#0;class#Topics#0" expanded="true" />
@@ -112,8 +123,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2115">
-              <caret line="141" column="33" lean-forward="false" selection-start-line="141" selection-start-column="33" selection-end-line="141" selection-end-column="33" />
+            <state relative-caret-position="75">
+              <caret line="98" column="20" lean-forward="true" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -124,16 +135,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
               <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="en.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/stoplists/en.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -235,7 +236,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelString.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/Home/SearchBarActions.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SummaryEvaluation/SummaryEvaluationActions.js" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -251,6 +251,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
       </list>
     </option>
   </component>
@@ -1322,14 +1323,7 @@
       <workItem from="1490695952010" duration="95924000" />
       <workItem from="1491926569536" duration="8385000" />
       <workItem from="1492002902704" duration="27962000" />
-      <workItem from="1492430182328" duration="22229000" />
-    </task>
-    <task id="LOCAL-00098" summary="Further progress with pronouns">
-      <created>1491295920573</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1491295920573</updated>
+      <workItem from="1492430182328" duration="22716000" />
     </task>
     <task id="LOCAL-00099" summary="Created Summary Evaluation Resource">
       <created>1491297031292</created>
@@ -1667,7 +1661,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492520837781</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="Caught exception logger statements">
+      <created>1492521390183</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1492521390183</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1700,7 +1701,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="365408000" />
+    <option name="totallyTimeSpent" value="365895000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1755,7 +1756,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Created basic Wordnet" />
     <MESSAGE value="Skeletons for wordnet" />
     <MESSAGE value="Wordnet configuration" />
     <MESSAGE value="Completed step 1 of abstractive" />
@@ -1780,7 +1780,8 @@
     <MESSAGE value="Added exception catches and altered resources for Topic Modelling" />
     <MESSAGE value="Added print lines" />
     <MESSAGE value="Adding logging statements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding logging statements" />
+    <MESSAGE value="Caught exception logger statements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Caught exception logger statements" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1813,7 +1814,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java</url>
-          <line>229</line>
+          <line>232</line>
           <properties />
           <option name="timeStamp" value="439" />
         </line-breakpoint>
@@ -2045,16 +2046,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="method#main#0;class#Main#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Abstractive/Abstractive.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -2255,31 +2246,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2115">
-          <caret line="141" column="33" lean-forward="false" selection-start-line="141" selection-start-column="33" selection-end-line="141" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
-          <folding>
-            <element signature="method#TopicModelling#0;class#TopicModelling#0" expanded="true" />
-            <element signature="method#getInstances#0;class#TopicModelling#0" expanded="true" />
-            <element signature="method#getModel#0;class#TopicModelling#0" expanded="true" />
-            <element signature="e#4727#4728#0" expanded="true" />
-            <element signature="e#4773#4774#0" expanded="true" />
-            <element signature="method#getAllWords#0;class#TopicModelling#0" expanded="true" />
-            <element signature="method#extractArticleText#0;class#TopicModelling#0" expanded="true" />
-            <element signature="method#generateTopics#0;class#TopicModelling#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
@@ -2290,20 +2256,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="46" column="64" lean-forward="false" selection-start-line="46" selection-start-column="64" selection-end-line="46" selection-end-column="64" />
+        <state relative-caret-position="1260">
+          <caret line="97" column="9" lean-forward="true" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#Topics#0;class#Topics#0" expanded="true" />
+            <element signature="method#saveTopics#0;class#Topics#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2325,13 +2284,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="96" column="51" lean-forward="false" selection-start-line="96" selection-start-column="51" selection-end-line="96" selection-end-column="51" />
+        <state relative-caret-position="450">
+          <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
           <folding>
-            <element signature="method#Topics#0;class#Topics#0" expanded="true" />
-            <element signature="method#saveTopics#0;class#Topics#0" expanded="true" />
+            <element signature="method#TopicModelling#0;class#TopicModelling#0" expanded="true" />
+            <element signature="method#getInstances#0;class#TopicModelling#0" expanded="true" />
+            <element signature="method#getModel#0;class#TopicModelling#0" expanded="true" />
+            <element signature="e#4727#4728#0" expanded="true" />
+            <element signature="e#4773#4774#0" expanded="true" />
+            <element signature="method#getAllWords#0;class#TopicModelling#0" expanded="true" />
+            <element signature="method#extractArticleText#0;class#TopicModelling#0" expanded="true" />
+            <element signature="method#generateTopics#0;class#TopicModelling#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1149">
+          <caret line="37" column="59" lean-forward="true" selection-start-line="37" selection-start-column="59" selection-end-line="37" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="98" column="20" lean-forward="true" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="24" column="67" lean-forward="false" selection-start-line="24" selection-start-column="67" selection-end-line="24" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
