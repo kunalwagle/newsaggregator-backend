@@ -98,23 +98,28 @@ public class Articles {
 
     public List<OutletArticle> getAllArticles() {
         List<OutletArticle> articles = new ArrayList<>();
-        logger.info("Starting to scan database");
-        ItemCollection<ScanOutcome> items = table.scan();
-        logger.info("Scanned. Got " + items.getAccumulatedItemCount() + " items");
-        for (Item nextItem : items) {
-            try {
-                Map<String, Object> item = nextItem.asMap();
-                String articleUrl = (String) item.get("articleUrl");
-                Map<String, Object> info = (Map<String, Object>) item.get("info");
-                String title = (String) info.get("Title");
-                String body = (String) info.get("Body");
-                String imageUrl = (String) info.get("ImageUrl");
-                String source = (String) info.get("Source");
-                String datePublished = (String) info.get("DatePublished");
-                articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished));
-            } catch (Exception e) {
-                logger.info("Caught an exception, but still chugging along");
+        try {
+            logger.info("Starting to scan database");
+            ItemCollection<ScanOutcome> items = table.scan();
+            logger.info("Scanned. Got " + items.getAccumulatedItemCount() + " items");
+            for (Item nextItem : items) {
+                logger.info("Adding an item");
+                try {
+                    Map<String, Object> item = nextItem.asMap();
+                    String articleUrl = (String) item.get("articleUrl");
+                    Map<String, Object> info = (Map<String, Object>) item.get("info");
+                    String title = (String) info.get("Title");
+                    String body = (String) info.get("Body");
+                    String imageUrl = (String) info.get("ImageUrl");
+                    String source = (String) info.get("Source");
+                    String datePublished = (String) info.get("DatePublished");
+                    articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished));
+                } catch (Exception e) {
+                    logger.info("Caught an exception, but still chugging along");
+                }
             }
+        } catch (Exception e) {
+            logger.info("Caught an exception");
         }
         logger.info("About to return articles");
         return articles;
