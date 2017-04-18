@@ -80,7 +80,8 @@ public class ArticleFetchRunnable implements Runnable {
                 topicModelling.trainTopics(allArticles);
                 for (OutletArticle article : articleList) {
                     try {
-                        logger.info("Modelling and labelling article " + articleList.indexOf(article) + 1 + " out of " + articleList.size());
+                        int count = articleList.indexOf(article) + 1;
+                        logger.info("Modelling and labelling article " + count + " out of " + articleList.size());
                         Topic topic = topicModelling.getModel(article);
                         List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
                         for (String topicLabel : topicLabels) {
@@ -112,7 +113,8 @@ public class ArticleFetchRunnable implements Runnable {
                                 if (topicLabel.getValue().alreadyClustered(clusterUrls)) {
                                     continue;
                                 }
-                                logger.info("Summarising cluster " + clusters.indexOf(cluster) + 1 + " out of " + clusters.size());
+                                int count = clusters.indexOf(cluster) + 1;
+                                logger.info("Summarising cluster " + count + " out of " + clusters.size());
                                 List<OutletArticle> articlesForSummary = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
                                 Extractive extractive = new Extractive(articlesForSummary);
                                 Summary summary = extractive.summarise();
