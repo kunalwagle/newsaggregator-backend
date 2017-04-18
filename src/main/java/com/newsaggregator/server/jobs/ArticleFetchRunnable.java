@@ -40,10 +40,11 @@ public class ArticleFetchRunnable implements Runnable {
         List<OutletArticle> articleList = ArticleFetch.fetchArticles();
         Articles articleManager = new Articles(db);
         Topics topicManager = new Topics(db);
-        articleList = articleManager.articlesToAdd(articleList);
         logger.info("Getting database articles");
         List<OutletArticle> allArticles = articleManager.getAllArticles();
         logger.info("Getting database topics");
+        List<OutletArticle> finalAllArticles = allArticles;
+        articleList.removeIf(art -> finalAllArticles.stream().anyMatch(a -> a.getArticleUrl().equals(art.getArticleUrl())));
         Map<String, LabelString> allLabels = topicManager.getAllTopics();
         Map<String, LabelHolder> topicLabelMap = new HashMap<>();
         logger.info("Starting topic modelling and labelling");
