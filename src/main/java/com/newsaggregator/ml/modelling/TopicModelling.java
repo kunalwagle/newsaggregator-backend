@@ -33,7 +33,11 @@ public class TopicModelling {
 
     public List<TopicLabel> trainTopics(List<OutletArticle> articleList) throws IOException {
 
+        System.out.println("Starting to train topics");
+
         String[] articleBodies = extractArticleText(articleList);
+
+        System.out.println("Extracted article text");
 
         instances.addThruPipe(new StringArrayIterator(articleBodies));
 
@@ -42,6 +46,8 @@ public class TopicModelling {
         model.setNumThreads(2);
         model.setNumIterations(1000);
         model.estimate();
+
+        System.out.println("Performed the estimate");
 
         dataAlphabet = instances.getDataAlphabet();
 
