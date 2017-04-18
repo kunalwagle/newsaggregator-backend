@@ -59,7 +59,9 @@ public class Topics {
 
     public Map<String, LabelString> getAllTopics() {
         Map<String, LabelString> topicLabels = new HashMap<>();
+        System.out.println("Starting to scan database");
         ItemCollection<ScanOutcome> items = table.scan();
+        System.out.println("Scanned. Got " + items.getAccumulatedItemCount() + " items");
         for (Item nextItem : items) {
             try {
                 Map<String, Object> item = nextItem.asMap();
