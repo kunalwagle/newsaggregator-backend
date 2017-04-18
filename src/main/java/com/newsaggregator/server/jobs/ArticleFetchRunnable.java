@@ -18,6 +18,7 @@ import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.ArticleFetch;
 import com.newsaggregator.server.LabelHolder;
 import com.newsaggregator.server.LabelString;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,19 +33,20 @@ public class ArticleFetchRunnable implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Fetching articles");
+        Logger logger = Logger.getLogger(getClass());
+        logger.info("Fetching articles");
         DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
-        System.out.println(db.listTables());
+        logger.info(db.listTables());
         List<OutletArticle> articleList = ArticleFetch.fetchArticles();
         Articles articleManager = new Articles(db);
         Topics topicManager = new Topics(db);
         articleList = articleManager.articlesToAdd(articleList);
-        System.out.println("Getting database articles");
+        logger.info("Getting database articles");
         List<OutletArticle> allArticles = articleManager.getAllArticles();
-        System.out.println("Getting database topics");
+        logger.info("Getting database topics");
         Map<String, LabelString> allLabels = topicManager.getAllTopics();
         Map<String, LabelHolder> topicLabelMap = new HashMap<>();
-        System.out.println("Starting topic modelling and labelling");
+        logger.info("Starting topic modelling and labelling");
 
         for (Map.Entry<String, LabelString> label : allLabels.entrySet()) {
             String labelName = label.getKey();
@@ -72,7 +74,7 @@ public class ArticleFetchRunnable implements Runnable {
             topicModelling.trainTopics(allArticles);
             for (OutletArticle article : articleList) {
                 try {
-                    System.out.println("Modelling and labelling article " + articleList.indexOf(article) + " out of " + articleList.size());
+                    logger.info("Modelling and labelling article " + articleList.indexOf(article) + " out of " + articleList.size());
                     Topic topic = topicModelling.getModel(article);
                     List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
                     for (String topicLabel : topicLabels) {
@@ -88,12 +90,12 @@ public class ArticleFetchRunnable implements Runnable {
                     e.printStackTrace();
                 }
             }
-            System.out.println("Completed topic labelling.");
-            System.out.println("Starting clustering and summarising");
+            logger.info("Completed topic labelling.");
+            logger.info("Starting clustering and summarising");
             int counter = 0;
             for (Map.Entry<String, LabelHolder> topicLabel : topicLabelMap.entrySet()) {
                 try {
-                    System.out.println("Clustering topic " + counter + " out of " + topicLabelMap.size());
+                    logger.info("Clustering topic " + counter + " out of " + topicLabelMap.size());
                     List<OutletArticle> articles = topicLabel.getValue().getArticles();
                     Clusterer clusterer = new Clusterer(articles);
                     List<Cluster<ArticleVector>> clusters = clusterer.cluster();
@@ -103,7 +105,7 @@ public class ArticleFetchRunnable implements Runnable {
                             if (topicLabel.getValue().alreadyClustered(clusterUrls)) {
                                 continue;
                             }
-                            System.out.println("Summarising cluster " + clusters.indexOf(cluster) + " out of " + clusters.size());
+                            logger.info("Summarising cluster " + clusters.indexOf(cluster) + " out of " + clusters.size());
                             List<OutletArticle> articlesForSummary = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
                             Extractive extractive = new Extractive(articlesForSummary);
                             Summary summary = extractive.summarise();
@@ -120,7 +122,7 @@ public class ArticleFetchRunnable implements Runnable {
             }
             topicManager.saveTopics(topicLabelMap);
             articleManager.saveArticles(articleList);
-            System.out.println("Articles and topics saved");
+            logger.info("Articles and topics saved");
         } catch (Exception e) {
             Utils.sendExceptionEmail(e);
             e.printStackTrace();

@@ -11,6 +11,7 @@ import com.newsaggregator.base.Topic;
 import com.newsaggregator.base.TopicLabel;
 import com.newsaggregator.base.TopicWord;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,18 +27,19 @@ public class TopicModelling {
     private final int numTopics = 100;
     private InstanceList instances = getInstances();
     private ExtractSentenceTypes nounifier;
-
+    private Logger logger = Logger.getLogger(getClass());
+    
     public TopicModelling() throws URISyntaxException {
         nounifier = new ExtractSentenceTypes();
     }
 
     public List<TopicLabel> trainTopics(List<OutletArticle> articleList) throws IOException {
 
-        System.out.println("Starting to train topics");
+        logger.info("Starting to train topics");
 
         String[] articleBodies = extractArticleText(articleList);
 
-        System.out.println("Extracted article text");
+        logger.info("Extracted article text");
 
         instances.addThruPipe(new StringArrayIterator(articleBodies));
 
@@ -47,7 +49,7 @@ public class TopicModelling {
         model.setNumIterations(1000);
         model.estimate();
 
-        System.out.println("Performed the estimate");
+        logger.info("Performed the estimate");
 
         dataAlphabet = instances.getDataAlphabet();
 
@@ -61,7 +63,7 @@ public class TopicModelling {
         for (int position = 0; position < tokens.getLength(); position++) {
             out.format("%s-%d ", dataAlphabet.lookupObject(tokens.getIndexAtPosition(position)), topics.getIndexAtPosition(position));
         }
-        System.out.println(out);
+        logger.info(out);
 
         return topicList;
     }
@@ -104,7 +106,7 @@ public class TopicModelling {
         List<TopicWord> finalWords = titleWords.stream().limit(10).collect(Collectors.toList());
 
 //        for (TopicWord word : finalWords) {
-//            System.out.println(word.getWord());
+//            logger.info(word.getWord());
 //        }
         return new Topic(finalWords);
     }
@@ -128,7 +130,7 @@ public class TopicModelling {
         int i = 0;
 
         for (OutletArticle article : articleList) {
-            System.out.println(i + " out of " + articleList.size());
+            logger.info(i + " out of " + articleList.size());
             i++;
             articleBodies.add(nounifier.nounifyDocument(article.getBody()));
         }

@@ -7,6 +7,7 @@ import com.amazonaws.services.dynamodbv2.document.utils.NameMap;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.dynamodbv2.model.ReturnValue;
 import com.newsaggregator.base.OutletArticle;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,6 +22,7 @@ public class Articles {
 
     private final Table table;
     private DynamoDB database;
+    private Logger logger = Logger.getLogger(getClass());
 
     public Articles(DynamoDB database) {
         this.database = database;
@@ -96,9 +98,9 @@ public class Articles {
 
     public List<OutletArticle> getAllArticles() {
         List<OutletArticle> articles = new ArrayList<>();
-        System.out.println("Starting to scan database");
+        logger.info("Starting to scan database");
         ItemCollection<ScanOutcome> items = table.scan();
-        System.out.println("Scanned. Got " + items.getAccumulatedItemCount() + " items");
+        logger.info("Scanned. Got " + items.getAccumulatedItemCount() + " items");
         for (Item nextItem : items) {
             try {
                 Map<String, Object> item = nextItem.asMap();
@@ -111,9 +113,10 @@ public class Articles {
                 String datePublished = (String) info.get("DatePublished");
                 articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished));
             } catch (Exception e) {
-                System.out.println("Caught an exception, but still chugging along");
+                logger.info("Caught an exception, but still chugging along");
             }
         }
+        logger.info("About to return articles");
         return articles;
     }
 

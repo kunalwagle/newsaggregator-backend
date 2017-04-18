@@ -6,6 +6,7 @@ import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.LabelHolder;
 import com.newsaggregator.server.LabelString;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Topics {
 
     private final Table table;
     private DynamoDB database;
+    private Logger logger = Logger.getLogger(getClass());
 
     public Topics(DynamoDB database) {
         this.database = database;
@@ -59,9 +61,9 @@ public class Topics {
 
     public Map<String, LabelString> getAllTopics() {
         Map<String, LabelString> topicLabels = new HashMap<>();
-        System.out.println("Starting to scan database");
+        logger.info("Starting to scan database");
         ItemCollection<ScanOutcome> items = table.scan();
-        System.out.println("Scanned. Got " + items.getAccumulatedItemCount() + " items");
+        logger.info("Scanned. Got " + items.getAccumulatedItemCount() + " items");
         for (Item nextItem : items) {
             try {
                 Map<String, Object> item = nextItem.asMap();
@@ -87,9 +89,10 @@ public class Topics {
                 topicLabels.put(label, labelString);
 
             } catch (Exception e) {
-                System.out.println("Caught an exception, but still chugging along");
+                logger.info("Caught an exception, but still chugging along");
             }
         }
+        logger.info("About to return topics");
         return topicLabels;
     }
 
