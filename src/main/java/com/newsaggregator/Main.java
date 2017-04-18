@@ -1,5 +1,6 @@
 package com.newsaggregator;
 
+import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.routes.RouterApplication;
 import com.newsaggregator.server.jobs.ArticleFetchRunnable;
 import com.newsaggregator.server.jobs.SendEmailRunnable;
@@ -36,7 +37,7 @@ public class Main {
                 // System.out.println(label);
 
 //            throw new Exception();
-
+                new TopicModelling();
 
                 TaskService scheduleManager = new TaskService();
 

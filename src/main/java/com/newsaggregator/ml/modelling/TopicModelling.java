@@ -13,7 +13,6 @@ import com.newsaggregator.base.TopicWord;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import org.apache.log4j.Logger;
 
-import java.io.File;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -70,7 +69,7 @@ public class TopicModelling {
         ArrayList<Pipe> pipeList = new ArrayList<>();
         pipeList.add(new CharSequenceLowercase());
         pipeList.add(new CharSequence2TokenSequence(Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")));
-        pipeList.add(new TokenSequenceRemoveStopwords(new File(getClass().getClassLoader().getResource("en.txt").toExternalForm()), "UTF-8", false, false, false));
+        //pipeList.add(new TokenSequenceRemoveStopwords(new File("en.txt"), "UTF-8", false, false, false));
         pipeList.add(new TokenSequence2FeatureSequence());
 
         return new InstanceList(new SerialPipes(pipeList));
