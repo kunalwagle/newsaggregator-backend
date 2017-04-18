@@ -74,7 +74,7 @@ public class ArticleFetchRunnable implements Runnable {
 
             try {
                 TopicModelling topicModelling = new TopicModelling();
-                if (allArticles.size() == 0) {
+                if (allArticles.size() < 150) {
                     allArticles = articleList;
                 }
                 topicModelling.trainTopics(allArticles);
