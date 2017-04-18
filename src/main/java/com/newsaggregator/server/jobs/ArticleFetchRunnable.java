@@ -80,7 +80,7 @@ public class ArticleFetchRunnable implements Runnable {
                 topicModelling.trainTopics(allArticles);
                 for (OutletArticle article : articleList) {
                     try {
-                        logger.info("Modelling and labelling article " + articleList.indexOf(article) + " out of " + articleList.size());
+                        logger.info("Modelling and labelling article " + articleList.indexOf(article) + 1 + " out of " + articleList.size());
                         Topic topic = topicModelling.getModel(article);
                         List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
                         for (String topicLabel : topicLabels) {
@@ -99,7 +99,7 @@ public class ArticleFetchRunnable implements Runnable {
                 }
                 logger.info("Completed topic labelling.");
                 logger.info("Starting clustering and summarising");
-                int counter = 0;
+                int counter = 1;
                 for (Map.Entry<String, LabelHolder> topicLabel : topicLabelMap.entrySet()) {
                     try {
                         logger.info("Clustering topic " + counter + " out of " + topicLabelMap.size());
@@ -112,7 +112,7 @@ public class ArticleFetchRunnable implements Runnable {
                                 if (topicLabel.getValue().alreadyClustered(clusterUrls)) {
                                     continue;
                                 }
-                                logger.info("Summarising cluster " + clusters.indexOf(cluster) + " out of " + clusters.size());
+                                logger.info("Summarising cluster " + clusters.indexOf(cluster) + 1 + " out of " + clusters.size());
                                 List<OutletArticle> articlesForSummary = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
                                 Extractive extractive = new Extractive(articlesForSummary);
                                 Summary summary = extractive.summarise();
