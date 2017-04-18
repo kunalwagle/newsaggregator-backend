@@ -33,8 +33,9 @@ public class ArticleFetchRunnable implements Runnable {
     @Override
     public void run() {
         System.out.println("Fetching articles");
-        List<OutletArticle> articleList = ArticleFetch.fetchArticles();
         DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
+        System.out.println(db.listTables());
+        List<OutletArticle> articleList = ArticleFetch.fetchArticles();
         Articles articleManager = new Articles(db);
         Topics topicManager = new Topics(db);
         articleList = articleManager.articlesToAdd(articleList);
