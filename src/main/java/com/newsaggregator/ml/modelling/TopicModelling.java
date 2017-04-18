@@ -96,10 +96,15 @@ public class TopicModelling {
         }
         List<TopicWord> allWords = getAllWords(labels);
         List<TopicWord> topWords = allWords.stream().filter(topicWord -> isInArticle(topicWord.getWord(), document)).sorted(Comparator.comparing(TopicWord::getDistribution).reversed()).limit(10).collect(Collectors.toList());
+        List<TopicWord> titleWords = new ArrayList<>();
 
-        List<TopicWord> titleWords = Arrays.stream(title.split(" ")).map(string -> new TopicWord(string, topWords.get(0).getDistribution() * 2)).collect(Collectors.toList());
+        try {
+            titleWords = Arrays.stream(title.split(" ")).map(string -> new TopicWord(string, topWords.get(0).getDistribution() * 2)).collect(Collectors.toList());
+        } catch (Exception e) {
+            logger.error("Got an exception in topic modelling, but can continue", e);
+        }
+
         titleWords.addAll(topWords);
-
         List<TopicWord> finalWords = titleWords.stream().limit(10).collect(Collectors.toList());
 
 //        for (TopicWord word : finalWords) {
