@@ -14,7 +14,6 @@ import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import org.apache.log4j.Logger;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -27,8 +26,8 @@ public class TopicModelling {
     private InstanceList instances = getInstances();
     private ExtractSentenceTypes nounifier;
     private Logger logger = Logger.getLogger(getClass());
-    
-    public TopicModelling() throws URISyntaxException {
+
+    public TopicModelling() throws Exception {
         nounifier = new ExtractSentenceTypes();
     }
 
@@ -67,11 +66,11 @@ public class TopicModelling {
         return topicList;
     }
 
-    private InstanceList getInstances() throws URISyntaxException {
+    private InstanceList getInstances() throws Exception {
         ArrayList<Pipe> pipeList = new ArrayList<>();
         pipeList.add(new CharSequenceLowercase());
         pipeList.add(new CharSequence2TokenSequence(Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")));
-        pipeList.add(new TokenSequenceRemoveStopwords(new File(getClass().getClassLoader().getResource("en.txt").toURI()), "UTF-8", false, false, false));
+        pipeList.add(new TokenSequenceRemoveStopwords(new File(getClass().getClassLoader().getResource("en.txt").toExternalForm()), "UTF-8", false, false, false));
         pipeList.add(new TokenSequence2FeatureSequence());
 
         return new InstanceList(new SerialPipes(pipeList));
