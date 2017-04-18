@@ -108,12 +108,11 @@ public class Articles {
                 try {
                     Map<String, Object> item = nextItem.asMap();
                     String articleUrl = (String) item.get("articleUrl");
-                    Map<String, Object> info = (Map<String, Object>) item.get("info");
-                    String title = (String) info.get("Title");
-                    String body = (String) info.get("Body");
-                    String imageUrl = (String) info.get("ImageUrl");
-                    String source = (String) info.get("Source");
-                    String datePublished = (String) info.get("DatePublished");
+                    String title = (String) item.get("Title");
+                    String body = (String) item.get("Body");
+                    String imageUrl = (String) item.get("ImageUrl");
+                    String source = (String) item.get("Source");
+                    String datePublished = (String) item.get("datePublished");
                     articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished));
                 } catch (Exception e) {
                     logger.error("Reading articles exception", e);
