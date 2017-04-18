@@ -38,7 +38,7 @@ public class Articles {
                     writeArticle(article);
                 }
             } catch (Exception e) {
-                //e.printStackTrace();
+                logger.error("Saving articles error", e);
             }
         }
     }
@@ -50,12 +50,13 @@ public class Articles {
     private void writeArticle(OutletArticle article) {
         try {
             table.putItem(new Item()
-                    .withPrimaryKey("articleUrl", article.getArticleUrl(), "DatePublished", article.getLastPublished())
+                    .withPrimaryKey("articleUrl", article.getArticleUrl(), "datePublished", article.getLastPublished())
                     .withString("Body", article.getBody())
                     .withString("ImageUrl", article.getImageUrl())
                     .withString("Title", article.getTitle())
                     .withString("Source", article.getSource()));
         } catch (Exception e) {
+            logger.error("Writing articles error", e);
             //e.printStackTrace();
         }
     }
@@ -115,7 +116,7 @@ public class Articles {
                     String datePublished = (String) info.get("DatePublished");
                     articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished));
                 } catch (Exception e) {
-                    logger.info("Caught an exception, but still chugging along");
+                    logger.error("Reading articles exception", e);
                 }
             }
         } catch (Exception e) {

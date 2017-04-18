@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 public class LabelHolder {
 
     private String label;
-    private List<Summary> summaries;
-    private List<OutletArticle> articles;
-    private List<List<OutletArticle>> clusters;
+    private List<Summary> summaries = new ArrayList<>();
+    private List<OutletArticle> articles = new ArrayList<>();
+    private List<List<OutletArticle>> clusters = new ArrayList<>();
 
     public LabelHolder(String label) {
         this.label = label;

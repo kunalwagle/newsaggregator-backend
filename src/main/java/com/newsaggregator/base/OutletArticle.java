@@ -20,6 +20,10 @@ public class OutletArticle extends Article implements DatabaseStorage {
         this.lastPublished = lastPublished;
     }
 
+    public OutletArticle() {
+        //Dummy constructor for Jackson
+    }
+
     public String getBody() {
         return body;
     }

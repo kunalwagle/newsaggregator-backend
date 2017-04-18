@@ -51,21 +51,25 @@ public class ArticleFetchRunnable implements Runnable {
             logger.info("Starting topic modelling and labelling");
 
             for (Map.Entry<String, LabelString> label : allLabels.entrySet()) {
-                String labelName = label.getKey();
-                LabelString labelString = label.getValue();
-                List<OutletArticle> articles = new ArrayList<>();
-                for (String url : labelString.getArticles()) {
-                    articles.add(allArticles.stream().filter(art -> art.getArticleUrl().equals(url)).findFirst().get());
-                }
-                List<List<OutletArticle>> clusters = new ArrayList<>();
-                for (List<String> strings : labelString.getClusters()) {
-                    List<OutletArticle> cluster = new ArrayList<>();
-                    for (String string : strings) {
-                        cluster.add(allArticles.stream().filter(art -> art.getArticleUrl().equals(string)).findFirst().get());
+                try {
+                    String labelName = label.getKey();
+                    LabelString labelString = label.getValue();
+                    List<OutletArticle> articles = new ArrayList<>();
+                    for (String url : labelString.getArticles()) {
+                        articles.add(allArticles.stream().filter(art -> art.getArticleUrl().equals(url)).findFirst().get());
                     }
-                    clusters.add(cluster);
+                    List<List<OutletArticle>> clusters = new ArrayList<>();
+                    for (List<String> strings : labelString.getClusters()) {
+                        List<OutletArticle> cluster = new ArrayList<>();
+                        for (String string : strings) {
+                            cluster.add(allArticles.stream().filter(art -> art.getArticleUrl().equals(string)).findFirst().get());
+                        }
+                        clusters.add(cluster);
+                    }
+                    topicLabelMap.put(labelName, new LabelHolder(labelName, labelString.getSummaries(), articles, clusters));
+                } catch (Exception e) {
+                    logger.error("Error populating Topic Label Map", e);
                 }
-                topicLabelMap.put(labelName, new LabelHolder(labelName, labelString.getSummaries(), articles, clusters));
             }
 
             try {
@@ -115,11 +119,11 @@ public class ArticleFetchRunnable implements Runnable {
                                 topicLabel.getValue().addCluster(articlesForSummary);
                                 topicLabel.getValue().addSummary(summary);
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                logger.error("Summarisation error", e);
                             }
                         }
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        logger.error("Clustering error", e);
                     }
                     counter++;
                 }
@@ -128,7 +132,7 @@ public class ArticleFetchRunnable implements Runnable {
                 logger.info("Articles and topics saved");
             } catch (Exception e) {
                 Utils.sendExceptionEmail(e);
-                e.printStackTrace();
+                logger.error("Error. Email sent", e);
             }
         } catch (Exception e) {
             logger.error("An error", e);

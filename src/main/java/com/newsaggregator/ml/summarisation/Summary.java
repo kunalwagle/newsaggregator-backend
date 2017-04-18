@@ -20,6 +20,22 @@ public class Summary {
         this.articles = articles;
     }
 
+    public Summary() {
+        // Dummy constructor for Jackson
+    }
+
+    public void setNodes(List<Node> nodes) {
+        this.nodes = nodes;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setArticles(List<OutletArticle> articles) {
+        this.articles = articles;
+    }
+
     public List<Node> getNodes() {
         return nodes;
     }

@@ -55,7 +55,10 @@ public class TfIdf {
 
     private double completeTopHalf(String word, List<Map<String, Long>> corpusSizes) {
         double s1TF = calculateTf(corpusSizes.get(0), word);
-        double s2TF = calculateTf(corpusSizes.get(1), word);
+        double s2TF = s1TF;
+        if (corpusSizes.size() > 1) {
+            s2TF = calculateTf(corpusSizes.get(1), word);
+        }
         double idf = idfCalculation(word, corpusSizes, 2);
         return s1TF * s2TF * Math.pow(idf, 2);
     }

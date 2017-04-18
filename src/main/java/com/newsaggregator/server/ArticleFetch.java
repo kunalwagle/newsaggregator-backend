@@ -23,7 +23,7 @@ public class ArticleFetch {
         articles.addAll(fetchMirrorArticles());
         articles.addAll(fetchNewsweekArticles());
         articles.addAll(fetchReutersArticles());
-        //articles.addAll(fetchSSNArticles());
+//        articles.addAll(fetchSSNArticles());
         articles.addAll(fetchTelegraphArticles());
         articles.addAll(fetchTOIArticles());
         return articles;

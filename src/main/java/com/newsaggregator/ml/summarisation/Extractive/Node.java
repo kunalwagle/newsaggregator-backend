@@ -19,6 +19,10 @@ public class Node {
         this.source = source;
     }
 
+    public Node() {
+        //Dummy constructor for Jackson
+    }
+
     public int getIdentifier() {
         return identifier;
     }

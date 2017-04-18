@@ -54,7 +54,7 @@ public class Topics {
                 );
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("Saving topics error", e);
             }
         }
     }
@@ -79,7 +79,7 @@ public class Topics {
                         try {
                             summs.add(objectMapper.readValue(sum, Summary.class));
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            logger.error("Error reading topic", e);
                         }
                     }
                     for (String cluster : clusters) {

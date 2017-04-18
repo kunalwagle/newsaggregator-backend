@@ -14,6 +14,9 @@ public class Article {
         this.imageUrl = imageUrl;
     }
 
+    public Article() {
+    }
+
     public String getTitle() {
         return title;
     }
