@@ -14,7 +14,6 @@ import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import org.apache.log4j.Logger;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -33,7 +32,7 @@ public class TopicModelling {
         nounifier = new ExtractSentenceTypes();
     }
 
-    public List<TopicLabel> trainTopics(List<OutletArticle> articleList) throws IOException {
+    public List<TopicLabel> trainTopics(List<OutletArticle> articleList) throws Exception {
 
         logger.info("Starting to train topics");
 
