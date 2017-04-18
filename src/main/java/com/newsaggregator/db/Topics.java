@@ -61,36 +61,40 @@ public class Topics {
 
     public Map<String, LabelString> getAllTopics() {
         Map<String, LabelString> topicLabels = new HashMap<>();
-        logger.info("Starting to scan database");
-        ItemCollection<ScanOutcome> items = table.scan();
-        logger.info("Scanned. Got " + items.getAccumulatedItemCount() + " items");
-        for (Item nextItem : items) {
-            try {
-                Map<String, Object> item = nextItem.asMap();
-                String label = (String) item.get("Label");
-                List<String> articles = (List<String>) item.get("Articles");
-                List<String> clusters = (List<String>) item.get("Clusters");
-                List<String> summaries = (List<String>) item.get("Summaries");
-                List<List<String>> finalClusters = new ArrayList<>();
-                ObjectMapper objectMapper = new ObjectMapper();
-                List<Summary> summs = new ArrayList<>();
-                for (String sum : summaries) {
-                    try {
-                        summs.add(objectMapper.readValue(sum, Summary.class));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        try {
+            logger.info("Starting to scan database");
+            ItemCollection<ScanOutcome> items = table.scan();
+            logger.info("Scanned. Got " + items.getAccumulatedItemCount() + " items");
+            for (Item nextItem : items) {
+                try {
+                    Map<String, Object> item = nextItem.asMap();
+                    String label = (String) item.get("Label");
+                    List<String> articles = (List<String>) item.get("Articles");
+                    List<String> clusters = (List<String>) item.get("Clusters");
+                    List<String> summaries = (List<String>) item.get("Summaries");
+                    List<List<String>> finalClusters = new ArrayList<>();
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    List<Summary> summs = new ArrayList<>();
+                    for (String sum : summaries) {
+                        try {
+                            summs.add(objectMapper.readValue(sum, Summary.class));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-                for (String cluster : clusters) {
-                    finalClusters.add(objectMapper.readValue(cluster, List.class));
-                }
+                    for (String cluster : clusters) {
+                        finalClusters.add(objectMapper.readValue(cluster, List.class));
+                    }
 
-                LabelString labelString = new LabelString(articles, finalClusters, summs);
-                topicLabels.put(label, labelString);
+                    LabelString labelString = new LabelString(articles, finalClusters, summs);
+                    topicLabels.put(label, labelString);
 
-            } catch (Exception e) {
-                logger.info("Caught an exception, but still chugging along");
+                } catch (Exception e) {
+                    logger.error("Caught an exception", e);
+                }
             }
+        } catch (Exception e) {
+            logger.error("Caught an exception", e);
         }
         logger.info("About to return topics");
         return topicLabels;

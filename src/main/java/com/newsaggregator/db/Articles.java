@@ -119,7 +119,7 @@ public class Articles {
                 }
             }
         } catch (Exception e) {
-            logger.info("Caught an exception");
+            logger.error("Caught an exception", e);
         }
         logger.info("About to return articles");
         return articles;
