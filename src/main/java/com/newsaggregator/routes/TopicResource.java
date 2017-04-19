@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newsaggregator.db.Topics;
-import com.newsaggregator.ml.summarisation.Summary;
+import com.newsaggregator.server.ClusterString;
 import com.newsaggregator.server.LabelString;
 import org.apache.log4j.Logger;
 import org.restlet.resource.Get;
@@ -27,8 +27,8 @@ public class TopicResource extends ServerResource {
             DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
             Topics topicManager = new Topics(db);
             LabelString labelString = topicManager.getTopic(searchTerm);
-            List<Summary> summaries = labelString.getSummaries();
-            return new ObjectMapper().writeValueAsString(summaries);
+            List<ClusterString> clusterStrings = labelString.getClusters();
+            return new ObjectMapper().writeValueAsString(clusterStrings);
         } catch (Exception e) {
             logger.error("An error occurred whilst retrieving a topic", e);
             return null;
