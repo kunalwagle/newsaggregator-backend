@@ -4,10 +4,7 @@
 import {ARTICLE_CLICKED} from "../../actions/TopicViewer/TopicViewerActions";
 
 const initialState = {
-    label: "",
-    fetchInProgress: false,
-    articles: [],
-    selectedArticle: {}
+    article: {}
 };
 
 export default function topicViewer(state, action) {
@@ -18,7 +15,7 @@ export default function topicViewer(state, action) {
     switch (action.type) {
         case ARTICLE_CLICKED:
             return Object.assign({}, state, {
-                selectedArticle: state.articles[action.index]
+                article: state.articles[action.index]
             });
     }
 }
