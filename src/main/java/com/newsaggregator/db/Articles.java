@@ -49,12 +49,15 @@ public class Articles {
 
     private void writeArticle(OutletArticle article) {
         try {
-            table.putItem(new Item()
+            Item item = new Item()
                     .withPrimaryKey("articleUrl", article.getArticleUrl(), "datePublished", article.getLastPublished())
                     .withString("Body", article.getBody())
-                    .withString("ImageUrl", article.getImageUrl())
                     .withString("Title", article.getTitle())
-                    .withString("Source", article.getSource()));
+                    .withString("Source", article.getSource());
+            if (article.getImageUrl() != null && article.getImageUrl().length() > 1) {
+                item = item.withString("ImageUrl", article.getImageUrl());
+            }
+            table.putItem(item);
         } catch (Exception e) {
             logger.error("Writing articles error", e);
             //e.printStackTrace();

@@ -3,8 +3,9 @@
  */
 import {Grid, Row, Col, Thumbnail, Button, Carousel} from "react-bootstrap";
 import React from "react";
+import {Link} from "react-router";
 
-const thumbnails = (carousel) => {
+const thumbnails = (carousel, handleViewClicked) => {
     return (
         <Carousel.Item>
             <Grid>
@@ -18,7 +19,10 @@ const thumbnails = (carousel) => {
                                     <h3>{searchResult.title}</h3>
                                     <p>{searchResult.extract.substring(0, 600) + "..."}</p>
                                     <p>
-                                        <Button bsStyle="primary">View</Button>&nbsp;
+                                        <Button onClick={(event) => handleViewClicked(event, searchResult.title)}
+                                                bsStyle="primary">
+                                            <Link to="/topic">View</Link>
+                                        </Button>&nbsp;
                                         <Button bsStyle="default">Subscribe</Button>
                                     </p>
                                 </Thumbnail>
@@ -31,7 +35,7 @@ const thumbnails = (carousel) => {
     )
 };
 
-const carousels = (searchResults) => {
+const carousels = (searchResults, handleViewClicked) => {
     if (searchResults.length == 0) {
         return (
             <div>No Search Results...</div>
@@ -44,7 +48,7 @@ const carousels = (searchResults) => {
     }
 
     const mappedCarousels = carousels.map((carousel) => {
-        return thumbnails(carousel)
+        return thumbnails(carousel, handleViewClicked)
     });
 
     return (
@@ -58,11 +62,11 @@ const carousels = (searchResults) => {
     )
 };
 
-export const SearchResults = ({searchResults, fetchInProgress}) => {
+export const SearchResults = ({searchResults, fetchInProgress, handleViewClicked}) => {
     if (fetchInProgress) {
         return (
             <div className="loader">Loading...</div>
         )
     }
-    return carousels(searchResults);
+    return carousels(searchResults, handleViewClicked);
 }

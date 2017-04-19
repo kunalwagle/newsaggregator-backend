@@ -3,8 +3,9 @@
  */
 import {map} from "underscore";
 import React from "react";
-import * as ReactLayoutGrid from "react-layout-grid";
+import * as ReactLayoutGrid from "react-grid-layout";
 import {Button, Image, Label} from "react-bootstrap";
+import {Link} from "react-router";
 
 const TopicPanel = (article, index, handleArticleClick) => {
     return (
