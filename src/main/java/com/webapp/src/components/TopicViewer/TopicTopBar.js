@@ -4,9 +4,9 @@
 import {PageHeader, Button} from "react-bootstrap";
 import React from "react";
 
-export const TopicTopBar = ({title}) => (
+export const TopicTopBar = ({label, handleSubscribeClicked}) => (
     <div>
-        <PageHeader md={9}>{title}</PageHeader>
-        <Button bsStyle="success" bsSize="large">Subscribe</Button>
+        <PageHeader md={9}>{label}</PageHeader>
+        <Button enabled={false} onClick={handleSubscribeClicked} bsStyle="success" bsSize="large">Subscribe</Button>
     </div>
 );
