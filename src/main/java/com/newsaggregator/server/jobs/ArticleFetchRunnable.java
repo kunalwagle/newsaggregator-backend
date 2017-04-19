@@ -145,8 +145,10 @@ public class ArticleFetchRunnable implements Runnable {
                     }
                     counter++;
                 }
+                logger.info("Writing Topics");
                 topicManager.saveTopics(topicLabelMap);
                 logger.info("Topics saved");
+                logger.info("Writing Articles");
                 articleManager.saveArticles(articleList);
                 logger.info("Articles saved");
             } catch (Exception e) {

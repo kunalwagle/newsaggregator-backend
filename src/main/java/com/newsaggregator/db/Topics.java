@@ -27,9 +27,10 @@ public class Topics {
     }
 
     public void saveTopics(Map<String, LabelHolder> topics) {
+        int counter = 1;
         for (Map.Entry<String, LabelHolder> topic : topics.entrySet()) {
             try {
-
+                logger.info("Saving topic " + counter + " out of " + topics.size());
                 LabelHolder labelHolder = topic.getValue();
 
                 List<String> articleUrls = labelHolder.getArticles().stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());

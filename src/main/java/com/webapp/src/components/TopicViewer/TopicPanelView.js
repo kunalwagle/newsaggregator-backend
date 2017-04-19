@@ -2,8 +2,23 @@
  * Created by kunalwagle on 18/04/2017.
  */
 import {map} from "underscore";
+import React from "react";
+import * as ReactLayoutGrid from "react-layout-grid";
+import {Button, Image, Label} from "react-bootstrap";
 
-export const TopicPanelView = ({articles}) => {
+const TopicPanel = (article, index, handleArticleClick) => {
+    return (
+        <Button onClick={(event) => {
+            handleArticleClick(event, index)
+        }}>
+            <Image src={article.imageUrl} rounded>
+                <Label>{article.title}</Label>
+            </Image>
+        </Button>
+    )
+};
+
+export const TopicPanelView = ({articles, handleArticleClick}) => {
 
     let generateLayout = (articles) => {
         return map(articles, (article, index) => {
@@ -50,6 +65,22 @@ export const TopicPanelView = ({articles}) => {
                 static: true
             }
         });
-    }
+    };
+
+    let layout = generateLayout(articles);
+
+    return (
+        <ReactLayoutGrid layout={layout} cols={12} rowHeight={30} width={1200}>
+            {
+                map(articles, (article, index) => {
+                    return (
+                        <div key={index}>
+                            {TopicPanel(article, index, handleArticleClick)}
+                        </div>
+                    )
+                })
+            }
+        </ReactLayoutGrid>
+    )
 
 };
