@@ -10,6 +10,7 @@ import thunk from "redux-thunk";
 import {NavBarComponent} from "./components/NavBar";
 import {SearchResultPage} from "./components/SearchResults/SearchResultPage";
 import {SummaryEvaluation} from "./components/SummaryEvaluation/SummaryEvaluation";
+import {TopicViewerPage} from "./components/TopicViewer/TopicViewer";
 //import {reducers} from './reducers'
 
 const store = createStore(App, compose(applyMiddleware(thunk)));
@@ -28,12 +29,13 @@ const render = () => {
                     <Route path="/" component={SearchBarJumbotron}/>
                     <Route path="/searchResults" component={SearchResultPage}/>
                     <Route path="/summaryEvaluation" component={SummaryEvaluation}/>
+                    <Route path="/topic" component={TopicViewerPage}/>
                 </Router>
             </Provider>
         ),
         rootEl
     );
-}
+};
 
 render();
 
