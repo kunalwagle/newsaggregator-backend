@@ -1,7 +1,5 @@
 package com.newsaggregator.server;
 
-import com.newsaggregator.ml.summarisation.Summary;
-
 import java.util.List;
 
 /**
@@ -10,24 +8,19 @@ import java.util.List;
 public class LabelString {
 
     private List<String> articles;
-    private List<List<String>> clusters;
-    private List<Summary> summaries;
+    private List<ClusterString> clusters;
 
-    public LabelString(List<String> articles, List<List<String>> clusters, List<Summary> summaries) {
+    public LabelString(List<String> articles, List<ClusterString> clusters) {
         this.articles = articles;
         this.clusters = clusters;
-        this.summaries = summaries;
     }
 
     public List<String> getArticles() {
         return articles;
     }
 
-    public List<List<String>> getClusters() {
+    public List<ClusterString> getClusters() {
         return clusters;
     }
 
-    public List<Summary> getSummaries() {
-        return summaries;
-    }
 }

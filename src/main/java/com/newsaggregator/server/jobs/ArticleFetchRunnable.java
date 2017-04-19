@@ -15,10 +15,7 @@ import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.ml.summarisation.Summary;
-import com.newsaggregator.server.ArticleFetch;
-import com.newsaggregator.server.ClusterHolder;
-import com.newsaggregator.server.LabelHolder;
-import com.newsaggregator.server.LabelString;
+import com.newsaggregator.server.*;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -59,15 +56,15 @@ public class ArticleFetchRunnable implements Runnable {
                     for (String url : labelString.getArticles()) {
                         articles.add(allArticles.stream().filter(art -> art.getArticleUrl().equals(url)).findFirst().get());
                     }
-                    List<List<OutletArticle>> clusters = new ArrayList<>();
-                    for (List<String> strings : labelString.getClusters()) {
-                        List<OutletArticle> cluster = new ArrayList<>();
-                        for (String string : strings) {
-                            cluster.add(allArticles.stream().filter(art -> art.getArticleUrl().equals(string)).findFirst().get());
+                    List<ClusterHolder> clusters = new ArrayList<>();
+                    for (ClusterString clusterString : labelString.getClusters()) {
+                        List<OutletArticle> a = new ArrayList<>();
+                        for (String string : clusterString.getCluster()) {
+                            a.add(allArticles.stream().filter(art -> art.getArticleUrl().equals(string)).findFirst().get());
                         }
-                        clusters.add(cluster);
+                        clusters.add(new ClusterHolder(a, clusterString.getNodes()));
                     }
-                    topicLabelMap.put(labelName, new LabelHolder(labelName, labelString.getSummaries(), articles, clusters));
+                    topicLabelMap.put(labelName, new LabelHolder(labelName, articles, clusters));
                 } catch (Exception e) {
                     logger.error("Error populating Topic Label Map", e);
                 }
@@ -135,10 +132,10 @@ public class ArticleFetchRunnable implements Runnable {
                         logger.info("Summarising cluster " + counter + " out of " + clusterHolderList.size());
                         Extractive extractive = new Extractive(clusterHolder.getArticles());
                         Summary summary = extractive.summarise();
+                        clusterHolder.setSummary(summary.getNodes());
                         for (String topicLabel : clusterHolder.getLabels()) {
                             LabelHolder labelHolder = topicLabelMap.get(topicLabel);
-                            labelHolder.addSummary(summary);
-                            labelHolder.addCluster(clusterHolder.getArticles());
+                            labelHolder.addCluster(clusterHolder);
                         }
                     } catch (Exception e) {
                         logger.error("Summarisation error", e);
