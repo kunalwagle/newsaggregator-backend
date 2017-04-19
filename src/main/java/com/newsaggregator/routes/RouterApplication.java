@@ -27,6 +27,7 @@ public class RouterApplication extends Application {
         Router router = new Router(getContext());
         router.attach("/wikipedia/{searchTerm}", WikipediaSearchResource.class);
         router.attach("/summarise/", SummaryEvaluationResource.class);
+        router.attach("/topic/{topic}", TopicResource.class);
         return router;
     }
 }

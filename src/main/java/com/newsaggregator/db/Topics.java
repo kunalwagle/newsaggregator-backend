@@ -1,6 +1,8 @@
 package com.newsaggregator.db;
 
 import com.amazonaws.services.dynamodbv2.document.*;
+import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
+import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.summarisation.Summary;
@@ -9,10 +11,7 @@ import com.newsaggregator.server.LabelString;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Topics {
@@ -99,6 +98,48 @@ public class Topics {
         }
         logger.info("About to return topics");
         return topicLabels;
+    }
+
+    public LabelString getTopic(String label) {
+        try {
+            QuerySpec spec = new QuerySpec()
+                    .withKeyConditionExpression("Id = :v_id")
+                    .withValueMap(new ValueMap()
+                            .withString(":v_id", "Amazon DynamoDB#DynamoDB Thread 1"));
+
+            ItemCollection<QueryOutcome> items = table.query(spec);
+
+            Iterator<Item> iterator = items.iterator();
+            Item item = null;
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                List<String> articles = (List<String>) item.get("Articles");
+                List<String> clusters = (List<String>) item.get("Clusters");
+                List<String> summaries = (List<String>) item.get("Summaries");
+                List<List<String>> finalClusters = new ArrayList<>();
+                ObjectMapper objectMapper = new ObjectMapper();
+                List<Summary> summs = new ArrayList<>();
+                for (String sum : summaries) {
+                    try {
+                        summs.add(objectMapper.readValue(sum, Summary.class));
+                    } catch (IOException e) {
+                        logger.error("Error reading topic", e);
+                    }
+                }
+                for (String cluster : clusters) {
+                    try {
+                        finalClusters.add(objectMapper.readValue(cluster, List.class));
+                    } catch (Exception e) {
+                        logger.error("Got an error, but can continue getting topic", e);
+                    }
+                }
+
+                return new LabelString(articles, finalClusters, summs);
+            }
+        } catch (Exception e) {
+            logger.error("An error occurred whilst getting a single topic", e);
+        }
+        return null;
     }
 
     private Table getCollection() {
