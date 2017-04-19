@@ -40,8 +40,8 @@ public class ClusterHolder {
         labels.add(label);
     }
 
-    public boolean sameCluster(ClusterHolder holder) {
-        List<String> otherUrls = holder.getArticles().stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
+    public boolean sameCluster(List<OutletArticle> holder) {
+        List<String> otherUrls = holder.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
         List<String> theseUrls = articles.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
         return otherUrls.size() == theseUrls.size() && theseUrls.stream().allMatch(otherUrls::contains);
     }

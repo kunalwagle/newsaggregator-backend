@@ -16,6 +16,7 @@ import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.ArticleFetch;
+import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
 import com.newsaggregator.server.LabelString;
 import org.apache.log4j.Logger;
@@ -101,33 +102,46 @@ public class ArticleFetchRunnable implements Runnable {
                 logger.info("Completed topic labelling.");
                 logger.info("Starting clustering and summarising");
 
-
                 int counter = 1;
+                List<ClusterHolder> clusterHolderList = new ArrayList<>();
                 for (Map.Entry<String, LabelHolder> topicLabel : topicLabelMap.entrySet()) {
-                    try {
-                        logger.info("Clustering topic " + counter + " out of " + topicLabelMap.size());
-                        List<OutletArticle> articles = topicLabel.getValue().getArticles();
-                        Clusterer clusterer = new Clusterer(articles);
-                        List<Cluster<ArticleVector>> clusters = clusterer.cluster();
-                        for (Cluster<ArticleVector> cluster : clusters) {
-                            try {
-                                List<String> clusterUrls = cluster.getClusterItems().stream().map(vector -> vector.getArticle().getArticleUrl()).collect(Collectors.toList());
-                                if (topicLabel.getValue().alreadyClustered(clusterUrls)) {
-                                    continue;
+                    logger.info("Clustering topic " + counter + " out of " + topicLabelMap.size());
+                    List<OutletArticle> articles = topicLabel.getValue().getArticles();
+                    Clusterer clusterer = new Clusterer(articles);
+                    List<Cluster<ArticleVector>> clusters = clusterer.cluster();
+                    for (Cluster<ArticleVector> cluster : clusters) {
+                        try {
+                            List<OutletArticle> clusterArticles = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
+                            if (clusterHolderList.stream().anyMatch(c -> c.sameCluster(clusterArticles))) {
+                                ClusterHolder clusterHolder = clusterHolderList.stream().filter(c -> c.sameCluster(clusterArticles)).findFirst().get();
+                                clusterHolder.addLabel(topicLabel.getKey());
+                            } else {
+                                if (!topicLabel.getValue().clusterExists(cluster)) {
+                                    ClusterHolder clusterHolder = new ClusterHolder(clusterArticles);
+                                    clusterHolder.addLabel(topicLabel.getKey());
+                                    clusterHolderList.add(clusterHolder);
                                 }
-                                int count = clusters.indexOf(cluster) + 1;
-                                logger.info("Summarising cluster " + count + " out of " + clusters.size());
-                                List<OutletArticle> articlesForSummary = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
-                                Extractive extractive = new Extractive(articlesForSummary);
-                                Summary summary = extractive.summarise();
-                                topicLabel.getValue().addCluster(articlesForSummary);
-                                topicLabel.getValue().addSummary(summary);
-                            } catch (Exception e) {
-                                logger.error("Summarisation error", e);
                             }
+                        } catch (Exception e) {
+                            logger.error("Adding cluster error", e);
+                        }
+                    }
+                    counter++;
+                }
+
+                counter = 1;
+                for (ClusterHolder clusterHolder : clusterHolderList) {
+                    try {
+                        logger.info("Summarising cluster " + counter + " out of " + clusterHolderList.size());
+                        Extractive extractive = new Extractive(clusterHolder.getArticles());
+                        Summary summary = extractive.summarise();
+                        for (String topicLabel : clusterHolder.getLabels()) {
+                            LabelHolder labelHolder = topicLabelMap.get(topicLabel);
+                            labelHolder.addSummary(summary);
+                            labelHolder.addCluster(clusterHolder.getArticles());
                         }
                     } catch (Exception e) {
-                        logger.error("Clustering error", e);
+                        logger.error("Summarisation error", e);
                     }
                     counter++;
                 }

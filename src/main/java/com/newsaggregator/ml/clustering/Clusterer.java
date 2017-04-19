@@ -26,11 +26,22 @@ public class Clusterer {
     private TfIdf tfIdf;
 
     public Clusterer(List<OutletArticle> articles) {
-        tfIdf = new TfIdf(articles.stream().map(OutletArticle::getBody).collect(Collectors.toList()));
-        articles.forEach(this::createNewClusterFromArticle);
+        if (articles.size() == 1) {
+            createDummyClusterFromArticle(articles);
+        } else {
+            tfIdf = new TfIdf(articles.stream().map(OutletArticle::getBody).collect(Collectors.toList()));
+            articles.forEach(this::createNewClusterFromArticle);
+        }
+    }
+
+    private void createDummyClusterFromArticle(List<OutletArticle> articles) {
+        clusters.add(new Cluster<>(new ArticleVector(articles.get(0), null)));
     }
 
     public List<Cluster<ArticleVector>> cluster() {
+        if (clusters.size() == 1) {
+            return clusters;
+        }
         boolean clusterChanged;
         do {
             double[][] similarityMatrix = generateSimilarityMatrix();

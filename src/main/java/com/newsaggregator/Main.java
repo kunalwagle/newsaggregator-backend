@@ -2,9 +2,13 @@ package com.newsaggregator;
 
 import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.routes.RouterApplication;
+import com.newsaggregator.server.jobs.ArticleFetchRunnable;
+import com.newsaggregator.server.jobs.SendEmailRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -37,8 +41,8 @@ public class Main {
 
                 TaskService scheduleManager = new TaskService();
 
-//                scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 1L, 2L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 1L, TimeUnit.HOURS);
+                scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 1L, 30L, TimeUnit.MINUTES);
+                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 1L, TimeUnit.HOURS);
 
                 serverInitialised = true;
 
