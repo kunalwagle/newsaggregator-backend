@@ -3,6 +3,7 @@
  */
 import {connect} from "react-redux";
 import {SearchResults} from "../../components/SearchResults/SearchResult";
+import {viewClicked} from "../../actions/SearchResults/SearchResultsActions";
 
 const mapStateToProps = (state) => {
     return {
@@ -12,7 +13,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {}
+    return {
+        handleViewClicked: (title) => {
+            dispatch(viewClicked(title));
+        }
+    }
 };
 
 const SearchResultsContainer = connect(
