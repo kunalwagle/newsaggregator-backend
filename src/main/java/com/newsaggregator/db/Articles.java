@@ -101,6 +101,30 @@ public class Articles {
         }
     }
 
+    public OutletArticle getSingleArticle(String url) {
+        try {
+            QuerySpec spec = new QuerySpec()
+                    .withKeyConditionExpression("articleUrl = :a_url")
+                    .withValueMap(new ValueMap()
+                            .withString(":a_url", url));
+            ItemCollection<QueryOutcome> items = table.query(spec);
+            Iterator<Item> iterator = items.iterator();
+            if (iterator.hasNext()) {
+                Map<String, Object> item = iterator.next().asMap();
+                String articleUrl = (String) item.get("articleUrl");
+                String title = (String) item.get("Title");
+                String body = (String) item.get("Body");
+                String imageUrl = (String) item.get("ImageUrl");
+                String source = (String) item.get("Source");
+                String datePublished = (String) item.get("datePublished");
+                return new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished);
+            }
+        } catch (Exception e) {
+            logger.error("An error occurred retrieving a single article", e);
+        }
+        return null;
+    }
+
     public List<OutletArticle> getAllArticles() {
         List<OutletArticle> articles = new ArrayList<>();
         try {

@@ -17,7 +17,7 @@ export function searchValueChanged(searchValue) {
 export function search() {
     return (dispatch, getState) => {
         dispatch(searchStarted());
-        return fetch('localhost/api/wikipedia/' + getState().searchBar.searchTerm)
+        return fetch('http://localhost:8182/api/wikipedia/' + getState().searchBar.searchTerm)
             .then(response => response.json())
             .then(json => dispatch(searchResultsReceived(json)))
     }

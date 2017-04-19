@@ -40,7 +40,7 @@ export function summarise() {
         };
         let data = new FormData();
         data.append("json", JSON.stringify(value));
-        return fetch('api/summarise/', {
+        return fetch('http://localhost:8182/api/summarise/', {
             method: "POST",
             body: data
         })

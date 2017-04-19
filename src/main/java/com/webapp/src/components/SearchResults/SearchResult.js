@@ -20,7 +20,7 @@ const thumbnails = (carousel, handleViewClicked) => {
                                     <p>{searchResult.extract.substring(0, 600) + "..."}</p>
                                     <p>
                                         <Button onClick={(event) => handleViewClicked(event, searchResult.title)}
-                                                bsStyle="primary">
+                                                bsStyle="default">
                                             <Link to="/topic">View</Link>
                                         </Button>&nbsp;
                                         <Button bsStyle="default">Subscribe</Button>

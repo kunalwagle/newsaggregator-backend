@@ -9,7 +9,7 @@ export const ARTICLES_RECEIVED = 'ARTICLES_RECEIVED';
 export function viewClicked(title) {
     return (dispatch) => {
         dispatch(viewStarted(title));
-        return fetch("localhost:3000/api/topic/" + title)
+        return fetch("http://localhost:8182/api/topic/" + title)
             .then(response => response.json())
             .then(json => dispatch(articlesReceived(json)))
     }
