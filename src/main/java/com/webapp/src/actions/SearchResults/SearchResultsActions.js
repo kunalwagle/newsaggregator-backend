@@ -8,16 +8,17 @@ export const ARTICLES_RECEIVED = 'ARTICLES_RECEIVED';
 
 export function viewClicked(title) {
     return (dispatch) => {
-        dispatch(viewStarted());
+        dispatch(viewStarted(title));
         return fetch("localhost:3000/api/topic/" + title)
             .then(response => response.json())
             .then(json => dispatch(articlesReceived(json)))
     }
 }
 
-export function viewStarted() {
+export function viewStarted(title) {
     return {
-        type: VIEW_START
+        type: VIEW_START,
+        label: title
     }
 }
 

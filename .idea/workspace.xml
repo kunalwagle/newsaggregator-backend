@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/TopicViewer/TopicPanelContainer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/SearchResults/SearchResultsReducers.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SearchResults/SearchResultsContainer.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SearchResults/SearchResultsContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicViewer.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicViewer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/SearchResults/SearchResultsReducers.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/SearchResults/SearchResultsReducers.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,24 +30,35 @@
           <file leaf-file-name="SearchResultsContainer.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SearchResults/SearchResultsContainer.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+                <state relative-caret-position="255">
+                  <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                     <element signature="e#48#84#0" expanded="true" />
                     <element signature="e#274#407#0" expanded="true" />
-                    <element signature="e#504#557#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SearchResultsReducers.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="SearchResultsReducers.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/SearchResults/SearchResultsReducers.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state relative-caret-position="405">
+                  <caret line="29" column="17" lean-forward="true" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
                   <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TopicViewer.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicViewer.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="165">
+                  <caret line="13" column="2" lean-forward="true" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+                  <folding>
+                    <element signature="e#48#74#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -56,11 +66,13 @@
           <file leaf-file-name="SearchResultsActions.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+                <state relative-caret-position="435">
+                  <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
                   <folding>
+                    <element signature="n#!!doc" expanded="true" />
                     <element signature="n#!!block;n#viewClicked#0" expanded="true" />
-                    <element signature="e#244#449#0" expanded="true" />
+                    <element signature="e#244#454#0" expanded="true" />
+                    <element signature="n#!!block;n#viewStarted#0" expanded="true" />
                     <element signature="n#!!block;n#articlesReceived#0" expanded="true" />
                   </folding>
                 </state>
@@ -81,19 +93,20 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SearchBarReducers.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="SearchBarReducers.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/Home/SearchBarReducers.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+                <state relative-caret-position="495">
+                  <caret line="33" column="1" lean-forward="true" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
+                    <element signature="e#308#893#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SearchBarActions.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="SearchBarActions.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/Home/SearchBarActions.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="525">
@@ -239,7 +252,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/NewsAPI.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/index.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicViewer.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/package.json" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java" />
@@ -254,9 +266,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/TopicViewer/TopicTopBarContainer.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicTopBar.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/TopicViewer/TopicPanelContainer.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SearchResults/SearchResultsContainer.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/SearchResults/SearchResultsReducers.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicViewer.js" />
       </list>
     </option>
   </component>
@@ -2010,14 +2023,7 @@
       <workItem from="1490695952010" duration="95924000" />
       <workItem from="1491926569536" duration="8385000" />
       <workItem from="1492002902704" duration="27962000" />
-      <workItem from="1492430182328" duration="45927000" />
-    </task>
-    <task id="LOCAL-00117" summary="Created basic Wordnet">
-      <created>1492092146281</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1492092146281</updated>
+      <workItem from="1492430182328" duration="46946000" />
     </task>
     <task id="LOCAL-00118" summary="Skeletons for wordnet">
       <created>1492095309611</created>
@@ -2355,7 +2361,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492614766576</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="Search results actions">
+      <created>1492615526021</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1492615526021</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2388,7 +2401,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="389106000" />
+    <option name="totallyTimeSpent" value="390125000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2475,7 +2488,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Topic DB functions" />
     <MESSAGE value="Added clustering save" />
     <MESSAGE value="Ready to test article fetch runnable" />
     <MESSAGE value="Altered timings" />
@@ -2500,7 +2512,8 @@
     <MESSAGE value="Added logger lines" />
     <MESSAGE value="Topic Viewer actions" />
     <MESSAGE value="Topic Top Bar container" />
-    <option name="LAST_COMMIT_MESSAGE" value="Topic Top Bar container" />
+    <MESSAGE value="Search results actions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Search results actions" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2939,14 +2952,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicViewer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="2" lean-forward="false" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/TopicViewer/TopicTopBarContainer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -3009,7 +3014,6 @@
         <state relative-caret-position="375">
           <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#48#84#0" expanded="true" />
             <element signature="e#274#341#0" expanded="true" />
             <element signature="e#385#505#0" expanded="true" />
             <element signature="e#441#497#0" expanded="true" />
@@ -3053,16 +3057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/Home/SearchBarReducers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/Home/SearchBarActions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
@@ -3077,36 +3071,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/Home/SearchBarReducers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        <state relative-caret-position="495">
+          <caret line="33" column="1" lean-forward="true" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
           <folding>
-            <element signature="n#!!block;n#viewClicked#0" expanded="true" />
-            <element signature="e#244#449#0" expanded="true" />
-            <element signature="n#!!block;n#articlesReceived#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#308#893#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SearchResults/SearchResultsContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        <state relative-caret-position="255">
+          <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#48#84#0" expanded="true" />
             <element signature="e#274#407#0" expanded="true" />
-            <element signature="e#504#557#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#viewClicked#0" expanded="true" />
+            <element signature="e#244#454#0" expanded="true" />
+            <element signature="n#!!block;n#viewStarted#0" expanded="true" />
+            <element signature="n#!!block;n#articlesReceived#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/SearchResults/SearchResultsReducers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="405">
+          <caret line="29" column="17" lean-forward="true" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicViewer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="13" column="2" lean-forward="true" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+          <folding>
+            <element signature="e#48#74#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
