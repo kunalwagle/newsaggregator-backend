@@ -3,92 +3,52 @@
  */
 import {map} from "underscore";
 import React from "react";
-import {Button, Image, Label, Thumbnail} from "react-bootstrap";
+import {Button, Image, Label, Thumbnail, Grid, Row, Col} from "react-bootstrap";
 import {Link} from "react-router";
 
-let ReactLayoutGrid = require("react-grid-layout");
 
-const TopicPanel = (article, index, handleArticleClick) => {
+const thumbnails = (row, idx, handleArticleClick) => {
     return (
-        <Button onClick={(event) => {
-            handleArticleClick(event, index)
-        }}>
-            <Thumbnail src={article.articles[0].imageUrl} alt="242x200">
-                <h3>{article.articles[0].title}</h3>
-            </Thumbnail>
-        </Button>
+        <Row key={idx}>
+            {row.map((article, index) => {
+                return (
+                    <Col md={3} key={index}>
+                        <Thumbnail src={article.articles[0].imageUrl}>
+                            <h4>{article.articles[0].title}</h4>
+                            <Button onClick={(event) => handleArticleClick(event, index + idx * 4)}
+                                    bsStyle="default">
+                                <Link to="/article">View</Link>
+                            </Button>
+                        </Thumbnail>
+                    </Col>
+                )
+            })};
+        </Row>
     )
 };
 
-const TopicPanelView = ({articles, handleArticleClick}) => {
+const TopicPanelView = ({articles, fetchInProgress, handleArticleClick}) => {
 
-    let generateLayout = (articles) => {
-        return articles.map((article, index) => {
-            let x = 0;
-            let y = (index / 4) * 10;
-            let h = 2;
-            let w = 1;
-            switch (index % 8) {
-                case 0:
-                    x = 0;
-                    w = 3;
-                    break;
-                case 1:
-                    x = 7;
-                    break;
-                case 2:
-                    x = 9;
-                    break;
-                case 3:
-                    x = 11;
-                    break;
-                case 4:
-                    x = 0;
-                    break;
-                case 5:
-                    x = 2;
-                    break;
-                case 6:
-                    x = 4;
-                    break;
-                case 7:
-                    x = 6;
-                    w = 3;
-                    break;
-                default:
-                    break;
-            }
-            return {
-                i: index,
-                x,
-                y,
-                w,
-                h,
-                static: true,
-                maxWidth: 5,
-                maxHeight: 5
-            }
-        });
-    };
+    if (fetchInProgress) {
+        return (
+            <div className="loader">Loading...</div>
+        )
+    }
 
-    let layout = generateLayout(articles);
+    let rows = [];
+    for (let i = 0; i < articles.length; i += 4) {
+        let temparray = articles.slice(i, i + 4);
+        rows.push(temparray);
+    }
 
-    const innerReact = (articles) => {
-        return articles.map((article, index) => {
-            const panel = TopicPanel(article, index, handleArticleClick);
-            return (
-                <div key={index}>
-                    {panel}
-                </div>
-            )
-        });
-    };
-
+    const mappedRows = rows.map((row, idx) => {
+        return thumbnails(row, idx, handleArticleClick)
+    });
 
     return (
-        <ReactLayoutGrid layout={layout} cols={12} rowHeight={10} width={1200}>
-            {innerReact(articles)}
-        </ReactLayoutGrid>
+        <Grid>
+            {mappedRows}
+        </Grid>
     );
 
 };

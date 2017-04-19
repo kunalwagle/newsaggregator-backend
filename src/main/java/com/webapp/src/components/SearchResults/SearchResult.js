@@ -70,4 +70,4 @@ export const SearchResults = ({searchResults, fetchInProgress, handleViewClicked
         )
     }
     return carousels(searchResults, handleViewClicked);
-}
+};

@@ -7,7 +7,8 @@ import {articleClicked} from "../../actions/TopicViewer/TopicViewerActions";
 
 const mapStateToProps = (state) => {
     return {
-        articles: state.searchResults.articles
+        articles: state.searchResults.articles,
+        fetchInProgress: state.searchResults.fetchInProgress
     }
 };
 
