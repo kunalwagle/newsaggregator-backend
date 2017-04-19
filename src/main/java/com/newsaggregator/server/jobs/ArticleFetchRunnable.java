@@ -146,8 +146,9 @@ public class ArticleFetchRunnable implements Runnable {
                     counter++;
                 }
                 topicManager.saveTopics(topicLabelMap);
+                logger.info("Topics saved");
                 articleManager.saveArticles(articleList);
-                logger.info("Articles and topics saved");
+                logger.info("Articles saved");
             } catch (Exception e) {
                 Utils.sendExceptionEmail(e);
                 logger.error("Error. Email sent", e);
