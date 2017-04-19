@@ -48,7 +48,9 @@ public class Main {
 
 
 //            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
-////            Articles articles = new Articles(db);
+//            Articles articles = new Articles(db);
+//            List<OutletArticle> articleList = articles.getAllArticles();
+//            articles.saveArticles(articleList);
 ////            articles.getAllTopics();
 ////
 ////            Table table = db.getTable("Articles");

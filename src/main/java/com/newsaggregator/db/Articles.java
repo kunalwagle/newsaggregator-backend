@@ -62,23 +62,24 @@ public class Articles {
     }
 
     private void updateArticle(OutletArticle article) {
-        UpdateItemSpec updateItemSpec = new UpdateItemSpec()
-                .withPrimaryKey("articleUrl", article.getArticleUrl(), "DatePublished", article.getLastPublished())
-                .withUpdateExpression("set #i=:val1, #t=:val2, #b=:val3, #s=:val4")
-                .withNameMap(new NameMap()
-                        .with("#i", "ImageUrl")
-                        .with("#t", "Title")
-                        .with("#b", "Body")
-                        .with("#s", "Source"))
-                .withValueMap(new ValueMap()
-                        .withString(":val1", article.getImageUrl())
-                        .withString(":val2", article.getTitle())
-                        .withString(":val3", article.getBody())
-                        .withString(":val4", article.getSource()))
-                .withReturnValues(ReturnValue.ALL_NEW);
         try {
+            UpdateItemSpec updateItemSpec = new UpdateItemSpec()
+                    .withPrimaryKey("articleUrl", article.getArticleUrl(), "datePublished", article.getLastPublished())
+                    .withUpdateExpression("set #i=:val1, #t=:val2, #b=:val3, #s=:val4")
+                    .withNameMap(new NameMap()
+                            .with("#i", "ImageUrl")
+                            .with("#t", "Title")
+                            .with("#b", "Body")
+                            .with("#s", "Source"))
+                    .withValueMap(new ValueMap()
+                            .withString(":val1", article.getImageUrl())
+                            .withString(":val2", article.getTitle())
+                            .withString(":val3", article.getBody())
+                            .withString(":val4", article.getSource()))
+                    .withReturnValues(ReturnValue.ALL_NEW);
             table.updateItem(updateItemSpec);
         } catch (Exception e) {
+            logger.error("Updating Article error", e);
             //e.printStackTrace();
         }
     }
