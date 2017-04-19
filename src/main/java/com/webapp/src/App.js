@@ -3,11 +3,13 @@
  */
 import searchBar from "./reducers/Home/SearchBarReducers";
 import summaryEvaluation from "./reducers/SummaryEvaluation/SummaryEvaluation";
+import searchResults from "./reducers/SearchResults/SearchResultsReducers";
 import {combineReducers} from "redux";
 
 const App = combineReducers({
     searchBar,
-    summaryEvaluation
+    summaryEvaluation,
+    searchResults
 });
 
 export default App;

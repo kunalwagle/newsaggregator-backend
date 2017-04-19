@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleViewClicked: (event, title) => {
-            event.preventDefault;
+            event.preventDefault();
             dispatch(viewClicked(title));
         }
     }

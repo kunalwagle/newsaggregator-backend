@@ -2,12 +2,12 @@
  * Created by kunalwagle on 19/04/2017.
  */
 import {connect} from "react-redux";
-import {TopicPanelView} from "../../components/TopicViewer/TopicPanelView";
+import TopicPanelView from "../../components/TopicViewer/TopicPanelView";
 import {articleClicked} from "../../actions/TopicViewer/TopicViewerActions";
 
 const mapStateToProps = (state) => {
     return {
-        articles: state.topicViewer.articles
+        articles: state.searchResults.articles
     }
 };
 

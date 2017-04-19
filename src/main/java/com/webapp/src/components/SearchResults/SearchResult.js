@@ -5,24 +5,25 @@ import {Grid, Row, Col, Thumbnail, Button, Carousel} from "react-bootstrap";
 import React from "react";
 import {Link} from "react-router";
 
-const thumbnails = (carousel, handleViewClicked) => {
+const thumbnails = (carousel, idx, handleViewClicked) => {
     return (
-        <Carousel.Item>
+        <Carousel.Item key={idx}>
             <Grid>
                 <Row>
-                    {carousel.map((searchResult) => {
+                    {carousel.map((searchResult, index) => {
                         return (
-                            <Col md={3}>
+                            <Col md={3} key={index}>
                                 <Thumbnail
                                     src={searchResult.imageUrl}
-                                    key={searchResult.title}>
+                                >
                                     <h3>{searchResult.title}</h3>
                                     <p>{searchResult.extract.substring(0, 600) + "..."}</p>
                                     <p>
                                         <Button onClick={(event) => handleViewClicked(event, searchResult.title)}
                                                 bsStyle="default">
                                             <Link to="/topic">View</Link>
-                                        </Button>&nbsp;
+                                        </Button>
+                                        &nbsp;
                                         <Button bsStyle="default">Subscribe</Button>
                                     </p>
                                 </Thumbnail>
@@ -47,8 +48,8 @@ const carousels = (searchResults, handleViewClicked) => {
         carousels.push(temparray);
     }
 
-    const mappedCarousels = carousels.map((carousel) => {
-        return thumbnails(carousel, handleViewClicked)
+    const mappedCarousels = carousels.map((carousel, idx) => {
+        return thumbnails(carousel, idx, handleViewClicked)
     });
 
     return (

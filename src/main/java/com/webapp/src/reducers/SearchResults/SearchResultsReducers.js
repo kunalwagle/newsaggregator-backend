@@ -19,6 +19,7 @@ export default function searchResults(state, action) {
             return Object.assign({}, state, {
                 label: action.label,
                 fetchInProgress: true,
+                articles: []
             });
         case ARTICLES_RECEIVED:
             return Object.assign({}, state, {
