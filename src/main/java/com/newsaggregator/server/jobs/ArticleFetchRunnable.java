@@ -100,6 +100,8 @@ public class ArticleFetchRunnable implements Runnable {
                 }
                 logger.info("Completed topic labelling.");
                 logger.info("Starting clustering and summarising");
+
+
                 int counter = 1;
                 for (Map.Entry<String, LabelHolder> topicLabel : topicLabelMap.entrySet()) {
                     try {
