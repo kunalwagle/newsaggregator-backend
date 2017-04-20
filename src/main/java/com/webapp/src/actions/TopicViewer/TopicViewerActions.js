@@ -5,13 +5,10 @@
 export const ARTICLE_CLICKED = 'ARTICLE_CLICKED';
 export const SUBSCRIBE_CLICKED = 'SUBSCRIBE_CLICKED';
 
-export function articleClicked(index) {
-    return (dispatch, getState) => {
-        const article = getState().topicViewer.articles[index];
-        return {
-            type: ARTICLE_CLICKED,
-            article
-        }
+export function articleClicked(article) {
+    return {
+        type: ARTICLE_CLICKED,
+        article
     }
 }
 

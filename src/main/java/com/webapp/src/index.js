@@ -11,6 +11,7 @@ import {NavBarComponent} from "./components/NavBar";
 import {SearchResultPage} from "./components/SearchResults/SearchResultPage";
 import {SummaryEvaluation} from "./components/SummaryEvaluation/SummaryEvaluation";
 import {TopicViewerPage} from "./components/TopicViewer/TopicViewer";
+import {ArticleViewerPage} from "./components/ArticleViewer/ArticleViewerPage";
 //import {reducers} from './reducers'
 
 const store = createStore(App, compose(applyMiddleware(thunk)));
@@ -30,6 +31,7 @@ const render = () => {
                     <Route path="/searchResults" component={SearchResultPage}/>
                     <Route path="/summaryEvaluation" component={SummaryEvaluation}/>
                     <Route path="/topic" component={TopicViewerPage}/>
+                    <Route path="/article" component={ArticleViewerPage}/>
                 </Router>
             </Provider>
         ),

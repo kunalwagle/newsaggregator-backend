@@ -1,7 +1,7 @@
 /**
  * Created by kunalwagle on 18/04/2017.
  */
-import {map} from "underscore";
+import {map, filter, size} from "underscore";
 import React from "react";
 import {Button, Image, Label, Thumbnail, Grid, Row, Col} from "react-bootstrap";
 import {Link} from "react-router";
@@ -15,7 +15,7 @@ const thumbnails = (row, idx, handleArticleClick) => {
                     <Col md={3} key={index}>
                         <Thumbnail src={article.articles[0].imageUrl}>
                             <h4>{article.articles[0].title}</h4>
-                            <Button onClick={(event) => handleArticleClick(event, index + idx * 4)}
+                            <Button onClick={(event) => handleArticleClick(event, article)}
                                     bsStyle="default">
                                 <Link to="/article">View</Link>
                             </Button>
@@ -34,6 +34,10 @@ const TopicPanelView = ({articles, fetchInProgress, handleArticleClick}) => {
             <div className="loader">Loading...</div>
         )
     }
+
+    articles = filter(articles, function (article) {
+        return size(article.articles) && article.articles[0] != null;
+    });
 
     let rows = [];
     for (let i = 0; i < articles.length; i += 4) {

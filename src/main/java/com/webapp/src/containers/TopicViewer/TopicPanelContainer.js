@@ -14,8 +14,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleArticleClicked: (index) => {
-            dispatch(articleClicked(index));
+        handleArticleClick: (event, article) => {
+            event.preventDefault();
+            dispatch(articleClicked(article));
         }
     }
 };

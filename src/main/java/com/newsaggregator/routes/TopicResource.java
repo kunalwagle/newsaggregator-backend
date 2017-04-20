@@ -37,9 +37,12 @@ public class TopicResource extends ServerResource {
             List<ClusterString> clusterStrings = labelString.getClusters();
             List<ClusterHolder> clusterHolders = new ArrayList<>();
             for (ClusterString clusterString : clusterStrings) {
-                List<String> articles = clusterString.getCluster();
-                List<OutletArticle> arts = articles.stream().map(articleManager::getSingleArticle).collect(Collectors.toList());
-                clusterHolders.add(new ClusterHolder(arts, clusterString.getNodes()));
+                try {
+                    List<String> articles = clusterString.getCluster();
+                    List<OutletArticle> arts = articles.stream().map(articleManager::getSingleArticle).collect(Collectors.toList());
+                    clusterHolders.add(new ClusterHolder(arts, clusterString.getNodes()));
+                } catch (Exception e) {
+                }
             }
             return new ObjectMapper().writeValueAsString(clusterHolders);
         } catch (Exception e) {

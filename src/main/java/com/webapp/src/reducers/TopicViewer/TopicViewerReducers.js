@@ -15,7 +15,9 @@ export default function topicViewer(state, action) {
     switch (action.type) {
         case ARTICLE_CLICKED:
             return Object.assign({}, state, {
-                article: state.articles[action.index]
+                article: action.article
             });
+        default:
+            return initialState;
     }
 }
