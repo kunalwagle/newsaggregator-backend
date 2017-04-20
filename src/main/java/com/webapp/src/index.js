@@ -7,7 +7,7 @@ import {Router, Route, browserHistory} from "react-router";
 import App from "./App";
 import "babel-polyfill";
 import thunk from "redux-thunk";
-import {NavBarComponent} from "./components/NavBar";
+import NavBarContainer from "./containers/NavBarContainer";
 import {SearchResultPage} from "./components/SearchResults/SearchResultPage";
 import {SummaryEvaluation} from "./components/SummaryEvaluation/SummaryEvaluation";
 import {TopicViewerPage} from "./components/TopicViewer/TopicViewer";
@@ -20,7 +20,9 @@ const navBar = document.getElementById('navbar');
 
 const render = () => {
     ReactDOM.render((
-            <NavBarComponent/>
+            <Provider store={store}>
+                <NavBarContainer/>
+            </Provider>
         ),
         navBar
     );
