@@ -3,7 +3,6 @@
  */
 import {connect} from "react-redux";
 import {NavBarComponent} from "../components/NavBar";
-import {facebookLogin, googleSuccess, googleFailure} from "../actions/LoginModalActions";
 
 
 const mapStateToProps = () => {
@@ -11,17 +10,7 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        handleFacebookLogin: (response) => {
-            dispatch(facebookLogin(response))
-        },
-        handleGoogleSuccess: (response) => {
-            dispatch(googleSuccess(response))
-        },
-        handleGoogleFailure: (response) => {
-            dispatch(googleFailure(response))
-        }
-    }
+    return {}
 };
 
 const NavBarContainer = connect(

@@ -1,42 +1,19 @@
 /**
  * Created by kunalwagle on 20/04/2017.
  */
-export const FACEBOOK_LOGIN = 'FACEBOOK_LOGIN';
-export const GOOGLE_SUCCESS = 'GOOGLE_SUCCESS';
-export const GOOGLE_FAILURE = 'GOOGLE_FAILURE';
-export const HIDE_MODAL = 'HIDE_MODAL';
-export const SHOW_MODAL = 'SHOW_MODAL';
+export const EMAIL_CHANGED = 'EMAIL_CHANGED';
+export const LOG_IN_CHANGE = 'LOG_IN_CHANGE';
 
-export function hideModal() {
+export function emailAddressChanged(text) {
     return {
-        type: HIDE_MODAL
+        type: EMAIL_CHANGED,
+        text
     };
 }
 
-export function showModal() {
+export function showModal(loggedIn) {
     return {
-        type: SHOW_MODAL
-    };
-}
-
-export function facebookLogin(response) {
-    return {
-        type: FACEBOOK_LOGIN,
-        response
-    };
-}
-
-export function googleSuccess(response) {
-    return {
-        type: GOOGLE_SUCCESS,
-        response
-    };
-}
-
-export function googleFailure(response) {
-    console.log(response);
-    return {
-        type: GOOGLE_FAILURE,
-        response
+        type: LOG_IN_CHANGE,
+        loggedIn
     };
 }

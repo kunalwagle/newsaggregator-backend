@@ -1,14 +1,11 @@
 /**
  * Created by kunalwagle on 20/04/2017.
  */
-import {FACEBOOK_LOGIN, GOOGLE_SUCCESS, HIDE_MODAL, SHOW_MODAL} from "../actions/LoginModalActions";
+import {EMAIL_CHANGED, LOG_IN_CHANGE} from "../actions/LoginModalActions";
 
 const initialState = {
     loggedIn: false,
-    pictureSource: "",
-    email: "",
-    name: "",
-    modalShown: false
+    email: ""
 };
 
 export default function loggedIn(state, action) {
@@ -17,32 +14,18 @@ export default function loggedIn(state, action) {
     }
 
     switch (action.type) {
-        case HIDE_MODAL:
+        case EMAIL_CHANGED:
             return Object.assign({}, state, {
-                modalShown: false
+                email: action.text
             });
-        case SHOW_MODAL:
-            return Object.assign({}, state, {
-                modalShown: true
-            });
-        case FACEBOOK_LOGIN: {
-            if (action.response != null) {
-                if (action.response.status === "connected") {
-                    return Object.assign({}, state, {
-                        loggedIn: true,
-                        modalShown: false
-                    })
-                }
+        case LOG_IN_CHANGE:
+            let email = state.email;
+            if (action.loggedIn) {
+                email = "";
             }
-            return state;
-        }
-        case GOOGLE_SUCCESS:
             return Object.assign({}, state, {
-                loggedIn: true,
-                modalShown: false,
-                email: action.response.profileObj.getBasicProfile().getEmail(),
-                name: action.response.profileObj.getBasicProfile().getName(),
-                pictureSource: action.response.profileObj.getBasicProfile().getImageUrl()
+                loggedIn: action.loggedIn,
+                email: email
             });
         default:
             return state
