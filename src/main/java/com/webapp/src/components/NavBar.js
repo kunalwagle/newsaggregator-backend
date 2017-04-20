@@ -2,10 +2,24 @@
  * Created by kunalwagle on 07/02/2017.
  */
 import React from "react";
-import {Navbar, Nav, NavItem} from "react-bootstrap";
-import LoginModalContainer from "../containers/LoginModal";
+import {Navbar, Nav, NavItem, OverlayTrigger, Popover} from "react-bootstrap";
+import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
 
-export const NavBarComponent = ({handleSelect}) => (
+const loginPopover = (handleFacebookLogin, handleGoogleSuccess, handleGoogleFailure) => (
+    <Popover title="Login" id="loginModalPopover">
+        <FacebookLogin appId="540333079424464"
+                       autoLoad={false}
+                       fields="name,email,picture"
+                       callback={handleFacebookLogin}/>
+        <br/><br/><br/>
+        <GoogleLogin onSuccess={handleGoogleSuccess}
+                     onFailure={handleGoogleFailure}
+                     clientId="454694778698-pcb41ncbaqevjkcgvnko36faneenrb73.apps.googleusercontent.com"/>
+    </Popover>
+);
+
+export const NavBarComponent = ({handleFacebookLogin, handleGoogleSuccess, handleGoogleFailure}) => (
     <div>
     <Navbar inverse collapseOnSelect>
         <Navbar.Header>
@@ -22,12 +36,15 @@ export const NavBarComponent = ({handleSelect}) => (
                 <NavItem eventKey={1}>
                     <input placeholder="Search"/>
                 </NavItem>
-                <NavItem eventKey={2} onSelect={handleSelect}>Register</NavItem>
-                <NavItem eventKey={3} onSelect={handleSelect}>Sign In</NavItem>
+                <OverlayTrigger trigger="click" placement="bottom"
+                                overlay={loginPopover(handleFacebookLogin, handleGoogleSuccess, handleGoogleFailure)}>
+                    <NavItem eventKey={2}>Register</NavItem>
+                </OverlayTrigger>
+
+                <NavItem eventKey={3}>Sign In</NavItem>
             </Nav>
         </Navbar.Collapse>
     </Navbar>
-        <LoginModalContainer/>
     </div>
 
 );

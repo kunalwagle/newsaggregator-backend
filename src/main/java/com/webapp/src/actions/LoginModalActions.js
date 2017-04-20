@@ -34,6 +34,7 @@ export function googleSuccess(response) {
 }
 
 export function googleFailure(response) {
+    console.log(response);
     return {
         type: GOOGLE_FAILURE,
         response

@@ -3,7 +3,8 @@
  */
 import {connect} from "react-redux";
 import {NavBarComponent} from "../components/NavBar";
-import {showModal} from "../actions/LoginModalActions";
+import {facebookLogin, googleSuccess, googleFailure} from "../actions/LoginModalActions";
+
 
 const mapStateToProps = () => {
     return {}
@@ -11,8 +12,14 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleSelect: () => {
-            dispatch(showModal());
+        handleFacebookLogin: (response) => {
+            dispatch(facebookLogin(response))
+        },
+        handleGoogleSuccess: (response) => {
+            dispatch(googleSuccess(response))
+        },
+        handleGoogleFailure: (response) => {
+            dispatch(googleFailure(response))
         }
     }
 };
