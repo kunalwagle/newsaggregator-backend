@@ -5,7 +5,8 @@ import fetch from "isomorphic-fetch";
 
 export const EMAIL_CHANGED = 'EMAIL_CHANGED';
 export const LOG_IN_CHANGE = 'LOG_IN_CHANGE';
-export const SUBSCRIBE = 'SUBSCRIBE';
+export const FETCH_STARTED = 'FETCH_STARTED';
+export const FETCH_ENDED = 'FETCH_ENDED';
 export const SUBSCRIBE_COMPLETE = 'SUBSCRIBE_COMPLETE';
 
 export function emailAddressChanged(text) {
@@ -33,5 +34,28 @@ export function subscribe(topic) {
 export function subscribeComplete() {
     return {
         type: SUBSCRIBE_COMPLETE
+    }
+}
+
+export function getSubscriptions() {
+    return (dispatch, getState) => {
+        dispatch(startSubscriptionFetch());
+        const email = getState().loggedIn.email;
+        return fetch("http://localhost:8182/api/user/subscriptions/" + email)
+            .then(response => response.json())
+            .then(json => dispatch(fetchedSubscriptions(json)));
+    }
+}
+
+export function startSubscriptionFetch() {
+    return {
+        type: FETCH_STARTED
+    }
+}
+
+export function fetchedSubscriptions(json) {
+    return {
+        type: FETCH_ENDED,
+        json
     }
 }
