@@ -5,7 +5,11 @@ import {Grid, Row, Col, Thumbnail, Button, Carousel} from "react-bootstrap";
 import React from "react";
 import {Link} from "react-router";
 
-const thumbnails = (carousel, idx, handleViewClicked) => {
+const thumbnails = (loggedIn, carousel, idx, handleViewClicked) => {
+    let buttonText = "Subscribe";
+    if (!loggedIn) {
+        buttonText = "Log in to subscribe";
+    }
     return (
         <Carousel.Item key={idx}>
             <Grid>
@@ -24,7 +28,7 @@ const thumbnails = (carousel, idx, handleViewClicked) => {
                                             <Link to="/topic">View</Link>
                                         </Button>
                                         &nbsp;
-                                        <Button bsStyle="default">Subscribe</Button>
+                                        <Button disabled={!loggedIn} bsStyle="success">{buttonText}</Button>
                                     </p>
                                 </Thumbnail>
                             </Col>
@@ -36,7 +40,7 @@ const thumbnails = (carousel, idx, handleViewClicked) => {
     )
 };
 
-const carousels = (searchResults, handleViewClicked) => {
+const carousels = (loggedIn, searchResults, handleViewClicked) => {
     if (searchResults.length == 0) {
         return (
             <div>No Search Results...</div>
@@ -49,7 +53,7 @@ const carousels = (searchResults, handleViewClicked) => {
     }
 
     const mappedCarousels = carousels.map((carousel, idx) => {
-        return thumbnails(carousel, idx, handleViewClicked)
+        return thumbnails(loggedIn, carousel, idx, handleViewClicked)
     });
 
     return (
@@ -63,11 +67,11 @@ const carousels = (searchResults, handleViewClicked) => {
     )
 };
 
-export const SearchResults = ({searchResults, fetchInProgress, handleViewClicked}) => {
+export const SearchResults = ({loggedIn, searchResults, fetchInProgress, handleViewClicked}) => {
     if (fetchInProgress) {
         return (
             <div className="loader">Loading...</div>
         )
     }
-    return carousels(searchResults, handleViewClicked);
+    return carousels(loggedIn, searchResults, handleViewClicked);
 };
