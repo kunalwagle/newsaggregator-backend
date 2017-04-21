@@ -28,6 +28,8 @@ public class RouterApplication extends Application {
         router.attach("/wikipedia/{searchTerm}", WikipediaSearchResource.class);
         router.attach("/summarise/", SummaryEvaluationResource.class);
         router.attach("/topic/{topic}", TopicResource.class);
+        router.attach("/user/subscribe/{topic}", SubscribeUserResource.class);
+        router.attach("/user/subscriptions/{topic}", SubscriptionsResource.class);
         return router;
     }
 }
