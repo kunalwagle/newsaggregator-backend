@@ -27,7 +27,7 @@ const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClick
         )
     } else {
         return (
-            <NavItem href="myTopics" eventKey={2} onSelect={handleSubscriptionSearch}>My Topics</NavItem>
+            <NavItem href="/subscriptions" eventKey={2} onSelect={handleSubscriptionSearch}>My Topics</NavItem>
 
         )
     }

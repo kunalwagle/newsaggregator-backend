@@ -14,4 +14,12 @@ public class TopicHolder {
         this.topic = topic;
         this.clusterHolder = clusterHolder;
     }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public List<ClusterHolder> getClusterHolder() {
+        return clusterHolder;
+    }
 }
