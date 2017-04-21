@@ -1,7 +1,11 @@
 /**
  * Created by kunalwagle on 19/04/2017.
  */
-import {VIEW_START, ARTICLES_RECEIVED} from "../../actions/SearchResults/SearchResultsActions";
+import {
+    VIEW_START,
+    ARTICLES_RECEIVED,
+    SUBSCRIPTION_TAB_SELECTED
+} from "../../actions/SearchResults/SearchResultsActions";
 
 const initialState = {
     label: "",
@@ -25,6 +29,10 @@ export default function searchResults(state, action) {
             return Object.assign({}, state, {
                 fetchInProgress: false,
                 articles: action.json
+            });
+        case SUBSCRIPTION_TAB_SELECTED:
+            return Object.assign({}, state, {
+                articles: action.articles
             })
     }
 

@@ -5,6 +5,7 @@ import fetch from "isomorphic-fetch";
 
 export const VIEW_START = 'VIEW_START';
 export const ARTICLES_RECEIVED = 'ARTICLES_RECEIVED';
+export const SUBSCRIPTION_TAB_SELECTED = 'SUBSCRIPTION_TAB_SELECTED';
 
 export function viewClicked(title) {
     return (dispatch) => {
@@ -26,5 +27,12 @@ export function articlesReceived(json) {
     return {
         type: ARTICLES_RECEIVED,
         json
+    }
+}
+
+export function subscriptionTabSelected(articles) {
+    return {
+        type: SUBSCRIPTION_TAB_SELECTED,
+        articles
     }
 }
