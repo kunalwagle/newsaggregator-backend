@@ -27,7 +27,7 @@ const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClick
         )
     } else {
         return (
-            <LinkContainer to="/subscription" activeHref="active">
+            <LinkContainer onClick={handleSubscriptionSearch} to="/subscription" activeHref="active">
                 <NavItem>
                     My Topics
                 </NavItem>

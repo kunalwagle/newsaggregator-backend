@@ -2,12 +2,14 @@
  * Created by kunalwagle on 20/04/2017.
  */
 import fetch from "isomorphic-fetch";
+import {subscriptionTabSelected} from "./SearchResults/SearchResultsActions";
 
 export const EMAIL_CHANGED = 'EMAIL_CHANGED';
 export const LOG_IN_CHANGE = 'LOG_IN_CHANGE';
 export const FETCH_STARTED = 'FETCH_STARTED';
 export const FETCH_ENDED = 'FETCH_ENDED';
 export const SUBSCRIBE_COMPLETE = 'SUBSCRIBE_COMPLETE';
+
 
 export function emailAddressChanged(text) {
     return {
@@ -54,8 +56,21 @@ export function startSubscriptionFetch() {
 }
 
 export function fetchedSubscriptions(json) {
+    return (dispatch) => {
+        if (json.length > 0) {
+            const articles = json[0].clusterHolder;
+            dispatch(subscriptionTabSelected(articles));
+        }
+        return dispatch(populateSubscriptions(json));
+    };
+}
+
+export function populateSubscriptions(json) {
     return {
         type: FETCH_ENDED,
         json
-    }
+    };
 }
+
+
+

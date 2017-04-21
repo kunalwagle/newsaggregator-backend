@@ -17,7 +17,6 @@ import {SubscriptionPage} from "./components/Subscriptions/Subscriptions";
 
 const store = createStore(App, compose(applyMiddleware(thunk)));
 const rootEl = document.getElementById('root');
-const navBar = document.getElementById('navbar');
 
 class NavigationBar extends React.Component {
     render() {

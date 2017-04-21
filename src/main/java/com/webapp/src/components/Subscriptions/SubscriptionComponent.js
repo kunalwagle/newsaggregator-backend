@@ -27,7 +27,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handle
 
     const tabMap = topics.map((topic, index) => {
         return (
-            <NavItem onSelect={() => handleTopicChange(topic.clusterHolders)} eventKey={index} key={index}>
+            <NavItem onSelect={() => handleTopicChange(topic.clusterHolder)} eventKey={index} key={index}>
                 {topic.topic}
             </NavItem>
         )
@@ -42,7 +42,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handle
     });
 
     return (
-        <Tab.Container defaultActiveKey={0}>
+        <Tab.Container id="left-tabs-example" defaultActiveKey={0}>
             <Row className="clearfix">
                 <Col sm={4}>
                     <Nav bsStyle="pills" stacked>

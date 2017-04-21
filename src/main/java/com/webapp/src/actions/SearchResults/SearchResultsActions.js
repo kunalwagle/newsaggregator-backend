@@ -7,6 +7,7 @@ export const VIEW_START = 'VIEW_START';
 export const ARTICLES_RECEIVED = 'ARTICLES_RECEIVED';
 export const SUBSCRIPTION_TAB_SELECTED = 'SUBSCRIPTION_TAB_SELECTED';
 
+
 export function viewClicked(title) {
     return (dispatch) => {
         dispatch(viewStarted(title));
@@ -29,7 +30,6 @@ export function articlesReceived(json) {
         json
     }
 }
-
 export function subscriptionTabSelected(articles) {
     return {
         type: SUBSCRIPTION_TAB_SELECTED,
