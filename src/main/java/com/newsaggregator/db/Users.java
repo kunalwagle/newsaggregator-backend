@@ -30,14 +30,16 @@ public class Users {
         if (user == null) {
             user = new User(email, new ArrayList<>());
         }
-        user.getTopics().add(topic);
+        if (!user.getTopics().contains(topic)) {
+            user.getTopics().add(topic);
+        }
         writeUser(user);
     }
 
     private void writeUser(User user) {
         try {
             Item item = new Item()
-                    .withPrimaryKey("emailAddress", user.getEmailAddress())
+                    .withPrimaryKey("Email", user.getEmailAddress())
                     .withList("Topics", user.getTopics());
             table.putItem(item);
         } catch (Exception e) {
@@ -48,7 +50,7 @@ public class Users {
     public User getSingleUser(String email) {
         try {
             QuerySpec spec = new QuerySpec()
-                    .withKeyConditionExpression("emailAddress = :email")
+                    .withKeyConditionExpression("Email = :email")
                     .withValueMap(new ValueMap()
                             .withString(":email", email));
             ItemCollection<QueryOutcome> items = table.query(spec);

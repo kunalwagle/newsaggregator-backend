@@ -5,7 +5,7 @@ import {Grid, Row, Col, Thumbnail, Button, Carousel} from "react-bootstrap";
 import React from "react";
 import {Link} from "react-router";
 
-const thumbnails = (loggedIn, carousel, idx, handleViewClicked) => {
+const thumbnails = (loggedIn, carousel, idx, handleViewClicked, handleSubscribeClicked) => {
     let buttonText = "Subscribe";
     if (!loggedIn) {
         buttonText = "Log in to subscribe";
@@ -28,7 +28,8 @@ const thumbnails = (loggedIn, carousel, idx, handleViewClicked) => {
                                             <Link to="/topic">View</Link>
                                         </Button>
                                         &nbsp;
-                                        <Button disabled={!loggedIn} bsStyle="success">{buttonText}</Button>
+                                        <Button disabled={!loggedIn} bsStyle="success"
+                                                onClick={() => handleSubscribeClicked(searchResult.title)}>{buttonText}</Button>
                                     </p>
                                 </Thumbnail>
                             </Col>
@@ -40,7 +41,7 @@ const thumbnails = (loggedIn, carousel, idx, handleViewClicked) => {
     )
 };
 
-const carousels = (loggedIn, searchResults, handleViewClicked) => {
+const carousels = (loggedIn, searchResults, handleViewClicked, handleSubscribeClicked) => {
     if (searchResults.length == 0) {
         return (
             <div>No Search Results...</div>
@@ -53,7 +54,7 @@ const carousels = (loggedIn, searchResults, handleViewClicked) => {
     }
 
     const mappedCarousels = carousels.map((carousel, idx) => {
-        return thumbnails(loggedIn, carousel, idx, handleViewClicked)
+        return thumbnails(loggedIn, carousel, idx, handleViewClicked, handleSubscribeClicked)
     });
 
     return (
@@ -67,11 +68,11 @@ const carousels = (loggedIn, searchResults, handleViewClicked) => {
     )
 };
 
-export const SearchResults = ({loggedIn, searchResults, fetchInProgress, handleViewClicked}) => {
+export const SearchResults = ({loggedIn, searchResults, fetchInProgress, handleViewClicked, handleSubscribeClicked}) => {
     if (fetchInProgress) {
         return (
             <div className="loader">Loading...</div>
         )
     }
-    return carousels(loggedIn, searchResults, handleViewClicked);
+    return carousels(loggedIn, searchResults, handleViewClicked, handleSubscribeClicked);
 };

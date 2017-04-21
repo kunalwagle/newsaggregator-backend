@@ -20,7 +20,7 @@ export default function loggedIn(state, action) {
             });
         case LOG_IN_CHANGE:
             let email = state.email;
-            if (action.loggedIn) {
+            if (!action.loggedIn) {
                 email = "";
             }
             return Object.assign({}, state, {

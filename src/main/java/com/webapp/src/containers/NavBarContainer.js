@@ -18,8 +18,8 @@ const mapDispatchToProps = (dispatch) => {
         handleLoginClicked: (loggedIn) => {
             dispatch(loginChanged(!loggedIn));
         },
-        handleEmailChange: (email) => {
-            dispatch(emailAddressChanged(email));
+        handleEmailChange: (event) => {
+            dispatch(emailAddressChanged(event.target.value));
         }
     }
 };

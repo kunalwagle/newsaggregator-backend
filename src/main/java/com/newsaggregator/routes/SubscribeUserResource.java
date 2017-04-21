@@ -19,6 +19,7 @@ public class SubscribeUserResource extends ServerResource {
     @Get
     public String subscribeUser() {
         String topic = (String) getRequestAttributes().get("topic");
+        topic = topic.replace("%20", " ");
         String user = (String) getRequestAttributes().get("user");
         DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
         Users userManager = new Users(db);

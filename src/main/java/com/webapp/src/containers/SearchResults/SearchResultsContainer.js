@@ -4,6 +4,7 @@
 import {connect} from "react-redux";
 import {SearchResults} from "../../components/SearchResults/SearchResult";
 import {viewClicked} from "../../actions/SearchResults/SearchResultsActions";
+import {subscribe} from "../../actions/LoginModalActions";
 
 const mapStateToProps = (state) => {
     return {
@@ -18,6 +19,9 @@ const mapDispatchToProps = (dispatch) => {
         handleViewClicked: (event, title) => {
             event.preventDefault();
             dispatch(viewClicked(title));
+        },
+        handleSubscribeClicked: (topic) => {
+            dispatch(subscribe(topic));
         }
     }
 };

@@ -14,7 +14,7 @@ export const TopicTopBar = ({label, loggedIn, handleSubscribeClicked}) => {
     return (
         <div>
             <PageHeader bsClass="col-md-9">{label}</PageHeader>
-            <Button disabled={!loggedIn} onClick={handleSubscribeClicked} bsStyle="success"
+            <Button disabled={!loggedIn} onClick={() => handleSubscribeClicked(label)} bsStyle="success"
                     bsSize="large">{buttonText}</Button>
         </div>
     );

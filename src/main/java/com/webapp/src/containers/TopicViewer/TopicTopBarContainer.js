@@ -3,7 +3,7 @@
  */
 import {connect} from "react-redux";
 import {TopicTopBar} from "../../components/TopicViewer/TopicTopBar";
-import {subscribeClicked} from "../../actions/TopicViewer/TopicViewerActions";
+import {subscribe} from "../../actions/LoginModalActions";
 
 const mapStateToProps = (state) => {
     return {
@@ -14,9 +14,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleSubscribeClicked: (event) => {
-            event.preventDefault();
-            dispatch(subscribeClicked());
+        handleSubscribeClicked: (topic) => {
+            dispatch(subscribe(topic));
         }
     }
 };
