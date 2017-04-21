@@ -6,48 +6,44 @@ import {Navbar, Nav, NavItem, OverlayTrigger, Popover, Button} from "react-boots
 
 
 const loginPopover = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked) => {
+    return (
+        <Popover title="Login" id="loginModalPopover">
+            <strong>Give an email address to log in</strong>
+            <br/><br/><br/>
+            <input onChange={handleEmailChange} placeholder="Email address"/>
+            <br/><br/><br/>
+            <Button onClick={() => handleLoginClicked(loggedIn)}>Login</Button>
+        </Popover>
+    );
+};
 
-    if (loggedIn) {
+const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked) => {
+    if (!loggedIn) {
         return (
-            <Popover title="Log Out" id="loginModalPopover">
-                You are logged in as <strong>{emailAddress}</strong>
-                <Button onClick={handleLoginClicked}>Log Out</Button>
-            </Popover>
+            <OverlayTrigger trigger="click" rootClose placement="bottom"
+                            overlay={loginPopover(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}>
+                <NavItem eventKey={2}>Register</NavItem>
+            </OverlayTrigger>
         )
     } else {
         return (
-            <Popover title="Login" id="loginModalPopover">
-                <strong>Give an email address to log in</strong>
-                <input onChange={handleEmailChange} placeholder="Email address"/>
-                <Button onClick={handleLoginClicked}>Login</Button>
-            </Popover>
-        );
+            <NavItem href="myTopics" eventKey={2}>My Topics</NavItem>
+
+        )
     }
 };
 
-const navItems = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked) => {
-    if (loggedIn) {
+const rightNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked) => {
+    if (!loggedIn) {
         return (
-            <div>
-                <OverlayTrigger rootClose
-                                overlay={loginPopover(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}>
-                    <NavItem eventKey={2}>Register</NavItem>
-                </OverlayTrigger>
-                <OverlayTrigger rootClose
-                                overlay={loginPopover(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}>
-                    <NavItem eventKey={3}>Sign In</NavItem>
-                </OverlayTrigger>
-            </div>
+            <OverlayTrigger trigger="click" rootClose placement="bottom"
+                            overlay={loginPopover(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}>
+                <NavItem eventKey={3}>Sign In</NavItem>
+            </OverlayTrigger>
         )
     } else {
         return (
-            <div>
-                <NavItem href="myTopics" eventKey={2}>My Topics</NavItem>
-                <OverlayTrigger rootClose
-                                overlay={loginPopover(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}>
-                    <NavItem eventKey={3}>Log Out</NavItem>
-                </OverlayTrigger>
-            </div>
+            <NavItem eventKey={3} onSelect={() => handleLoginClicked(loggedIn)}>Log Out</NavItem>
         )
     }
 };
@@ -57,7 +53,7 @@ export const NavBarComponent = ({loggedIn, emailAddress, handleEmailChange, hand
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
                 <Navbar.Brand>
-                    <a href="#">News Aggregator</a>
+                    <a href="/">News Aggregator</a>
                 </Navbar.Brand>
                 <Navbar.Toggle />
             </Navbar.Header>
@@ -69,7 +65,8 @@ export const NavBarComponent = ({loggedIn, emailAddress, handleEmailChange, hand
                     <NavItem eventKey={1}>
                         <input placeholder="Search"/>
                     </NavItem>
-                    {navItems(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}
+                    {leftNavItem(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}
+                    {rightNavItem(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

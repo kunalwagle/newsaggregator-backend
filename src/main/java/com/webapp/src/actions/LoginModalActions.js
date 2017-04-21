@@ -11,7 +11,7 @@ export function emailAddressChanged(text) {
     };
 }
 
-export function showModal(loggedIn) {
+export function loginChanged(loggedIn) {
     return {
         type: LOG_IN_CHANGE,
         loggedIn
