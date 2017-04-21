@@ -8,7 +8,8 @@ import {viewClicked} from "../../actions/SearchResults/SearchResultsActions";
 const mapStateToProps = (state) => {
     return {
         searchResults: state.searchBar.searchResults,
-        fetchInProgress: state.searchBar.fetchInProgress
+        fetchInProgress: state.searchBar.fetchInProgress,
+        loggedIn: state.loggedIn.loggedIn
     }
 };
 

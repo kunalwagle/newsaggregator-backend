@@ -7,7 +7,8 @@ import {subscribeClicked} from "../../actions/TopicViewer/TopicViewerActions";
 
 const mapStateToProps = (state) => {
     return {
-        label: state.searchResults.label
+        label: state.searchResults.label,
+        loggedIn: state.loggedIn.loggedIn
     }
 };
 
