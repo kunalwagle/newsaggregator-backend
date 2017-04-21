@@ -42,15 +42,17 @@ public class SubscriptionsResource extends ServerResource {
             List<TopicHolder> topicHolders = new ArrayList<>();
             for (String topic : topics) {
                 LabelString labelString = topicManager.getTopic(topic);
-                List<ClusterString> clusterStrings = labelString.getClusters();
                 List<ClusterHolder> clusterHolders = new ArrayList<>();
-                for (ClusterString clusterString : clusterStrings) {
-                    try {
-                        List<String> articles = clusterString.getCluster();
-                        List<OutletArticle> arts = articles.stream().map(articleManager::getSingleArticle).collect(Collectors.toList());
-                        clusterHolders.add(new ClusterHolder(arts, clusterString.getNodes()));
-                    } catch (Exception e) {
-                        logger.error("Internal exception generating cluster holder, can continue", e);
+                if (labelString != null) {
+                    List<ClusterString> clusterStrings = labelString.getClusters();
+                    for (ClusterString clusterString : clusterStrings) {
+                        try {
+                            List<String> articles = clusterString.getCluster();
+                            List<OutletArticle> arts = articles.stream().map(articleManager::getSingleArticle).collect(Collectors.toList());
+                            clusterHolders.add(new ClusterHolder(arts, clusterString.getNodes()));
+                        } catch (Exception e) {
+                            logger.error("Internal exception generating cluster holder, can continue", e);
+                        }
                     }
                 }
                 topicHolders.add(new TopicHolder(topic, clusterHolders));
