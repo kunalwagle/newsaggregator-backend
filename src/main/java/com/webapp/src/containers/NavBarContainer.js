@@ -3,7 +3,7 @@
  */
 import {connect} from "react-redux";
 import {NavBarComponent} from "../components/NavBar";
-import {emailAddressChanged, loginChanged} from "../actions/LoginModalActions";
+import {emailAddressChanged, loginChanged, getSubscriptions} from "../actions/LoginModalActions";
 
 
 const mapStateToProps = (state) => {
@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleEmailChange: (event) => {
             dispatch(emailAddressChanged(event.target.value));
+        },
+        handleSubscriptionSearch: () => {
+            dispatch(getSubscriptions())
         }
     }
 };

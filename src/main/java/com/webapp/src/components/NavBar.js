@@ -17,7 +17,7 @@ const loginPopover = (loggedIn, emailAddress, handleEmailChange, handleLoginClic
     );
 };
 
-const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked) => {
+const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked, handleSubscriptionSearch) => {
     if (!loggedIn) {
         return (
             <OverlayTrigger trigger="click" rootClose placement="bottom"
@@ -27,7 +27,7 @@ const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClick
         )
     } else {
         return (
-            <NavItem href="myTopics" eventKey={2}>My Topics</NavItem>
+            <NavItem href="myTopics" eventKey={2} onSelect={handleSubscriptionSearch}>My Topics</NavItem>
 
         )
     }
@@ -48,7 +48,7 @@ const rightNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClic
     }
 };
 
-export const NavBarComponent = ({loggedIn, emailAddress, handleEmailChange, handleLoginClicked}) => (
+export const NavBarComponent = ({loggedIn, emailAddress, handleEmailChange, handleLoginClicked, handleSubscriptionSearch}) => (
     <div>
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
@@ -65,7 +65,7 @@ export const NavBarComponent = ({loggedIn, emailAddress, handleEmailChange, hand
                     <NavItem eventKey={1}>
                         <input placeholder="Search"/>
                     </NavItem>
-                    {leftNavItem(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}
+                    {leftNavItem(loggedIn, emailAddress, handleEmailChange, handleLoginClicked, handleSubscriptionSearch)}
                     {rightNavItem(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}
                 </Nav>
             </Navbar.Collapse>
