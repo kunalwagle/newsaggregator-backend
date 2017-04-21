@@ -2,7 +2,7 @@
  * Created by kunalwagle on 07/02/2017.
  */
 import {connect} from "react-redux";
-import {SearchResults} from "../../components/SearchResults/SearchResult";
+import {SubscriptionComponent} from "../../components/SearchResults/SearchResult";
 import {viewClicked} from "../../actions/SearchResults/SearchResultsActions";
 import {subscribe} from "../../actions/LoginModalActions";
 
@@ -29,6 +29,6 @@ const mapDispatchToProps = (dispatch) => {
 const SearchResultsContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(SearchResults);
+)(SubscriptionComponent);
 
 export default SearchResultsContainer;
