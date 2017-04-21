@@ -3,8 +3,15 @@
  */
 import React from "react";
 import TopicPanelContainer from "../../containers/TopicViewer/TopicPanelContainer";
+import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
 
-export const SubscriptionComponent = ({topics, handleTopicChange}) => {
+export const SubscriptionComponent = ({fetchInProgress, topics, handleTopicChange}) => {
+
+    if (fetchInProgress) {
+        return (
+            <div className="loader">Loading...</div>
+        )
+    }
 
     const tabMap = topics.map((topic, index) => {
         return (
