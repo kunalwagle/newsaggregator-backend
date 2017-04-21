@@ -3,7 +3,7 @@
  */
 import React from "react";
 import {Navbar, Nav, NavItem, OverlayTrigger, Popover, Button} from "react-bootstrap";
-
+import {LinkContainer} from "react-router-bootstrap";
 
 const loginPopover = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked) => {
     return (
@@ -27,7 +27,11 @@ const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClick
         )
     } else {
         return (
-            <NavItem href="/subscriptions" eventKey={2} onSelect={handleSubscriptionSearch}>My Topics</NavItem>
+            <LinkContainer to="/subscription" activeHref="active">
+                <NavItem>
+                    My Topics
+                </NavItem>
+            </LinkContainer>
 
         )
     }
