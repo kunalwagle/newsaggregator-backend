@@ -11,7 +11,7 @@ export const SUBSCRIPTION_TAB_SELECTED = 'SUBSCRIPTION_TAB_SELECTED';
 export function viewClicked(title) {
     return (dispatch) => {
         dispatch(viewStarted(title));
-        return fetch("http://localhost:8182/api/topic/" + title)
+        return fetch("http://178.62.27.53:8182/api/topic/" + title)
             .then(response => response.json())
             .then(json => dispatch(articlesReceived(json)))
     }

@@ -66,9 +66,6 @@ export const NavBarComponent = ({loggedIn, emailAddress, handleEmailChange, hand
                     <NavItem eventKey={1} href="#">About</NavItem>
                 </Nav>
                 <Nav pullRight>
-                    <NavItem eventKey={1}>
-                        <input placeholder="Search"/>
-                    </NavItem>
                     {leftNavItem(loggedIn, emailAddress, handleEmailChange, handleLoginClicked, handleSubscriptionSearch)}
                     {rightNavItem(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}
                 </Nav>

@@ -28,7 +28,7 @@ export function loginChanged(loggedIn) {
 export function subscribe(topic) {
     return (dispatch, getState) => {
         const email = getState().loggedIn.email;
-        return fetch("http://localhost:8182/api/user/subscribe/" + email + "/" + topic)
+        return fetch("http://178.62.27.53:8182/api/user/subscribe/" + email + "/" + topic)
             .then(dispatch(subscribeComplete()))
     }
 }
@@ -43,7 +43,7 @@ export function getSubscriptions() {
     return (dispatch, getState) => {
         dispatch(startSubscriptionFetch());
         const email = getState().loggedIn.email;
-        return fetch("http://localhost:8182/api/user/subscriptions/" + email)
+        return fetch("http://178.62.27.53:8182/api/user/subscriptions/" + email)
             .then(response => response.json())
             .then(json => dispatch(fetchedSubscriptions(json)));
     }
