@@ -8,7 +8,8 @@ import {subscriptionTabSelected} from "../../actions/SearchResults/SearchResults
 const mapStateToProps = (state) => {
     return {
         fetchInProgress: state.loggedIn.fetchInProgress,
-        topics: state.loggedIn.topics
+        topics: state.loggedIn.topics,
+        loggedIn: state.loggedIn.loggedIn
     }
 };
 

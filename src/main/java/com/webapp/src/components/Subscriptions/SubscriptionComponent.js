@@ -5,11 +5,23 @@ import React from "react";
 import TopicPanelContainer from "../../containers/TopicViewer/TopicPanelContainer";
 import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
 
-export const SubscriptionComponent = ({fetchInProgress, topics, handleTopicChange}) => {
+export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handleTopicChange}) => {
+
+    if (!loggedIn) {
+        return (
+            <div>You must be logged in to access this feature</div>
+        )
+    }
 
     if (fetchInProgress) {
         return (
             <div className="loader">Loading...</div>
+        )
+    }
+
+    if (topics.length === 0) {
+        return (
+            <div>You have no subscriptions</div>
         )
     }
 
