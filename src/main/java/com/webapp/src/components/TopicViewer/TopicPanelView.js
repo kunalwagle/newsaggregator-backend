@@ -39,6 +39,12 @@ const TopicPanelView = ({articles, fetchInProgress, handleArticleClick}) => {
         return size(article.articles) && article.articles[0] != null;
     });
 
+    if (articles.length === 0) {
+        return (
+            <div>There is no recent news for this topic</div>
+        )
+    }
+
     let rows = [];
     for (let i = 0; i < articles.length; i += 4) {
         let temparray = articles.slice(i, i + 4);
