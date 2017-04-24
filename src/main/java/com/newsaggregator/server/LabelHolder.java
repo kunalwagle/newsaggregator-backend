@@ -1,8 +1,11 @@
 package com.newsaggregator.server;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newsaggregator.base.ArticleVector;
+import com.newsaggregator.base.DatabaseStorage;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.clustering.Cluster;
+import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * Created by kunalwagle on 17/04/2017.
  */
-public class LabelHolder {
+public class LabelHolder implements DatabaseStorage {
 
     private String label;
     private List<OutletArticle> articles = new ArrayList<>();
@@ -57,5 +60,14 @@ public class LabelHolder {
 
     public void addCluster(ClusterHolder articlesForSummary) {
         clusters.add(articlesForSummary);
+    }
+
+    @Override
+    public Document createDocument() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Document document = new Document();
+        document.put("Label", label);
+
+        return document;
     }
 }

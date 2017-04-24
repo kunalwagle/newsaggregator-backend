@@ -1,18 +1,16 @@
 package com.newsaggregator.db;
 
-import com.amazonaws.services.dynamodbv2.document.*;
-import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
-import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
-import com.amazonaws.services.dynamodbv2.document.utils.NameMap;
-import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
-import com.amazonaws.services.dynamodbv2.model.ReturnValue;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.base.OutletArticle;
 import org.apache.log4j.Logger;
+import org.bson.Document;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -20,82 +18,30 @@ import java.util.stream.Collectors;
  */
 public class Articles {
 
-    private final Table table;
-    private DynamoDB database;
+    private MongoDatabase database;
+    private MongoCollection<Document> collection;
+
     private Logger logger = Logger.getLogger(getClass());
 
-    public Articles(DynamoDB database) {
+    public Articles(MongoDatabase database) {
         this.database = database;
-        this.table = getCollection();
+        this.collection = getCollection();
     }
 
     public void saveArticles(List<OutletArticle> articles) {
-        for (OutletArticle article : articles) {
-            try {
-                if (articleExists(article)) {
-                    updateArticle(article);
-                } else {
-                    writeArticle(article);
-                }
-            } catch (Exception e) {
-                logger.error("Saving articles error", e);
-            }
-        }
+        MongoCollection<Document> articleCollection = getCollection();
+        List<Document> documents = articles.stream().map(OutletArticle::createDocument).collect(Collectors.toList());
+        articleCollection.insertMany(documents);
     }
 
     public List<OutletArticle> articlesToAdd(List<OutletArticle> articles) {
         return articles.stream().filter(article -> !articleExists(article)).collect(Collectors.toList());
     }
 
-    private void writeArticle(OutletArticle article) {
-        try {
-            Item item = new Item()
-                    .withPrimaryKey("articleUrl", article.getArticleUrl(), "datePublished", article.getLastPublished())
-                    .withString("Body", article.getBody())
-                    .withString("Title", article.getTitle())
-                    .withString("Source", article.getSource());
-            if (article.getImageUrl() != null && article.getImageUrl().length() > 1) {
-                item = item.withString("ImageUrl", article.getImageUrl());
-            }
-            table.putItem(item);
-        } catch (Exception e) {
-            logger.error("Writing articles error", e);
-            //e.printStackTrace();
-        }
-    }
-
-    private void updateArticle(OutletArticle article) {
-        try {
-            UpdateItemSpec updateItemSpec = new UpdateItemSpec()
-                    .withPrimaryKey("articleUrl", article.getArticleUrl(), "datePublished", article.getLastPublished())
-                    .withUpdateExpression("set #i=:val1, #t=:val2, #b=:val3, #s=:val4")
-                    .withNameMap(new NameMap()
-                            .with("#i", "ImageUrl")
-                            .with("#t", "Title")
-                            .with("#b", "Body")
-                            .with("#s", "Source"))
-                    .withValueMap(new ValueMap()
-                            .withString(":val1", article.getImageUrl())
-                            .withString(":val2", article.getTitle())
-                            .withString(":val3", article.getBody())
-                            .withString(":val4", article.getSource()))
-                    .withReturnValues(ReturnValue.ALL_NEW);
-            table.updateItem(updateItemSpec);
-        } catch (Exception e) {
-            logger.error("Updating Article error", e);
-            //e.printStackTrace();
-        }
-    }
-
     private boolean articleExists(OutletArticle article) {
         try {
-            QuerySpec spec = new QuerySpec()
-                    .withKeyConditionExpression("articleUrl = :a_url")
-                    .withValueMap(new ValueMap()
-                            .withString(":a_url", article.getArticleUrl()));
-            ItemCollection<QueryOutcome> items = table.query(spec);
-            Iterator<Item> iterator = items.iterator();
-            return iterator.next() != null;
+            BasicDBObject queryObject = new BasicDBObject().append("ArticleUrl", article.getArticleUrl());
+            return collection.count(queryObject) > 0;
         } catch (Exception e) {
             return false;
         }
@@ -103,21 +49,12 @@ public class Articles {
 
     public OutletArticle getSingleArticle(String url) {
         try {
-            QuerySpec spec = new QuerySpec()
-                    .withKeyConditionExpression("articleUrl = :a_url")
-                    .withValueMap(new ValueMap()
-                            .withString(":a_url", url));
-            ItemCollection<QueryOutcome> items = table.query(spec);
-            Iterator<Item> iterator = items.iterator();
+            BasicDBObject queryObject = new BasicDBObject().append("ArticleUrl", url);
+            MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             if (iterator.hasNext()) {
-                Map<String, Object> item = iterator.next().asMap();
-                String articleUrl = (String) item.get("articleUrl");
-                String title = (String) item.get("Title");
-                String body = (String) item.get("Body");
-                String imageUrl = (String) item.get("ImageUrl");
-                String source = (String) item.get("Source");
-                String datePublished = (String) item.get("datePublished");
-                return new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished);
+                String item = iterator.next().toJson();
+                ObjectMapper objectMapper = new ObjectMapper();
+                return objectMapper.readValue(item, OutletArticle.class);
             }
         } catch (Exception e) {
             logger.error("An error occurred retrieving a single article", e);
@@ -128,23 +65,11 @@ public class Articles {
     public List<OutletArticle> getAllArticles() {
         List<OutletArticle> articles = new ArrayList<>();
         try {
-            logger.info("Starting to scan database");
-            ItemCollection<ScanOutcome> items = table.scan();
-            logger.info("Scanned. Got " + items.getAccumulatedItemCount() + " items");
-            for (Item nextItem : items) {
-                logger.info("Adding an item");
-                try {
-                    Map<String, Object> item = nextItem.asMap();
-                    String articleUrl = (String) item.get("articleUrl");
-                    String title = (String) item.get("Title");
-                    String body = (String) item.get("Body");
-                    String imageUrl = (String) item.get("ImageUrl");
-                    String source = (String) item.get("Source");
-                    String datePublished = (String) item.get("datePublished");
-                    articles.add(new OutletArticle(title, body, imageUrl, articleUrl, source, datePublished));
-                } catch (Exception e) {
-                    logger.error("Reading articles exception", e);
-                }
+            MongoCursor<Document> iterator = collection.find().iterator();
+            while (iterator.hasNext()) {
+                String item = iterator.next().toJson();
+                ObjectMapper objectMapper = new ObjectMapper();
+                articles.add(objectMapper.readValue(item, OutletArticle.class));
             }
         } catch (Exception e) {
             logger.error("Caught an exception", e);
@@ -153,8 +78,14 @@ public class Articles {
         return articles;
     }
 
-    private Table getCollection() {
-        return database.getTable("Articles");
+    private MongoCollection<Document> getCollection() {
+        MongoCollection<Document> articleCollection = database.getCollection("articles", Document.class);
+
+        if (articleCollection == null) {
+            database.createCollection("articles");
+            articleCollection = database.getCollection("articles", Document.class);
+        }
+        return articleCollection;
     }
 
 }
