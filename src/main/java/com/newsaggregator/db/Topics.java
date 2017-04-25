@@ -1,28 +1,34 @@
 package com.newsaggregator.db;
 
-import com.amazonaws.services.dynamodbv2.document.*;
+import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.ItemCollection;
+import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
+import com.amazonaws.services.dynamodbv2.document.ScanOutcome;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.ClusterString;
 import com.newsaggregator.server.LabelHolder;
 import com.newsaggregator.server.LabelString;
 import org.apache.log4j.Logger;
+import org.bson.Document;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Topics {
 
-    private final Table table;
-    private DynamoDB database;
+    private final MongoCollection<Document> collection;
+    private MongoDatabase database;
     private Logger logger = Logger.getLogger(getClass());
 
-    public Topics(DynamoDB database) {
+    public Topics(MongoDatabase database) {
         this.database = database;
-        this.table = getCollection();
+        this.collection = getCollection();
     }
 
     public void saveTopics(Map<String, LabelHolder> topics) {
@@ -119,7 +125,13 @@ public class Topics {
         return null;
     }
 
-    private Table getCollection() {
-        return database.getTable("Topics");
+    private MongoCollection<Document> getCollection() {
+        MongoCollection<Document> topicCollection = database.getCollection("topics", Document.class);
+
+        if (topicCollection == null) {
+            database.createCollection("topics");
+            topicCollection = database.getCollection("topics", Document.class);
+        }
+        return topicCollection;
     }
 }

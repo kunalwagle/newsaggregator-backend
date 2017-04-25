@@ -7,6 +7,7 @@ import org.bson.Document;
  */
 public class OutletArticle extends Article implements DatabaseStorage {
 
+    private String _id;
     private String body;
     private String articleUrl;
     private String lastPublished;
@@ -32,6 +33,14 @@ public class OutletArticle extends Article implements DatabaseStorage {
 
     public String getLastPublished() {
         return lastPublished;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     @Override
