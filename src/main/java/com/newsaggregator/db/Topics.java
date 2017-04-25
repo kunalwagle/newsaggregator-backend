@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class Topics {
         this.collection = getCollection();
     }
 
-    public void saveTopics(List<LabelHolder> topics) {
+    public void saveTopics(Collection<LabelHolder> topics) {
         List<Document> documents = topics.stream().map(LabelHolder::createDocument).collect(Collectors.toList());
         collection.insertMany(documents);
     }

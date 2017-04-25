@@ -1,13 +1,13 @@
 package com.newsaggregator.server.jobs;
 
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.Topic;
 import com.newsaggregator.db.Articles;
+import com.newsaggregator.db.Summaries;
 import com.newsaggregator.db.Topics;
 import com.newsaggregator.ml.clustering.Cluster;
 import com.newsaggregator.ml.clustering.Clusterer;
@@ -15,7 +15,9 @@ import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.ml.summarisation.Summary;
-import com.newsaggregator.server.*;
+import com.newsaggregator.server.ArticleFetch;
+import com.newsaggregator.server.ClusterHolder;
+import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -34,41 +36,25 @@ public class ArticleFetchRunnable implements Runnable {
         Logger logger = Logger.getLogger(getClass());
         try {
             logger.info("Fetching articles");
-            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
+            MongoClient mongoClient = new MongoClient("localhost", 27017);
+            MongoDatabase db = mongoClient.getDatabase("NewsAggregator");
             Articles articleManager = new Articles(db);
             Topics topicManager = new Topics(db);
-            logger.info(db.listTables());
+            Summaries summaryManager = new Summaries(db);
             List<OutletArticle> articleList = ArticleFetch.fetchArticles();
             logger.info("Getting database articles");
             List<OutletArticle> allArticles = articleManager.getAllArticles();
             logger.info("Getting database topics");
             List<OutletArticle> finalAllArticles = allArticles;
             articleList.removeIf(art -> finalAllArticles.stream().anyMatch(a -> a.getArticleUrl().equals(art.getArticleUrl())));
-            Map<String, LabelString> allLabels = topicManager.getAllTopics();
+            List<LabelHolder> topicLabels = topicManager.getAllTopics();
             Map<String, LabelHolder> topicLabelMap = new HashMap<>();
-            logger.info("Starting topic modelling and labelling");
 
-            for (Map.Entry<String, LabelString> label : allLabels.entrySet()) {
-                try {
-                    String labelName = label.getKey();
-                    LabelString labelString = label.getValue();
-                    List<OutletArticle> articles = new ArrayList<>();
-                    for (String url : labelString.getArticles()) {
-                        articles.add(allArticles.stream().filter(art -> art.getArticleUrl().equals(url)).findFirst().get());
-                    }
-                    List<ClusterHolder> clusters = new ArrayList<>();
-                    for (ClusterString clusterString : labelString.getClusters()) {
-                        List<OutletArticle> a = new ArrayList<>();
-                        for (String string : clusterString.getCluster()) {
-                            a.add(allArticles.stream().filter(art -> art.getArticleUrl().equals(string)).findFirst().get());
-                        }
-                        clusters.add(new ClusterHolder(a, clusterString.getNodes()));
-                    }
-                    topicLabelMap.put(labelName, new LabelHolder(labelName, articles, clusters));
-                } catch (Exception e) {
-                    logger.error("Error populating Topic Label Map", e);
-                }
+            for (LabelHolder holder : topicLabels) {
+                topicLabelMap.put(holder.getLabel(), holder);
             }
+
+            logger.info("Starting topic modelling and labelling");
 
             try {
                 TopicModelling topicModelling = new TopicModelling();
@@ -81,8 +67,8 @@ public class ArticleFetchRunnable implements Runnable {
                         int count = articleList.indexOf(article) + 1;
                         logger.info("Modelling and labelling article " + count + " out of " + articleList.size());
                         Topic topic = topicModelling.getModel(article);
-                        List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
-                        for (String topicLabel : topicLabels) {
+                        List<String> labels = TopicLabelling.generateTopicLabel(topic, article);
+                        for (String topicLabel : labels) {
                             if (topicLabelMap.containsKey(topicLabel)) {
                                 topicLabelMap.get(topicLabel).addArticle(article);
                             } else {
@@ -101,6 +87,7 @@ public class ArticleFetchRunnable implements Runnable {
 
                 int counter = 1;
                 List<ClusterHolder> clusterHolderList = new ArrayList<>();
+                List<ClusterHolder> databaseClusters = summaryManager.getAllClusters();
                 for (Map.Entry<String, LabelHolder> topicLabel : topicLabelMap.entrySet()) {
                     logger.info("Clustering topic " + counter + " out of " + topicLabelMap.size());
                     List<OutletArticle> articles = topicLabel.getValue().getArticles();
@@ -109,14 +96,16 @@ public class ArticleFetchRunnable implements Runnable {
                     for (Cluster<ArticleVector> cluster : clusters) {
                         try {
                             List<OutletArticle> clusterArticles = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
-                            if (clusterHolderList.stream().anyMatch(c -> c.sameCluster(clusterArticles))) {
-                                ClusterHolder clusterHolder = clusterHolderList.stream().filter(c -> c.sameCluster(clusterArticles)).findFirst().get();
-                                clusterHolder.addLabel(topicLabel.getKey());
-                            } else {
-                                if (!topicLabel.getValue().clusterExists(cluster)) {
-                                    ClusterHolder clusterHolder = new ClusterHolder(clusterArticles);
+                            if (databaseClusters.stream().noneMatch(c -> c.sameCluster(clusterArticles))) {
+                                if (clusterHolderList.stream().anyMatch(c -> c.sameCluster(clusterArticles))) {
+                                    ClusterHolder clusterHolder = clusterHolderList.stream().filter(c -> c.sameCluster(clusterArticles)).findFirst().get();
                                     clusterHolder.addLabel(topicLabel.getKey());
-                                    clusterHolderList.add(clusterHolder);
+                                } else {
+                                    if (!topicLabel.getValue().clusterExists(cluster)) {
+                                        ClusterHolder clusterHolder = new ClusterHolder(clusterArticles);
+                                        clusterHolder.addLabel(topicLabel.getKey());
+                                        clusterHolderList.add(clusterHolder);
+                                    }
                                 }
                             }
                         } catch (Exception e) {
@@ -143,7 +132,7 @@ public class ArticleFetchRunnable implements Runnable {
                     counter++;
                 }
                 logger.info("Writing Topics");
-                topicManager.saveTopics(topicLabelMap);
+                topicManager.saveTopics(topicLabelMap.values());
                 logger.info("Topics saved");
                 logger.info("Writing Articles");
                 articleManager.saveArticles(articleList);

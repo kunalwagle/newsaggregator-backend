@@ -83,4 +83,8 @@ public class LabelHolder implements DatabaseStorage {
         document.put("Clusters", clusters.stream().map(ClusterHolder::get_id).collect(Collectors.toList()));
         return document;
     }
+
+    public String getLabel() {
+        return label;
+    }
 }
