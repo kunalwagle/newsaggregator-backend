@@ -40,21 +40,24 @@ public class Topics {
         try {
             MongoCursor<Document> iterator = collection.find().iterator();
             while (iterator.hasNext()) {
-                String item = iterator.next().toJson();
+                Document document = iterator.next();
+                String item = document.toJson();
                 JSONObject jsonObject = new JSONObject(item);
                 JSONArray articleIds = jsonObject.getJSONArray("Articles");
                 List<OutletArticle> articles = new ArrayList<>();
                 for (int i = 0; i < articleIds.length(); i++) {
-                    String articleId = articleIds.getString(i);
+                    String articleId = articleIds.getJSONObject(i).getString("$oid");
                     articles.add(articleManager.getArticleFromId(articleId));
                 }
                 JSONArray summaryIds = jsonObject.getJSONArray("Clusters");
                 List<ClusterHolder> clusters = new ArrayList<>();
                 for (int i = 0; i < summaryIds.length(); i++) {
-                    String summaryId = summaryIds.getString(i);
+                    String summaryId = summaryIds.getJSONObject(i).getString("$oid");
                     clusters.add(summaryManager.getSingleCluster(summaryId));
                 }
-                labelHolders.add(new LabelHolder(jsonObject.getString("Label"), articles, clusters));
+                LabelHolder labelHolder = new LabelHolder(jsonObject.getString("Label"), articles, clusters);
+                labelHolder.set_id(document.getObjectId("_id"));
+                labelHolders.add(labelHolder);
             }
         } catch (Exception e) {
             logger.error("Caught an exception", e);
@@ -70,7 +73,8 @@ public class Topics {
             Articles articleManager = new Articles(database);
             Summaries summaryManager = new Summaries(database);
             if (iterator.hasNext()) {
-                String item = iterator.next().toJson();
+                Document document = iterator.next();
+                String item = document.toJson();
                 JSONObject jsonObject = new JSONObject(item);
                 JSONArray articleIds = jsonObject.getJSONArray("Articles");
                 List<OutletArticle> articles = new ArrayList<>();
@@ -84,7 +88,9 @@ public class Topics {
                     String summaryId = summaryIds.getString(i);
                     clusters.add(summaryManager.getSingleCluster(summaryId));
                 }
-                return new LabelHolder(jsonObject.getString("Label"), articles, clusters);
+                LabelHolder labelHolder = new LabelHolder(jsonObject.getString("Label"), articles, clusters);
+                labelHolder.set_id(document.getObjectId("_id"));
+                return labelHolder;
             }
         } catch (Exception e) {
             logger.error("An error occurred whilst getting a single topic", e);

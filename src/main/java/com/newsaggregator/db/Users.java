@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kunalwagle on 21/04/2017.
@@ -50,9 +51,12 @@ public class Users {
             BasicDBObject queryObject = new BasicDBObject().append("emailAddress", email);
             MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             if (iterator.hasNext()) {
-                String item = iterator.next().toJson();
-                ObjectMapper objectMapper = new ObjectMapper();
-                return objectMapper.readValue(item, User.class);
+                Document document = iterator.next();
+                String address = document.getString("emailAddress");
+                List<String> topicIds = (List<String>) document.get("topicIds");
+                User user = new User(address, topicIds);
+                user.set_id(document.getObjectId("_id"));
+                return user;
             }
         } catch (Exception e) {
             logger.error("An error occurred retrieving a single user", e);

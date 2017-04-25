@@ -24,6 +24,16 @@ public class OutletArticle extends Article implements DatabaseStorage {
         //Dummy constructor for Jackson
     }
 
+    public OutletArticle(Document item) {
+        _id = (ObjectId) item.get("_id");
+        title = (String) item.get("Title");
+        body = (String) item.get("Body");
+        imageUrl = (String) item.get("ImageURL");
+        articleUrl = (String) item.get("ArticleURL");
+        source = (String) item.get("Source");
+        lastPublished = (String) item.get("LastPublished");
+    }
+
     public String getBody() {
         return body;
     }
@@ -56,6 +66,7 @@ public class OutletArticle extends Article implements DatabaseStorage {
         doc.put("ImageURL", imageUrl);
         doc.put("ArticleURL", articleUrl);
         doc.put("Source", source);
+        doc.put("LastPublished", lastPublished);
 
         return doc;
     }

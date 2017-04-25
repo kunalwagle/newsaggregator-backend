@@ -10,6 +10,7 @@ import com.newsaggregator.ml.summarisation.Extractive.Node;
 import com.newsaggregator.server.ClusterHolder;
 import org.apache.log4j.Logger;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -40,22 +41,29 @@ public class Summaries {
 
     public ClusterHolder getSingleCluster(String _id) {
         try {
-            BasicDBObject queryObject = new BasicDBObject().append("_id", _id);
+            BasicDBObject queryObject = new BasicDBObject().append("_id", new ObjectId(_id));
             MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             Articles articleManager = new Articles(database);
             ObjectMapper objectMapper = new ObjectMapper();
             if (iterator.hasNext()) {
-                String item = iterator.next().toJson();
+                Document document = iterator.next();
+                String item = document.toJson();
                 JSONObject jsonObject = new JSONObject(item);
                 JSONArray articleIds = jsonObject.getJSONArray("Articles");
                 List<OutletArticle> articles = new ArrayList<>();
                 for (int i = 0; i < articleIds.length(); i++) {
-                    String articleId = articleIds.getString(i);
+                    String articleId = articleIds.getJSONObject(i).getString("$oid");
                     articles.add(articleManager.getArticleFromId(articleId));
                 }
-                String nodes = jsonObject.getJSONArray("Summaries").toString();
-                List<List<Node>> summaries = objectMapper.readValue(nodes, List.class);
-                return new ClusterHolder(articles, summaries);
+                JSONArray nodes = jsonObject.getJSONArray("Summaries");
+                List<List<Node>> summaries = new ArrayList<>();
+                for (int i = 0; i < articleIds.length(); i++) {
+                    String node = nodes.getString(i);
+                    summaries.add(objectMapper.readValue(node, objectMapper.getTypeFactory().constructCollectionType(List.class, Node.class)));
+                }
+                ClusterHolder clusterHolder = new ClusterHolder(articles, summaries);
+                clusterHolder.set_id(document.getObjectId("_id"));
+                return clusterHolder;
             }
         } catch (Exception e) {
             logger.error("An error occurred retrieving a single cluster", e);
@@ -70,17 +78,24 @@ public class Summaries {
         try {
             MongoCursor<Document> iterator = collection.find().iterator();
             while (iterator.hasNext()) {
-                String item = iterator.next().toJson();
+                Document document = iterator.next();
+                String item = document.toJson();
                 JSONObject jsonObject = new JSONObject(item);
                 JSONArray articleIds = jsonObject.getJSONArray("Articles");
                 List<OutletArticle> articles = new ArrayList<>();
                 for (int i = 0; i < articleIds.length(); i++) {
-                    String articleId = articleIds.getString(i);
+                    String articleId = articleIds.getJSONObject(i).getString("$oid");
                     articles.add(articleManager.getArticleFromId(articleId));
                 }
-                String nodes = jsonObject.getJSONArray("Summaries").toString();
-                List<List<Node>> summaries = objectMapper.readValue(nodes, List.class);
-                clusters.add(new ClusterHolder(articles, summaries));
+                JSONArray nodes = jsonObject.getJSONArray("Summaries");
+                List<List<Node>> summaries = new ArrayList<>();
+                for (int i = 0; i < articleIds.length(); i++) {
+                    String node = nodes.getString(i);
+                    summaries.add(objectMapper.readValue(node, objectMapper.getTypeFactory().constructCollectionType(List.class, Node.class)));
+                }
+                ClusterHolder clusterHolder = new ClusterHolder(articles, summaries);
+                clusterHolder.set_id(document.getObjectId("_id"));
+                clusters.add(clusterHolder);
             }
         } catch (Exception e) {
             logger.error("Caught an exception", e);

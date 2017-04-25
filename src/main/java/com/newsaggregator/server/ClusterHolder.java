@@ -79,7 +79,11 @@ public class ClusterHolder implements DatabaseStorage {
             document.put("_id", _id);
             document.put("Articles", articles.stream().map(OutletArticle::get_id).collect(Collectors.toList()));
             ObjectMapper objectMapper = new ObjectMapper();
-            document.put("Summaries", objectMapper.writeValueAsString(summaries));
+            List<String> sums = new ArrayList<>();
+            for (List<Node> sum : summaries) {
+                sums.add(objectMapper.writeValueAsString(sum));
+            }
+            document.put("Summaries", sums);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;

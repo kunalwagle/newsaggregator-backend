@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="Build works">
+    <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,8 +31,8 @@
       <file leaf-file-name="ClusterHolder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="81" column="30" lean-forward="false" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
+            <state relative-caret-position="344">
+              <caret line="85" column="42" lean-forward="false" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
               <folding>
                 <element signature="method#ClusterHolder#1;class#ClusterHolder#0" expanded="true" />
                 <element signature="method#setSummary#0;class#ClusterHolder#0" expanded="true" />
@@ -40,51 +42,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Summaries.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Summaries.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="45" lean-forward="false" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+            <state relative-caret-position="359">
+              <caret line="99" column="31" lean-forward="true" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#Summaries#0;class#Summaries#0" expanded="true" />
                 <element signature="method#saveSummaries#0;class#Summaries#0" expanded="true" />
                 <element signature="method#getSingleCluster#0;class#Summaries#0" expanded="true" />
-                <element signature="method#getAllClusters#0;class#Summaries#0" expanded="true" />
                 <element signature="method#getCollection#0;class#Summaries#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SubscriptionsResource.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="40" column="63" lean-forward="false" selection-start-line="40" selection-start-column="63" selection-end-line="40" selection-end-column="63" />
-              <folding>
-                <marker date="1493121804000" expanded="false" signature="43:604" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArticleFetch.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="27" column="36" lean-forward="false" selection-start-line="26" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SubscribeUserResource.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="22" column="47" lean-forward="false" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
-              <folding>
-                <marker date="1493121804000" expanded="false" signature="36:286" ph="..." />
               </folding>
             </state>
           </provider>
@@ -93,15 +61,14 @@
       <file leaf-file-name="Articles.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+            <state relative-caret-position="524">
+              <caret line="55" column="47" lean-forward="false" selection-start-line="55" selection-start-column="47" selection-end-line="55" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Articles#0;class#Articles#0" expanded="true" />
                 <element signature="method#saveArticles#0;class#Articles#0" expanded="true" />
                 <element signature="method#articlesToAdd#0;class#Articles#0" expanded="true" />
                 <element signature="method#articleExists#0;class#Articles#0" expanded="true" />
-                <element signature="method#getSingleArticle#0;class#Articles#0" expanded="true" />
                 <element signature="method#getArticleFromId#0;class#Articles#0" expanded="true" />
                 <element signature="method#getAllArticles#0;class#Articles#0" expanded="true" />
                 <element signature="method#getCollection#0;class#Articles#0" expanded="true" />
@@ -110,38 +77,73 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SendEmailRunnable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SendEmailRunnable.java">
+      <file leaf-file-name="OutletArticle.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="21" column="47" lean-forward="false" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
-              <folding>
-                <marker date="1493121804000" expanded="false" signature="41:357" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TopicResource.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
+            <state relative-caret-position="164">
               <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#topic#0;class#TopicResource#0" expanded="true" />
+                <element signature="method#createDocument#0;class#OutletArticle#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArticleFetchRunnable.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ArticleFetchRunnable.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+            <state relative-caret-position="1290">
+              <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Topics.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="254">
+              <caret line="55" column="77" lean-forward="true" selection-start-line="55" selection-start-column="77" selection-end-line="55" selection-end-column="77" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#Topics#0;class#Topics#0" expanded="true" />
+                <element signature="method#saveTopics#0;class#Topics#0" expanded="true" />
+                <element signature="method#getTopic#0;class#Topics#0" expanded="true" />
+                <element signature="method#getCollection#0;class#Topics#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Users.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="64" column="5" lean-forward="true" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+              <folding>
+                <element signature="method#Users#0;class#Users#0" expanded="true" />
+                <element signature="method#addTopic#0;class#Users#0" expanded="true" />
+                <element signature="method#writeUser#0;class#Users#0" expanded="true" />
+                <element signature="method#getSingleUser#0;class#Users#0" expanded="true" />
+                <element signature="method#getUserFromId#0;class#Users#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="13" column="23" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#User#0;class#User#0" expanded="true" />
+                <element signature="method#User#1;class#User#0" expanded="true" />
+                <element signature="method#createDocument#0;class#User#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -246,11 +248,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Home/SearchBar.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/NavBar.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/DatabaseStorage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Utils.java" />
@@ -260,6 +257,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
       </list>
@@ -793,6 +795,134 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="db" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mongo-java-driver-3.4.2.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mongo-java-driver-3.4.2.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mongodb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="json-20160810.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="json" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="json-20160810.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -1462,14 +1592,7 @@
       <workItem from="1490695952010" duration="95924000" />
       <workItem from="1491926569536" duration="8385000" />
       <workItem from="1492002902704" duration="27962000" />
-      <workItem from="1492430182328" duration="102513000" />
-    </task>
-    <task id="LOCAL-00167" summary="Populating Topic Viewer">
-      <created>1492616952728</created>
-      <option name="number" value="00167" />
-      <option name="presentableId" value="LOCAL-00167" />
-      <option name="project" value="LOCAL" />
-      <updated>1492616952728</updated>
+      <workItem from="1492430182328" duration="106773000" />
     </task>
     <task id="LOCAL-00168" summary="Added topic page to index">
       <created>1492617400067</created>
@@ -1807,7 +1930,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493121806333</updated>
     </task>
-    <option name="localTasksCounter" value="216" />
+    <task id="LOCAL-00216" summary="Multiple summaries for databases">
+      <created>1493122840348</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL-00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1493122840349</updated>
+    </task>
+    <option name="localTasksCounter" value="217" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1840,7 +1970,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="445692000" />
+    <option name="totallyTimeSpent" value="449952000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1927,7 +2057,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Created skeleton resources" />
     <MESSAGE value="Subscribe to a topic" />
     <MESSAGE value="Getting subscriptions" />
     <MESSAGE value="Added login modal fetch actions" />
@@ -1952,7 +2081,8 @@
     <MESSAGE value="User database class" />
     <MESSAGE value="Ready to test Runnable" />
     <MESSAGE value="Build works" />
-    <option name="LAST_COMMIT_MESSAGE" value="Build works" />
+    <MESSAGE value="Multiple summaries for databases" />
+    <option name="LAST_COMMIT_MESSAGE" value="Multiple summaries for databases" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1989,12 +2119,6 @@
           <properties />
           <option name="timeStamp" value="439" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java</url>
-          <line>31</line>
-          <properties />
-          <option name="timeStamp" value="535" />
-        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -2005,33 +2129,19 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="536" />
+      <option name="time" value="565" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((LinkedHashMap)summaries.get(0).get(1)).entrySet().toArray()[2]" custom="java.util.LinkedHashMap" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/NavBarActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticleViewerPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="47" lean-forward="false" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="47" />
-          <folding>
-            <element signature="e#48#74#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/LoginModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -2333,14 +2443,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/DatabaseStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/SummarisedArticle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -2371,88 +2473,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="44" column="5" lean-forward="true" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#922#923#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
-            <element signature="e#988#989#0" expanded="true" />
-            <element signature="e#1018#1019#0" expanded="true" />
-            <element signature="method#createDocument#0;class#OutletArticle#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="636">
-          <caret line="56" column="25" lean-forward="false" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#User#0;class#User#0" expanded="true" />
-            <element signature="method#User#1;class#User#0" expanded="true" />
-            <element signature="e#509#510#0" expanded="true" />
-            <element signature="e#535#536#0" expanded="true" />
-            <element signature="e#575#576#0" expanded="true" />
-            <element signature="e#605#606#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="70" column="13" lean-forward="false" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
-          <folding>
-            <element signature="method#Users#0;class#Users#0" expanded="true" />
-            <element signature="method#addTopic#0;class#Users#0" expanded="true" />
-            <element signature="method#writeUser#0;class#Users#0" expanded="true" />
-            <element signature="method#getSingleUser#0;class#Users#0" expanded="true" />
-            <element signature="e#2576#2577#0" expanded="true" />
-            <element signature="e#2630#2631#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#LabelHolder#0" expanded="true" />
-            <element signature="method#LabelHolder#1;class#LabelHolder#0" expanded="true" />
-            <element signature="method#addArticle#0;class#LabelHolder#0" expanded="true" />
-            <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
-            <element signature="e#1848#1849#0" expanded="true" />
-            <element signature="e#1879#1880#0" expanded="true" />
-            <element signature="e#2102#2103#0" expanded="true" />
-            <element signature="e#2128#2129#0" expanded="true" />
-            <element signature="e#2168#2169#0" expanded="true" />
-            <element signature="e#2198#2199#0" expanded="true" />
-            <element signature="method#createDocument#0;class#LabelHolder#0" expanded="true" />
-            <element signature="e#2753#2754#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="76" column="50" lean-forward="false" selection-start-line="76" selection-start-column="50" selection-end-line="76" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Topics#0;class#Topics#0" expanded="true" />
-            <element signature="method#saveTopics#0;class#Topics#0" expanded="true" />
-            <element signature="method#getAllTopics#0;class#Topics#0" expanded="true" />
-            <element signature="method#getCollection#0;class#Topics#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
@@ -2469,7 +2489,7 @@
         <state relative-caret-position="300">
           <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding>
-            <element signature="method#getDatabase#0;class#Utils#0" expanded="true" />
+            <element signature="method#getDatabase#0;class#Utils#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2509,8 +2529,8 @@
         <state relative-caret-position="375">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#topic#0;class#TopicResource#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="method#topic#0;class#TopicResource#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2531,17 +2551,98 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/DatabaseStorage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
-          <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+          <caret line="27" column="11" lean-forward="false" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#LabelHolder#0" expanded="true" />
+            <element signature="method#LabelHolder#1;class#LabelHolder#0" expanded="true" />
+            <element signature="method#addArticle#0;class#LabelHolder#0" expanded="true" />
+            <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
+            <element signature="method#createDocument#0;class#LabelHolder#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="13" column="23" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#User#0;class#User#0" expanded="true" />
+            <element signature="method#User#1;class#User#0" expanded="true" />
+            <element signature="method#createDocument#0;class#User#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="64" column="5" lean-forward="true" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+          <folding>
+            <element signature="method#Users#0;class#Users#0" expanded="true" />
+            <element signature="method#addTopic#0;class#Users#0" expanded="true" />
+            <element signature="method#writeUser#0;class#Users#0" expanded="true" />
+            <element signature="method#getSingleUser#0;class#Users#0" expanded="true" />
+            <element signature="method#getUserFromId#0;class#Users#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/json-20160810.jar!/org/json/JSONArray.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="180" column="0" lean-forward="false" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/mongo-java-driver-3.4.2.jar!/com/mongodb/BasicDBObject.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="39" column="11" lean-forward="false" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
+          <folding>
+            <element signature="method#BasicDBObject#0;class#BasicDBObject#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="55" column="77" lean-forward="true" selection-start-line="55" selection-start-column="77" selection-end-line="55" selection-end-column="77" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Topics#0;class#Topics#0" expanded="true" />
+            <element signature="method#saveTopics#0;class#Topics#0" expanded="true" />
+            <element signature="method#getTopic#0;class#Topics#0" expanded="true" />
+            <element signature="method#getCollection#0;class#Topics#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="524">
+          <caret line="55" column="47" lean-forward="false" selection-start-line="55" selection-start-column="47" selection-end-line="55" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Articles#0;class#Articles#0" expanded="true" />
             <element signature="method#saveArticles#0;class#Articles#0" expanded="true" />
             <element signature="method#articlesToAdd#0;class#Articles#0" expanded="true" />
             <element signature="method#articleExists#0;class#Articles#0" expanded="true" />
-            <element signature="method#getSingleArticle#0;class#Articles#0" expanded="true" />
             <element signature="method#getArticleFromId#0;class#Articles#0" expanded="true" />
             <element signature="method#getAllArticles#0;class#Articles#0" expanded="true" />
             <element signature="method#getCollection#0;class#Articles#0" expanded="true" />
@@ -2549,20 +2650,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+        <state relative-caret-position="359">
+          <caret line="99" column="31" lean-forward="true" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#Summaries#0;class#Summaries#0" expanded="true" />
+            <element signature="method#saveSummaries#0;class#Summaries#0" expanded="true" />
+            <element signature="method#getSingleCluster#0;class#Summaries#0" expanded="true" />
+            <element signature="method#getCollection#0;class#Summaries#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="81" column="30" lean-forward="false" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
+        <state relative-caret-position="344">
+          <caret line="85" column="42" lean-forward="false" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
           <folding>
             <element signature="method#ClusterHolder#1;class#ClusterHolder#0" expanded="true" />
             <element signature="method#setSummary#0;class#ClusterHolder#0" expanded="true" />
@@ -2571,16 +2676,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="45" lean-forward="false" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+        <state relative-caret-position="164">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
-            <element signature="method#Summaries#0;class#Summaries#0" expanded="true" />
-            <element signature="method#saveSummaries#0;class#Summaries#0" expanded="true" />
-            <element signature="method#getSingleCluster#0;class#Summaries#0" expanded="true" />
-            <element signature="method#getAllClusters#0;class#Summaries#0" expanded="true" />
-            <element signature="method#getCollection#0;class#Summaries#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#createDocument#0;class#OutletArticle#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1290">
+          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

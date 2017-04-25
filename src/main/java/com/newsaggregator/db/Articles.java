@@ -1,6 +1,5 @@
 package com.newsaggregator.db;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -8,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.base.OutletArticle;
 import org.apache.log4j.Logger;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +51,8 @@ public class Articles {
             BasicDBObject queryObject = new BasicDBObject().append("ArticleUrl", url);
             MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             if (iterator.hasNext()) {
-                String item = iterator.next().toJson();
-                ObjectMapper objectMapper = new ObjectMapper();
-                return objectMapper.readValue(item, OutletArticle.class);
+                Document item = iterator.next();
+                return new OutletArticle(item);
             }
         } catch (Exception e) {
             logger.error("An error occurred retrieving a single article", e);
@@ -63,12 +62,11 @@ public class Articles {
 
     public OutletArticle getArticleFromId(String id) {
         try {
-            BasicDBObject queryObject = new BasicDBObject().append("_id", id);
+            BasicDBObject queryObject = new BasicDBObject().append("_id", new ObjectId(id));
             MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             if (iterator.hasNext()) {
-                String item = iterator.next().toJson();
-                ObjectMapper objectMapper = new ObjectMapper();
-                return objectMapper.readValue(item, OutletArticle.class);
+                Document item = iterator.next();
+                return new OutletArticle(item);
             }
         } catch (Exception e) {
             logger.error("An error occurred retrieving a single article", e);
@@ -81,9 +79,8 @@ public class Articles {
         try {
             MongoCursor<Document> iterator = collection.find().iterator();
             while (iterator.hasNext()) {
-                String item = iterator.next().toJson();
-                ObjectMapper objectMapper = new ObjectMapper();
-                articles.add(objectMapper.readValue(item, OutletArticle.class));
+                Document item = iterator.next();
+                articles.add(new OutletArticle(item));
             }
         } catch (Exception e) {
             logger.error("Caught an exception", e);
