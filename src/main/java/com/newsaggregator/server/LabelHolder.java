@@ -1,6 +1,5 @@
 package com.newsaggregator.server;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.DatabaseStorage;
 import com.newsaggregator.base.OutletArticle;
@@ -64,12 +63,24 @@ public class LabelHolder implements DatabaseStorage {
         clusters.add(articlesForSummary);
     }
 
+    public ObjectId get_id() {
+        return _id;
+    }
+
+    public void set_id(ObjectId _id) {
+        this._id = _id;
+    }
+
     @Override
     public Document createDocument() {
-        ObjectMapper objectMapper = new ObjectMapper();
         Document document = new Document();
+        if (_id == null) {
+            this._id = new ObjectId();
+        }
+        document.put("_id", _id);
         document.put("Label", label);
-
+        document.put("Articles", articles.stream().map(OutletArticle::get_id).collect(Collectors.toList()));
+        document.put("Clusters", clusters.stream().map(ClusterHolder::get_id).collect(Collectors.toList()));
         return document;
     }
 }

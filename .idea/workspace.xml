@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -28,7 +29,7 @@
       <file leaf-file-name="ClusterHolder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
+            <state relative-caret-position="426">
               <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
                 <element signature="method#ClusterHolder#1;class#ClusterHolder#0" expanded="true" />
@@ -44,7 +45,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OutletArticle.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OutletArticle.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="405">
@@ -64,8 +65,8 @@
       <file leaf-file-name="LabelHolder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+            <state relative-caret-position="1035">
+              <caret line="77" column="26" lean-forward="true" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;class#LabelHolder#0" expanded="true" />
@@ -74,7 +75,10 @@
                 <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
                 <element signature="e#1900#1901#0" expanded="true" />
                 <element signature="e#1931#1932#0" expanded="true" />
-                <element signature="method#createDocument#0;class#LabelHolder#0" expanded="true" />
+                <element signature="e#2154#2155#0" expanded="true" />
+                <element signature="e#2180#2181#0" expanded="true" />
+                <element signature="e#2220#2221#0" expanded="true" />
+                <element signature="e#2250#2251#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -95,8 +99,8 @@
       <file leaf-file-name="Articles.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+            <state relative-caret-position="291">
+              <caret line="68" column="43" lean-forward="true" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Articles#0;class#Articles#0" expanded="true" />
@@ -111,15 +115,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Topics.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Topics.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="46" lean-forward="true" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
+            <state relative-caret-position="1320">
+              <caret line="88" column="65" lean-forward="false" selection-start-line="88" selection-start-column="65" selection-end-line="88" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Topics#0;class#Topics#0" expanded="true" />
                 <element signature="method#saveTopics#0;class#Topics#0" expanded="true" />
+                <element signature="method#getAllTopics#0;class#Topics#0" expanded="true" />
                 <element signature="method#getCollection#0;class#Topics#0" expanded="true" />
               </folding>
             </state>
@@ -143,13 +148,13 @@
       <file leaf-file-name="Summaries.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+            <state relative-caret-position="1140">
+              <caret line="78" column="65" lean-forward="false" selection-start-line="78" selection-start-column="65" selection-end-line="78" selection-end-column="65" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#Summaries#0;class#Summaries#0" expanded="true" />
                 <element signature="method#saveSummaries#0;class#Summaries#0" expanded="true" />
                 <element signature="method#getSingleCluster#0;class#Summaries#0" expanded="true" />
-                <element signature="method#getAllClusters#0;class#Summaries#0" expanded="true" />
                 <element signature="method#getCollection#0;class#Summaries#0" expanded="true" />
               </folding>
             </state>
@@ -265,12 +270,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/NavBar.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/DatabaseStorage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
       </list>
     </option>
   </component>
@@ -1347,14 +1352,7 @@
       <workItem from="1490695952010" duration="95924000" />
       <workItem from="1491926569536" duration="8385000" />
       <workItem from="1492002902704" duration="27962000" />
-      <workItem from="1492430182328" duration="96430000" />
-    </task>
-    <task id="LOCAL-00162" summary="Added logger lines">
-      <created>1492600124739</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL-00162" />
-      <option name="project" value="LOCAL" />
-      <updated>1492600124740</updated>
+      <workItem from="1492430182328" duration="98274000" />
     </task>
     <task id="LOCAL-00163" summary="Added logger lines">
       <created>1492607779733</created>
@@ -1692,7 +1690,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493110643189</updated>
     </task>
-    <option name="localTasksCounter" value="211" />
+    <task id="LOCAL-00211" summary="Changing _id to ObjectId">
+      <created>1493111385281</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1493111385281</updated>
+    </task>
+    <option name="localTasksCounter" value="212" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1725,7 +1730,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="439609000" />
+    <option name="totallyTimeSpent" value="441453000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1812,7 +1817,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Login button" />
     <MESSAGE value="Subscribe button on Topic Panel" />
     <MESSAGE value="Subscribe button on search results" />
     <MESSAGE value="User skeleton" />
@@ -1837,7 +1841,8 @@
     <MESSAGE value="Ready to push to server" />
     <MESSAGE value="Mongoified Article Table" />
     <MESSAGE value="Summaries class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Summaries class" />
+    <MESSAGE value="Changing _id to ObjectId" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changing _id to ObjectId" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2322,29 +2327,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Articles#0;class#Articles#0" expanded="true" />
-            <element signature="method#saveArticles#0;class#Articles#0" expanded="true" />
-            <element signature="method#articlesToAdd#0;class#Articles#0" expanded="true" />
-            <element signature="method#articleExists#0;class#Articles#0" expanded="true" />
-            <element signature="method#getSingleArticle#0;class#Articles#0" expanded="true" />
-            <element signature="method#getAllArticles#0;class#Articles#0" expanded="true" />
-            <element signature="method#getCollection#0;class#Articles#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Home/SearchBar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
           <folding>
             <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#922#923#0" expanded="true" />
+            <element signature="e#948#949#0" expanded="true" />
+            <element signature="e#988#989#0" expanded="true" />
+            <element signature="e#1018#1019#0" expanded="true" />
+            <element signature="method#createDocument#0;class#OutletArticle#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="method#ClusterHolder#1;class#ClusterHolder#0" expanded="true" />
+            <element signature="method#sameCluster#0;class#ClusterHolder#0" expanded="true" />
+            <element signature="method#convertToClusterString#0;class#ClusterHolder#0" expanded="true" />
+            <element signature="e#2003#2004#0" expanded="true" />
+            <element signature="e#2033#2034#0" expanded="true" />
+            <element signature="e#2065#2066#0" expanded="true" />
+            <element signature="e#2091#2092#0" expanded="true" />
+            <element signature="method#createDocument#0;class#ClusterHolder#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1035">
+          <caret line="77" column="26" lean-forward="true" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#LabelHolder#0" expanded="true" />
+            <element signature="method#LabelHolder#1;class#LabelHolder#0" expanded="true" />
+            <element signature="method#addArticle#0;class#LabelHolder#0" expanded="true" />
+            <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
+            <element signature="e#1900#1901#0" expanded="true" />
+            <element signature="e#1931#1932#0" expanded="true" />
+            <element signature="e#2154#2155#0" expanded="true" />
+            <element signature="e#2180#2181#0" expanded="true" />
+            <element signature="e#2220#2221#0" expanded="true" />
+            <element signature="e#2250#2251#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2361,86 +2409,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+        <state relative-caret-position="1140">
+          <caret line="78" column="65" lean-forward="false" selection-start-line="78" selection-start-column="65" selection-end-line="78" selection-end-column="65" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#Summaries#0;class#Summaries#0" expanded="true" />
             <element signature="method#saveSummaries#0;class#Summaries#0" expanded="true" />
             <element signature="method#getSingleCluster#0;class#Summaries#0" expanded="true" />
-            <element signature="method#getAllClusters#0;class#Summaries#0" expanded="true" />
             <element signature="method#getCollection#0;class#Summaries#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="68" column="43" lean-forward="true" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Articles#0;class#Articles#0" expanded="true" />
+            <element signature="method#saveArticles#0;class#Articles#0" expanded="true" />
+            <element signature="method#articlesToAdd#0;class#Articles#0" expanded="true" />
+            <element signature="method#articleExists#0;class#Articles#0" expanded="true" />
+            <element signature="method#getSingleArticle#0;class#Articles#0" expanded="true" />
+            <element signature="method#getAllArticles#0;class#Articles#0" expanded="true" />
+            <element signature="method#getCollection#0;class#Articles#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="46" lean-forward="true" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
+        <state relative-caret-position="1320">
+          <caret line="88" column="65" lean-forward="false" selection-start-line="88" selection-start-column="65" selection-end-line="88" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Topics#0;class#Topics#0" expanded="true" />
             <element signature="method#saveTopics#0;class#Topics#0" expanded="true" />
+            <element signature="method#getAllTopics#0;class#Topics#0" expanded="true" />
             <element signature="method#getCollection#0;class#Topics#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#LabelHolder#0" expanded="true" />
-            <element signature="method#LabelHolder#1;class#LabelHolder#0" expanded="true" />
-            <element signature="method#addArticle#0;class#LabelHolder#0" expanded="true" />
-            <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
-            <element signature="e#1900#1901#0" expanded="true" />
-            <element signature="e#1931#1932#0" expanded="true" />
-            <element signature="method#createDocument#0;class#LabelHolder#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding>
-            <element signature="method#ClusterHolder#1;class#ClusterHolder#0" expanded="true" />
-            <element signature="method#sameCluster#0;class#ClusterHolder#0" expanded="true" />
-            <element signature="method#convertToClusterString#0;class#ClusterHolder#0" expanded="true" />
-            <element signature="e#2003#2004#0" expanded="true" />
-            <element signature="e#2033#2034#0" expanded="true" />
-            <element signature="e#2065#2066#0" expanded="true" />
-            <element signature="e#2091#2092#0" expanded="true" />
-            <element signature="method#createDocument#0;class#ClusterHolder#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#922#923#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
-            <element signature="e#988#989#0" expanded="true" />
-            <element signature="e#1018#1019#0" expanded="true" />
-            <element signature="method#createDocument#0;class#OutletArticle#0" expanded="true" />
           </folding>
         </state>
       </provider>

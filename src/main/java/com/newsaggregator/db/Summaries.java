@@ -51,7 +51,7 @@ public class Summaries {
                 List<OutletArticle> articles = new ArrayList<>();
                 for (int i = 0; i < articleIds.length(); i++) {
                     String articleId = articleIds.getString(i);
-                    articles.add(articleManager.getSingleArticle(articleId));
+                    articles.add(articleManager.getArticleFromId(articleId));
                 }
                 String nodes = jsonObject.getJSONArray("Summary").toString();
                 List<Node> summary = objectMapper.readValue(nodes, List.class);
@@ -76,7 +76,7 @@ public class Summaries {
                 List<OutletArticle> articles = new ArrayList<>();
                 for (int i = 0; i < articleIds.length(); i++) {
                     String articleId = articleIds.getString(i);
-                    articles.add(articleManager.getSingleArticle(articleId));
+                    articles.add(articleManager.getArticleFromId(articleId));
                 }
                 String nodes = jsonObject.getJSONArray("Summary").toString();
                 List<Node> summary = objectMapper.readValue(nodes, List.class);

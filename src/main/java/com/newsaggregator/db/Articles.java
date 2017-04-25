@@ -29,9 +29,8 @@ public class Articles {
     }
 
     public void saveArticles(List<OutletArticle> articles) {
-        MongoCollection<Document> articleCollection = getCollection();
         List<Document> documents = articles.stream().map(OutletArticle::createDocument).collect(Collectors.toList());
-        articleCollection.insertMany(documents);
+        collection.insertMany(documents);
     }
 
     public List<OutletArticle> articlesToAdd(List<OutletArticle> articles) {
@@ -50,6 +49,21 @@ public class Articles {
     public OutletArticle getSingleArticle(String url) {
         try {
             BasicDBObject queryObject = new BasicDBObject().append("ArticleUrl", url);
+            MongoCursor<Document> iterator = collection.find(queryObject).iterator();
+            if (iterator.hasNext()) {
+                String item = iterator.next().toJson();
+                ObjectMapper objectMapper = new ObjectMapper();
+                return objectMapper.readValue(item, OutletArticle.class);
+            }
+        } catch (Exception e) {
+            logger.error("An error occurred retrieving a single article", e);
+        }
+        return null;
+    }
+
+    public OutletArticle getArticleFromId(String id) {
+        try {
+            BasicDBObject queryObject = new BasicDBObject().append("_id", id);
             MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             if (iterator.hasNext()) {
                 String item = iterator.next().toJson();
