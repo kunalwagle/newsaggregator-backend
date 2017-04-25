@@ -36,7 +36,7 @@ public class SubscriptionsResource extends ServerResource {
         Users userManager = new Users(db);
         try {
             User response = userManager.getSingleUser(user);
-            List<String> topics = response.getTopics();
+            List<String> topics = response.getTopicIds();
             Topics topicManager = new Topics(db);
             Articles articleManager = new Articles(db);
             List<TopicHolder> topicHolders = new ArrayList<>();

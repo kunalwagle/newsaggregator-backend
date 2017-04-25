@@ -1,47 +1,45 @@
 package com.newsaggregator.db;
 
-import com.amazonaws.services.dynamodbv2.document.*;
-import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
-import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.base.User;
 import org.apache.log4j.Logger;
+import org.bson.Document;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by kunalwagle on 21/04/2017.
  */
 public class Users {
 
-    private final Table table;
-    private DynamoDB database;
+    private final MongoCollection<Document> collection;
+    private MongoDatabase database;
     private Logger logger = Logger.getLogger(getClass());
 
-    public Users(DynamoDB database) {
+    public Users(MongoDatabase database) {
         this.database = database;
-        this.table = getCollection();
+        this.collection = getCollection();
     }
 
-    public void addTopic(String email, String topic) {
+    public void addTopic(String email, String topicId) {
         User user = getSingleUser(email);
         if (user == null) {
             user = new User(email, new ArrayList<>());
         }
-        if (!user.getTopics().contains(topic)) {
-            user.getTopics().add(topic);
+        if (!user.getTopicIds().contains(topicId)) {
+            user.getTopicIds().add(topicId);
         }
         writeUser(user);
     }
 
     private void writeUser(User user) {
         try {
-            Item item = new Item()
-                    .withPrimaryKey("Email", user.getEmailAddress())
-                    .withList("Topics", user.getTopics());
-            table.putItem(item);
+            Document document = user.createDocument();
+            collection.insertOne(document);
         } catch (Exception e) {
             logger.error("Writing user error", e);
         }
@@ -49,16 +47,12 @@ public class Users {
 
     public User getSingleUser(String email) {
         try {
-            QuerySpec spec = new QuerySpec()
-                    .withKeyConditionExpression("Email = :email")
-                    .withValueMap(new ValueMap()
-                            .withString(":email", email));
-            ItemCollection<QueryOutcome> items = table.query(spec);
-            Iterator<Item> iterator = items.iterator();
+            BasicDBObject queryObject = new BasicDBObject().append("emailAddress", email);
+            MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             if (iterator.hasNext()) {
-                Map<String, Object> item = iterator.next().asMap();
-                List<String> topics = (List<String>) item.get("Topics");
-                return new User(email, topics);
+                String item = iterator.next().toJson();
+                ObjectMapper objectMapper = new ObjectMapper();
+                return objectMapper.readValue(item, User.class);
             }
         } catch (Exception e) {
             logger.error("An error occurred retrieving a single user", e);
@@ -66,8 +60,23 @@ public class Users {
         return null;
     }
 
-    private Table getCollection() {
-        return database.getTable("Users");
+    public User getUserFromId(String id) {
+        try {
+            BasicDBObject queryObject = new BasicDBObject().append("_id", id);
+            MongoCursor<Document> iterator = collection.find(queryObject).iterator();
+            if (iterator.hasNext()) {
+                String item = iterator.next().toJson();
+                ObjectMapper objectMapper = new ObjectMapper();
+                return objectMapper.readValue(item, User.class);
+            }
+        } catch (Exception e) {
+            logger.error("An error occurred retrieving a single user", e);
+        }
+        return null;
+    }
+
+    private MongoCollection<Document> getCollection() {
+        return database.getCollection("Users");
     }
 
 
