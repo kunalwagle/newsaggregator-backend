@@ -13,19 +13,54 @@ public class ArticleFetch {
 
     public static List<OutletArticle> fetchArticles() {
         List<OutletArticle> articles = new ArrayList<>();
-        articles.addAll(fetchAPArticles());
-        articles.addAll(fetchBusinessInsiderArticles());
-        articles.addAll(fetchCricinfoArticles());
-        articles.addAll(fetchDailyMailArticles());
-        articles.addAll(fetchGuardianArticles());
-        articles.addAll(fetchIndependentArticles());
-        articles.addAll(fetchMetroArticles());
-        articles.addAll(fetchMirrorArticles());
-        articles.addAll(fetchNewsweekArticles());
-        articles.addAll(fetchReutersArticles());
-//        articles.addAll(fetchSSNArticles());
-        articles.addAll(fetchTelegraphArticles());
-        articles.addAll(fetchTOIArticles());
+        List<OutletArticle> ap = fetchAPArticles();
+        List<OutletArticle> bi = fetchBusinessInsiderArticles();
+        List<OutletArticle> c = fetchCricinfoArticles();
+        List<OutletArticle> dm = fetchDailyMailArticles();
+        List<OutletArticle> g = fetchGuardianArticles();
+        List<OutletArticle> i = fetchIndependentArticles();
+        List<OutletArticle> me = fetchMetroArticles();
+        List<OutletArticle> mi = fetchMirrorArticles();
+        List<OutletArticle> nw = fetchNewsweekArticles();
+        List<OutletArticle> r = fetchReutersArticles();
+        List<OutletArticle> te = fetchTelegraphArticles();
+        List<OutletArticle> toi = fetchTOIArticles();
+        if (ap != null) {
+            articles.addAll(ap);
+        }
+        if (bi != null) {
+            articles.addAll(bi);
+        }
+        if (c != null) {
+            articles.addAll(c);
+        }
+        if (dm != null) {
+            articles.addAll(dm);
+        }
+        if (g != null) {
+            articles.addAll(g);
+        }
+        if (i != null) {
+            articles.addAll(i);
+        }
+        if (me != null) {
+            articles.addAll(me);
+        }
+        if (mi != null) {
+            articles.addAll(mi);
+        }
+        if (nw != null) {
+            articles.addAll(nw);
+        }
+        if (r != null) {
+            articles.addAll(r);
+        }
+        if (te != null) {
+            articles.addAll(te);
+        }
+        if (toi != null) {
+            articles.addAll(toi);
+        }
         return articles;
     }
 
