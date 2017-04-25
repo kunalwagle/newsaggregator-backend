@@ -35,11 +35,11 @@ const render = () => {
                 <Router history={browserHistory}>
                     <Route path="/" component={NavigationBar}>
                         <IndexRoute component={SearchBarJumbotron}/>
-                        <Route path="searchResults" component={SearchResultPage}/>
+                        <Route path="searchResults/:searchTerm" component={SearchResultPage}/>
                         <Route path="summaryEvaluation" component={SummaryEvaluation}/>
-                        <Route path="topic" component={TopicViewerPage}/>
-                        <Route path="article" component={ArticleViewerPage}/>
-                        <Route path="subscription" component={SubscriptionPage}/>
+                        <Route path="topic/:topicId" component={TopicViewerPage}/>
+                        <Route path="topic/:topicId/article/:articleId" component={ArticleViewerPage}/>
+                        <Route path="subscription/:userId" component={SubscriptionPage}/>
                     </Route>
                 </Router>
             </Provider>
