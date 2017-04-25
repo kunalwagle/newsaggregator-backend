@@ -1,8 +1,7 @@
 package com.newsaggregator.server.jobs;
 
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.mongodb.client.MongoDatabase;
+import com.newsaggregator.Utils;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.db.Articles;
 
@@ -20,7 +19,7 @@ public class SendEmailRunnable implements Runnable {
     @Override
     public void run() {
 
-        DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
+        MongoDatabase db = Utils.getDatabase();
         Articles articleManager = new Articles(db);
         List<OutletArticle> articleList = articleManager.getAllArticles();
 

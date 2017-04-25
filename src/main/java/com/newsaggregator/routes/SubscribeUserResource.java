@@ -1,8 +1,7 @@
 package com.newsaggregator.routes;
 
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.mongodb.client.MongoDatabase;
+import com.newsaggregator.Utils;
 import com.newsaggregator.db.Users;
 import org.apache.log4j.Logger;
 import org.restlet.data.Status;
@@ -21,7 +20,7 @@ public class SubscribeUserResource extends ServerResource {
         String topic = (String) getRequestAttributes().get("topic");
         topic = topic.replace("%20", " ");
         String user = (String) getRequestAttributes().get("user");
-        DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
+        MongoDatabase db = Utils.getDatabase();
         Users userManager = new Users(db);
         try {
             userManager.addTopic(user, topic);

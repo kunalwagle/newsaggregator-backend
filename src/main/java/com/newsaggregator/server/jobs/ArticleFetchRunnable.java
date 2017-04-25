@@ -1,6 +1,5 @@
 package com.newsaggregator.server.jobs;
 
-import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.base.ArticleVector;
@@ -36,8 +35,7 @@ public class ArticleFetchRunnable implements Runnable {
         Logger logger = Logger.getLogger(getClass());
         try {
             logger.info("Fetching articles");
-            MongoClient mongoClient = new MongoClient("localhost", 27017);
-            MongoDatabase db = mongoClient.getDatabase("NewsAggregator");
+            MongoDatabase db = Utils.getDatabase();
             Articles articleManager = new Articles(db);
             Topics topicManager = new Topics(db);
             Summaries summaryManager = new Summaries(db);

@@ -1,6 +1,9 @@
 package com.newsaggregator;
 
 
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -55,6 +58,11 @@ public class Utils {
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }
+    }
+
+    public static MongoDatabase getDatabase() {
+        MongoClient mongoClient = new MongoClient("178.62.27.53", 27017);
+        return mongoClient.getDatabase("NewsAggregator");
     }
 
 
