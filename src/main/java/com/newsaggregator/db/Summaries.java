@@ -112,4 +112,8 @@ public class Summaries {
         }
         return summaryCollection;
     }
+
+    public long count() {
+        return collection.count();
+    }
 }

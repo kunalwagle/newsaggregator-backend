@@ -2,13 +2,13 @@ package com.newsaggregator.server.jobs;
 
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
-import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.db.Articles;
+import com.newsaggregator.db.Summaries;
+import com.newsaggregator.db.Topics;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -21,7 +21,8 @@ public class SendEmailRunnable implements Runnable {
 
         MongoDatabase db = Utils.getDatabase();
         Articles articleManager = new Articles(db);
-        List<OutletArticle> articleList = articleManager.getAllArticles();
+        Topics topicManager = new Topics(db);
+        Summaries summariesManager = new Summaries(db);
 
         String to = "kmw13@ic.ac.uk";
 
@@ -46,7 +47,7 @@ public class SendEmailRunnable implements Runnable {
             message.setFrom(new InternetAddress(username));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject("News Aggregator Status Report");
-            message.setText("Hello, it's time for the latest database status report. \n\n There are currently " + articleList.size() + " articles in the database");
+            message.setText("Hello, it's time for the latest database status report. \n\n There are currently " + articleManager.count() + " articles in the database. \n\n There are currently " + topicManager.count() + " topics in the database. \n\n There are currently " + summariesManager.count() + " summaries in the database.");
 
             // Send message
             Transport.send(message);

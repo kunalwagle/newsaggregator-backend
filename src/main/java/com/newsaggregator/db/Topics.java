@@ -107,4 +107,8 @@ public class Topics {
         }
         return topicCollection;
     }
+
+    public long count() {
+        return collection.count();
+    }
 }

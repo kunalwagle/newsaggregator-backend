@@ -99,4 +99,8 @@ public class Articles {
         return articleCollection;
     }
 
+    public long count() {
+        return collection.count();
+    }
+
 }
