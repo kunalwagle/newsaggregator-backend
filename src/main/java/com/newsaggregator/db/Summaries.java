@@ -57,7 +57,7 @@ public class Summaries {
                 }
                 JSONArray nodes = jsonObject.getJSONArray("Summaries");
                 List<List<Node>> summaries = new ArrayList<>();
-                for (int i = 0; i < articleIds.length(); i++) {
+                for (int i = 0; i < summaries.size(); i++) {
                     String node = nodes.getString(i);
                     summaries.add(objectMapper.readValue(node, objectMapper.getTypeFactory().constructCollectionType(List.class, Node.class)));
                 }
