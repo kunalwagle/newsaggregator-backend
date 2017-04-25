@@ -40,7 +40,7 @@ public class Main {
 
                 TaskService scheduleManager = new TaskService();
 
-                scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 1L, 30L, TimeUnit.MINUTES);
+                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 10L, TimeUnit.MINUTES);
                 scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 1L, TimeUnit.HOURS);
 
                 serverInitialised = true;
