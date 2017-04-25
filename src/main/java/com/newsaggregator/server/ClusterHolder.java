@@ -6,6 +6,7 @@ import com.newsaggregator.base.DatabaseStorage;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.summarisation.Extractive.Node;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class ClusterHolder implements DatabaseStorage {
 
-    private String _id;
+    private ObjectId _id;
     private List<OutletArticle> articles;
     private List<Node> summary;
     private List<String> labels = new ArrayList<>();
@@ -61,11 +62,11 @@ public class ClusterHolder implements DatabaseStorage {
         return new ClusterString(articleUrls, summary);
     }
 
-    public void set_id(String _id) {
+    public void set_id(ObjectId _id) {
         this._id = _id;
     }
 
-    public String get_id() {
+    public ObjectId get_id() {
         return _id;
     }
 
@@ -74,6 +75,10 @@ public class ClusterHolder implements DatabaseStorage {
     public Document createDocument() {
         Document document = new Document();
         try {
+            if (_id == null) {
+                this._id = new ObjectId();
+            }
+            document.put("_id", _id);
             document.put("Articles", articles.stream().map(OutletArticle::get_id).collect(Collectors.toList()));
             ObjectMapper objectMapper = new ObjectMapper();
             document.put("Summary", objectMapper.writeValueAsString(summary));

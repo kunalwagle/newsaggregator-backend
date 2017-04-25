@@ -1,13 +1,14 @@
 package com.newsaggregator.base;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  * Created by kunalwagle on 30/01/2017.
  */
 public class OutletArticle extends Article implements DatabaseStorage {
 
-    private String _id;
+    private ObjectId _id;
     private String body;
     private String articleUrl;
     private String lastPublished;
@@ -35,18 +36,21 @@ public class OutletArticle extends Article implements DatabaseStorage {
         return lastPublished;
     }
 
-    public String get_id() {
+    public ObjectId get_id() {
         return _id;
     }
 
-    public void set_id(String _id) {
+    public void set_id(ObjectId _id) {
         this._id = _id;
     }
 
     @Override
     public Document createDocument() {
         Document doc = new Document();
-
+        if (_id == null) {
+            this._id = new ObjectId();
+        }
+        doc.put("_id", _id);
         doc.put("Title", title);
         doc.put("Body", body);
         doc.put("ImageURL", imageUrl);

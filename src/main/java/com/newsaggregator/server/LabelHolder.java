@@ -6,6 +6,7 @@ import com.newsaggregator.base.DatabaseStorage;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.clustering.Cluster;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
  */
 public class LabelHolder implements DatabaseStorage {
 
+    private ObjectId _id;
     private String label;
     private List<OutletArticle> articles = new ArrayList<>();
     private List<ClusterHolder> clusters = new ArrayList<>();
