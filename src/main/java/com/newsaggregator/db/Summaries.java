@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -36,6 +37,7 @@ public class Summaries {
     public void saveSummaries(List<ClusterHolder> clusterHolders) {
         MongoCollection<Document> articleCollection = getCollection();
         List<Document> documents = clusterHolders.stream().map(ClusterHolder::createDocument).collect(Collectors.toList());
+        documents = documents.stream().filter(Objects::nonNull).collect(Collectors.toList());
         articleCollection.insertMany(documents);
     }
 

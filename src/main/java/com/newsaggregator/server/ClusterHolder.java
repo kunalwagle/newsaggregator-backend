@@ -1,6 +1,5 @@
 package com.newsaggregator.server;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newsaggregator.base.DatabaseStorage;
 import com.newsaggregator.base.OutletArticle;
@@ -84,7 +83,7 @@ public class ClusterHolder implements DatabaseStorage {
                 sums.add(objectMapper.writeValueAsString(sum));
             }
             document.put("Summaries", sums);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
