@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -50,19 +50,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Summaries.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Summaries.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="39" column="60" lean-forward="false" selection-start-line="39" selection-start-column="60" selection-end-line="39" selection-end-column="60" />
+            <state relative-caret-position="212">
+              <caret line="93" column="52" lean-forward="false" selection-start-line="93" selection-start-column="52" selection-end-line="93" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Summaries#0;class#Summaries#0" expanded="true" />
+                <element signature="method#saveSummaries#0;class#Summaries#0" expanded="true" />
                 <element signature="method#getSingleCluster#0;class#Summaries#0" expanded="true" />
-                <element signature="method#getAllClusters#0;class#Summaries#0" expanded="true" />
                 <element signature="method#getCollection#0;class#Summaries#0" expanded="true" />
-                <element signature="e#5222#5223#0" expanded="true" />
-                <element signature="e#5263#5264#0" expanded="true" />
+                <element signature="e#5219#5220#0" expanded="true" />
+                <element signature="e#5260#5261#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,14 +80,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArticleFetch.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ArticleFetch.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="840">
-              <caret line="63" column="9" lean-forward="false" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+              <caret line="62" column="9" lean-forward="false" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
               <folding>
-                <element signature="e#2957#2958#0" expanded="true" />
-                <element signature="e#3008#3009#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#2917#2918#0" expanded="true" />
+                <element signature="e#2968#2969#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -274,8 +275,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SendEmailRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
       </list>
     </option>
   </component>
@@ -1748,14 +1749,7 @@
       <workItem from="1490695952010" duration="95924000" />
       <workItem from="1491926569536" duration="8385000" />
       <workItem from="1492002902704" duration="27962000" />
-      <workItem from="1492430182328" duration="109361000" />
-    </task>
-    <task id="LOCAL-00174" summary="Topic Resource complete">
-      <created>1492633641433</created>
-      <option name="number" value="00174" />
-      <option name="presentableId" value="LOCAL-00174" />
-      <option name="project" value="LOCAL" />
-      <updated>1492633641433</updated>
+      <workItem from="1492430182328" duration="109564000" />
     </task>
     <task id="LOCAL-00175" summary="Topic Panel with panels">
       <created>1492642088884</created>
@@ -2093,7 +2087,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493145594766</updated>
     </task>
-    <option name="localTasksCounter" value="223" />
+    <task id="LOCAL-00223" summary="Adjusted article fetch for better error handling">
+      <created>1493146251704</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1493146251704</updated>
+    </task>
+    <option name="localTasksCounter" value="224" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2126,7 +2127,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="452540000" />
+    <option name="totallyTimeSpent" value="452743000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2213,7 +2214,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added action and reducer" />
     <MESSAGE value="Added fetch in progress" />
     <MESSAGE value="Created Subscription Container" />
     <MESSAGE value="Linked to subscriptions" />
@@ -2238,7 +2238,8 @@
     <MESSAGE value="Added server jobs" />
     <MESSAGE value="Adjusted article fetch call" />
     <MESSAGE value="Fixed minor cluster retrieval bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed minor cluster retrieval bug" />
+    <MESSAGE value="Adjusted article fetch for better error handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjusted article fetch for better error handling" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2807,22 +2808,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="39" column="60" lean-forward="false" selection-start-line="39" selection-start-column="60" selection-end-line="39" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Summaries#0;class#Summaries#0" expanded="true" />
-            <element signature="method#getSingleCluster#0;class#Summaries#0" expanded="true" />
-            <element signature="method#getAllClusters#0;class#Summaries#0" expanded="true" />
-            <element signature="method#getCollection#0;class#Summaries#0" expanded="true" />
-            <element signature="e#5222#5223#0" expanded="true" />
-            <element signature="e#5263#5264#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/NewsAPI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -2855,10 +2840,27 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
-          <caret line="63" column="9" lean-forward="false" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+          <caret line="62" column="9" lean-forward="false" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
           <folding>
-            <element signature="e#2957#2958#0" expanded="true" />
-            <element signature="e#3008#3009#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#2917#2918#0" expanded="true" />
+            <element signature="e#2968#2969#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="93" column="52" lean-forward="false" selection-start-line="93" selection-start-column="52" selection-end-line="93" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Summaries#0;class#Summaries#0" expanded="true" />
+            <element signature="method#saveSummaries#0;class#Summaries#0" expanded="true" />
+            <element signature="method#getSingleCluster#0;class#Summaries#0" expanded="true" />
+            <element signature="method#getCollection#0;class#Summaries#0" expanded="true" />
+            <element signature="e#5219#5220#0" expanded="true" />
+            <element signature="e#5260#5261#0" expanded="true" />
           </folding>
         </state>
       </provider>
