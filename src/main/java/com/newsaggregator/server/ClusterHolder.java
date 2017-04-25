@@ -19,24 +19,24 @@ public class ClusterHolder implements DatabaseStorage {
 
     private ObjectId _id;
     private List<OutletArticle> articles;
-    private List<Node> summary;
+    private List<List<Node>> summaries;
     private List<String> labels = new ArrayList<>();
 
     public ClusterHolder(List<OutletArticle> articles) {
         this.articles = articles;
     }
 
-    public ClusterHolder(List<OutletArticle> articles, List<Node> summary) {
+    public ClusterHolder(List<OutletArticle> articles, List<List<Node>> summaries) {
         this.articles = articles;
-        this.summary = summary;
+        this.summaries = summaries;
     }
 
     public List<OutletArticle> getArticles() {
         return articles;
     }
 
-    public List<Node> getSummary() {
-        return summary;
+    public List<List<Node>> getSummary() {
+        return summaries;
     }
 
     public List<String> getLabels() {
@@ -44,7 +44,10 @@ public class ClusterHolder implements DatabaseStorage {
     }
 
     public void setSummary(List<Node> summary) {
-        this.summary = summary;
+        if (summaries == null) {
+            summaries = new ArrayList<>();
+        }
+        this.summaries.add(summary);
     }
 
     public void addLabel(String label) {
@@ -55,11 +58,6 @@ public class ClusterHolder implements DatabaseStorage {
         List<String> otherUrls = holder.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
         List<String> theseUrls = articles.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
         return otherUrls.size() == theseUrls.size() && theseUrls.stream().allMatch(otherUrls::contains);
-    }
-
-    public ClusterString convertToClusterString() {
-        List<String> articleUrls = articles.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
-        return new ClusterString(articleUrls, summary);
     }
 
     public void set_id(ObjectId _id) {
@@ -81,7 +79,7 @@ public class ClusterHolder implements DatabaseStorage {
             document.put("_id", _id);
             document.put("Articles", articles.stream().map(OutletArticle::get_id).collect(Collectors.toList()));
             ObjectMapper objectMapper = new ObjectMapper();
-            document.put("Summary", objectMapper.writeValueAsString(summary));
+            document.put("Summaries", objectMapper.writeValueAsString(summaries));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;

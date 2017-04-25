@@ -129,12 +129,15 @@ public class ArticleFetchRunnable implements Runnable {
                     }
                     counter++;
                 }
-                logger.info("Writing Topics");
-                topicManager.saveTopics(topicLabelMap.values());
-                logger.info("Topics saved");
                 logger.info("Writing Articles");
                 articleManager.saveArticles(articleList);
                 logger.info("Articles saved");
+                logger.info("Writing Summaries");
+                summaryManager.saveSummaries(clusterHolderList);
+                logger.info("Summaries saved");
+                logger.info("Writing Topics");
+                topicManager.saveTopics(topicLabelMap.values());
+                logger.info("Topics saved");
             } catch (Exception e) {
                 Utils.sendExceptionEmail(e);
                 logger.error("Error. Email sent", e);

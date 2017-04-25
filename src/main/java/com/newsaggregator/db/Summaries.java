@@ -53,9 +53,9 @@ public class Summaries {
                     String articleId = articleIds.getString(i);
                     articles.add(articleManager.getArticleFromId(articleId));
                 }
-                String nodes = jsonObject.getJSONArray("Summary").toString();
-                List<Node> summary = objectMapper.readValue(nodes, List.class);
-                return new ClusterHolder(articles, summary);
+                String nodes = jsonObject.getJSONArray("Summaries").toString();
+                List<List<Node>> summaries = objectMapper.readValue(nodes, List.class);
+                return new ClusterHolder(articles, summaries);
             }
         } catch (Exception e) {
             logger.error("An error occurred retrieving a single cluster", e);
@@ -78,9 +78,9 @@ public class Summaries {
                     String articleId = articleIds.getString(i);
                     articles.add(articleManager.getArticleFromId(articleId));
                 }
-                String nodes = jsonObject.getJSONArray("Summary").toString();
-                List<Node> summary = objectMapper.readValue(nodes, List.class);
-                clusters.add(new ClusterHolder(articles, summary));
+                String nodes = jsonObject.getJSONArray("Summaries").toString();
+                List<List<Node>> summaries = objectMapper.readValue(nodes, List.class);
+                clusters.add(new ClusterHolder(articles, summaries));
             }
         } catch (Exception e) {
             logger.error("Caught an exception", e);

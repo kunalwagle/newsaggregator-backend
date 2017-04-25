@@ -13,19 +13,19 @@ public class ArticleFetch {
 
     public static List<OutletArticle> fetchArticles() {
         List<OutletArticle> articles = new ArrayList<>();
-        articles.addAll(fetchAPArticles());
-        articles.addAll(fetchBusinessInsiderArticles());
-        articles.addAll(fetchCricinfoArticles());
-        articles.addAll(fetchDailyMailArticles());
-        articles.addAll(fetchGuardianArticles());
+//        articles.addAll(fetchAPArticles());
+//        articles.addAll(fetchBusinessInsiderArticles());
+//        articles.addAll(fetchCricinfoArticles());
+//        articles.addAll(fetchDailyMailArticles());
+//        articles.addAll(fetchGuardianArticles());
         articles.addAll(fetchIndependentArticles());
-        articles.addAll(fetchMetroArticles());
-        articles.addAll(fetchMirrorArticles());
-        articles.addAll(fetchNewsweekArticles());
-        articles.addAll(fetchReutersArticles());
+//        articles.addAll(fetchMetroArticles());
+//        articles.addAll(fetchMirrorArticles());
+//        articles.addAll(fetchNewsweekArticles());
+//        articles.addAll(fetchReutersArticles());
 //        articles.addAll(fetchSSNArticles());
-        articles.addAll(fetchTelegraphArticles());
-        articles.addAll(fetchTOIArticles());
+//        articles.addAll(fetchTelegraphArticles());
+//        articles.addAll(fetchTOIArticles());
         return articles;
     }
 
