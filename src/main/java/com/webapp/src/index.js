@@ -3,7 +3,9 @@ import ReactDOM from "react-dom";
 import {createStore, compose, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import {SearchBarJumbotron} from "./components/Home/SearchBarJumbotron";
-import {Router, Route, browserHistory, IndexRoute} from "react-router";
+import {Route, IndexRoute} from "react-router";
+import createHistory from "history/createBrowserHistory";
+import {ConnectedRouter, routerReducer, routerMiddleware} from "react-router-redux";
 import App from "./App";
 import "babel-polyfill";
 import thunk from "redux-thunk";
@@ -15,7 +17,10 @@ import {ArticleViewerPage} from "./components/ArticleViewer/ArticleViewerPage";
 import {SubscriptionPage} from "./components/Subscriptions/Subscriptions";
 //import {reducers} from './reducers'
 
-const store = createStore(App, compose(applyMiddleware(thunk)));
+
+const browserHistory = createHistory();
+const middleware = routerMiddleware(browserHistory);
+const store = createStore(App, compose(applyMiddleware(thunk, middleware)));
 const rootEl = document.getElementById('root');
 
 class NavigationBar extends React.Component {
@@ -32,7 +37,7 @@ class NavigationBar extends React.Component {
 const render = () => {
     ReactDOM.render((
             <Provider store={store}>
-                <Router history={browserHistory}>
+                <ConnectedRouter history={browserHistory}>
                     <Route path="/" component={NavigationBar}>
                         <IndexRoute component={SearchBarJumbotron}/>
                         <Route path="searchResults/:searchTerm" component={SearchResultPage}/>
@@ -41,7 +46,7 @@ const render = () => {
                         <Route path="topic/:topicId/article/:articleId" component={ArticleViewerPage}/>
                         <Route path="subscription/:userId" component={SubscriptionPage}/>
                     </Route>
-                </Router>
+                </ConnectedRouter>
             </Provider>
         ),
         rootEl

@@ -6,6 +6,7 @@ import summaryEvaluation from "./reducers/SummaryEvaluation/SummaryEvaluation";
 import searchResults from "./reducers/SearchResults/SearchResultsReducers";
 import topicViewer from "./reducers/TopicViewer/TopicViewerReducers";
 import loggedIn from "./reducers/LoginModalReducers";
+import {routerReducer} from "react-router-redux";
 import {combineReducers} from "redux";
 
 const App = combineReducers({
@@ -13,7 +14,8 @@ const App = combineReducers({
     summaryEvaluation,
     searchResults,
     topicViewer,
-    loggedIn
+    loggedIn,
+    router: routerReducer
 });
 
 export default App;
