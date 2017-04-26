@@ -3,15 +3,15 @@
  */
 import React from "react";
 
-export const ArticlesSummarised = ({article}) => {
+export const ArticlesSummarised = ({article, fetchInProgressCalled}) => {
 
-    if (article.articles[0] == null) {
-        return null;
+    if (!fetchInProgressCalled || article == null || article.articles[0] == null) {
+        return (<div></div>);
     }
 
-    const articleInfo = article.articles.map((art) => {
+    const articleInfo = article.articles.map((art, index) => {
         return (
-            <div>
+            <div key={index}>
                 <b>{art.title}</b>
                 <br/>
                 <a href={art.articleUrl}>Original Article</a>

@@ -6,14 +6,14 @@ import ArticleContent from "../../containers/ArticleViewer/ArticleContent";
 import ArticlesSummariseContainer from "../../containers/ArticleViewer/ArticleSummarisedContainer";
 import {Grid, Row, Col} from "react-bootstrap";
 
-export const ArticleViewerPage = () => (
+export const ArticleViewerPage = ({params}) => (
     <Grid>
         <Row>
             <Col md={9}>
-                <ArticleContent/>
+                <ArticleContent topicId={params.topicId} articleId={params.articleId}/>
             </Col>
             <Col md={3}>
-                <ArticlesSummariseContainer/>
+                <ArticlesSummariseContainer topicId={params.topicId} articleId={params.articleId}/>
             </Col>
         </Row>
     </Grid>

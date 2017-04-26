@@ -17,9 +17,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleArticleClick: (event, article) => {
+        handleArticleClick: (event, topicId, articleId) => {
             event.preventDefault();
-            dispatch(articleClicked(article));
+            dispatch(articleClicked(topicId, articleId));
         },
         handleReloadNeeded: (topicId) => {
             dispatch(viewClicked(topicId));

@@ -7,7 +7,7 @@ import {Button, Image, Label, Thumbnail, Grid, Row, Col} from "react-bootstrap";
 import {Link} from "react-router";
 
 
-const thumbnails = (row, idx, handleArticleClick) => {
+const thumbnails = (row, idx, topicId, handleArticleClick) => {
     return (
         <Row key={idx}>
             {row.map((article, index) => {
@@ -15,9 +15,9 @@ const thumbnails = (row, idx, handleArticleClick) => {
                     <Col md={3} key={index}>
                         <Thumbnail src={article.articles[0].imageUrl}>
                             <h4>{article.articles[0].title}</h4>
-                            <Button onClick={(event) => handleArticleClick(event, article)}
+                            <Button onClick={(event) => handleArticleClick(event, topicId, article.id)}
                                     bsStyle="default">
-                                <Link to="/article">View</Link>
+                                View
                             </Button>
                         </Thumbnail>
                     </Col>
@@ -59,7 +59,7 @@ const TopicPanelView = ({articles, fetchInProgress, fetchInProgressCalled, topic
     }
 
     const mappedRows = rows.map((row, idx) => {
-        return thumbnails(row, idx, handleArticleClick)
+        return thumbnails(row, idx, topicId, handleArticleClick)
     });
 
     return (

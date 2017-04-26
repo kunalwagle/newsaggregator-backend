@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class ClusterHolder implements DatabaseStorage {
 
     private ObjectId _id;
+    private String id;
     private List<OutletArticle> articles;
     private List<List<Node>> summaries;
     private List<String> labels = new ArrayList<>();
@@ -61,6 +62,11 @@ public class ClusterHolder implements DatabaseStorage {
 
     public void set_id(ObjectId _id) {
         this._id = _id;
+        this.id = _id.toHexString();
+    }
+
+    public String getId() {
+        return id;
     }
 
     public ObjectId get_id() {

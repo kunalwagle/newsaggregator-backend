@@ -19,6 +19,15 @@ export function viewClicked(title) {
     }
 }
 
+export function articleClicked(title) {
+    return (dispatch) => {
+        dispatch(viewStarted());
+        return fetch("http://localhost:8182/api/topic/" + title)
+            .then(response => response.json())
+            .then(json => dispatch(articlesReceived(json)))
+    }
+}
+
 export function viewStarted() {
     return {
         type: VIEW_START
