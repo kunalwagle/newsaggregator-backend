@@ -20,7 +20,7 @@ export function search() {
         dispatch(searchStarted());
         let searchTerm = getState().searchBar.searchTerm.replace(' ', "%20");
         dispatch(push("/searchResults/" + searchTerm));
-        return fetch('http://localhost:8182/api/wikipedia/' + searchTerm)
+        return fetch('http://178.62.27.53:8182/api/wikipedia/' + searchTerm)
             .then(response => response.json())
             .then(json => dispatch(searchResultsReceived(json)))
     }
@@ -29,7 +29,7 @@ export function search() {
 export function searchOnReload(searchTerm) {
     return (dispatch) => {
         dispatch(searchStarted());
-        return fetch('http://localhost:8182/api/wikipedia/' + searchTerm)
+        return fetch('http://178.62.27.53:8182/api/wikipedia/' + searchTerm)
             .then(response => response.json())
             .then(json => dispatch(searchResultsReceived(json)))
     }
