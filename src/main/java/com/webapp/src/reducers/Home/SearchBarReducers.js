@@ -6,6 +6,7 @@ import {SEARCH_VALUE_CHANGED, SEARCH_START, SEARCH_RESULTS_RECEIVED} from "../..
 const initialState = {
     searchTerm: "",
     fetchInProgress: false,
+    fetchInProgressCalled: false,
     searchResults: []
 };
 
@@ -22,6 +23,7 @@ export default function searchBar(state, action) {
         case SEARCH_START:
             return Object.assign({}, state, {
                 fetchInProgress: true,
+                fetchInProgressCalled: true
             });
         case SEARCH_RESULTS_RECEIVED:
             return Object.assign({}, state, {

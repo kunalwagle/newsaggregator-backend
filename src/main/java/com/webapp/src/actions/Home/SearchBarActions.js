@@ -18,7 +18,9 @@ export function searchValueChanged(searchValue) {
 export function search() {
     return (dispatch, getState) => {
         dispatch(searchStarted());
-        return fetch('http://localhost:8182/api/wikipedia/' + getState().searchBar.searchTerm)
+        let searchTerm = getState().searchBar.searchTerm.replace(' ', "%20");
+        dispatch(push("/searchResults/" + searchTerm));
+        return fetch('http://localhost:8182/api/wikipedia/' + searchTerm)
             .then(response => response.json())
             .then(json => dispatch(searchResultsReceived(json)))
     }
@@ -27,8 +29,6 @@ export function search() {
 export function searchOnReload(searchTerm) {
     return (dispatch) => {
         dispatch(searchStarted());
-        searchTerm = searchTerm.replace(' ', "%20");
-        dispatch(push("/searchResults/" + searchTerm));
         return fetch('http://localhost:8182/api/wikipedia/' + searchTerm)
             .then(response => response.json())
             .then(json => dispatch(searchResultsReceived(json)))

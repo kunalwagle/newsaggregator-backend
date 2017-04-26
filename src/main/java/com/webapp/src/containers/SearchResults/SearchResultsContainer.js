@@ -12,6 +12,7 @@ const mapStateToProps = (state, ownProps) => {
         searchTerm: ownProps.searchTerm,
         searchResults: state.searchBar.searchResults,
         fetchInProgress: state.searchBar.fetchInProgress,
+        fetchInProgressCalled: state.searchBar.fetchInProgressCalled,
         loggedIn: state.loggedIn.loggedIn
     }
 };

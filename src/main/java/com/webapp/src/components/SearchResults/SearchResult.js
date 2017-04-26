@@ -68,14 +68,14 @@ const carousels = (loggedIn, searchResults, handleViewClicked, handleSubscribeCl
     )
 };
 
-export const SubscriptionComponent = ({loggedIn, searchResults, fetchInProgress, searchTerm, handleSearchEmpty, handleViewClicked, handleSubscribeClicked}) => {
+export const SubscriptionComponent = ({loggedIn, searchResults, fetchInProgress, fetchInProgressCalled, searchTerm, handleSearchEmpty, handleViewClicked, handleSubscribeClicked}) => {
     if (fetchInProgress) {
         return (
             <div className="loader">Loading...</div>
         )
     }
 
-    if (!fetchInProgress && searchResults == undefined) {
+    if (!fetchInProgressCalled) {
         handleSearchEmpty(searchTerm);
         return (
             <div className="loader">Loading...</div>
