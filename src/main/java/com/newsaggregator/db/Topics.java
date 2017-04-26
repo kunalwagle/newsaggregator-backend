@@ -1,5 +1,6 @@
 package com.newsaggregator.db;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -138,5 +139,14 @@ public class Topics {
         Document document = labelHolder.createDocument();
         collection.insertOne(document);
         return labelHolder;
+    }
+
+    public void removeTopics(List<LabelHolder> topics) {
+        List<ObjectId> objectIds = topics.stream().map(LabelHolder::get_id).collect(Collectors.toList());
+        BasicDBList list = new BasicDBList();
+        list.addAll(objectIds);
+        BasicDBObject inClause = new BasicDBObject("$in", list);
+        BasicDBObject query = new BasicDBObject("_id", inClause);
+        collection.deleteMany(query);
     }
 }
