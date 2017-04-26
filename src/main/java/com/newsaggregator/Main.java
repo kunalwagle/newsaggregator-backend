@@ -1,12 +1,9 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.jobs.RemoveDuplicatesRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
-
-import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -39,7 +36,7 @@ public class Main {
 
                 TaskService scheduleManager = new TaskService();
 
-                scheduleManager.schedule(new RemoveDuplicatesRunnable(), 1L, TimeUnit.SECONDS);
+//                scheduleManager.schedule(new RemoveDuplicatesRunnable(), 1L, TimeUnit.SECONDS);
 //                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 10L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 1L, TimeUnit.HOURS);
 

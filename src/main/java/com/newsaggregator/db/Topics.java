@@ -101,17 +101,25 @@ public class Topics {
             Document document = iterator.next();
             String item = document.toJson();
             JSONObject jsonObject = new JSONObject(item);
-            JSONArray articleIds = jsonObject.getJSONArray("Articles");
             List<OutletArticle> articles = new ArrayList<>();
-            for (int i = 0; i < articleIds.length(); i++) {
-                String articleId = articleIds.getString(i);
-                articles.add(articleManager.getArticleFromId(articleId));
+            try {
+                JSONArray articleIds = jsonObject.getJSONArray("Articles");
+                for (int i = 0; i < articleIds.length(); i++) {
+                    String articleId = articleIds.getJSONObject(i).getString("$oid");
+                    articles.add(articleManager.getArticleFromId(articleId));
+                }
+            } catch (Exception e) {
+                logger.error("An error occurred whilst getting articles for a single topic", e);
             }
-            JSONArray summaryIds = jsonObject.getJSONArray("Clusters");
             List<ClusterHolder> clusters = new ArrayList<>();
-            for (int i = 0; i < summaryIds.length(); i++) {
-                String summaryId = summaryIds.getString(i);
-                clusters.add(summaryManager.getSingleCluster(summaryId));
+            try {
+                JSONArray summaryIds = jsonObject.getJSONArray("Clusters");
+                for (int i = 0; i < summaryIds.length(); i++) {
+                    String summaryId = summaryIds.getJSONObject(i).getString("$oid");
+                    clusters.add(summaryManager.getSingleCluster(summaryId));
+                }
+            } catch (Exception e) {
+                logger.error("An error occurred whilst getting clusters for a single topic", e);
             }
             LabelHolder labelHolder = new LabelHolder(jsonObject.getString("Label"), articles, clusters);
             labelHolder.set_id(document.getObjectId("_id"));
