@@ -111,4 +111,11 @@ public class Topics {
     public long count() {
         return collection.count();
     }
+
+    public LabelHolder createBlankTopic(String title) {
+        LabelHolder labelHolder = new LabelHolder(title, new ArrayList<>(), new ArrayList<>());
+        Document document = labelHolder.createDocument();
+        collection.insertOne(document);
+        return labelHolder;
+    }
 }

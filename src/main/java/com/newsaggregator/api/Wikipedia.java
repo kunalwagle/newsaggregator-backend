@@ -1,8 +1,11 @@
 package com.newsaggregator.api;
 
+import com.newsaggregator.Utils;
 import com.newsaggregator.base.Outlet;
 import com.newsaggregator.base.Outlink;
 import com.newsaggregator.base.WikipediaArticle;
+import com.newsaggregator.db.Topics;
+import com.newsaggregator.server.LabelHolder;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +20,16 @@ import java.util.List;
 public class Wikipedia {
 
     public static ArrayList<WikipediaArticle> getArticles(String searchTerm) {
-        return queryAndParseArticles(searchTerm, null);
+        ArrayList<WikipediaArticle> articles = queryAndParseArticles(searchTerm, null);
+        Topics topicManager = new Topics(Utils.getDatabase());
+        for (WikipediaArticle article : articles) {
+            LabelHolder labelHolder = topicManager.getTopic(article.getTitle());
+            if (labelHolder == null) {
+                labelHolder = topicManager.createBlankTopic(article.getTitle());
+            }
+            article.set_id(labelHolder.get_id().toString());
+        }
+        return articles;
     }
 
     public static WikipediaArticle getNearMatchArticle(String searchTerm) {
