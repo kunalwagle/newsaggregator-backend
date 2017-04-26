@@ -22,12 +22,12 @@ const thumbnails = (row, idx, handleArticleClick) => {
                         </Thumbnail>
                     </Col>
                 )
-            })};
+            })}
         </Row>
     )
 };
 
-const TopicPanelView = ({articles, fetchInProgress, fetchInProgressCalled, topicId, handleArticleClick}) => {
+const TopicPanelView = ({articles, fetchInProgress, fetchInProgressCalled, topicId, handleReloadNeeded, handleArticleClick}) => {
 
     if (fetchInProgress) {
         return (
@@ -36,7 +36,10 @@ const TopicPanelView = ({articles, fetchInProgress, fetchInProgressCalled, topic
     }
 
     if (!fetchInProgressCalled) {
-
+        handleReloadNeeded(topicId);
+        return (
+            <div className="loader">Loading...</div>
+        )
     }
 
     articles = filter(articles, function (article) {

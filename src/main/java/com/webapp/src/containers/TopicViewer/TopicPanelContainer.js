@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
             event.preventDefault();
             dispatch(articleClicked(article));
         },
-        handleTopicEmpty: (topicId) => {
+        handleReloadNeeded: (topicId) => {
             dispatch(viewClicked(topicId));
         }
     }
