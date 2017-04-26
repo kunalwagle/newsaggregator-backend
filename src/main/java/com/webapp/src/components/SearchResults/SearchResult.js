@@ -74,5 +74,13 @@ export const SubscriptionComponent = ({loggedIn, searchResults, fetchInProgress,
             <div className="loader">Loading...</div>
         )
     }
+
+    if (!fetchInProgress && searchResults == undefined) {
+        handleSearchEmpty(searchTerm);
+        return (
+            <div className="loader">Loading...</div>
+        )
+    }
+
     return carousels(loggedIn, searchResults, handleViewClicked, handleSubscribeClicked);
 };
