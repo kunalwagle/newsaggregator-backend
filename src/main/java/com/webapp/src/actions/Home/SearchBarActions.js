@@ -2,6 +2,7 @@
  * Created by kunalwagle on 06/02/2017.
  */
 import fetch from "isomorphic-fetch";
+import {push} from "react-router-redux";
 
 export const SEARCH_VALUE_CHANGED = 'SEARCH_VALUE_CHANGED';
 export const SEARCH_START = 'SEARCH_START';
@@ -17,7 +18,7 @@ export function searchValueChanged(searchValue) {
 export function search() {
     return (dispatch, getState) => {
         dispatch(searchStarted());
-        return fetch('http://178.62.27.53:8182/api/wikipedia/' + getState().searchBar.searchTerm)
+        return fetch('http://localhost:8182/api/wikipedia/' + getState().searchBar.searchTerm)
             .then(response => response.json())
             .then(json => dispatch(searchResultsReceived(json)))
     }
@@ -26,7 +27,9 @@ export function search() {
 export function searchOnReload(searchTerm) {
     return (dispatch) => {
         dispatch(searchStarted());
-        return fetch('http://178.62.27.53:8182/api/wikipedia/' + searchTerm)
+        searchTerm = searchTerm.replace(' ', "%20");
+        dispatch(push("/searchResults/" + searchTerm));
+        return fetch('http://localhost:8182/api/wikipedia/' + searchTerm)
             .then(response => response.json())
             .then(json => dispatch(searchResultsReceived(json)))
     }

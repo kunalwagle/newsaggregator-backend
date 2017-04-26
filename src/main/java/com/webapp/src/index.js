@@ -3,9 +3,8 @@ import ReactDOM from "react-dom";
 import {createStore, compose, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import {SearchBarJumbotron} from "./components/Home/SearchBarJumbotron";
-import {Route, IndexRoute} from "react-router";
-import createHistory from "history/createBrowserHistory";
-import {ConnectedRouter, routerReducer, routerMiddleware} from "react-router-redux";
+import {Route, IndexRoute, browserHistory, Router} from "react-router";
+import {syncHistoryWithStore} from "react-router-redux";
 import App from "./App";
 import "babel-polyfill";
 import thunk from "redux-thunk";
@@ -18,10 +17,9 @@ import {SubscriptionPage} from "./components/Subscriptions/Subscriptions";
 //import {reducers} from './reducers'
 
 
-const browserHistory = createHistory();
-const middleware = routerMiddleware(browserHistory);
-const store = createStore(App, compose(applyMiddleware(thunk, middleware)));
+const store = createStore(App, compose(applyMiddleware(thunk)));
 const rootEl = document.getElementById('root');
+const history = syncHistoryWithStore(browserHistory, store);
 
 class NavigationBar extends React.Component {
     render() {
@@ -37,7 +35,7 @@ class NavigationBar extends React.Component {
 const render = () => {
     ReactDOM.render((
             <Provider store={store}>
-                <ConnectedRouter history={browserHistory}>
+                <Router history={history}>
                     <Route path="/" component={NavigationBar}>
                         <IndexRoute component={SearchBarJumbotron}/>
                         <Route path="searchResults/:searchTerm" component={SearchResultPage}/>
@@ -46,7 +44,7 @@ const render = () => {
                         <Route path="topic/:topicId/article/:articleId" component={ArticleViewerPage}/>
                         <Route path="subscription/:userId" component={SubscriptionPage}/>
                     </Route>
-                </ConnectedRouter>
+                </Router>
             </Provider>
         ),
         rootEl

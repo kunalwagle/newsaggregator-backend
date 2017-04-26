@@ -15,7 +15,7 @@ export const SearchBar = ({searchValue, handleSearchValueChanged, handleSearchBu
         </FormGroup>
         {'  '}
         <Button onClick={event => handleSearchButtonPressed(event)} bsClass="col-md-3" type="submit">
-            <Link to="/searchResults">Search</Link>
+            Search
         </Button>
     </Form>
 );

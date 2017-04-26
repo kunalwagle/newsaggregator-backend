@@ -15,7 +15,7 @@ const App = combineReducers({
     searchResults,
     topicViewer,
     loggedIn,
-    router: routerReducer
+    routing: routerReducer
 });
 
 export default App;
