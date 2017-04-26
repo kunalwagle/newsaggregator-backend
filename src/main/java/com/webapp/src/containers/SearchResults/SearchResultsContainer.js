@@ -5,9 +5,11 @@ import {connect} from "react-redux";
 import {SubscriptionComponent} from "../../components/SearchResults/SearchResult";
 import {viewClicked} from "../../actions/SearchResults/SearchResultsActions";
 import {subscribe} from "../../actions/LoginModalActions";
+import {searchOnReload} from "../../actions/Home/SearchBarActions";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
+        searchTerm: ownProps.searchTerm,
         searchResults: state.searchBar.searchResults,
         fetchInProgress: state.searchBar.fetchInProgress,
         loggedIn: state.loggedIn.loggedIn
@@ -22,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleSubscribeClicked: (topic) => {
             dispatch(subscribe(topic));
+        },
+        handleSearchEmpty: (searchTerm) => {
+            dispatch(searchOnReload(searchTerm));
         }
     }
 };

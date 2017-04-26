@@ -68,7 +68,7 @@ const carousels = (loggedIn, searchResults, handleViewClicked, handleSubscribeCl
     )
 };
 
-export const SubscriptionComponent = ({loggedIn, searchResults, fetchInProgress, handleViewClicked, handleSubscribeClicked}) => {
+export const SubscriptionComponent = ({loggedIn, searchResults, fetchInProgress, searchTerm, handleSearchEmpty, handleViewClicked, handleSubscribeClicked}) => {
     if (fetchInProgress) {
         return (
             <div className="loader">Loading...</div>

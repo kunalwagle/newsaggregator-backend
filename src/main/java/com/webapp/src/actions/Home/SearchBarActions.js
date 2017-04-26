@@ -23,6 +23,15 @@ export function search() {
     }
 }
 
+export function searchOnReload(searchTerm) {
+    return (dispatch) => {
+        dispatch(searchStarted());
+        return fetch('http://178.62.27.53:8182/api/wikipedia/' + searchTerm)
+            .then(response => response.json())
+            .then(json => dispatch(searchResultsReceived(json)))
+    }
+}
+
 export function searchStarted() {
     return {
         type: SEARCH_START

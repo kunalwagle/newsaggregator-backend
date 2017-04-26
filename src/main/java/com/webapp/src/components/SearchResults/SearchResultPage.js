@@ -6,14 +6,14 @@ import SearchResultsContainer from "../../containers/SearchResults/SearchResults
 import SearchBarContainer from "../../containers/Home/SearchBarContainer";
 import React from "react";
 
-export const SearchResultPage = () => (
+export const SearchResultPage = ({params}) => (
     <div>
         <div>
             <SearchBarContainer/>
         </div>
         <br/><br/><br/>
         <div>
-            <SearchResultsContainer/>
+            <SearchResultsContainer searchTerm={params.searchTerm}/>
         </div>
     </div>
 );
