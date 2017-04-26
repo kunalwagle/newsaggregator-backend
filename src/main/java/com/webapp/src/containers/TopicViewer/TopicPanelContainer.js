@@ -4,11 +4,14 @@
 import {connect} from "react-redux";
 import TopicPanelView from "../../components/TopicViewer/TopicPanelView";
 import {articleClicked} from "../../actions/TopicViewer/TopicViewerActions";
+import {viewClicked} from "../../actions/SearchResults/SearchResultsActions";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
+        topicId: ownProps.topicId,
         articles: state.searchResults.articles,
-        fetchInProgress: state.searchResults.fetchInProgress
+        fetchInProgress: state.searchResults.fetchInProgress,
+        fetchInProgressCalled: state.searchResults.fetchInProgressCalled
     }
 };
 
@@ -17,6 +20,9 @@ const mapDispatchToProps = (dispatch) => {
         handleArticleClick: (event, article) => {
             event.preventDefault();
             dispatch(articleClicked(article));
+        },
+        handleTopicEmpty: (topicId) => {
+            dispatch(viewClicked(topicId));
         }
     }
 };

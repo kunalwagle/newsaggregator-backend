@@ -5,10 +5,10 @@ import React from "react";
 import TopicPanelContainer from "../../containers/TopicViewer/TopicPanelContainer";
 import TopicTopBarContainer from "../../containers/TopicViewer/TopicTopBarContainer";
 
-export const TopicViewerPage = () => (
+export const TopicViewerPage = ({params}) => (
     <div>
         <TopicTopBarContainer/>
         <br/> <br/><br/>
-        <TopicPanelContainer/>
+        <TopicPanelContainer topicId={params.topicId}/>
     </div>
 );

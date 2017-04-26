@@ -27,12 +27,16 @@ const thumbnails = (row, idx, handleArticleClick) => {
     )
 };
 
-const TopicPanelView = ({articles, fetchInProgress, handleArticleClick}) => {
+const TopicPanelView = ({articles, fetchInProgress, fetchInProgressCalled, topicId, handleArticleClick}) => {
 
     if (fetchInProgress) {
         return (
             <div className="loader">Loading...</div>
         )
+    }
+
+    if (!fetchInProgressCalled) {
+
     }
 
     articles = filter(articles, function (article) {

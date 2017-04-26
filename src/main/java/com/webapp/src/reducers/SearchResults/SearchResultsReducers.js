@@ -10,6 +10,7 @@ import {
 const initialState = {
     label: "",
     fetchInProgress: false,
+    fetchInProgressCalled: false,
     articles: []
 };
 
@@ -23,6 +24,7 @@ export default function searchResults(state, action) {
             return Object.assign({}, state, {
                 label: action.label,
                 fetchInProgress: true,
+                fetchInProgressCalled: true,
                 articles: []
             });
         case ARTICLES_RECEIVED:
