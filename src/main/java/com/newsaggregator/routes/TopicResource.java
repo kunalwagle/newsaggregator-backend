@@ -19,12 +19,11 @@ public class TopicResource extends ServerResource {
     @Get("json")
     public String topic() {
         String searchTerm = (String) getRequestAttributes().get("topic");
-        searchTerm = searchTerm.replace("%20", " ");
         try {
             MongoDatabase db = Utils.getDatabase();
             Topics topicManager = new Topics(db);
-            LabelHolder labelHolder = topicManager.getTopic(searchTerm);
-            return new ObjectMapper().writeValueAsString(labelHolder.getClusters());
+            LabelHolder labelHolder = topicManager.getTopicById(searchTerm);
+            return new ObjectMapper().writeValueAsString(labelHolder);
         } catch (Exception e) {
             logger.error("An error occurred whilst retrieving a topic", e);
             return null;

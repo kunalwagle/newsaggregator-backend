@@ -22,7 +22,6 @@ export default function searchResults(state, action) {
     switch (action.type) {
         case VIEW_START:
             return Object.assign({}, state, {
-                label: action.label,
                 fetchInProgress: true,
                 fetchInProgressCalled: true,
                 articles: []
@@ -30,7 +29,8 @@ export default function searchResults(state, action) {
         case ARTICLES_RECEIVED:
             return Object.assign({}, state, {
                 fetchInProgress: false,
-                articles: action.json
+                label: action.json.label,
+                articles: action.json.clusters
             });
         case SUBSCRIPTION_TAB_SELECTED:
             return Object.assign({}, state, {

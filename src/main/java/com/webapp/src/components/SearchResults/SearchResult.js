@@ -23,13 +23,13 @@ const thumbnails = (loggedIn, carousel, idx, handleViewClicked, handleSubscribeC
                                     <h3>{searchResult.title}</h3>
                                     <p>{searchResult.extract.substring(0, 600) + "..."}</p>
                                     <p>
-                                        <Button onClick={(event) => handleViewClicked(event, searchResult.title)}
+                                        <Button onClick={(event) => handleViewClicked(event, searchResult._id)}
                                                 bsStyle="default">
-                                            <Link to="/topic">View</Link>
+                                            View
                                         </Button>
                                         &nbsp;
                                         <Button disabled={!loggedIn} bsStyle="success"
-                                                onClick={() => handleSubscribeClicked(searchResult.title)}>{buttonText}</Button>
+                                                onClick={() => handleSubscribeClicked(searchResult._id)}>{buttonText}</Button>
                                     </p>
                                 </Thumbnail>
                             </Col>

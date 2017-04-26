@@ -9,6 +9,7 @@ import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -72,28 +73,48 @@ public class Topics {
             MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             Articles articleManager = new Articles(database);
             Summaries summaryManager = new Summaries(database);
-            if (iterator.hasNext()) {
-                Document document = iterator.next();
-                String item = document.toJson();
-                JSONObject jsonObject = new JSONObject(item);
-                JSONArray articleIds = jsonObject.getJSONArray("Articles");
-                List<OutletArticle> articles = new ArrayList<>();
-                for (int i = 0; i < articleIds.length(); i++) {
-                    String articleId = articleIds.getString(i);
-                    articles.add(articleManager.getArticleFromId(articleId));
-                }
-                JSONArray summaryIds = jsonObject.getJSONArray("Clusters");
-                List<ClusterHolder> clusters = new ArrayList<>();
-                for (int i = 0; i < summaryIds.length(); i++) {
-                    String summaryId = summaryIds.getString(i);
-                    clusters.add(summaryManager.getSingleCluster(summaryId));
-                }
-                LabelHolder labelHolder = new LabelHolder(jsonObject.getString("Label"), articles, clusters);
-                labelHolder.set_id(document.getObjectId("_id"));
-                return labelHolder;
-            }
+            LabelHolder labelHolder = getLabelHolderFromIterator(iterator, articleManager, summaryManager);
+            if (labelHolder != null) return labelHolder;
         } catch (Exception e) {
             logger.error("An error occurred whilst getting a single topic", e);
+        }
+        return null;
+    }
+
+    public LabelHolder getTopicById(String id) {
+        try {
+            BasicDBObject queryObject = new BasicDBObject().append("_id", new ObjectId(id));
+            MongoCursor<Document> iterator = collection.find(queryObject).iterator();
+            Articles articleManager = new Articles(database);
+            Summaries summaryManager = new Summaries(database);
+            LabelHolder labelHolder = getLabelHolderFromIterator(iterator, articleManager, summaryManager);
+            if (labelHolder != null) return labelHolder;
+        } catch (Exception e) {
+            logger.error("An error occurred whilst getting a single topic", e);
+        }
+        return null;
+    }
+
+    private LabelHolder getLabelHolderFromIterator(MongoCursor<Document> iterator, Articles articleManager, Summaries summaryManager) {
+        if (iterator.hasNext()) {
+            Document document = iterator.next();
+            String item = document.toJson();
+            JSONObject jsonObject = new JSONObject(item);
+            JSONArray articleIds = jsonObject.getJSONArray("Articles");
+            List<OutletArticle> articles = new ArrayList<>();
+            for (int i = 0; i < articleIds.length(); i++) {
+                String articleId = articleIds.getString(i);
+                articles.add(articleManager.getArticleFromId(articleId));
+            }
+            JSONArray summaryIds = jsonObject.getJSONArray("Clusters");
+            List<ClusterHolder> clusters = new ArrayList<>();
+            for (int i = 0; i < summaryIds.length(); i++) {
+                String summaryId = summaryIds.getString(i);
+                clusters.add(summaryManager.getSingleCluster(summaryId));
+            }
+            LabelHolder labelHolder = new LabelHolder(jsonObject.getString("Label"), articles, clusters);
+            labelHolder.set_id(document.getObjectId("_id"));
+            return labelHolder;
         }
         return null;
     }
