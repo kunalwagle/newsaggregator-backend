@@ -116,7 +116,7 @@ public class ArticleFetchRunnable implements Runnable {
                     try {
                         logger.info("Summarising cluster " + counter + " out of " + clusterHolderList.size());
                         Set<OutletArticle> clusterArticles = new HashSet<>(clusterHolder.getArticles());
-                        Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles);
+                        Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
                         List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
                         List<Summary> summaries = extractives.parallelStream().map(Extractive::summarise).collect(Collectors.toList());
                         clusterHolder.setSummary(summaries.stream().map(Summary::getNodes).collect(Collectors.toList()));
