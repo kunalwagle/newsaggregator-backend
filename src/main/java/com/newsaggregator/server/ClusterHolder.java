@@ -19,7 +19,7 @@ public class ClusterHolder implements DatabaseStorage {
     private ObjectId _id;
     private String id;
     private List<OutletArticle> articles;
-    private List<List<Node>> summaries;
+    private List<List<Node>> summaries = new ArrayList<>();
     private List<String> labels = new ArrayList<>();
 
     public ClusterHolder(List<OutletArticle> articles) {
@@ -43,11 +43,8 @@ public class ClusterHolder implements DatabaseStorage {
         return labels;
     }
 
-    public void setSummary(List<Node> summary) {
-        if (summaries == null) {
-            summaries = new ArrayList<>();
-        }
-        this.summaries.add(summary);
+    public void setSummary(List<List<Node>> summaries) {
+        this.summaries.addAll(summaries);
     }
 
     public void addLabel(String label) {

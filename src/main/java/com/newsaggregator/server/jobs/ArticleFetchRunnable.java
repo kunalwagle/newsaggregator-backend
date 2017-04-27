@@ -1,5 +1,6 @@
 package com.newsaggregator.server.jobs;
 
+import com.google.common.collect.Sets;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.base.ArticleVector;
@@ -19,10 +20,7 @@ import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -117,9 +115,11 @@ public class ArticleFetchRunnable implements Runnable {
                 for (ClusterHolder clusterHolder : clusterHolderList) {
                     try {
                         logger.info("Summarising cluster " + counter + " out of " + clusterHolderList.size());
-                        Extractive extractive = new Extractive(clusterHolder.getArticles());
-                        Summary summary = extractive.summarise();
-                        clusterHolder.setSummary(summary.getNodes());
+                        Set<OutletArticle> clusterArticles = new HashSet<>(clusterHolder.getArticles());
+                        Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles);
+                        List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
+                        List<Summary> summaries = extractives.parallelStream().map(Extractive::summarise).collect(Collectors.toList());
+                        clusterHolder.setSummary(summaries.stream().map(Summary::getNodes).collect(Collectors.toList()));
                         for (String topicLabel : clusterHolder.getLabels()) {
                             LabelHolder labelHolder = topicLabelMap.get(topicLabel);
                             labelHolder.addCluster(clusterHolder);
