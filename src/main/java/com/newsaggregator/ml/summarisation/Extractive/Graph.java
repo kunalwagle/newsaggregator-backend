@@ -63,9 +63,15 @@ public class Graph {
         List<String> nounifiedTexts = texts.stream().map(extractSentenceTypes::nounifyDocument).collect(Collectors.toList());
         TfIdf tfIdf = new TfIdf(nounifiedTexts);
         double max = 0;
-        for (Connection connection : connections) {
+        Iterator<Connection> connectionIterator = connections.iterator();
+        while (connectionIterator.hasNext()) {
+            Connection connection = connectionIterator.next();
             String nounifiedFirstSentence = extractSentenceTypes.nounifyDocument(connection.getFirstNode().getSentence());
             String nounifiedSecondSentence = extractSentenceTypes.nounifyDocument(connection.getSecondNode().getSentence());
+            if (nounifiedFirstSentence.length() == 0 || nounifiedSecondSentence.length() == 0) {
+                connectionIterator.remove();
+                continue;
+            }
             double cosineSimilarity = tfIdf.performTfIdfCosineSimilarities(nounifiedFirstSentence, nounifiedSecondSentence);
             double sentencePositionDifference = 1 - Math.abs(connection.getFirstNode().getSentencePosition() - connection.getSecondNode().getSentencePosition());
             cosineSimilarity *= sentencePositionDifference;

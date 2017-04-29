@@ -34,15 +34,33 @@ public class Extractive implements Summarisation {
         graph = filterGraph(graph);
         List<Node> finalNodes = applyPageRank(graph);
         List<Node> strippedNodes = generateFinalStringFromList(finalNodes, texts.size());
+        List<Connection> originalFilteredConnections = graph.getConnections();
+        strippedNodes = getRelatedNodes(strippedNodes, originalFilteredConnections);
         graph = new Graph();
+        strippedNodes = fixQuotationOrdering(strippedNodes);
         graph.addNodes(strippedNodes);
         return new Summary(graph.getNodes(), generateFinalString(strippedNodes), articles);
+    }
+
+    private List<Node> getRelatedNodes(List<Node> strippedNodes, List<Connection> originalFilteredConnections) {
+        for (Node node : strippedNodes) {
+            for (Connection connection : originalFilteredConnections) {
+                boolean isInConnection = (node == connection.getFirstNode() && !strippedNodes.contains(connection.getSecondNode())) && (node == connection.getSecondNode() && !strippedNodes.contains(connection.getFirstNode()));
+                if (isInConnection) {
+                    if (node == connection.getFirstNode()) {
+                        node.addNode(connection.getSecondNode());
+                    } else {
+                        node.addNode(connection.getFirstNode());
+                    }
+                }
+            }
+        }
+        return strippedNodes;
     }
 
     private List<Node> generateFinalStringFromList(List<Node> finalNodes, int textSize) {
         List<Node> strippedNodes = finalNodes.stream().limit(finalNodes.size() / textSize).collect(Collectors.toList());
         strippedNodes = strippedNodes.stream().sorted(Comparator.comparing(Node::getSentencePosition)).collect(Collectors.toList());
-        strippedNodes = fixQuotationOrdering(strippedNodes);
         return strippedNodes;
     }
 

@@ -1,9 +1,8 @@
 package com.newsaggregator.ml.tfidf;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import com.google.common.collect.Lists;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,39 +32,65 @@ public class TfIdf {
     public double performTfIdfCosineSimilarities(String sentence1, String sentence2) {
         Map<String, Long> sentence1Freq = calculateFrequencies(sentence1);
         Map<String, Long> sentence2Freq = calculateFrequencies(sentence2);
+        Map<String, Long> generatedCorpus = generateCorpus(sentence1Freq, sentence2Freq);
+        List<Map<String, Long>> sentenceCorpi = Lists.newArrayList(sentence1Freq, sentence2Freq);
         double topHalfTotal = 0;
         double bottomFirstSentenceTotal = 0;
         double bottomSecondSentenceTotal = 0;
 
+        for (Map.Entry<String, Long> entry : generatedCorpus.entrySet()) {
+            topHalfTotal += completeTopHalf(entry.getKey(), sentenceCorpi);
+        }
+
         for (Map.Entry<String, Long> entry : sentence1Freq.entrySet()) {
-            topHalfTotal += completeTopHalf(entry.getKey(), corpusSizes);
-            bottomFirstSentenceTotal += bottomHalf(entry.getKey(), corpusSizes);
+            bottomFirstSentenceTotal += bottomHalf(entry.getKey(), sentence1Freq);
         }
 
         for (Map.Entry<String, Long> entry : sentence2Freq.entrySet()) {
-            topHalfTotal += completeTopHalf(entry.getKey(), corpusSizes);
-            bottomSecondSentenceTotal += bottomHalf(entry.getKey(), corpusSizes);
+            bottomSecondSentenceTotal += bottomHalf(entry.getKey(), sentence2Freq);
         }
 
         bottomFirstSentenceTotal = Math.pow(bottomFirstSentenceTotal, 0.5);
         bottomSecondSentenceTotal = Math.pow(bottomSecondSentenceTotal, 0.5);
 
+        if (bottomFirstSentenceTotal == 0 || bottomSecondSentenceTotal == 0) {
+            return 0;
+        }
+
         return topHalfTotal / (bottomFirstSentenceTotal * bottomSecondSentenceTotal);
     }
 
-    private double completeTopHalf(String word, List<Map<String, Long>> corpusSizes) {
-        double s1TF = calculateTf(corpusSizes.get(0), word);
-        double s2TF = s1TF;
-        if (corpusSizes.size() > 1) {
-            s2TF = calculateTf(corpusSizes.get(1), word);
+    private Map<String, Long> generateCorpus(Map<String, Long> sentence1Freq, Map<String, Long> sentence2Freq) {
+        Map<String, Long> corpus = new HashMap<>();
+
+        for (Map.Entry<String, Long> entry : sentence1Freq.entrySet()) {
+            corpus.put(entry.getKey(), entry.getValue());
         }
-        double idf = idfCalculation(word, corpusSizes, 2);
+
+        for (Map.Entry<String, Long> entry : sentence2Freq.entrySet()) {
+            if (corpus.containsKey(entry.getKey())) {
+                corpus.put(entry.getKey(), entry.getValue() + corpus.get(entry.getKey()));
+            } else {
+                corpus.put(entry.getKey(), entry.getValue());
+            }
+        }
+
+        return corpus;
+    }
+
+    private double completeTopHalf(String word, List<Map<String, Long>> sentenceCorpi) {
+        double s1TF = calculateTf(sentenceCorpi.get(0), word);
+        double s2TF = s1TF;
+        if (sentenceCorpi.size() > 1) {
+            s2TF = calculateTf(sentenceCorpi.get(1), word);
+        }
+        double idf = idfCalculation(word, corpusSizes, corpusSize);
         return s1TF * s2TF * Math.pow(idf, 2);
     }
 
-    private double bottomHalf(String word, List<Map<String, Long>> corpusSizes) {
-        double TF = calculateTf(corpusSizes.get(0), word);
-        double IDF = idfCalculation(word, corpusSizes, 2);
+    private double bottomHalf(String word, Map<String, Long> corpus) {
+        double TF = calculateTf(corpus, word);
+        double IDF = idfCalculation(word, corpusSizes, corpusSize);
         return Math.pow((TF * IDF), 2);
     }
 

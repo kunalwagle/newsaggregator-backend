@@ -1,5 +1,8 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by kunalwagle on 29/03/2017.
  */
@@ -9,6 +12,7 @@ public class Node {
     private double sentencePosition;
     private int absoluteSentencePosition;
     private int identifier;
+    private List<Node> relatedNodes = new ArrayList<>();
     private String source;
 
     public Node(String sentence, double sentencePosition, int absoluteSentencePosition, int identifier, String source) {
@@ -43,11 +47,19 @@ public class Node {
         return absoluteSentencePosition;
     }
 
+    public List<Node> getRelatedNodes() {
+        return relatedNodes;
+    }
+
     public void setSentence(String sentence) {
         this.sentence = sentence;
     }
 
     public void setAbsoluteSentencePosition(int absoluteSentencePosition) {
         this.absoluteSentencePosition = absoluteSentencePosition;
+    }
+
+    public void addNode(Node node) {
+        relatedNodes.add(node);
     }
 }
