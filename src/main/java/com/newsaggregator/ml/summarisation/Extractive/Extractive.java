@@ -137,12 +137,16 @@ public class Extractive implements Summarisation {
         OutletArticle article = articles.stream().filter(outletArticle -> outletArticle.getSource().equals(source)).findFirst().get();
         String[] sentences = new SentenceDetection().detectSentences(article.getBody());
         for (int i = absoluteSentenceNumber - 1; i >= 0; i--) {
-            String currentSentence = sentences[i];
-            int numberOfQuotationMarks = numberOfQuotationMarks(currentSentence);
-            if (numberOfQuotationMarks > 0 && numberOfQuotationMarks % 2 == 0) {
-                break;
-            } else if (numberOfQuotationMarks % 2 == 1) {
-                return false;
+            try {
+                String currentSentence = sentences[i];
+                int numberOfQuotationMarks = numberOfQuotationMarks(currentSentence);
+                if (numberOfQuotationMarks > 0 && numberOfQuotationMarks % 2 == 0) {
+                    break;
+                } else if (numberOfQuotationMarks % 2 == 1) {
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         return true;

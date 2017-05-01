@@ -2,7 +2,6 @@ package com.newsaggregator.api.outlets;
 
 import com.newsaggregator.base.Outlet;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -17,8 +16,7 @@ public class AssociatedPress extends NewsAPI {
 
     @Override
     protected String extractArticleText(Document page) throws NullPointerException {
-        Elements articleBodyElements = page.getElementsByClass("field-items");
-        Element articleBody = articleBodyElements.get(2);
-        return articleBody.text();
+        Elements articleBodyElements = page.getElementsByClass("field-name-body");
+        return articleBodyElements.text();
     }
 }
