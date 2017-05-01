@@ -19,8 +19,8 @@ public class ArticleFetch {
 //        List<OutletArticle> dm = fetchDailyMailArticles();
 //        List<OutletArticle> g = fetchGuardianArticles();
 //        List<OutletArticle> i = fetchIndependentArticles();
-        List<OutletArticle> me = fetchMetroArticles();
-        List<OutletArticle> mi = fetchMirrorArticles();
+//        List<OutletArticle> me = fetchMetroArticles();
+//        List<OutletArticle> mi = fetchMirrorArticles();
         List<OutletArticle> nw = fetchNewsweekArticles();
         List<OutletArticle> r = fetchReutersArticles();
         List<OutletArticle> te = fetchTelegraphArticles();
@@ -43,12 +43,12 @@ public class ArticleFetch {
 //        if (i != null) {
 //            articles.addAll(i);
 //        }
-        if (me != null) {
-            articles.addAll(me);
-        }
-        if (mi != null) {
-            articles.addAll(mi);
-        }
+//        if (me != null) {
+//            articles.addAll(me);
+//        }
+//        if (mi != null) {
+//            articles.addAll(mi);
+//        }
         if (nw != null) {
             articles.addAll(nw);
         }

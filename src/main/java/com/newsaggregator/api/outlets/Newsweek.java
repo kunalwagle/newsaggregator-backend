@@ -19,6 +19,12 @@ public class Newsweek extends NewsAPI {
         Elements elements = page.getElementsByAttributeValue("itemprop", "articleBody");
         Element content = elements.get(0);
         Elements articleBody = content.getElementsByTag("p");
+        for (Element element : articleBody) {
+            element.getElementsByTag("strong").remove();
+            element.getElementsByTag("a").remove();
+            element.getElementsByAttributeValue("itemprop", "image").remove();
+            element.getElementsByClass("videocontent-wrapper").remove();
+        }
         return articleBody.text();
     }
 }
