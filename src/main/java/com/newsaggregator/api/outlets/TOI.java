@@ -14,6 +14,10 @@ public class TOI extends NewsAPI {
 
     @Override
     protected String extractArticleText(Document page) throws IndexOutOfBoundsException {
-        return page.getElementsByAttributeValue("itemprop", "articleBody").text();
+        String text = page.getElementsByAttributeValue("itemprop", "articleBody").text();
+        if (text.contains("Stay updated on the go with Times")) {
+            return text.substring(0, text.indexOf("Stay updated on the go with Times"));
+        }
+        return text;
     }
 }

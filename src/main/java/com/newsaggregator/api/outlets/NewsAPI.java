@@ -32,7 +32,7 @@ public abstract class NewsAPI {
             JSONArray response = fetchArticles();
             return parseAndCollectArticles(response);
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         return null;
     }
