@@ -19,6 +19,14 @@ public class Cricinfo extends NewsAPI {
     protected String extractArticleText(Document page) throws IndexOutOfBoundsException {
         Elements elements = page.getElementsByClass("story-content-main");
         Element articleBody = elements.get(0);
-        return articleBody.text();
+        articleBody.getElementsByClass("fixed-social").remove();
+        articleBody.getElementsByClass("video-section").remove();
+        articleBody.getElementsByClass("end-credit").remove();
+        articleBody.getElementsByClass("end-copyright").remove();
+        String article = articleBody.text();
+        if (article.contains("ball-by-ball details")) {
+            article = article.substring(article.indexOf("ball-by-ball details") + 21);
+        }
+        return article;
     }
 }
