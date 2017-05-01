@@ -2,7 +2,6 @@ package com.newsaggregator.api.outlets;
 
 import com.newsaggregator.base.Outlet;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -16,9 +15,8 @@ public class DailyMail extends NewsAPI {
 
     @Override
     protected String extractArticleText(Document page) throws IndexOutOfBoundsException {
-        Elements articleBodyElements = page.getElementsByAttributeValue("itemprop", "articleBody");
-        Element articleBody = articleBodyElements.get(0);
-        return articleBody.text();
+        Elements articleBodyElements = page.getElementsByClass("mol-para-with-font");
+        return articleBodyElements.text();
     }
 
 }
