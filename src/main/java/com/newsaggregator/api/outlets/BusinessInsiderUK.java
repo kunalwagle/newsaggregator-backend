@@ -18,6 +18,11 @@ public class BusinessInsiderUK extends NewsAPI {
     protected String extractArticleText(Document page) throws NullPointerException {
         Elements articleBodyElements = page.getElementsByClass("post-content");
         Element articleBody = articleBodyElements.get(0);
+        articleBody.getElementsByClass("image-container").remove();
+        articleBody.getElementsByTag("h2").remove();
+        articleBody.getElementsByTag("em").remove();
+        articleBody.getElementsByClass("tagline").remove();
+        articleBody.getElementsByClass("margin-top").remove();
         return articleBody.text();
     }
 
