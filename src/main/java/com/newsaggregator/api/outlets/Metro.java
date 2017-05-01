@@ -2,7 +2,6 @@ package com.newsaggregator.api.outlets;
 
 import com.newsaggregator.base.Outlet;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -17,7 +16,7 @@ public class Metro extends NewsAPI {
     @Override
     protected String extractArticleText(Document page) throws IndexOutOfBoundsException {
         Elements elements = page.getElementsByClass("article-body");
-        Element articleBody = elements.get(0);
+        Elements articleBody = elements.get(0).getElementsByTag("p");
         return articleBody.text();
     }
 }

@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/DailyMail.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/DailyMail.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Metro.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Metro.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -39,11 +40,38 @@
       <file leaf-file-name="ArticleFetch.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="33" column="24" lean-forward="true" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+            <state relative-caret-position="134">
+              <caret line="21" column="20" lean-forward="true" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
               <folding>
-                <element signature="e#2341#2342#0" expanded="true" />
-                <element signature="e#2393#2394#0" expanded="true" />
+                <element signature="e#2389#2390#0" expanded="true" />
+                <element signature="e#2441#2442#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Metro.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Metro.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <folding>
+                <element signature="e#285#286#0" expanded="true" />
+                <element signature="e#320#321#0" expanded="true" />
+                <element signature="method#extractArticleText#0;class#Metro#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Independent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Independent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="314">
+              <caret line="30" column="34" lean-forward="true" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+              <folding>
+                <element signature="e#326#327#0" expanded="true" />
+                <element signature="e#367#368#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -53,10 +81,11 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/DailyMail.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
-              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
-                <element signature="e#293#294#0" expanded="true" />
-                <element signature="e#332#333#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#261#262#0" expanded="true" />
+                <element signature="e#300#301#0" expanded="true" />
                 <element signature="method#extractArticleText#0;class#DailyMail#0" expanded="true" />
               </folding>
             </state>
@@ -134,33 +163,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TfIdf.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/tfidf/TfIdf.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1">
-              <caret line="92" column="67" lean-forward="true" selection-start-line="92" selection-start-column="67" selection-end-line="92" selection-end-column="67" />
-              <folding>
-                <element signature="method#TfIdf#0;class#TfIdf#0" expanded="true" />
-                <element signature="method#performTfIdfCosineSimilarities#0;class#TfIdf#0" expanded="true" />
-                <element signature="method#generateCorpus#0;class#TfIdf#0" expanded="true" />
-                <element signature="method#completeTopHalf#0;class#TfIdf#0" expanded="true" />
-                <element signature="method#idfCalculation#0;class#TfIdf#0" expanded="true" />
-                <element signature="method#calculateFrequencies#0;class#TfIdf#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArticleFetchRunnable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1440">
-              <caret line="119" column="102" lean-forward="false" selection-start-line="119" selection-start-column="102" selection-end-line="119" selection-end-column="102" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -219,7 +221,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/NavBar.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/DatabaseStorage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Utils.java" />
@@ -267,9 +268,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/AssociatedPress.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/BusinessInsiderUK.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Cricinfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/DailyMail.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Metro.java" />
       </list>
     </option>
   </component>
@@ -1547,14 +1549,7 @@
       <workItem from="1491926569536" duration="8385000" />
       <workItem from="1492002902704" duration="27962000" />
       <workItem from="1492430182328" duration="128984000" />
-      <workItem from="1493313787752" duration="20592000" />
-    </task>
-    <task id="LOCAL-00198" summary="Created Subscription Container">
-      <created>1492741503331</created>
-      <option name="number" value="00198" />
-      <option name="presentableId" value="LOCAL-00198" />
-      <option name="project" value="LOCAL" />
-      <updated>1492741503331</updated>
+      <workItem from="1493313787752" duration="21040000" />
     </task>
     <task id="LOCAL-00199" summary="Linked to subscriptions">
       <created>1492741707957</created>
@@ -1892,7 +1887,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493673747326</updated>
     </task>
-    <option name="localTasksCounter" value="247" />
+    <task id="LOCAL-00247" summary="Daily Mail stripped">
+      <created>1493675398052</created>
+      <option name="number" value="00247" />
+      <option name="presentableId" value="LOCAL-00247" />
+      <option name="project" value="LOCAL" />
+      <updated>1493675398052</updated>
+    </task>
+    <option name="localTasksCounter" value="248" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1925,7 +1927,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="492755000" />
+    <option name="totallyTimeSpent" value="493203000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1980,7 +1982,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fixed minor cluster retrieval bug" />
     <MESSAGE value="Adjusted article fetch for better error handling" />
     <MESSAGE value="Fixed minor bug" />
     <MESSAGE value="Added patterns to react router" />
@@ -2005,7 +2006,8 @@
     <MESSAGE value="Stripped AP articles" />
     <MESSAGE value="Stripped Business Insider UK articles" />
     <MESSAGE value="Stripped Cricinfo articles" />
-    <option name="LAST_COMMIT_MESSAGE" value="Stripped Cricinfo articles" />
+    <MESSAGE value="Daily Mail stripped" />
+    <option name="LAST_COMMIT_MESSAGE" value="Daily Mail stripped" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2042,12 +2044,6 @@
           <properties />
           <option name="timeStamp" value="439" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java</url>
-          <line>19</line>
-          <properties />
-          <option name="timeStamp" value="650" />
-        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -2058,7 +2054,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="651" />
+      <option name="time" value="654" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2067,20 +2063,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="32" lean-forward="false" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Home/SearchBarContainer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Home/SearchBar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -2519,22 +2501,46 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/DailyMail.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#261#262#0" expanded="true" />
+            <element signature="e#300#301#0" expanded="true" />
+            <element signature="method#extractArticleText#0;class#DailyMail#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Independent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="30" column="34" lean-forward="true" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+          <folding>
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#367#368#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Metro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
           <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
-            <element signature="e#293#294#0" expanded="true" />
-            <element signature="e#332#333#0" expanded="true" />
-            <element signature="method#extractArticleText#0;class#DailyMail#0" expanded="true" />
+            <element signature="e#285#286#0" expanded="true" />
+            <element signature="e#320#321#0" expanded="true" />
+            <element signature="method#extractArticleText#0;class#Metro#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="33" column="24" lean-forward="true" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+        <state relative-caret-position="134">
+          <caret line="21" column="20" lean-forward="true" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
           <folding>
-            <element signature="e#2341#2342#0" expanded="true" />
-            <element signature="e#2393#2394#0" expanded="true" />
+            <element signature="e#2389#2390#0" expanded="true" />
+            <element signature="e#2441#2442#0" expanded="true" />
           </folding>
         </state>
       </provider>

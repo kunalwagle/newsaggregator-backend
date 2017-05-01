@@ -13,36 +13,36 @@ public class ArticleFetch {
 
     public static List<OutletArticle> fetchArticles() {
         List<OutletArticle> articles = new ArrayList<>();
-        List<OutletArticle> ap = fetchAPArticles();
-        List<OutletArticle> bi = fetchBusinessInsiderArticles();
-        List<OutletArticle> c = fetchCricinfoArticles();
-        List<OutletArticle> dm = fetchDailyMailArticles();
-        List<OutletArticle> g = fetchGuardianArticles();
-        List<OutletArticle> i = fetchIndependentArticles();
+//        List<OutletArticle> ap = fetchAPArticles();
+//        List<OutletArticle> bi = fetchBusinessInsiderArticles();
+//        List<OutletArticle> c = fetchCricinfoArticles();
+//        List<OutletArticle> dm = fetchDailyMailArticles();
+//        List<OutletArticle> g = fetchGuardianArticles();
+//        List<OutletArticle> i = fetchIndependentArticles();
         List<OutletArticle> me = fetchMetroArticles();
         List<OutletArticle> mi = fetchMirrorArticles();
         List<OutletArticle> nw = fetchNewsweekArticles();
         List<OutletArticle> r = fetchReutersArticles();
         List<OutletArticle> te = fetchTelegraphArticles();
         List<OutletArticle> toi = fetchTOIArticles();
-        if (ap != null) {
-            articles.addAll(ap);
-        }
-        if (bi != null) {
-            articles.addAll(bi);
-        }
-        if (c != null) {
-            articles.addAll(c);
-        }
-        if (dm != null) {
-            articles.addAll(dm);
-        }
-        if (g != null) {
-            articles.addAll(g);
-        }
-        if (i != null) {
-            articles.addAll(i);
-        }
+//        if (ap != null) {
+//            articles.addAll(ap);
+//        }
+//        if (bi != null) {
+//            articles.addAll(bi);
+//        }
+//        if (c != null) {
+//            articles.addAll(c);
+//        }
+//        if (dm != null) {
+//            articles.addAll(dm);
+//        }
+//        if (g != null) {
+//            articles.addAll(g);
+//        }
+//        if (i != null) {
+//            articles.addAll(i);
+//        }
         if (me != null) {
             articles.addAll(me);
         }
