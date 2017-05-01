@@ -7,11 +7,10 @@ import com.newsaggregator.ml.nlp.apache.SentenceDetection;
 import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.summarisation.Summarisation;
 import com.newsaggregator.ml.summarisation.Summary;
+import org.apache.commons.io.IOUtils;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,40 +32,58 @@ public class Extractive implements Summarisation {
         graph = applyCosineSimilarities(graph, texts);
         graph = filterGraph(graph);
         List<Node> finalNodes = applyPageRank(graph);
-        List<Node> strippedNodes = generateFinalStringFromList(finalNodes, texts.size());
-        List<Connection> originalFilteredConnections = graph.getConnections();
-        strippedNodes = getRelatedNodes(strippedNodes, originalFilteredConnections);
+        finalNodes = getRelatedNodes(finalNodes);
         graph = new Graph();
-        strippedNodes = fixQuotationOrdering(strippedNodes);
-        graph.addNodes(strippedNodes);
-        return new Summary(graph.getNodes(), generateFinalString(strippedNodes), articles);
+        finalNodes = fixQuotationOrdering(finalNodes);
+        finalNodes = generateFinalStringFromList(finalNodes, getSize(finalNodes));
+        graph.addNodes(finalNodes);
+        return new Summary(graph.getNodes(), generateFinalString(finalNodes), articles);
     }
 
-    private List<Node> getRelatedNodes(List<Node> strippedNodes, List<Connection> originalFilteredConnections) {
+    private List<Node> getRelatedNodes(List<Node> strippedNodes) {
+        List<Node> finals = new ArrayList<>();
         for (Node node : strippedNodes) {
-            for (Connection connection : originalFilteredConnections) {
-                boolean isInConnection = (node == connection.getFirstNode() && !strippedNodes.contains(connection.getSecondNode())) && (node == connection.getSecondNode() && !strippedNodes.contains(connection.getFirstNode()));
-                if (isInConnection) {
-                    if (node == connection.getFirstNode()) {
-                        node.addNode(connection.getSecondNode());
-                    } else {
-                        node.addNode(connection.getFirstNode());
+            if (finals.contains(node) || finals.stream().anyMatch(n -> n.getRelatedNodes().contains(node))) {
+                continue;
+            }
+            for (Node secondNode : strippedNodes) {
+                if (finals.contains(secondNode) || finals.stream().anyMatch(n -> n.getRelatedNodes().contains(secondNode))) {
+                    continue;
+                }
+                if (node != secondNode) {
+                    try {
+                        String[] firstNodeWords = node.getSentence().toLowerCase().split("\\W+");
+                        String[] secondNodeWords = secondNode.getSentence().toLowerCase().split("\\W+");
+                        List<String> stopList = IOUtils.readLines(getClass().getResourceAsStream("/en.txt"), "UTF-8");
+                        List<String> firstNodeList = Arrays.stream(firstNodeWords).filter(string -> !stopList.contains(string)).collect(Collectors.toList());
+                        List<String> secondNodeList = Arrays.stream(secondNodeWords).filter(string -> !stopList.contains(string)).collect(Collectors.toList());
+                        double size = secondNodeList.size();
+                        if (firstNodeList.size() > secondNodeList.size()) {
+                            size = firstNodeList.size();
+                        }
+                        double firstTotal = firstNodeList.stream().filter(secondNodeList::contains).count() / size;
+                        if (firstTotal > 0.6) {
+                            node.addNode(secondNode);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
             }
+            finals.add(node);
         }
-        return strippedNodes;
+        return finals;
     }
 
     private List<Node> generateFinalStringFromList(List<Node> finalNodes, int textSize) {
-        List<Node> strippedNodes = finalNodes.stream().limit(finalNodes.size() / textSize).collect(Collectors.toList());
+        List<Node> strippedNodes = finalNodes.stream().limit(textSize).collect(Collectors.toList());
         strippedNodes = strippedNodes.stream().sorted(Comparator.comparing(Node::getSentencePosition)).collect(Collectors.toList());
         return strippedNodes;
     }
 
     private String generateFinalString(List<Node> strippedNodes) {
-        List<String> finalStrings = stripClausesAndSentences(strippedNodes, strippedNodes.stream().map(Node::getSentence).collect(Collectors.toList()));
-        return Combiner.combineStrings(finalStrings);
+//        List<String> finalStrings = stripClausesAndSentences(strippedNodes, strippedNodes.stream().map(Node::getSentence).collect(Collectors.toList()));
+        return Combiner.combineStrings(strippedNodes.stream().map(Node::getSentence).collect(Collectors.toList()));
     }
 
     private List<Node> fixQuotationOrdering(List<Node> nodes) {
@@ -192,5 +209,12 @@ public class Extractive implements Summarisation {
             }
         }
         return summaryStrings;
+    }
+
+    public int getSize(List<Node> finalNodes) {
+        if (texts.size() > 1) {
+            return finalNodes.size() / texts.size();
+        }
+        return (int) Math.ceil(finalNodes.size() / 2.0);
     }
 }

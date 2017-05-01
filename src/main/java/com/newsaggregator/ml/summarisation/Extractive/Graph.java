@@ -1,10 +1,13 @@
 package com.newsaggregator.ml.summarisation.Extractive;
 
+import com.google.common.collect.Lists;
 import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import com.newsaggregator.ml.nlp.apache.SentenceDetection;
+import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.tfidf.TfIdf;
+import org.apache.commons.io.IOUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
 public class Graph {
 
     private List<Connection> connections;
+    private List<Connection> removedConnections = Lists.newArrayList();
     protected List<Node> nodes;
 
     public Graph(List<OutletArticle> articles) {
@@ -59,28 +63,40 @@ public class Graph {
     }
 
     public void applyCosineSimilarities(List<String> texts) {
-        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
-        List<String> nounifiedTexts = texts.stream().map(extractSentenceTypes::nounifyDocument).collect(Collectors.toList());
-        TfIdf tfIdf = new TfIdf(nounifiedTexts);
-        double max = 0;
-        Iterator<Connection> connectionIterator = connections.iterator();
-        while (connectionIterator.hasNext()) {
-            Connection connection = connectionIterator.next();
-            String nounifiedFirstSentence = extractSentenceTypes.nounifyDocument(connection.getFirstNode().getSentence());
-            String nounifiedSecondSentence = extractSentenceTypes.nounifyDocument(connection.getSecondNode().getSentence());
-            if (nounifiedFirstSentence.length() == 0 || nounifiedSecondSentence.length() == 0) {
-                connectionIterator.remove();
-                continue;
+//        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+
+        try {
+            List<String[]> wordedTexts = texts.stream().map(text -> text.toLowerCase().split("\\W+")).collect(Collectors.toList());
+            List<String> stopList = IOUtils.readLines(getClass().getResourceAsStream("/en.txt"), "UTF-8");
+            List<String> nounifiedTexts = Lists.newArrayList();
+            for (String[] strings : wordedTexts) {
+                List<String> stringList = Arrays.stream(strings).filter(string -> !stopList.contains(string)).collect(Collectors.toList());
+                nounifiedTexts.add(Combiner.combineStrings(stringList));
             }
-            double cosineSimilarity = tfIdf.performTfIdfCosineSimilarities(nounifiedFirstSentence, nounifiedSecondSentence);
-            double sentencePositionDifference = 1 - Math.abs(connection.getFirstNode().getSentencePosition() - connection.getSecondNode().getSentencePosition());
-            cosineSimilarity *= sentencePositionDifference;
-            if (max < cosineSimilarity) {
-                max = cosineSimilarity;
+//        List<String> nounifiedTexts = texts;//.stream().map(extractSentenceTypes::nounifyDocument).collect(Collectors.toList());
+            TfIdf tfIdf = new TfIdf(nounifiedTexts);
+            double max = 0;
+            Iterator<Connection> connectionIterator = connections.iterator();
+            while (connectionIterator.hasNext()) {
+                Connection connection = connectionIterator.next();
+                String nounifiedFirstSentence = connection.getFirstNode().getSentence();//extractSentenceTypes.nounifyDocument(connection.getFirstNode().getSentence());
+                String nounifiedSecondSentence = connection.getSecondNode().getSentence();//extractSentenceTypes.nounifyDocument(connection.getSecondNode().getSentence());
+                if (nounifiedFirstSentence.length() == 0 || nounifiedSecondSentence.length() == 0) {
+                    connectionIterator.remove();
+                    continue;
+                }
+                double cosineSimilarity = tfIdf.performTfIdfCosineSimilarities(nounifiedFirstSentence, nounifiedSecondSentence);
+//            double sentencePositionDifference = 1 - Math.abs(connection.getFirstNode().getSentencePosition() - connection.getSecondNode().getSentencePosition());
+//            cosineSimilarity *= sentencePositionDifference;
+                if (max < cosineSimilarity) {
+                    max = cosineSimilarity;
+                }
+                connection.setDistance(cosineSimilarity);
             }
-            connection.setDistance(cosineSimilarity);
+            normaliseDistances(max);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        normaliseDistances(max);
     }
 
     private void normaliseDistances(double max) {
@@ -99,6 +115,10 @@ public class Graph {
                 iterator.remove();
             }
         }
+    }
+
+    public List<Connection> getRemovedConnections() {
+        return removedConnections;
     }
 
     public Node getNodeForSentence(String sentence) {
