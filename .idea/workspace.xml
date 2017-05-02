@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -69,11 +69,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SubscribeUserResource.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SubscribeUserResource.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
               <caret line="27" column="51" lean-forward="false" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SubscriptionsResource.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="45" column="67" lean-forward="false" selection-start-line="45" selection-start-column="67" selection-end-line="45" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -175,7 +185,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Articles.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SendEmailRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java" />
@@ -226,6 +235,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java" />
       </list>
     </option>
   </component>
@@ -1747,14 +1757,7 @@
       <workItem from="1491926569536" duration="8385000" />
       <workItem from="1492002902704" duration="27962000" />
       <workItem from="1492430182328" duration="128984000" />
-      <workItem from="1493313787752" duration="27016000" />
-    </task>
-    <task id="LOCAL-00203" summary="Added minor error handling">
-      <created>1492742501234</created>
-      <option name="number" value="00203" />
-      <option name="presentableId" value="LOCAL-00203" />
-      <option name="project" value="LOCAL" />
-      <updated>1492742501234</updated>
+      <workItem from="1493313787752" duration="27141000" />
     </task>
     <task id="LOCAL-00204" summary="Added get methods to TopicHolder">
       <created>1492742655527</created>
@@ -2092,7 +2095,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493719466728</updated>
     </task>
-    <option name="localTasksCounter" value="252" />
+    <task id="LOCAL-00252" summary="Subscribe user now returns user">
+      <created>1493727531464</created>
+      <option name="number" value="00252" />
+      <option name="presentableId" value="LOCAL-00252" />
+      <option name="project" value="LOCAL" />
+      <updated>1493727531464</updated>
+    </task>
+    <option name="localTasksCounter" value="253" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2125,7 +2135,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="499179000" />
+    <option name="totallyTimeSpent" value="499304000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2180,7 +2190,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added _id to wikipedia articles" />
     <MESSAGE value="Initial code for search on reload" />
     <MESSAGE value="Added code to search result" />
     <MESSAGE value="Initial page load" />
@@ -2205,7 +2214,8 @@
     <MESSAGE value="Newsweek stripped" />
     <MESSAGE value="Stripping articles complete" />
     <MESSAGE value="Clustering thresholds lowered" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clustering thresholds lowered" />
+    <MESSAGE value="Subscribe user now returns user" />
+    <option name="LAST_COMMIT_MESSAGE" value="Subscribe user now returns user" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2261,13 +2271,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticleContent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/ArticleViewer/ArticleContent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -2774,6 +2777,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="27" column="51" lean-forward="false" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="45" column="67" lean-forward="false" selection-start-line="45" selection-start-column="67" selection-end-line="45" selection-end-column="67" />
           <folding />
         </state>
       </provider>
