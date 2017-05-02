@@ -22,7 +22,7 @@ public class ArticleVector implements ClusterItem {
         double result;
         VectorScore otherVectorScore = otherItem.getVector();
         result = findSimilarities(otherVectorScore);
-        if (result > 0.001) {
+        if (result > 0.0005) {
             return result / factorInTimeStamp(otherVectorScore);
         }
         return -1;
@@ -39,7 +39,6 @@ public class ArticleVector implements ClusterItem {
         List<TfIdfScores> secondNounScores = otherVectorScore.getNounScores();
         double similarityRunningTotal = 0;
         double differenceRunningTotal = 0;
-        double total = vectorScore.getTotalTfIdfScore() + otherVectorScore.getTotalTfIdfScore();
         double averageWords = (firstNounScores.size() + secondNounScores.size()) / 2;
         double totalSimilarWords = 0;
         for (TfIdfScores word : firstNounScores) {
