@@ -37,7 +37,7 @@ public class Users {
         writeUser(user);
     }
 
-    private void writeUser(User user) {
+    public void writeUser(User user) {
         try {
             Document document = user.createDocument();
             collection.insertOne(document);

@@ -1,11 +1,11 @@
 /**
  * Created by kunalwagle on 20/04/2017.
  */
-import {EMAIL_CHANGED, LOG_IN_CHANGE, FETCH_ENDED, FETCH_STARTED} from "../actions/LoginModalActions";
+import {EMAIL_CHANGED, LOG_IN, LOG_OUT, FETCH_ENDED, FETCH_STARTED} from "../actions/LoginModalActions";
 
 const initialState = {
     loggedIn: false,
-    email: "",
+    user: {},
     fetchInProgress: false,
     topics: []
 };
@@ -20,14 +20,15 @@ export default function loggedIn(state, action) {
             return Object.assign({}, state, {
                 email: action.text
             });
-        case LOG_IN_CHANGE:
-            let email = state.email;
-            if (!action.loggedIn) {
-                email = "";
-            }
+        case LOG_IN:
             return Object.assign({}, state, {
                 loggedIn: action.loggedIn,
-                email: email
+                user: action.user
+            });
+        case LOG_OUT:
+            return Object.assign({}, state, {
+                loggedIn: false,
+                user: {}
             });
         case FETCH_STARTED:
             return Object.assign({}, state, {

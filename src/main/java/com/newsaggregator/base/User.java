@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class User implements DatabaseStorage {
 
+    //TODO: Create id field and put _id.toString in it
+
     private String emailAddress;
     private List<String> topicIds;
     private ObjectId _id;

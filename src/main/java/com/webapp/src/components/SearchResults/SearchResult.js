@@ -4,12 +4,18 @@
 import {Grid, Row, Col, Thumbnail, Button, Carousel} from "react-bootstrap";
 import React from "react";
 import {Link} from "react-router";
+import {contains} from "underscore";
 
-const thumbnails = (loggedIn, carousel, idx, handleViewClicked, handleSubscribeClicked) => {
+const thumbnails = (loggedIn, user, carousel, idx, handleViewClicked, handleSubscribeClicked) => {
     let buttonText = "Subscribe";
     if (!loggedIn) {
         buttonText = "Log in to subscribe";
     }
+
+    const subscribed = (id) => {
+        return contains(user.topicIds, id);
+    };
+
     return (
         <Carousel.Item key={idx}>
             <Grid>
@@ -28,7 +34,7 @@ const thumbnails = (loggedIn, carousel, idx, handleViewClicked, handleSubscribeC
                                             View
                                         </Button>
                                         &nbsp;
-                                        <Button disabled={!loggedIn} bsStyle="success"
+                                        <Button disabled={!loggedIn || subscribed(searchResult._id)} bsStyle="success"
                                                 onClick={() => handleSubscribeClicked(searchResult._id)}>{buttonText}</Button>
                                     </p>
                                 </Thumbnail>
@@ -41,7 +47,7 @@ const thumbnails = (loggedIn, carousel, idx, handleViewClicked, handleSubscribeC
     )
 };
 
-const carousels = (loggedIn, searchResults, handleViewClicked, handleSubscribeClicked) => {
+const carousels = (loggedIn, user, searchResults, handleViewClicked, handleSubscribeClicked) => {
     if (searchResults.length == 0) {
         return (
             <div>No Search Results...</div>
@@ -54,7 +60,7 @@ const carousels = (loggedIn, searchResults, handleViewClicked, handleSubscribeCl
     }
 
     const mappedCarousels = carousels.map((carousel, idx) => {
-        return thumbnails(loggedIn, carousel, idx, handleViewClicked, handleSubscribeClicked)
+        return thumbnails(loggedIn, user, carousel, idx, handleViewClicked, handleSubscribeClicked)
     });
 
     return (
@@ -68,7 +74,7 @@ const carousels = (loggedIn, searchResults, handleViewClicked, handleSubscribeCl
     )
 };
 
-export const SubscriptionComponent = ({loggedIn, searchResults, fetchInProgress, fetchInProgressCalled, searchTerm, handleSearchEmpty, handleViewClicked, handleSubscribeClicked}) => {
+export const SubscriptionComponent = ({loggedIn, user, searchResults, fetchInProgress, fetchInProgressCalled, searchTerm, handleSearchEmpty, handleViewClicked, handleSubscribeClicked}) => {
     if (fetchInProgress) {
         return (
             <div className="loader">Loading...</div>
@@ -82,5 +88,5 @@ export const SubscriptionComponent = ({loggedIn, searchResults, fetchInProgress,
         )
     }
 
-    return carousels(loggedIn, searchResults, handleViewClicked, handleSubscribeClicked);
+    return carousels(loggedIn, user, searchResults, handleViewClicked, handleSubscribeClicked);
 };

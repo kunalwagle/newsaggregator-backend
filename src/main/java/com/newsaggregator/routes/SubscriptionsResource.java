@@ -10,6 +10,8 @@ import org.restlet.data.Status;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 
+import java.util.ArrayList;
+
 /**
  * Created by kunalwagle on 21/04/2017.
  */
@@ -24,6 +26,11 @@ public class SubscriptionsResource extends ServerResource {
         Users userManager = new Users(db);
         try {
             User response = userManager.getSingleUser(user);
+            if (response == null) {
+                response = new User(user, new ArrayList<>());
+                userManager.writeUser(response);
+                response = userManager.getSingleUser(user);
+            }
 //            List<String> topics = response.getTopicIds();
 //            Topics topicManager = new Topics(db);
 //            List<TopicHolder> topicHolders = new ArrayList<>();

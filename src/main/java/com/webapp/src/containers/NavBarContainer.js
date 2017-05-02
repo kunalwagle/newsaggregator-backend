@@ -3,20 +3,24 @@
  */
 import {connect} from "react-redux";
 import {NavBarComponent} from "../components/NavBar";
-import {emailAddressChanged, loginChanged, getSubscriptions} from "../actions/LoginModalActions";
+import {emailAddressChanged, login, logout, getSubscriptions} from "../actions/LoginModalActions";
 
 
 const mapStateToProps = (state) => {
     return {
         loggedIn: state.loggedIn.loggedIn,
-        emailAddress: state.emailAddress
+        user: state.loggedIn.user
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         handleLoginClicked: (loggedIn) => {
-            dispatch(loginChanged(!loggedIn));
+            if (!loggedIn) {
+                dispatch(login());
+            } else {
+                dispatch(logout());
+            }
         },
         handleEmailChange: (event) => {
             dispatch(emailAddressChanged(event.target.value));

@@ -13,7 +13,7 @@ export function viewClicked(title) {
     return (dispatch) => {
         dispatch(viewStarted());
         dispatch(push("/topic/" + title));
-        return fetch("http://178.62.27.53:8182/api/topic/" + title)
+        return fetch("http://localhost:8182/api/topic/" + title)
             .then(response => response.json())
             .then(json => dispatch(articlesReceived(json)))
     }
@@ -22,7 +22,7 @@ export function viewClicked(title) {
 export function articleClicked(title) {
     return (dispatch) => {
         dispatch(viewStarted());
-        return fetch("http://178.62.27.53:8182/api/topic/" + title)
+        return fetch("http://localhost:8182/api/topic/" + title)
             .then(response => response.json())
             .then(json => dispatch(articlesReceived(json)))
     }

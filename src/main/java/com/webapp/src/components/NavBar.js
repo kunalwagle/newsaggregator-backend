@@ -52,7 +52,14 @@ const rightNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClic
     }
 };
 
-export const NavBarComponent = ({loggedIn, emailAddress, handleEmailChange, handleLoginClicked, handleSubscriptionSearch}) => (
+export const NavBarComponent = ({loggedIn, user, handleEmailChange, handleLoginClicked, handleSubscriptionSearch}) => {
+
+    let emailAddress = "";
+    if (user != undefined) {
+        emailAddress = user.emailAddress;
+    }
+
+    return (
     <div>
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
@@ -73,4 +80,5 @@ export const NavBarComponent = ({loggedIn, emailAddress, handleEmailChange, hand
         </Navbar>
     </div>
 
-);
+    )
+};
