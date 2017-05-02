@@ -2,6 +2,7 @@ package com.newsaggregator.db;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
+import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
@@ -41,8 +42,19 @@ public class Users {
         try {
             Document document = user.createDocument();
             collection.insertOne(document);
+        } catch (MongoWriteException e) {
+            updateUser(user);
         } catch (Exception e) {
             logger.error("Writing user error", e);
+        }
+    }
+
+    public void updateUser(User user) {
+        try {
+            Document document = user.createDocument();
+            collection.replaceOne(new BasicDBObject().append("_id", user.get_id()), document);
+        } catch (Exception e) {
+            logger.error("Updating user error", e);
         }
     }
 

@@ -27,8 +27,8 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handle
 
     const tabMap = topics.map((topic, index) => {
         return (
-            <NavItem onSelect={() => handleTopicChange(topic.clusterHolder)} eventKey={index} key={index}>
-                {topic.topic}
+            <NavItem onSelect={() => handleTopicChange(topic)} eventKey={index} key={index}>
+                {topic}
             </NavItem>
         )
     });
@@ -36,7 +36,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handle
     const contentMap = topics.map((topic, index) => {
         return (
             <Tab.Pane eventKey={index} key={index}>
-                <TopicPanelContainer/>
+                <TopicPanelContainer topic={topic}/>
             </Tab.Pane>
         )
     });

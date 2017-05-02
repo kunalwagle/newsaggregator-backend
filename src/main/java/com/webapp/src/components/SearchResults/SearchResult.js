@@ -4,7 +4,7 @@
 import {Grid, Row, Col, Thumbnail, Button, Carousel} from "react-bootstrap";
 import React from "react";
 import {Link} from "react-router";
-import {contains} from "underscore";
+import {contains, pluck} from "underscore";
 
 const thumbnails = (loggedIn, user, carousel, idx, handleViewClicked, handleSubscribeClicked) => {
     let buttonText = "Subscribe";
@@ -12,8 +12,9 @@ const thumbnails = (loggedIn, user, carousel, idx, handleViewClicked, handleSubs
         buttonText = "Log in to subscribe";
     }
 
-    const subscribed = (id) => {
-        return contains(user.topicIds, id);
+    const subscribed = (topicId) => {
+        const ids = pluck(user.topics, "id");
+        return contains(ids, topicId);
     };
 
     return (

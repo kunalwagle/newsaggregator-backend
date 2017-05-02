@@ -64,7 +64,6 @@ export function subscribeComplete() {
 export function getSubscriptions() {
     return (dispatch, getState) => {
         dispatch(startSubscriptionFetch());
-        dispatch(push("/subscription"));
         const email = getState().loggedIn.email;
         return fetch("http://localhost:8182/api/user/subscriptions/" + email)
             .then(response => response.json())
@@ -80,8 +79,12 @@ export function startSubscriptionFetch() {
 
 export function fetchedSubscriptions(json) {
     return (dispatch) => {
-        if (json.length > 0) {
-            const articles = json[0].clusterHolder;
+        let articles = [];
+        if (json.id !== undefined) {
+            dispatch(push("/subscription/" + json.id));
+            if (json.topics.length > 0) {
+                articles = json.topics[0].clusterHolder;
+            }
             dispatch(subscriptionTabSelected(articles));
         }
         return dispatch(populateSubscriptions(json));
