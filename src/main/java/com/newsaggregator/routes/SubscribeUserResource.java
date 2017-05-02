@@ -1,5 +1,6 @@
 package com.newsaggregator.routes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.db.Users;
@@ -18,13 +19,13 @@ public class SubscribeUserResource extends ServerResource {
     @Get
     public String subscribeUser() {
         String topic = (String) getRequestAttributes().get("topic");
-        topic = topic.replace("%20", " ");
         String user = (String) getRequestAttributes().get("user");
         MongoDatabase db = Utils.getDatabase();
         Users userManager = new Users(db);
         try {
             userManager.addTopic(user, topic);
-            getResponse().setStatus(Status.SUCCESS_NO_CONTENT);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(userManager.getSingleUser(user));
         } catch (Exception e) {
             logger.error("Exception occurred subscribing user", e);
             getResponse().setStatus(Status.SERVER_ERROR_INTERNAL);
