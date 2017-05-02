@@ -1,17 +1,9 @@
 package com.newsaggregator;
 
-import com.newsaggregator.base.ArticleVector;
-import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.db.Topics;
-import com.newsaggregator.ml.clustering.Cluster;
-import com.newsaggregator.ml.clustering.Clusterer;
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.LabelHolder;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
-
-import java.util.List;
 
 
 public class Main {
@@ -50,9 +42,9 @@ public class Main {
 
                 serverInitialised = true;
 
-                Topics topics = new Topics(Utils.getDatabase());
-                LabelHolder labelHolder = topics.getTopicById("58ff77a2acea826a39311a26");
-                List<OutletArticle> articles = labelHolder.getArticles();
+//                Topics topics = new Topics(Utils.getDatabase());
+//                LabelHolder labelHolder = topics.getTopicById("58ff77a2acea826a39311a26");
+//                List<OutletArticle> articles = labelHolder.getArticles();
 //            DynamoDB db = new DynamoDB(AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_WEST_2).build());
 //            Articles articles = new Articles(db);
 //            List<OutletArticle> articleList = articles.getAllArticles();
@@ -191,20 +183,20 @@ public class Main {
 //                }
 //                i++;
 //            }
-                System.out.println("Starting Clustering");
-                Clusterer clusterer = new Clusterer(articles);
-                System.out.println("Starting Actual Clustering");
-                List<Cluster<ArticleVector>> clusters = clusterer.cluster();
-                for (Cluster<ArticleVector> cluster : clusters) {
-                    System.out.println("New Cluster:");
-                    for (ArticleVector vector : cluster.getClusterItems()) {
-                        System.out.println(vector.getArticle().getTitle());
-                    }
-                    System.out.println("Cluster size: " + cluster.getClusterItems().size());
-                    System.out.println("");
-                }
-                System.out.println("Total number of clusters: " + clusters.size());
-                System.out.println("");
+//                System.out.println("Starting Clustering");
+//                Clusterer clusterer = new Clusterer(articles);
+//                System.out.println("Starting Actual Clustering");
+//                List<Cluster<ArticleVector>> clusters = clusterer.cluster();
+//                for (Cluster<ArticleVector> cluster : clusters) {
+//                    System.out.println("New Cluster:");
+//                    for (ArticleVector vector : cluster.getClusterItems()) {
+//                        System.out.println(vector.getArticle().getTitle());
+//                    }
+//                    System.out.println("Cluster size: " + cluster.getClusterItems().size());
+//                    System.out.println("");
+//                }
+//                System.out.println("Total number of clusters: " + clusters.size());
+//                System.out.println("");
 
 //
 //            Extractive extractive = new Extractive(outletArticles);

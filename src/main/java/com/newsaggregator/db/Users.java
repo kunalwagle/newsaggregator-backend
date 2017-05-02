@@ -56,6 +56,7 @@ public class Users {
                 List<String> topicIds = (List<String>) document.get("topicIds");
                 User user = new User(address, topicIds);
                 user.set_id(document.getObjectId("_id"));
+                user.setId(user.get_id().toHexString());
                 return user;
             }
         } catch (Exception e) {

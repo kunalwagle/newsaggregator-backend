@@ -10,11 +10,10 @@ import java.util.List;
  */
 public class User implements DatabaseStorage {
 
-    //TODO: Create id field and put _id.toString in it
-
     private String emailAddress;
     private List<String> topicIds;
     private ObjectId _id;
+    private String id;
 
     public User(String emailAddress, List<String> topicIds) {
         this.emailAddress = emailAddress;
@@ -46,6 +45,14 @@ public class User implements DatabaseStorage {
 
     public void setTopicIds(List<String> topicIds) {
         this.topicIds = topicIds;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
