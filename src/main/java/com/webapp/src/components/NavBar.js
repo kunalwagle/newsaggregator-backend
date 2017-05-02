@@ -27,11 +27,9 @@ const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClick
         )
     } else {
         return (
-            <LinkContainer onClick={handleSubscriptionSearch} to="/subscription" activeHref="active">
-                <NavItem>
+            <NavItem eventKey={2} onSelect={() => handleSubscriptionSearch()}>
                     My Topics
                 </NavItem>
-            </LinkContainer>
 
         )
     }

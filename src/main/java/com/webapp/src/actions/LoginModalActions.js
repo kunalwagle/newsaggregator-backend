@@ -3,6 +3,7 @@
  */
 import fetch from "isomorphic-fetch";
 import {subscriptionTabSelected} from "./SearchResults/SearchResultsActions";
+import {push} from "react-router-redux";
 
 export const EMAIL_CHANGED = 'EMAIL_CHANGED';
 export const LOG_IN = 'LOG_IN';
@@ -63,6 +64,7 @@ export function subscribeComplete() {
 export function getSubscriptions() {
     return (dispatch, getState) => {
         dispatch(startSubscriptionFetch());
+        dispatch(push("/subscription"));
         const email = getState().loggedIn.email;
         return fetch("http://localhost:8182/api/user/subscriptions/" + email)
             .then(response => response.json())
