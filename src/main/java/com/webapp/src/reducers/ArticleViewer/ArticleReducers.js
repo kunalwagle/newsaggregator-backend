@@ -19,4 +19,7 @@ export default function articleViewer(state, action) {
                 annotations: action.annotations
             });
     }
+
+    return state;
+
 }

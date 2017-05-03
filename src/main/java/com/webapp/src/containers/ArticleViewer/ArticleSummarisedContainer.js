@@ -3,6 +3,7 @@
  */
 import {connect} from "react-redux";
 import {ArticlesSummarised} from "../../components/ArticleViewer/ArticlesSummarised";
+import {annotationsChange} from "../../actions/ArticleViewer/ArticleActions";
 import {find} from "underscore";
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,12 +17,17 @@ const mapStateToProps = (state, ownProps) => {
     }
     return {
         article,
-        fetchInProgressCalled: state.searchResults.fetchInProgressCalled
+        fetchInProgressCalled: state.searchResults.fetchInProgressCalled,
+        annotations: state.articleViewer.annotations
     }
 };
 
-const mapDispatchToProps = () => {
-    return {}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleAnnotationSwitch: (annotations) => {
+            dispatch(annotationsChange(annotations));
+        }
+    }
 };
 
 const ArticleSummarisedContainer = connect(
