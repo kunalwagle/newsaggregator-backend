@@ -28,7 +28,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handle
     const tabMap = topics.map((topic, index) => {
         return (
             <NavItem onSelect={() => handleTopicChange(topic)} eventKey={index} key={index}>
-                {topic}
+                {topic.label}
             </NavItem>
         )
     });
@@ -44,7 +44,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handle
     return (
         <Tab.Container id="left-tabs-example" defaultActiveKey={0}>
             <Row className="clearfix">
-                <Col sm={4}>
+                <Col sm={3}>
                     <Nav bsStyle="pills" stacked>
                         {tabMap}
                     </Nav>

@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class LabelHolder implements DatabaseStorage {
 
     private ObjectId _id;
+    private String id;
     private String label;
     private List<OutletArticle> articles = new ArrayList<>();
     private List<ClusterHolder> clusters = new ArrayList<>();
@@ -67,8 +68,13 @@ public class LabelHolder implements DatabaseStorage {
         return _id;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public void set_id(ObjectId _id) {
         this._id = _id;
+        this.id = _id.toHexString();
     }
 
     @Override

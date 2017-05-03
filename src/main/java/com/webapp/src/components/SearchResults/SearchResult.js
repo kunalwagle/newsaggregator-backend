@@ -13,7 +13,7 @@ const thumbnails = (loggedIn, user, carousel, idx, handleViewClicked, handleSubs
     }
 
     const subscribed = (topicId) => {
-        const ids = pluck(user.topics, "id");
+        const ids = pluck(user.topics, "topic");
         return contains(ids, topicId);
     };
 

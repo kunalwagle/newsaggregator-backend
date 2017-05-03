@@ -51,13 +51,15 @@ export function subscribe(topic) {
     return (dispatch, getState) => {
         const email = getState().loggedIn.email;
         return fetch("http://localhost:8182/api/user/subscribe/" + email + "/" + topic)
-            .then(dispatch(subscribeComplete()))
+            .then(response => response.json())
+            .then(json => dispatch(subscribeComplete(json)))
     }
 }
 
-export function subscribeComplete() {
+export function subscribeComplete(json) {
     return {
-        type: SUBSCRIBE_COMPLETE
+        type: SUBSCRIBE_COMPLETE,
+        json
     }
 }
 

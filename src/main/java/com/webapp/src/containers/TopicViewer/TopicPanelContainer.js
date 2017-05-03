@@ -7,11 +7,19 @@ import {articleClicked} from "../../actions/TopicViewer/TopicViewerActions";
 import {viewClicked} from "../../actions/SearchResults/SearchResultsActions";
 
 const mapStateToProps = (state, ownProps) => {
+    let articles = state.searchResults.articles;
+    let topicId = ownProps.topicId;
+    let fetchInProgressCalled = state.searchResults.fetchInProgressCalled;
+    if (ownProps.topic !== undefined) {
+        articles = ownProps.topic.clusters;
+        topicId = ownProps.topic.id;
+        fetchInProgressCalled = true;
+    }
     return {
-        topicId: ownProps.topicId,
-        articles: state.searchResults.articles,
+        topicId,
+        articles,
         fetchInProgress: state.searchResults.fetchInProgress,
-        fetchInProgressCalled: state.searchResults.fetchInProgressCalled
+        fetchInProgressCalled
     }
 };
 
