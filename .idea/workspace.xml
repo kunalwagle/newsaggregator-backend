@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/UserHolder.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/ArticleViewer/ArticleActions.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/ArticleViewer/ArticleReducers.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/LoginModalActions.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/LoginModalActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/SearchResults/SearchResult.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/SearchResults/SearchResult.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Subscriptions/SubscriptionComponent.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Subscriptions/SubscriptionComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/TopicViewer/TopicPanelContainer.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/TopicViewer/TopicPanelContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/LoginModalReducers.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/LoginModalReducers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticlesSummarised.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticlesSummarised.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -30,268 +24,55 @@
     <favorites_list name="newsaggregator-backend" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="SearchResultsReducers.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/SearchResults/SearchResultsReducers.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="443">
-                  <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SubscriptionComponent.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Subscriptions/SubscriptionComponent.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="705">
-                  <caret line="51" column="26" lean-forward="true" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-                  <folding>
-                    <element signature="e#720#900#0" expanded="true" />
-                    <element signature="e#956#1119#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="TopicPanelContainer.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/TopicViewer/TopicPanelContainer.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="165">
-                  <caret line="14" column="36" lean-forward="false" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="LabelHolder.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
-                  <folding>
-                    <element signature="e#2180#2181#0" expanded="true" />
-                    <element signature="e#2205#2206#0" expanded="true" />
-                    <element signature="method#set_id#0;class#LabelHolder#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SubscriptionsResource.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="238">
-                  <caret line="34" column="31" lean-forward="true" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SubscribeUserResource.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="405">
-                  <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-                  <folding>
-                    <element signature="method#subscribeUser#0;class#SubscribeUserResource#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="UserHolder.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/UserHolder.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="523">
-                  <caret line="45" column="1" lean-forward="true" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="method#UserHolder#0;class#UserHolder#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="TopicHolder.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/TopicHolder.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="285">
-                  <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-                  <folding>
-                    <element signature="method#TopicHolder#0;class#TopicHolder#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SummaryEval.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SummaryEval.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="45">
-                  <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SubscriptionContainer.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Subscription/SubscriptionContainer.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="360">
-                  <caret line="28" column="31" lean-forward="true" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
-                  <folding>
-                    <element signature="e#303#468#0" expanded="true" />
-                    <element signature="e#512#644#0" expanded="true" />
-                    <element signature="e#568#636#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="SearchResultsActions.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="44" column="12" lean-forward="true" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="12" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                    <element signature="e#48#85#0" expanded="true" />
-                    <element signature="n#!!block;n#viewClicked#0" expanded="true" />
-                    <element signature="e#356#611#0" expanded="true" />
-                    <element signature="n#!!block;n#articleClicked#0" expanded="true" />
-                    <element signature="e#680#892#0" expanded="true" />
-                    <element signature="n#!!block;n#articlesReceived#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SearchResult.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/SearchResults/SearchResult.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="15">
-                  <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-                  <folding>
-                    <element signature="e#473#568#0" expanded="true" />
-                    <element signature="e#718#1884#0" expanded="true" />
-                    <element signature="e#2061#2826#0" expanded="true" />
-                    <element signature="e#2415#2522#0" expanded="true" />
-                    <element signature="e#3017#3390#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SearchResultsReducers.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/SearchResults/SearchResultsReducers.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="525">
-                  <caret line="41" column="1" lean-forward="true" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-                  <folding>
-                    <element signature="e#360#1057#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="NavBar.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/NavBar.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="173">
-                  <caret line="56" column="41" lean-forward="false" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
-                  <folding>
-                    <element signature="e#305#677#0" expanded="true" />
-                    <marker date="1493745828000" expanded="true" signature="1148:1283" ph="&lt;LinkContainer/&gt;" />
-                    <marker date="1493745828000" expanded="true" signature="1983:2848" ph="{...}" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="TopicViewer.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicViewer.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="165">
-                  <caret line="13" column="2" lean-forward="false" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SubscriptionContainer.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Subscription/SubscriptionContainer.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#303#468#0" expanded="true" />
-                    <element signature="e#512#644#0" expanded="true" />
-                    <element signature="e#568#636#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/App.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="405">
-                  <caret line="49" column="10" lean-forward="false" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="10" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SubscribeUserResource.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="269">
-                  <caret line="35" column="57" lean-forward="false" selection-start-line="35" selection-start-column="57" selection-end-line="35" selection-end-column="57" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="UserHolder.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/UserHolder.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="329">
-                  <caret line="30" column="35" lean-forward="false" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="ArticlesSummarised.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticlesSummarised.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="88" lean-forward="false" selection-start-line="6" selection-start-column="88" selection-end-line="6" selection-end-column="88" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#48#74#0" expanded="true" />
+                <element signature="e#227#988#0" expanded="true" />
+                <element signature="e#412#646#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArticleActions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/ArticleViewer/ArticleActions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!block;n#annotationsChange#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArticleReducers.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/ArticleViewer/ArticleReducers.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="20" column="15" lean-forward="false" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SearchBarReducers.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/Home/SearchBarReducers.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="20" column="46" lean-forward="true" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -301,8 +82,8 @@
         <option value="CSS File" />
         <option value="JUnit4 Test Class" />
         <option value="Interface" />
-        <option value="JavaScript File" />
         <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -352,8 +133,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicPanelView.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticleViewerPage.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/TopicViewer/TopicViewerActions.js" />
@@ -362,7 +141,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticleContent.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/ArticleViewer/ArticleContent.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticlesSummarised.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Summarisation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" />
@@ -395,7 +173,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SearchResults/SearchResultsContainer.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/LoginModalActions.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/LoginModalReducers.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/SearchResults/SearchResult.js" />
@@ -403,6 +180,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Subscriptions/SubscriptionComponent.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/TopicViewer/TopicPanelContainer.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticlesSummarised.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/ArticleViewer/ArticleActions.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/ArticleViewer/ArticleReducers.js" />
       </list>
     </option>
   </component>
@@ -723,6 +504,48 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="reducers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ArticleViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="containers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -850,6 +673,48 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="SearchResults" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="containers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ArticleViewer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1135,6 +1000,48 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ArticleViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="actions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1304,6 +1211,48 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Home" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="actions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ArticleViewer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2106,14 +2055,7 @@
       <workItem from="1491926569536" duration="8385000" />
       <workItem from="1492002902704" duration="27962000" />
       <workItem from="1492430182328" duration="128984000" />
-      <workItem from="1493313787752" duration="38910000" />
-    </task>
-    <task id="LOCAL-00209" summary="Mongoified Article Table">
-      <created>1493039997003</created>
-      <option name="number" value="00209" />
-      <option name="presentableId" value="LOCAL-00209" />
-      <option name="project" value="LOCAL" />
-      <updated>1493039997003</updated>
+      <workItem from="1493313787752" duration="40010000" />
     </task>
     <task id="LOCAL-00210" summary="Summaries class">
       <created>1493110643189</created>
@@ -2451,7 +2393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493759341478</updated>
     </task>
-    <option name="localTasksCounter" value="258" />
+    <task id="LOCAL-00258" summary="Viewing articles from a user page">
+      <created>1493817963457</created>
+      <option name="number" value="00258" />
+      <option name="presentableId" value="LOCAL-00258" />
+      <option name="project" value="LOCAL" />
+      <updated>1493817963457</updated>
+    </task>
+    <option name="localTasksCounter" value="259" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2484,7 +2433,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="511073000" />
+    <option name="totallyTimeSpent" value="512173000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2502,7 +2451,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43376318" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3059789" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2539,7 +2488,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Routes to topics but with minor bug" />
     <MESSAGE value="Code to remove any duplicate topics" />
     <MESSAGE value="Fixing minor bug in TopicManager" />
     <MESSAGE value="Topic Routing complete" />
@@ -2564,7 +2512,8 @@
     <MESSAGE value="Logging in fully works" />
     <MESSAGE value="Now navigates to my topics page" />
     <MESSAGE value="User subscribes properly" />
-    <option name="LAST_COMMIT_MESSAGE" value="User subscribes properly" />
+    <MESSAGE value="Viewing articles from a user page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Viewing articles from a user page" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2620,37 +2569,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/AssociatedPress.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="20" column="46" lean-forward="false" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/SkySportsNews.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="17" column="88" lean-forward="true" selection-start-line="17" selection-start-column="88" selection-end-line="17" selection-end-column="88" />
-          <folding>
-            <element signature="e#301#302#0" expanded="false" />
-            <element signature="e#344#345#0" expanded="false" />
-            <element signature="method#extractArticleText#0;class#SkySportsNews#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Telegraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="23" column="9" lean-forward="false" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
-          <folding>
-            <element signature="e#293#294#0" expanded="false" />
-            <element signature="e#332#333#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/TOI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -2827,16 +2745,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/Home/SearchBarReducers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="23" column="41" lean-forward="false" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -2897,32 +2805,10 @@
         <state relative-caret-position="345">
           <caret line="28" column="30" lean-forward="true" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#48#84#0" expanded="true" />
-            <element signature="e#275#374#0" expanded="true" />
-            <element signature="e#475#621#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/NavBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="56" column="41" lean-forward="false" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
-          <folding>
-            <element signature="e#305#677#0" expanded="true" />
-            <marker date="1493745828000" expanded="true" signature="1148:1283" ph="&lt;LinkContainer/&gt;" />
-            <marker date="1493745828000" expanded="true" signature="1983:2848" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#48#84#0" expanded="false" />
+            <element signature="e#275#374#0" expanded="false" />
+            <element signature="e#475#621#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2967,17 +2853,7 @@
         <state relative-caret-position="75">
           <caret line="7" column="13" lean-forward="true" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
-            <element signature="e#327#1330#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicViewer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="13" column="2" lean-forward="false" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#353#1356#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2987,7 +2863,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2997,7 +2873,7 @@
         <state relative-caret-position="75">
           <caret line="9" column="62" lean-forward="true" selection-start-line="9" selection-start-column="62" selection-end-line="9" selection-end-column="62" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
             <element signature="e#301#943#0" expanded="false" />
             <element signature="e#381#918#0" expanded="false" />
             <element signature="e#1074#1967#0" expanded="false" />
@@ -3026,7 +2902,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/SearchResults/SearchResult.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+          <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
           <folding>
             <element signature="e#473#568#0" expanded="true" />
             <element signature="e#718#1884#0" expanded="true" />
@@ -3042,19 +2918,17 @@
         <state relative-caret-position="833">
           <caret line="88" column="13" lean-forward="false" selection-start-line="88" selection-start-column="12" selection-end-line="88" selection-end-column="13" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#48#85#0" expanded="true" />
-            <element signature="n#!!block;n#login#0" expanded="true" />
-            <element signature="e#634#880#0" expanded="true" />
-            <element signature="n#!!block;n#logged#0" expanded="true" />
-            <element signature="n#!!block;n#logout#0" expanded="true" />
-            <element signature="n#!!block;n#subscribe#0" expanded="true" />
-            <element signature="e#1215#1467#0" expanded="true" />
-            <element signature="n#!!block;n#subscribeComplete#0" expanded="true" />
-            <element signature="n#!!block;n#getSubscriptions#0" expanded="true" />
-            <element signature="e#1654#1944#0" expanded="true" />
-            <element signature="n#!!block;n#startSubscriptionFetch#0" expanded="true" />
-            <element signature="n#!!block;n#populateSubscriptions#0" expanded="true" />
+            <element signature="n#!!block;n#login#0" expanded="false" />
+            <element signature="e#634#880#0" expanded="false" />
+            <element signature="n#!!block;n#logged#0" expanded="false" />
+            <element signature="n#!!block;n#logout#0" expanded="false" />
+            <element signature="n#!!block;n#subscribe#0" expanded="false" />
+            <element signature="e#1215#1467#0" expanded="false" />
+            <element signature="n#!!block;n#subscribeComplete#0" expanded="false" />
+            <element signature="n#!!block;n#getSubscriptions#0" expanded="false" />
+            <element signature="e#1654#1944#0" expanded="false" />
+            <element signature="n#!!block;n#startSubscriptionFetch#0" expanded="false" />
+            <element signature="n#!!block;n#populateSubscriptions#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3067,14 +2941,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Subscription/SubscriptionContainer.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/TopicViewer/TopicPanelContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="28" column="31" lean-forward="true" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+        <state relative-caret-position="165">
+          <caret line="14" column="36" lean-forward="false" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
           <folding>
-            <element signature="e#303#468#0" expanded="true" />
-            <element signature="e#512#644#0" expanded="true" />
-            <element signature="e#568#636#0" expanded="true" />
+            <element signature="e#2180#2181#0" expanded="true" />
+            <element signature="e#2205#2206#0" expanded="true" />
+            <element signature="method#set_id#0;class#LabelHolder#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="30" column="31" lean-forward="false" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Subscriptions/SubscriptionComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="51" column="26" lean-forward="false" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#48#74#0" expanded="true" />
+            <element signature="e#720#900#0" expanded="true" />
+            <element signature="e#956#1119#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="30" column="57" lean-forward="false" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/UserHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="28" column="35" lean-forward="false" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3099,73 +3022,96 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/SearchResults/SearchResultsReducers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/UserHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="45" column="1" lean-forward="true" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
+        <state relative-caret-position="525">
+          <caret line="41" column="1" lean-forward="true" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#UserHolder#0;class#UserHolder#0" expanded="true" />
+            <element signature="e#360#1057#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscribeUserResource.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/NavBar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+        <state relative-caret-position="173">
+          <caret line="56" column="41" lean-forward="false" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
           <folding>
-            <element signature="method#subscribeUser#0;class#SubscribeUserResource#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#48#74#0" expanded="true" />
+            <element signature="e#305#677#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Subscriptions/SubscriptionComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="51" column="26" lean-forward="true" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-          <folding>
-            <element signature="e#720#900#0" expanded="true" />
-            <element signature="e#956#1119#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/TopicViewer/TopicPanelContainer.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicViewer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="14" column="36" lean-forward="false" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+          <caret line="13" column="2" lean-forward="false" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Subscription/SubscriptionContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+        <state relative-caret-position="210">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
-            <element signature="e#2180#2181#0" expanded="true" />
-            <element signature="e#2205#2206#0" expanded="true" />
-            <element signature="method#set_id#0;class#LabelHolder#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#48#84#0" expanded="true" />
+            <element signature="e#303#468#0" expanded="true" />
+            <element signature="e#512#644#0" expanded="true" />
+            <element signature="e#568#636#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="34" column="31" lean-forward="true" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+        <state relative-caret-position="210">
+          <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticlesSummarised.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="88" lean-forward="false" selection-start-line="6" selection-start-column="88" selection-end-line="6" selection-end-column="88" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#48#74#0" expanded="true" />
+            <element signature="e#227#988#0" expanded="true" />
+            <element signature="e#412#646#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/ArticleViewer/ArticleActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!block;n#annotationsChange#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/Home/SearchBarReducers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="20" column="46" lean-forward="true" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/ArticleViewer/ArticleReducers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="20" column="15" lean-forward="false" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>

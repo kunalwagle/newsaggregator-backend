@@ -2,8 +2,9 @@
  * Created by kunalwagle on 20/04/2017.
  */
 import React from "react";
+import {Checkbox} from "react-bootstrap";
 
-export const ArticlesSummarised = ({article, fetchInProgressCalled}) => {
+export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled, handleAnnotationSwitch}) => {
 
     if (!fetchInProgressCalled || article == null || article.articles[0] == null) {
         return (<div></div>);
@@ -22,6 +23,10 @@ export const ArticlesSummarised = ({article, fetchInProgressCalled}) => {
 
     return (
         <div>
+            <Checkbox checked={annotations} onClick={() => handleAnnotationSwitch(annotations)}>
+                Show summary annotations
+            </Checkbox>
+            <br/><br/><br/>
             <b>Articles Summarised From:</b>
             <br/><br/><br/>
             {articleInfo}
