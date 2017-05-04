@@ -15,6 +15,7 @@ const mapStateToProps = (state, ownProps) => {
     }
     return {
         article,
+        annotations: state.articleViewer.annotations,
         topicId: ownProps.topicId,
         fetchInProgressCalled: state.searchResults.fetchInProgressCalled
     }

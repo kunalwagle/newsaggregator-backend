@@ -5,7 +5,7 @@ import React from "react";
 import {PageHeader, Image} from "react-bootstrap";
 import {pluck, isEmpty} from "underscore";
 
-export const ArticleContent = ({article, topicId, fetchInProgressCalled, handleReloadNeeded}) => {
+export const ArticleContent = ({article, topicId, annotations, fetchInProgressCalled, handleReloadNeeded}) => {
 
     if (!fetchInProgressCalled) {
         handleReloadNeeded(topicId);
