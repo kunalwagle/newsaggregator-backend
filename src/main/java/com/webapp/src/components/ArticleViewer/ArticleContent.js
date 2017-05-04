@@ -4,6 +4,7 @@
 import React from "react";
 import {PageHeader, Image} from "react-bootstrap";
 import {pluck, isEmpty} from "underscore";
+import {getColour} from "../../UtilityMethods";
 
 export const ArticleContent = ({article, topicId, annotations, fetchInProgressCalled, handleReloadNeeded}) => {
 
@@ -16,9 +17,23 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
 
     const stripIntoSentences = pluck(article.summary[0], "sentence");
 
-    const paragraphs = (node) => {
+    const paragraphsPlain = (node) => {
         return node.map((text, index) => <p key={index}>{text}</p>)
             .reduce((nodes, node) => nodes.concat(node), []);
+    };
+
+    const paragraphsAnnotated = (node) => {
+        return node.map((text, index) => <p key={index}><u style={{"color": getColour(text.source)}}>{text.sentence}</u>
+        </p>)
+            .reduce((nodes, node) => nodes.concat(node), []);
+    };
+
+    const paragraph = () => {
+        if (!annotations) {
+            return (<h5>{paragraphsPlain(stripIntoSentences)}</h5>)
+        } else {
+            return (<h5>{paragraphsAnnotated(article.summary[0])}</h5>)
+        }
     };
 
     return (
@@ -27,7 +42,7 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
                 {article.articles[0].title}
             </h1>
             <Image width={750} src={article.articles[0].imageUrl} rounded/>
-            <h5>{paragraphs(stripIntoSentences)}</h5>
+            {paragraph()}
         </div>
     )
 
