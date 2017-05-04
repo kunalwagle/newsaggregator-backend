@@ -2,6 +2,8 @@ package com.newsaggregator;
 
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 
 import javax.mail.*;
@@ -61,7 +63,11 @@ public class Utils {
     }
 
     public static MongoDatabase getDatabase() {
-        MongoClient mongoClient = new MongoClient("178.62.27.53", 27017);
+        MongoClientOptions.Builder builder = new MongoClientOptions.Builder();
+        //build the connection options
+        builder.maxConnectionIdleTime(60000);//set the max wait time in (ms)
+        MongoClientOptions opts = builder.build();
+        MongoClient mongoClient = new MongoClient(new ServerAddress("178.62.27.53", 27017), opts);
         return mongoClient.getDatabase("NewsAggregator");
     }
 
