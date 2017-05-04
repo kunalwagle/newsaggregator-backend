@@ -3,6 +3,7 @@
  */
 import fetch from "isomorphic-fetch";
 import {push} from "react-router-redux";
+import {getIPAddress} from "../../UtilityMethods";
 
 export const VIEW_START = 'VIEW_START';
 export const ARTICLES_RECEIVED = 'ARTICLES_RECEIVED';
@@ -13,7 +14,7 @@ export function viewClicked(title) {
     return (dispatch) => {
         dispatch(viewStarted());
         dispatch(push("/topic/" + title));
-        return fetch("http://localhost:8182/api/topic/" + title)
+        return fetch(getIPAddress() + "topic/" + title)
             .then(response => response.json())
             .then(json => dispatch(articlesReceived(json)))
     }
@@ -22,7 +23,7 @@ export function viewClicked(title) {
 export function articleClicked(title) {
     return (dispatch) => {
         dispatch(viewStarted());
-        return fetch("http://localhost:8182/api/topic/" + title)
+        return fetch(getIPAddress() + "topic/" + title)
             .then(response => response.json())
             .then(json => dispatch(articlesReceived(json)))
     }

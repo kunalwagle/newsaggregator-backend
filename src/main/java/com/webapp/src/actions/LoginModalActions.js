@@ -4,6 +4,7 @@
 import fetch from "isomorphic-fetch";
 import {subscriptionTabSelected} from "./SearchResults/SearchResultsActions";
 import {push} from "react-router-redux";
+import {getIPAddress} from "../UtilityMethods";
 
 export const EMAIL_CHANGED = 'EMAIL_CHANGED';
 export const LOG_IN = 'LOG_IN';
@@ -23,7 +24,7 @@ export function emailAddressChanged(text) {
 export function login() {
     return (dispatch, getState) => {
         dispatch(startSubscriptionFetch());
-        return fetch("http://localhost:8182/api/user/subscriptions/" + getState().loggedIn.email)
+        return fetch(getIPAddress() + "user/subscriptions/" + getState().loggedIn.email)
             .then(response => response.json())
             .then(json => dispatch(logged(json)))
     }
@@ -50,7 +51,7 @@ export function logout() {
 export function subscribe(topic) {
     return (dispatch, getState) => {
         const email = getState().loggedIn.email;
-        return fetch("http://localhost:8182/api/user/subscribe/" + email + "/" + topic)
+        return fetch(getIPAddress() + "user/subscribe/" + email + "/" + topic)
             .then(response => response.json())
             .then(json => dispatch(subscribeComplete(json)))
     }
@@ -67,7 +68,7 @@ export function getSubscriptions() {
     return (dispatch, getState) => {
         dispatch(startSubscriptionFetch());
         const email = getState().loggedIn.email;
-        return fetch("http://localhost:8182/api/user/subscriptions/" + email)
+        return fetch(getIPAddress() + "user/subscriptions/" + email)
             .then(response => response.json())
             .then(json => dispatch(fetchedSubscriptions(json)));
     }

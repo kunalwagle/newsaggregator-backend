@@ -3,6 +3,7 @@
  */
 import fetch from "isomorphic-fetch";
 import {push} from "react-router-redux";
+import {getIPAddress} from "../../UtilityMethods";
 
 export const SEARCH_VALUE_CHANGED = 'SEARCH_VALUE_CHANGED';
 export const SEARCH_START = 'SEARCH_START';
@@ -20,7 +21,7 @@ export function search() {
         dispatch(searchStarted());
         let searchTerm = getState().searchBar.searchTerm.replace(' ', "%20");
         dispatch(push("/searchResults/" + searchTerm));
-        return fetch('http://localhost:8182/api/wikipedia/' + searchTerm)
+        return fetch(getIPAddress() + 'wikipedia/' + searchTerm)
             .then(response => response.json())
             .then(json => dispatch(searchResultsReceived(json)))
     }
@@ -29,7 +30,7 @@ export function search() {
 export function searchOnReload(searchTerm) {
     return (dispatch) => {
         dispatch(searchStarted());
-        return fetch('http://localhost:8182/api/wikipedia/' + searchTerm)
+        return fetch(getIPAddress() + 'wikipedia/' + searchTerm)
             .then(response => response.json())
             .then(json => dispatch(searchResultsReceived(json)))
     }
