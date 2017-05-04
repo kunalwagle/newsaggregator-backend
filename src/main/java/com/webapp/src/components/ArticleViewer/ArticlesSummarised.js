@@ -3,6 +3,7 @@
  */
 import React from "react";
 import {Checkbox} from "react-bootstrap";
+import {getColour} from "../../UtilityMethods";
 
 export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled, handleAnnotationSwitch}) => {
 
@@ -11,14 +12,26 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
     }
 
     const articleInfo = article.articles.map((art, index) => {
-        return (
-            <div key={index}>
-                <b>{art.title}</b>
-                <br/>
-                <a href={art.articleUrl}>Original Article</a>
-                <br/><br/><br/>
-            </div>
-        )
+        if (!annotations) {
+            return (
+                <div key={index}>
+                    <b>{art.title}</b>
+                    <br/>
+                    <a href={art.articleUrl}>Original Article</a>
+                    <br/><br/><br/>
+                </div>
+            )
+        } else {
+            return (
+                <div key={index}>
+                    <hr style={{"background": getColour(art.source), "height": "8px"}}/>
+                    <b>{art.title}</b>
+                    <br/>
+                    <a href={art.articleUrl}>Original Article</a>
+                    <br/><br/><br/>
+                </div>
+            )
+        }
     });
 
     return (
