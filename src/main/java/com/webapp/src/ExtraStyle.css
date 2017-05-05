@@ -58,6 +58,42 @@
     margin-left: 30px;
 }
 
+.panel-image-container {
+    max-width: 100%;
+    max-height: 70%;
+}
+
+.panel-small {
+    width: 300px;
+    max-height: 400px;
+    padding-bottom: 15px;
+    color: white;
+    background-color: #032436;
+}
+
+.panel-large {
+    width: 300px;
+    max-height: 450px;
+    padding-bottom: 15px;
+    color: white;
+    background-color: #032436;
+}
+
+.panel-text-small {
+    color: white;
+    height: 200px;
+    width: 100%;
+    padding-left: 10px;
+    background-color: #032436;
+}
+
+.panel-text-large {
+    color: white;
+    height: 250px;
+    width: 100%;
+    background-color: #032436;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
