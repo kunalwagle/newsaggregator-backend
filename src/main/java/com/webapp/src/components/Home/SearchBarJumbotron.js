@@ -9,12 +9,12 @@ import SearchBarContainer from "../../containers/Home/SearchBarContainer";
 export const SearchBarJumbotron = () => (
     <div>
         <Jumbotron className="jumbotron">
-            <h2 style={{"textAlign": "center"}}>
-                News Aggregator and Summariser
-            </h2>
+            <h1 style={{"textAlign": "center"}}>
+                NewSumm
+            </h1>
             <br></br>
             <p style={{"textAlign": "center"}}>
-                I really need to think of a better name...
+                News Aggregator and Summariser
             </p>
             <br></br>
             <SearchBarContainer/>
