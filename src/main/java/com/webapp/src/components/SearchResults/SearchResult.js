@@ -5,6 +5,7 @@ import {Grid, Row, Col, Thumbnail, Button, Carousel} from "react-bootstrap";
 import React from "react";
 import {Link} from "react-router";
 import {contains, pluck} from "underscore";
+import "../../ExtraStyle.css";
 
 const thumbnails = (loggedIn, user, carousel, idx, handleViewClicked, handleSubscribeClicked) => {
     let buttonText = "Subscribe";
@@ -78,14 +79,14 @@ const carousels = (loggedIn, user, searchResults, handleViewClicked, handleSubsc
 export const SubscriptionComponent = ({loggedIn, user, searchResults, fetchInProgress, fetchInProgressCalled, searchTerm, handleSearchEmpty, handleViewClicked, handleSubscribeClicked}) => {
     if (fetchInProgress) {
         return (
-            <div className="loader">Loading...</div>
+            <div className="loader"></div>
         )
     }
 
     if (!fetchInProgressCalled) {
         handleSearchEmpty(searchTerm);
         return (
-            <div className="loader">Loading...</div>
+            <div className="loader"></div>
         )
     }
 
