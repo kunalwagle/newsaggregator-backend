@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Panel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/ExtraStyle.css" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/ExtraStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Panel.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Panel.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -38,20 +37,22 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/ExtraStyle.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="83" column="19" lean-forward="true" selection-start-line="83" selection-start-column="19" selection-end-line="83" selection-end-column="19" />
+              <caret line="83" column="18" lean-forward="false" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Panel.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Panel.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Panel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="32" column="42" lean-forward="true" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
+            <state relative-caret-position="465">
+              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
-                <element signature="e#49#88#0" expanded="true" />
-                <element signature="e#205#436#0" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#48#87#0" expanded="true" />
+                <element signature="e#202#414#0" expanded="true" />
+                <element signature="e#445#676#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,7 +91,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchBarJumbotron.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SearchBarJumbotron.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Home/SearchBarJumbotron.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -247,9 +248,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/SearchResults/SearchResult.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/public/index.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Home/SearchBar.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Panel.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/ExtraStyle.css" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Home/SearchBarJumbotron.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Panel.js" />
       </list>
     </option>
   </component>
@@ -1883,14 +1884,7 @@
       <workItem from="1491926569536" duration="8385000" />
       <workItem from="1492002902704" duration="27962000" />
       <workItem from="1492430182328" duration="128984000" />
-      <workItem from="1493313787752" duration="50441000" />
-    </task>
-    <task id="LOCAL-00224" summary="Fixed minor bug">
-      <created>1493149267918</created>
-      <option name="number" value="00224" />
-      <option name="presentableId" value="LOCAL-00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1493149267918</updated>
+      <workItem from="1493313787752" duration="50638000" />
     </task>
     <task id="LOCAL-00225" summary="Added patterns to react router">
       <created>1493150709408</created>
@@ -2228,7 +2222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493989466968</updated>
     </task>
-    <option name="localTasksCounter" value="273" />
+    <task id="LOCAL-00273" summary="Panel written">
+      <created>1493996518292</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1493996518292</updated>
+    </task>
+    <option name="localTasksCounter" value="274" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2261,7 +2262,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="522604000" />
+    <option name="totallyTimeSpent" value="522801000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2316,7 +2317,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Metro articles stripped" />
     <MESSAGE value="Newsweek stripped" />
     <MESSAGE value="Stripping articles complete" />
     <MESSAGE value="Clustering thresholds lowered" />
@@ -2341,7 +2341,8 @@
     <MESSAGE value="Basic jumbotron styling" />
     <MESSAGE value="Home page nearly complete" />
     <MESSAGE value="Home page complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="Home page complete" />
+    <MESSAGE value="Panel written" />
+    <option name="LAST_COMMIT_MESSAGE" value="Panel written" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2907,19 +2908,8 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/ExtraStyle.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="83" column="19" lean-forward="true" selection-start-line="83" selection-start-column="19" selection-end-line="83" selection-end-column="19" />
+          <caret line="83" column="18" lean-forward="false" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Panel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="32" column="42" lean-forward="true" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
-          <folding>
-            <element signature="e#49#88#0" expanded="true" />
-            <element signature="e#205#436#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2930,6 +2920,19 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#48#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Panel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#48#87#0" expanded="true" />
+            <element signature="e#202#414#0" expanded="true" />
+            <element signature="e#445#676#0" expanded="true" />
           </folding>
         </state>
       </provider>

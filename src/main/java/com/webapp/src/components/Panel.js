@@ -6,6 +6,14 @@ import {Image} from "react-bootstrap";
 
 export default class Panel extends Component {
 
+    getImage = function () {
+        if (this.props.image !== "thumbnail") {
+            return this.props.image;
+        } else {
+            return "http://support.yumpu.com/en/wp-content/themes/qaengine/img/default-thumbnail.jpg";
+        }
+    };
+
     smallText = function () {
         if (this.props.largePanel) {
             return (
@@ -28,7 +36,7 @@ export default class Panel extends Component {
 
         return (
             <div className={panelOverallClass}>
-                <img src="https://i.ytimg.com/vi/0AGXi-oKxfw/maxresdefault.jpg" className="panel-image-container"/>
+                <img src={this.getImage()} className="panel-image-container"/>
                 <h5>{this.props.title}</h5>
                 {this.smallText()}
             </div>
