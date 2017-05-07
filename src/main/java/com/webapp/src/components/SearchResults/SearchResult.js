@@ -6,48 +6,35 @@ import React from "react";
 import {Link} from "react-router";
 import {contains, pluck} from "underscore";
 import "../../ExtraStyle.css";
+import Panel from "../Panel";
 
-const thumbnails = (loggedIn, user, carousel, idx, handleViewClicked, handleSubscribeClicked) => {
-    let buttonText = "Subscribe";
-    if (!loggedIn) {
-        buttonText = "Log in to subscribe";
-    }
+const thumbnails = (loggedIn, user, carousel, handleViewClicked, handleSubscribeClicked) => {
+    // let buttonText = "Subscribe";
+    // if (!loggedIn) {
+    //     buttonText = "Log in to subscribe";
+    // }
+    //
+    // const subscribed = (topicId) => {
+    //     const ids = pluck(user.topics, "topic");
+    //     return contains(ids, topicId);
+    // };
 
-    const subscribed = (topicId) => {
-        const ids = pluck(user.topics, "topic");
-        return contains(ids, topicId);
-    };
+    return carousel.map((searchResult, index) => {
+        let image = "thumbnail";
+        if (searchResult.imageUrl != undefined) {
+            image = searchResult.imageUrl;
+        }
+        return (
+            <div key={index} className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <Panel key={index} image={image} title={searchResult.title}
+                       largePanel={true}
+                       text={searchResult.extract.substring(0, 200) + "..."}/>
 
-    return (
-        <Carousel.Item key={idx}>
-            <Grid>
-                <Row>
-                    {carousel.map((searchResult, index) => {
-                        return (
-                            <Col md={3} key={index}>
-                                <Thumbnail
-                                    src={searchResult.imageUrl}
-                                >
-                                    <h3>{searchResult.title}</h3>
-                                    <p>{searchResult.extract.substring(0, 600) + "..."}</p>
-                                    <p>
-                                        <Button onClick={(event) => handleViewClicked(event, searchResult._id)}
-                                                bsStyle="default">
-                                            View
-                                        </Button>
-                                        &nbsp;
-                                        <Button disabled={!loggedIn || subscribed(searchResult._id)} bsStyle="success"
-                                                onClick={() => handleSubscribeClicked(searchResult._id)}>{buttonText}</Button>
-                                    </p>
-                                </Thumbnail>
-                            </Col>
-                        )
-                    })}
-                </Row>
-            </Grid>
-        </Carousel.Item>
-    )
-};
+            </div>
+
+        )
+    })
+}
 
 const carousels = (loggedIn, user, searchResults, handleViewClicked, handleSubscribeClicked) => {
     if (searchResults.length == 0) {
@@ -55,15 +42,13 @@ const carousels = (loggedIn, user, searchResults, handleViewClicked, handleSubsc
             <div>No Search Results...</div>
         )
     }
-    let carousels = [];
-    for (let i = 0; i < searchResults.length; i += 4) {
-        let temparray = searchResults.slice(i, i + 4);
-        carousels.push(temparray);
-    }
+    // let carousels = [];
+    // for (let i = 0; i < searchResults.length; i += 4) {
+    //     let temparray = searchResults.slice(i, i + 4);
+    //     carousels.push(temparray);
+    // }
 
-    const mappedCarousels = carousels.map((carousel, idx) => {
-        return thumbnails(loggedIn, user, carousel, idx, handleViewClicked, handleSubscribeClicked)
-    });
+
 
     return (
         <div>
@@ -71,7 +56,13 @@ const carousels = (loggedIn, user, searchResults, handleViewClicked, handleSubsc
                 <h5>Your search returned <b>{searchResults.length}</b> results</h5>
                 <br/>
             </div>
-            <div><Carousel interval={100000} style={{"height": "750px"}}>{mappedCarousels}</Carousel></div>
+            <div>
+                <div className="container">
+                    <div className="row">
+                        {thumbnails(loggedIn, user, searchResults, handleViewClicked, handleSubscribeClicked)}
+                    </div>
+                </div>
+            </div>
         </div>
     )
 };
