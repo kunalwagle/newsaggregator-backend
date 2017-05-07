@@ -57,7 +57,7 @@ const carousels = (loggedIn, user, searchResults, handleViewClicked, handleSubsc
                 <br/>
             </div>
             <div>
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row">
                         {thumbnails(loggedIn, user, searchResults, handleViewClicked, handleSubscribeClicked)}
                     </div>
