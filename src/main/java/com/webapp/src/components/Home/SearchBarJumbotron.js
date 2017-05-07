@@ -8,7 +8,8 @@ import SearchBarContainer from "../../containers/Home/SearchBarContainer";
 
 export const SearchBarJumbotron = () => (
     <div>
-        <Jumbotron className="jumbotron">
+        <Jumbotron
+            className="jumbotron col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
             <h1 style={{"textAlign": "center"}}>
                 NewSumm
             </h1>

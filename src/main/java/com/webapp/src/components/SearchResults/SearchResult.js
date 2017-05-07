@@ -53,8 +53,7 @@ const carousels = (loggedIn, user, searchResults, handleViewClicked, handleSubsc
     return (
         <div>
             <div>
-                <h5>Your search returned <b>{searchResults.length}</b> results</h5>
-                <br/>
+                <h5 className="whited">Your search returned <b>{searchResults.length}</b> results</h5>
             </div>
             <div>
                 <div className="container-fluid">
