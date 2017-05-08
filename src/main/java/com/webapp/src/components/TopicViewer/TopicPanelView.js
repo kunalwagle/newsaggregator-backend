@@ -7,6 +7,7 @@ import {Button, Image, Label, Thumbnail, Grid, Row, Col} from "react-bootstrap";
 import {Link} from "react-router";
 import ExtraLargePanel from "./ExtraLargePanel";
 import Panel from "../Panel";
+import ListPanel from "./ListPanel";
 
 function findBootstrapEnvironment() {
     let envs = ["xs", "sm", "md", "lg"],
@@ -172,8 +173,8 @@ const xs = (articles, handleArticleClick) => {
                         imageUrl = article.imageUrl;
                     }
                     return (
-                        <div className="col-lg-6" key={index}>
-                            <ExtraLargePanel key={index} title={article.title} image={imageUrl}/>
+                        <div className="col-xs-12" key={index}>
+                            <Panel key={index} title={article.title} image={imageUrl}/>
                         </div>
                     )
                 })}
@@ -186,8 +187,8 @@ const xs = (articles, handleArticleClick) => {
                         imageUrl = article.imageUrl;
                     }
                     return (
-                        <div className="col-lg-3" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.title}/>
+                        <div className="col-xs-12" key={index}>
+                            <ListPanel image={imageUrl} key={index} title={article.title}/>
                         </div>
                     )
                 })}
