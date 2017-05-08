@@ -63,9 +63,17 @@
     background-color: white;
 }
 
+.panel-large-image-container {
+    height: 250px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    background-color: white;
+}
+
 .panel-small {
     width: 100%;
-    height: 15%;
+    height: 150px;
     padding-bottom: 15px;
     color: white;
     background-color: #032436;
@@ -74,6 +82,15 @@
 .panel-large {
     width: 100%;
     height: 250px;
+    margin-top: 15px;
+    color: white;
+    background-color: #032436;
+    text-overflow: ellipsis;
+}
+
+.panel-extra-large {
+    width: 100%;
+    height: 350px;
     margin-top: 15px;
     color: white;
     background-color: #032436;
@@ -93,6 +110,23 @@
     height: 250px;
     width: 100%;
     background-color: #032436;
+}
+
+.list-cell {
+    color: white;
+    height: 100px;
+    width: 100%;
+    padding-left: 10px;
+    background-color: #28546C;
+    border-bottom: 1px solid white;
+}
+
+.list-image {
+    height: 100px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    background-color: white;
 }
 
 .grid-col {
