@@ -12,10 +12,10 @@ export const TopicTopBar = ({label, loggedIn, handleSubscribeClicked}) => {
     }
 
     return (
-        <div>
-            <PageHeader bsClass="col-md-9">{label}</PageHeader>
-            <Button disabled={!loggedIn} onClick={() => handleSubscribeClicked(label)} bsStyle="success"
-                    bsSize="large">{buttonText}</Button>
+        <div style={{"verticalAlign": "text-bottom"}}>
+            <h1 className="col-md-9 col-lg-9 col-sm-12 col-xs-12 whited">{label}</h1>
+            <button className="col-md-2 col-lg-2 col-sm-12 col-xs-12 pull-right primary-button" disabled={!loggedIn}
+                    onClick={() => handleSubscribeClicked(label)}>{buttonText}</button>
         </div>
     );
 };

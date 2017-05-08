@@ -62,7 +62,7 @@ const md = (articles, handleArticleClick) => {
                         imageUrl = article.articles[0].imageUrl;
                     }
                     return (
-                        <div className="col-md-8" key={index}>
+                        <div className="col-md-12" key={index}>
                             <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}/>
                         </div>
                     )
@@ -197,6 +197,7 @@ const xs = (articles, handleArticleClick) => {
         </div>
     )
 };
+
 
 const TopicPanelView = ({articles, fetchInProgress, fetchInProgressCalled, topicId, handleReloadNeeded, handleArticleClick}) => {
 
