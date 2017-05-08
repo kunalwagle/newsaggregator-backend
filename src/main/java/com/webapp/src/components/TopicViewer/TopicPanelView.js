@@ -58,12 +58,12 @@ const md = (articles, handleArticleClick) => {
             <div>
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.imageUrl != undefined) {
-                        imageUrl = article.imageUrl;
+                    if (article.articles[0].imageUrl != undefined) {
+                        imageUrl = article.articles[0].imageUrl;
                     }
                     return (
                         <div className="col-md-8" key={index}>
-                            <ExtraLargePanel key={index} title={article.title} image={imageUrl}/>
+                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}/>
                         </div>
                     )
                 })}
@@ -72,12 +72,12 @@ const md = (articles, handleArticleClick) => {
             <div>
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.imageUrl != undefined) {
-                        imageUrl = article.imageUrl;
+                    if (article.articles[0].imageUrl != undefined) {
+                        imageUrl = article.articles[0].imageUrl;
                     }
                     return (
                         <div className="col-md-3" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.title}/>
+                            <Panel image={imageUrl} key={index} title={article.articles[0].title}/>
                         </div>
                     )
                 })}
@@ -92,29 +92,30 @@ const lg = (articles, handleArticleClick) => {
 
     return (
         <div>
-            <div>
+            <div className="row">
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.imageUrl != undefined) {
-                        imageUrl = article.imageUrl;
+                    if (article.articles[0].imageUrl != undefined) {
+                        imageUrl = article.articles[0].imageUrl;
                     }
                     return (
+
                         <div className="col-lg-6" key={index}>
-                            <ExtraLargePanel key={index} title={article.title} image={imageUrl}/>
+                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}/>
                         </div>
                     )
                 })}
             </div>
             <br/>
-            <div>
+            <div className="row">
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.imageUrl != undefined) {
-                        imageUrl = article.imageUrl;
+                    if (article.articles[0].imageUrl != undefined) {
+                        imageUrl = article.articles[0].imageUrl;
                     }
                     return (
                         <div className="col-lg-3" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.title}/>
+                            <Panel image={imageUrl} key={index} title={article.articles[0].title}/>
                         </div>
                     )
                 })}
@@ -132,12 +133,12 @@ const sm = (articles, handleArticleClick) => {
             <div>
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.imageUrl != undefined) {
-                        imageUrl = article.imageUrl;
+                    if (article.articles[0].imageUrl != undefined) {
+                        imageUrl = article.articles[0].imageUrl;
                     }
                     return (
                         <div className="col-sm-12" key={index}>
-                            <ExtraLargePanel key={index} title={article.title} image={imageUrl}/>
+                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}/>
                         </div>
                     )
                 })}
@@ -146,12 +147,12 @@ const sm = (articles, handleArticleClick) => {
             <div>
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.imageUrl != undefined) {
-                        imageUrl = article.imageUrl;
+                    if (article.articles[0].imageUrl != undefined) {
+                        imageUrl = article.articles[0].imageUrl;
                     }
                     return (
                         <div className="col-sm-6" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.title}/>
+                            <Panel image={imageUrl} key={index} title={article.articles[0].title}/>
                         </div>
                     )
                 })}
@@ -169,12 +170,12 @@ const xs = (articles, handleArticleClick) => {
             <div>
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.imageUrl != undefined) {
-                        imageUrl = article.imageUrl;
+                    if (article.articles[0].imageUrl != undefined) {
+                        imageUrl = article.articles[0].imageUrl;
                     }
                     return (
                         <div className="col-xs-12" key={index}>
-                            <Panel key={index} title={article.title} image={imageUrl}/>
+                            <Panel key={index} title={article.articles[0].title} image={imageUrl}/>
                         </div>
                     )
                 })}
@@ -183,12 +184,12 @@ const xs = (articles, handleArticleClick) => {
             <div>
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.imageUrl != undefined) {
-                        imageUrl = article.imageUrl;
+                    if (article.articles[0].imageUrl != undefined) {
+                        imageUrl = article.articles[0].imageUrl;
                     }
                     return (
                         <div className="col-xs-12" key={index}>
-                            <ListPanel image={imageUrl} key={index} title={article.title}/>
+                            <ListPanel image={imageUrl} key={index} title={article.articles[0].title}/>
                         </div>
                     )
                 })}
@@ -201,19 +202,19 @@ const TopicPanelView = ({articles, fetchInProgress, fetchInProgressCalled, topic
 
     if (fetchInProgress) {
         return (
-            <div className="loader">Loading...</div>
+            <div className="loader"></div>
         )
     }
 
     if (!fetchInProgressCalled) {
         handleReloadNeeded(topicId);
         return (
-            <div className="loader">Loading...</div>
+            <div className="loader"></div>
         )
     }
 
     articles = filter(articles, function (article) {
-        return size(article.articles) && article.articles[0] != null;
+        return article.articles.length && article.articles[0] != null;
     });
 
     if (articles.length === 0) {

@@ -17,9 +17,8 @@ export default class ExtraLargePanel extends Component {
     render() {
 
         return (
-            <div className="panel-extra-large">
-                <img src={this.getImage()} className="panel-large-image-container"/>
-                <h5>{this.props.title}</h5>
+            <div className="panel-extra-large" style={{"backgroundImage": "url(" + this.getImage() + ")"}}>
+                <h5 className="panel-text-large">{this.props.title}</h5>
             </div>
         )
     }

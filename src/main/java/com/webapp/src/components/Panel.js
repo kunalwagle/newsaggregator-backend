@@ -35,10 +35,12 @@ export default class Panel extends Component {
         }
 
         return (
-            <div className={panelOverallClass}>
-                <img src={this.getImage()} className="panel-image-container"/>
-                <h5>{this.props.title}</h5>
-                {this.smallText()}
+            <div className={panelOverallClass} style={{"backgroundImage": "url(" + this.getImage() + ")"}}
+                 onClick={this.props.onClick}>
+                <div className="panel-text-small panel-text-small-background">
+                    <h5>{this.props.title}</h5>
+                    {this.smallText()}
+                </div>
             </div>
         )
     }

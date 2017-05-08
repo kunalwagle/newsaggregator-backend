@@ -28,7 +28,8 @@ const thumbnails = (loggedIn, user, carousel, handleViewClicked, handleSubscribe
             <div key={index} className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <Panel key={index} image={image} title={searchResult.title}
                        largePanel={true}
-                       text={searchResult.extract.substring(0, 200) + "..."}/>
+                       text={searchResult.extract.substring(0, 200) + "..."}
+                       onClick={(event) => handleViewClicked(event, searchResult._id)}/>
 
             </div>
 
