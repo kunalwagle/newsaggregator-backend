@@ -76,7 +76,7 @@ const md = (articles, handleArticleClick) => {
                         imageUrl = article.articles[0].imageUrl;
                     }
                     return (
-                        <div className="col-md-3" key={index}>
+                        <div className="col-md-6 col-sm-6 col-lg-6" key={index}>
                             <Panel image={imageUrl} key={index} title={article.articles[0].title}/>
                         </div>
                     )
@@ -114,7 +114,7 @@ const lg = (articles, handleArticleClick) => {
                         imageUrl = article.articles[0].imageUrl;
                     }
                     return (
-                        <div className="col-lg-3" key={index}>
+                        <div className="col-lg-3 col-md-6" key={index}>
                             <Panel image={imageUrl} key={index} title={article.articles[0].title}/>
                         </div>
                     )
@@ -167,7 +167,7 @@ const xs = (articles, handleArticleClick) => {
 
     return (
         <div>
-            <div>
+            <div className="row">
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
                     if (article.articles[0].imageUrl != undefined) {
@@ -181,7 +181,7 @@ const xs = (articles, handleArticleClick) => {
                 })}
             </div>
             <br/>
-            <div>
+            <div className="row">
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
                     if (article.articles[0].imageUrl != undefined) {
@@ -226,10 +226,11 @@ const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCa
 
     switch (mediaType) {
         case "extraSmall":
-            return xs(articles, handleArticleClick);
         case "small":
-            return sm(articles, handleArticleClick);
+            return xs(articles, handleArticleClick);
         case "medium":
+            return sm(articles, handleArticleClick);
+        case "large":
             return md(articles, handleArticleClick);
         default:
             return lg(articles, handleArticleClick);
