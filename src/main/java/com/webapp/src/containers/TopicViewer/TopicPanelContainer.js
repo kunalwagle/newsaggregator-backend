@@ -19,7 +19,8 @@ const mapStateToProps = (state, ownProps) => {
         topicId,
         articles,
         fetchInProgress: state.searchResults.fetchInProgress,
-        fetchInProgressCalled
+        fetchInProgressCalled,
+        mediaType: state.browser.mediaType
     }
 };
 

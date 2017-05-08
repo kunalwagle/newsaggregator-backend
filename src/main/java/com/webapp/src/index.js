@@ -5,6 +5,7 @@ import {Provider} from "react-redux";
 import {SearchBarJumbotron} from "./components/Home/SearchBarJumbotron";
 import {Route, IndexRoute, browserHistory, Router} from "react-router";
 import {syncHistoryWithStore, routerMiddleware} from "react-router-redux";
+import {responsiveStoreEnhancer} from "redux-responsive";
 import App from "./App";
 import "babel-polyfill";
 import thunk from "redux-thunk";
@@ -18,7 +19,7 @@ import {SubscriptionPage} from "./components/Subscriptions/Subscriptions";
 
 
 const middleware = routerMiddleware(browserHistory);
-const store = createStore(App, compose(applyMiddleware(thunk, middleware)));
+const store = createStore(App, compose(responsiveStoreEnhancer, applyMiddleware(thunk, middleware)));
 const rootEl = document.getElementById('root');
 const history = syncHistoryWithStore(browserHistory, store);
 

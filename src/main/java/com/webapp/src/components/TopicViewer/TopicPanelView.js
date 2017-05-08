@@ -199,7 +199,7 @@ const xs = (articles, handleArticleClick) => {
 };
 
 
-const TopicPanelView = ({articles, fetchInProgress, fetchInProgressCalled, topicId, handleReloadNeeded, handleArticleClick}) => {
+const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCalled, topicId, handleReloadNeeded, handleArticleClick}) => {
 
     if (fetchInProgress) {
         return (
@@ -224,14 +224,12 @@ const TopicPanelView = ({articles, fetchInProgress, fetchInProgressCalled, topic
         )
     }
 
-    const size = findBootstrapEnvironment();
-
-    switch (size) {
-        case "xs":
+    switch (mediaType) {
+        case "extraSmall":
             return xs(articles, handleArticleClick);
-        case "sm":
+        case "small":
             return sm(articles, handleArticleClick);
-        case "md":
+        case "medium":
             return md(articles, handleArticleClick);
         default:
             return lg(articles, handleArticleClick);
