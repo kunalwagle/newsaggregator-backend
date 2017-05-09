@@ -16,11 +16,15 @@ import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Wikipedia {
 
-    public static ArrayList<WikipediaArticle> getArticles(String searchTerm) {
-        ArrayList<WikipediaArticle> articles = queryAndParseArticles(searchTerm, null);
+    public static List<WikipediaArticle> getArticles(String searchTerm) {
+//        ArrayList<WikipediaArticle> articles = queryAndParseArticles(searchTerm, null);
+        ArrayList<String> titles = titles(searchTerm);
+        List<WikipediaArticle> articles = titles.stream().map(Wikipedia::convertToArticle).filter(Objects::nonNull).collect(Collectors.toList());
         Topics topicManager = new Topics(Utils.getDatabase());
         for (WikipediaArticle article : articles) {
             LabelHolder labelHolder = topicManager.getTopic(article.getTitle());
@@ -89,6 +93,59 @@ public class Wikipedia {
         return outlinks;
     }
 
+    private static ArrayList<String> titles(String searchTerm) {
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            searchTerm = searchTerm.replace(' ', '+');
+            searchTerm = searchTerm.replace("%20", "+");
+            URL wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&indexpageids=1&srlimit=25&srsearch=" + searchTerm);
+            URLConnection wikipediaURLConnection = wikipediaURL.openConnection();
+            wikipediaURLConnection.connect();
+            JSONArray response = new JSONObject(IOUtils.toString(wikipediaURLConnection.getInputStream(), Charset.forName("UTF-8"))).getJSONObject("query").getJSONArray("search");
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject searchResult = response.getJSONObject(i);
+                result.add(searchResult.getString("title"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private static WikipediaArticle convertToArticle(String title) {
+        try {
+            title = title.replace(' ', '+');
+            title = title.replace("%20", "+");
+            URL wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cpageimages&exsentences=1&exintro=1&explaintext=1&piprop=original&titles=" + title);
+            URLConnection wikipediaURLConnection = wikipediaURL.openConnection();
+            wikipediaURLConnection.connect();
+            JSONObject response = new JSONObject(IOUtils.toString(wikipediaURLConnection.getInputStream(), Charset.forName("UTF-8"))).getJSONObject("query").getJSONObject("pages");
+            WikipediaArticle article = null;
+            for (String key : response.keySet()) {
+                article = extractArticleFromJSON(response.getJSONObject(key));
+            }
+            return article;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static WikipediaArticle extractArticleFromJSON(JSONObject article) {
+        String title = article.getString("title");
+        String extract = article.getString("extract");
+        String imageUrl = "http://larics.fer.hr/wp-content/uploads/2016/04/default-placeholder.png";
+        try {
+            imageUrl = article.getJSONObject("thumbnail").getString("original");
+        } catch (JSONException e) {
+            //e.printStackTrace();
+        }
+        if (!title.contains("(disambiguation)")) {
+            return new WikipediaArticle(Outlet.Wikipedia.getSourceString(), title, extract, imageUrl);
+        }
+        return null;
+    }
+
     private static ArrayList<WikipediaArticle> queryAndParseArticles(String searchTerm, String searchType) {
         ArrayList<WikipediaArticle> articles = new ArrayList<>();
         try {
@@ -102,21 +159,13 @@ public class Wikipedia {
             wikipediaURLConnection.connect();
             JSONObject response = new JSONObject(IOUtils.toString(wikipediaURLConnection.getInputStream(), Charset.forName("UTF-8"))).getJSONObject("query").getJSONObject("pages");
             for (String key : response.keySet()) {
-                JSONObject article = response.getJSONObject(key);
-                String title = article.getString("title");
-                String extract = article.getString("extract");
-                String imageUrl = "http://larics.fer.hr/wp-content/uploads/2016/04/default-placeholder.png";
-                try {
-                    imageUrl = article.getJSONObject("thumbnail").getString("original");
-                } catch (JSONException e) {
-                    //e.printStackTrace();
-                }
-                if (!title.contains("(disambiguation)")) {
-                    articles.add(new WikipediaArticle(Outlet.Wikipedia.getSourceString(), title, extract, imageUrl));
+                WikipediaArticle article = extractArticleFromJSON(response.getJSONObject(key));
+                if (article != null) {
+                    articles.add(article);
                 }
             }
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         return articles;
     }
