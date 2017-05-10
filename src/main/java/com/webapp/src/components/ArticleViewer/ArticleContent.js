@@ -11,7 +11,7 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
     if (!fetchInProgressCalled) {
         handleReloadNeeded(topicId);
         return (
-            <div className="loader">Loading...</div>
+            <div className="loader"></div>
         )
     }
 
@@ -37,7 +37,7 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
     };
 
     return (
-        <div>
+        <div className="white">
             <h1>
                 {article.articles[0].title}
             </h1>

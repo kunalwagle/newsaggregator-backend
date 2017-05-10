@@ -35,7 +35,7 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
     });
 
     return (
-        <div>
+        <div className="white">
             <Checkbox checked={annotations} onClick={() => handleAnnotationSwitch(annotations)}>
                 Show summary annotations
             </Checkbox>
