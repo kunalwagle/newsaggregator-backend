@@ -12,9 +12,11 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
     }
 
     const articleInfo = article.articles.map((art, index) => {
+        const imageSource = "../../outlets/" + art.source + ".png";
         if (!annotations) {
             return (
                 <div key={index}>
+                    <img src={imageSource} className="outlet-icon"/>
                     <b>{art.title}</b>
                     <br/>
                     <a href={art.articleUrl}>Original Article</a>
@@ -25,6 +27,7 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
             return (
                 <div key={index}>
                     <hr style={{"background": getColour(art.source), "height": "8px"}}/>
+                    <img src={imageSource} className="outlet-icon"/>
                     <b>{art.title}</b>
                     <br/>
                     <a href={art.articleUrl}>Original Article</a>
