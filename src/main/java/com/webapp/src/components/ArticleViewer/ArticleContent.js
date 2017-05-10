@@ -24,11 +24,21 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
 
     const paragraphsAnnotated = (node) => {
         return node.map((text, index) => {
-            if (text.relatedNodes == undefined || text.relatedNodes.length === 0) {
+            if (text.relatedNodes == undefined) {
                 return (
                     <p key={index} style={{"backgroundColor": getColour(text.source)}}>
                         {text.sentence}
                     </p>
+                )
+            } else if (text.relatedNodes.length === 0) {
+                return (
+                    <p key={index} style={{"backgroundColor": getColour(text.source)}}>
+                        {text.sentence}
+                    </p>
+                )
+            } else {
+                return (
+                    <p key={index}>{text}</p>
                 )
             }
         })

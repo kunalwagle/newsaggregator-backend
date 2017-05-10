@@ -122,33 +122,34 @@ public class Main {
 ////            wikipediaArticleList.stream().forEach(wikipediaArticle -> System.out.println(wikipediaArticle.getTitle() + ": " + wikipediaArticle.getExtract()));
 //            //TopicModelling.trainTopics(articles);
 
-//                OutletArticle murrayBBC = new OutletArticle("Murray set to miss Davis Cup tie", "Andy Murray is unlikely to play in Great Britain's Davis Cup quarter-final against France next month as he recovers from an elbow injury. GB captain Leon Smith will name his team for the tie, in Rouen from 7-9 April, at 12:00 BST on Tuesday. Murray, 29, pulled out of the Miami Open almost a week before his opening match because of an elbow injury. The world number one needs to rest \"some sort of tear\", his brother Jamie told reporters in Florida. He said Andy told him he could \"do everything except serve\" and \"rest was all he had to do\". \"I am not planning that he is going to be there,\" he added. \"If he is, then obviously that's great for the team and we'll see what happens, but the most important thing for him is just to get healthy.\" Smith is likely to call on Dan Evans and Kyle Edmund for the singles matches in Rouen, with Jamie Murray and Dom Inglot in line for the doubles. The tie will be played indoors on clay at the Kindarena.", "http://www.hellomagazine.com/imagenes//celebrities/2016100433872/andy-murray-stalked-hotel-maid/0-175-236/murray-d.jpg", "http://wikipedia.org", "the-telegraph", "2017-03-28T11:35:22Z");
-//                OutletArticle murrayGuardian = new OutletArticle("Murray will miss Davis Cup tie", "The elbow injury Andy Murray suffered last week is set to rule the player out of Great Britain’s Davis Cup tie against France, according to his brother, Jamie. The quarter-final tie in Rouen, which starts a week on Friday, will apparently come much too early for the world No1 to make a recovery and he is not expected to be in the squad when it is revealed on Tuesday. “It’s some sort of tear in his elbow,” said Jamie Murray after his quarter-finals doubles match with partner Bruno Soares at the Miami Open on Sunday. “[Andy] said he can do everything except serve and he told me rest was all he had to do. I am not planning that he is going to be there [in Rouen to face France next week]. If he is, then, obviously that’s great for the team and we’ll see what happens, but the most important thing for him is just to get healthy because he has had a few issues now. “He has had shingles and he has had his elbow. He was sick here as well [with flu] for two or three days after he pulled out of the tournament. I think he just needs to get a bit settled and get a good crack at it over the next three months because there’s a lot of big tournaments to play.” Andy Murray had to withdraw from the Miami Open last week after being injured in practice and returned to Britain for scans on the elbow. The extent of the damage means Murray may struggle to be ready for the Monte Carlo Masters in mid-April, with more information about the injury likely to be revealed by his team in the coming days.", "http://ichef.bbci.co.uk/news/976/cpsprodpb/2807/production/_92574201_epa_andymurray.jpg", "http://wikipedia.org", "guardian", "2017-03-28T11:12:22Z");
+//                OutletArticle murrayBBC = new OutletArticle("Murray set to miss Davis Cup tie", "Andy Murray is set to miss Davis Cup tie. Andy Murray is unlikely to play in Great Britain's Davis Cup quarter-final against France next month as he recovers from an elbow injury. GB captain Leon Smith will name his team for the tie, in Rouen from 7-9 April, at 12:00 BST on Tuesday. Murray, 29, pulled out of the Miami Open almost a week before his opening match because of an elbow injury. The world number one needs to rest \"some sort of tear\", his brother Jamie told reporters in Florida. He said Andy told him he could \"do everything except serve\" and \"rest was all he had to do\". \"I am not planning that he is going to be there,\" he added. \"If he is, then obviously that's great for the team and we'll see what happens, but the most important thing for him is just to get healthy.\" Smith is likely to call on Dan Evans and Kyle Edmund for the singles matches in Rouen, with Jamie Murray and Dom Inglot in line for the doubles. The tie will be played indoors on clay at the Kindarena.", "http://www.hellomagazine.com/imagenes//celebrities/2016100433872/andy-murray-stalked-hotel-maid/0-175-236/murray-d.jpg", "http://telegraph.co.uk/fakemurray", "the-telegraph", "2017-03-28T11:35:22Z");
+//                OutletArticle murrayGuardian = new OutletArticle("Murray will miss Davis Cup tie", "Andy Murray will miss the Davis Cup tie. The elbow injury Andy Murray suffered last week is set to rule the player out of Great Britain’s Davis Cup tie against France, according to his brother, Jamie. The quarter-final tie in Rouen, which starts a week on Friday, will apparently come much too early for the world No1 to make a recovery and he is not expected to be in the squad when it is revealed on Tuesday. “It’s some sort of tear in his elbow,” said Jamie Murray after his quarter-finals doubles match with partner Bruno Soares at the Miami Open on Sunday. “[Andy] said he can do everything except serve and he told me rest was all he had to do. I am not planning that he is going to be there [in Rouen to face France next week]. If he is, then, obviously that’s great for the team and we’ll see what happens, but the most important thing for him is just to get healthy because he has had a few issues now. “He has had shingles and he has had his elbow. He was sick here as well [with flu] for two or three days after he pulled out of the tournament. I think he just needs to get a bit settled and get a good crack at it over the next three months because there’s a lot of big tournaments to play.” Andy Murray had to withdraw from the Miami Open last week after being injured in practice and returned to Britain for scans on the elbow. The extent of the damage means Murray may struggle to be ready for the Monte Carlo Masters in mid-April, with more information about the injury likely to be revealed by his team in the coming days.", "http://ichef.bbci.co.uk/news/976/cpsprodpb/2807/production/_92574201_epa_andymurray.jpg", "http://theguardian.co.uk/fakemurray", "the-guardian-uk", "2017-03-28T11:12:22Z");
 //
 //                List<OutletArticle> articles = Lists.newArrayList(murrayBBC, murrayGuardian);
 //
 //                Topics topicsManager = new Topics(Utils.getDatabase());
 //                Articles articleManager = new Articles(Utils.getDatabase());
 //                Summaries summaryManager = new Summaries(Utils.getDatabase());
-//
-//                List<OutletArticle> articles = Lists.newArrayList(articleManager.getArticleFromId("591346535dc53f2aa6e203db"), articleManager.getArticleFromId("591346535dc53f2aa6e203dc"));
-//                ClusterHolder clusterHolder = summaryManager.getSingleCluster("5913468c5dc53f2aa6e203dd");
-//
-//                LabelHolder labelHolder = new LabelHolder("Test Andy Murray", articles, Lists.newArrayList(clusterHolder));
-//
-//                topicsManager.saveTopics(Lists.newArrayList(labelHolder));
-//
-//                topicsManager.createBlankTopic("Test Andy Murray");
+////
+////                List<OutletArticle> articles = Lists.newArrayList(articleManager.getArticleFromId("591346535dc53f2aa6e203db"), articleManager.getArticleFromId("591346535dc53f2aa6e203dc"));
+////                ClusterHolder clusterHolder = summaryManager.getSingleCluster("5913468c5dc53f2aa6e203dd");
+////
+////                LabelHolder labelHolder = new LabelHolder("Test Andy Murray", articles, Lists.newArrayList(clusterHolder));
+////
+////                topicsManager.saveTopics(Lists.newArrayList(labelHolder));
+////
+////                topicsManager.createBlankTopic("Test Andy Murray");
 //                articleManager.saveArticles(articles);
-//
+////
 //                Set<OutletArticle> clusterArticles = new HashSet<>(articles);
 //                Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
 //                List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
 //                List<Summary> summaries = extractives.parallelStream().map(Extractive::summarise).collect(Collectors.toList());
 //
 //                ClusterHolder clusterHolder = new ClusterHolder(articles, summaries.stream().map(Summary::getNodes).collect(Collectors.toList()));
-//
+////
 //                summaryManager.saveSummaries(Lists.newArrayList(clusterHolder));
+//                LabelHolder labelHolder = new LabelHolder("Test Andy Murray", articles, Lists.newArrayList(clusterHolder));
 //                LabelHolder labelHolder = topicsManager.getTopic("Test Andy Murray");
 //                labelHolder.addCluster(clusterHolder);
 //                topicsManager.saveTopics(Lists.newArrayList(labelHolder));
