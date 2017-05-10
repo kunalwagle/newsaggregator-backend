@@ -18,7 +18,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         article,
         fetchInProgressCalled: state.searchResults.fetchInProgressCalled,
-        annotations: state.articleViewer.annotations
+        annotations: state.articleViewer.annotations,
+        mediaType: state.browser.mediaType
     }
 };
 

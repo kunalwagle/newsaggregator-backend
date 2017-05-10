@@ -5,7 +5,7 @@ import React from "react";
 import {Checkbox} from "react-bootstrap";
 import {getColour} from "../../UtilityMethods";
 
-export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled, handleAnnotationSwitch}) => {
+export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled, mediaType, handleAnnotationSwitch}) => {
 
     if (!fetchInProgressCalled || article == null || article.articles[0] == null) {
         return (<div></div>);
@@ -34,8 +34,15 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
         }
     });
 
+    let className = "white ";
+    if (mediaType !== "large" && mediaType !== "infinity") {
+        className = "white horizontalLine";
+    } else {
+        className = "white verticalLine";
+    }
+
     return (
-        <div className="white">
+        <div className={className}>
             <Checkbox checked={annotations} onClick={() => handleAnnotationSwitch(annotations)}>
                 Show summary annotations
             </Checkbox>

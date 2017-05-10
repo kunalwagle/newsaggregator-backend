@@ -30,9 +30,9 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
 
     const paragraph = () => {
         if (!annotations) {
-            return (<p className="align-with-image">{paragraphsPlain(stripIntoSentences)}</p>)
+            return (<p className="image-width">{paragraphsPlain(stripIntoSentences)}</p>)
         } else {
-            return (<p className="align-with-image">{paragraphsAnnotated(article.summary[0])}</p>)
+            return (<p className="image-width">{paragraphsAnnotated(article.summary[0])}</p>)
         }
     };
 
@@ -41,7 +41,7 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
             <h1>
                 {article.articles[0].title}
             </h1>
-            <img width={750} src={article.articles[0].imageUrl}/>
+            <img src={article.articles[0].imageUrl} className="image-width"/>
             <br/><br/>
             {paragraph()}
         </div>
