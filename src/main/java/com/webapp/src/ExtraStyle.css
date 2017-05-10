@@ -229,7 +229,7 @@ h5 {
 
 .verticalLine {
     border-left: thick solid white;
-    padding-bottom: 100px;
+    padding-bottom: 100%;
     padding-left: 20px;
 }
 
@@ -260,6 +260,10 @@ h5 {
 .no-border {
     border: none;
     width: 100%;
+}
+
+.margin-below {
+    padding-bottom: 20px;
 }
 
 @keyframes spin {

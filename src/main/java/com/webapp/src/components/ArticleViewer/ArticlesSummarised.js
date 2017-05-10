@@ -12,12 +12,12 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
     }
 
     const articleImage = (imageSource, source) => (
-        <div>
-            <div className="row">
+        <div className="row">
+            <div className="col-md-12 col-lg-12 col-xs-12 col-sm-12">
                 <img src={imageSource} alt={imageSource.substring(0, imageSource.length - 3) + "jpg"}
                      className="outlet-icon"/>
             </div>
-            <div className="row">
+            <div className="col-md-12 col-lg-12 col-xs-12 col-sm-12">
                 <hr style={{"background": getColour(source), "height": "20px"}} className="no-border"/>
             </div>
         </div>
@@ -27,34 +27,34 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
         const imageSource = "/outlets/" + art.source + ".png";
         if (!annotations) {
             return (
-                <div key={index}>
-                    <div>
+                <div key={index} className="row">
+                    <div >
                         <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <img src={imageSource} className="outlet-icon"/>
                         </div>
-                        <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9 margin-below">
                             <b>{art.title}</b>
                             <br/>
                             <a href={art.articleUrl}>Original Article</a>
                         </div>
                     </div>
-                    <br/><br/><br/>
+
                 </div>
             )
         } else {
             return (
-                <div key={index}>
+                <div key={index} className="row">
                     <div>
                         <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             {articleImage(imageSource, art.source)}
                         </div>
-                        <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9 margin-below">
                             <b>{art.title}</b>
                             <br/>
                             <a href={art.articleUrl}>Original Article</a>
                         </div>
                     </div>
-                    <br/><br/><br/>
+                    <br/><br/><br/><br/>
                 </div>
             )
         }
