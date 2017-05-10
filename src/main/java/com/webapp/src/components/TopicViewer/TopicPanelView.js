@@ -49,7 +49,7 @@ const thumbnails = (row, idx, topicId, handleArticleClick) => {
     )
 };
 
-const md = (articles, handleArticleClick) => {
+const md = (articles, handleArticleClick, topicId) => {
     const largePanels = articles.slice(0, 1);
     const smallPanels = articles.slice(1);
 
@@ -63,7 +63,8 @@ const md = (articles, handleArticleClick) => {
                     }
                     return (
                         <div className="col-md-12" key={index}>
-                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}/>
+                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}
+                                             onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
                 })}
@@ -77,7 +78,8 @@ const md = (articles, handleArticleClick) => {
                     }
                     return (
                         <div className="col-md-6 col-sm-6 col-lg-6" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.articles[0].title}/>
+                            <Panel image={imageUrl} key={index} title={article.articles[0].title}
+                                   onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
                 })}
@@ -86,7 +88,7 @@ const md = (articles, handleArticleClick) => {
     )
 };
 
-const lg = (articles, handleArticleClick) => {
+const lg = (articles, handleArticleClick, topicId) => {
     const largePanels = articles.slice(0, 2);
     const smallPanels = articles.slice(2);
 
@@ -101,7 +103,8 @@ const lg = (articles, handleArticleClick) => {
                     return (
 
                         <div className="col-lg-6" key={index}>
-                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}/>
+                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}
+                                             onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
                 })}
@@ -115,7 +118,8 @@ const lg = (articles, handleArticleClick) => {
                     }
                     return (
                         <div className="col-lg-3 col-md-6" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.articles[0].title}/>
+                            <Panel image={imageUrl} key={index} title={article.articles[0].title}
+                                   onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
                 })}
@@ -124,7 +128,7 @@ const lg = (articles, handleArticleClick) => {
     )
 };
 
-const sm = (articles, handleArticleClick) => {
+const sm = (articles, handleArticleClick, topicId) => {
     const largePanels = articles.slice(0, 1);
     const smallPanels = articles.slice(1);
 
@@ -138,7 +142,8 @@ const sm = (articles, handleArticleClick) => {
                     }
                     return (
                         <div className="col-sm-12" key={index}>
-                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}/>
+                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}
+                                             onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
                 })}
@@ -152,7 +157,8 @@ const sm = (articles, handleArticleClick) => {
                     }
                     return (
                         <div className="col-sm-6" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.articles[0].title}/>
+                            <Panel image={imageUrl} key={index} title={article.articles[0].title}
+                                   onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
                 })}
@@ -161,7 +167,7 @@ const sm = (articles, handleArticleClick) => {
     )
 };
 
-const xs = (articles, handleArticleClick) => {
+const xs = (articles, handleArticleClick, topicId) => {
     const largePanels = articles.slice(0, 2);
     const smallPanels = articles.slice(2);
 
@@ -175,7 +181,8 @@ const xs = (articles, handleArticleClick) => {
                     }
                     return (
                         <div className="col-xs-12" key={index}>
-                            <Panel key={index} title={article.articles[0].title} image={imageUrl}/>
+                            <Panel key={index} title={article.articles[0].title} image={imageUrl}
+                                   onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
                 })}
@@ -189,7 +196,8 @@ const xs = (articles, handleArticleClick) => {
                     }
                     return (
                         <div className="col-xs-12" key={index}>
-                            <ListPanel image={imageUrl} key={index} title={article.articles[0].title}/>
+                            <ListPanel image={imageUrl} key={index} title={article.articles[0].title}
+                                       onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
                 })}
@@ -227,13 +235,13 @@ const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCa
     switch (mediaType) {
         case "extraSmall":
         case "small":
-            return xs(articles, handleArticleClick);
+            return xs(articles, handleArticleClick, topicId);
         case "medium":
-            return sm(articles, handleArticleClick);
+            return sm(articles, handleArticleClick, topicId);
         case "large":
-            return md(articles, handleArticleClick);
+            return md(articles, handleArticleClick, topicId);
         default:
-            return lg(articles, handleArticleClick);
+            return lg(articles, handleArticleClick, topicId);
     }
 
     // let rows = [];

@@ -17,7 +17,7 @@ export default class ListPanel extends Component {
     render() {
 
         return (
-            <div className="list-cell">
+            <div className="list-cell" onClick={this.props.onClick}>
                 <div className="col-xs-3 pull-left">
                     <img src={this.getImage()} className="list-image"/>
                 </div>
