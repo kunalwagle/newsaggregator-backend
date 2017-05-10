@@ -11,6 +11,18 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
         return (<div></div>);
     }
 
+    const articleImage = (imageSource, source) => (
+        <div>
+            <div className="row">
+                <img src={imageSource} alt={imageSource.substring(0, imageSource.length - 3) + "jpg"}
+                     className="outlet-icon"/>
+            </div>
+            <div className="row">
+                <hr style={{"background": getColour(source), "height": "20px"}} className="no-border"/>
+            </div>
+        </div>
+    );
+
     const articleInfo = article.articles.map((art, index) => {
         const imageSource = "/outlets/" + art.source + ".png";
         if (!annotations) {
@@ -32,11 +44,16 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
         } else {
             return (
                 <div key={index}>
-                    <hr style={{"background": getColour(art.source), "height": "8px"}}/>
-                    <img src={imageSource} className="outlet-icon"/>
-                    <b>{art.title}</b>
-                    <br/>
-                    <a href={art.articleUrl}>Original Article</a>
+                    <div>
+                        <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            {articleImage(imageSource, art.source)}
+                        </div>
+                        <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <b>{art.title}</b>
+                            <br/>
+                            <a href={art.articleUrl}>Original Article</a>
+                        </div>
+                    </div>
                     <br/><br/><br/>
                 </div>
             )

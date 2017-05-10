@@ -23,16 +23,23 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
     };
 
     const paragraphsAnnotated = (node) => {
-        return node.map((text, index) => <p key={index}><u style={{"color": getColour(text.source)}}>{text.sentence}</u>
-        </p>)
+        return node.map((text, index) => {
+            if (text.relatedNodes == undefined || text.relatedNodes.length === 0) {
+                return (
+                    <p key={index} style={{"backgroundColor": getColour(text.source)}}>
+                        {text.sentence}
+                    </p>
+                )
+            }
+        })
             .reduce((nodes, node) => nodes.concat(node), []);
     };
 
     const paragraph = () => {
         if (!annotations) {
-            return (<p className="image-width">{paragraphsPlain(stripIntoSentences)}</p>)
+            return (<div className="image-width">{paragraphsPlain(stripIntoSentences)}</div>)
         } else {
-            return (<p className="image-width">{paragraphsAnnotated(article.summary[0])}</p>)
+            return (<div className="image-width">{paragraphsAnnotated(article.summary[0])}</div>)
         }
     };
 
