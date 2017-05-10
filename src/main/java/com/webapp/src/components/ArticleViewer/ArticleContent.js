@@ -3,10 +3,10 @@
  */
 import React from "react";
 import {PageHeader, Image} from "react-bootstrap";
-import {pluck, isEmpty} from "underscore";
+import {pluck, isEmpty, isEqual} from "underscore";
 import {getColour} from "../../UtilityMethods";
 
-export const ArticleContent = ({article, topicId, annotations, fetchInProgressCalled, handleReloadNeeded}) => {
+export const ArticleContent = ({article, sources, topicId, annotations, fetchInProgressCalled, handleReloadNeeded}) => {
 
     if (!fetchInProgressCalled) {
         handleReloadNeeded(topicId);
@@ -15,7 +15,16 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
         )
     }
 
-    const stripIntoSentences = pluck(article.summary[0], "sentence");
+    const getSummary = () => {
+        for (let key in article.summaryMap) {
+            if (!article.summaryMap.hasOwnProperty(key)) continue;
+            if ("[" + sources.sort().toString() + "]" === key) {
+                return article.summaryMap[key];
+            }
+        }
+    };
+
+    const stripIntoSentences = (summary) => pluck(summary, "sentence");
 
     const paragraphsPlain = (node) => {
         return node.map((text, index) => <p key={index}>{text}</p>)
@@ -38,7 +47,7 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
                 )
             } else {
                 return (
-                    <p key={index}>{text}</p>
+                    <p key={index}>{text.sentence}</p>
                 )
             }
         })
@@ -47,9 +56,9 @@ export const ArticleContent = ({article, topicId, annotations, fetchInProgressCa
 
     const paragraph = () => {
         if (!annotations) {
-            return (<div className="image-width">{paragraphsPlain(stripIntoSentences)}</div>)
+            return (<div className="image-width">{paragraphsPlain(stripIntoSentences(getSummary()))}</div>)
         } else {
-            return (<div className="image-width">{paragraphsAnnotated(article.summary[0])}</div>)
+            return (<div className="image-width">{paragraphsAnnotated(getSummary())}</div>)
         }
     };
 

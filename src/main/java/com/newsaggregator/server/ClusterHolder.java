@@ -22,7 +22,7 @@ public class ClusterHolder implements DatabaseStorage {
     private String id;
     private List<OutletArticle> articles;
     private List<List<Node>> summaries = new ArrayList<>();
-    private Map<List<String>, List<Node>> summaryMap = new HashMap<>();
+    private Map<String, List<Node>> summaryMap = new HashMap<>();
     private List<String> labels = new ArrayList<>();
 
     public ClusterHolder(List<OutletArticle> articles) {
@@ -37,11 +37,12 @@ public class ClusterHolder implements DatabaseStorage {
             List<String> related = nodes.stream().flatMap(node -> node.getRelatedNodes().stream()).collect(Collectors.toList()).stream().map(Node::getSource).distinct().collect(Collectors.toList());
             sources.addAll(related);
             sources = sources.stream().distinct().collect(Collectors.toList());
-            summaryMap.put(sources, nodes);
+            String source = sources.stream().sorted().collect(Collectors.toList()).toString().replace(" ", "");
+            summaryMap.put(source, nodes);
         }
     }
 
-    public Map<List<String>, List<Node>> getSummaryMap() {
+    public Map<String, List<Node>> getSummaryMap() {
         return summaryMap;
     }
 
