@@ -3,7 +3,7 @@
  */
 import {connect} from "react-redux";
 import {ArticlesSummarised} from "../../components/ArticleViewer/ArticlesSummarised";
-import {annotationsChange} from "../../actions/ArticleViewer/ArticleActions";
+import {annotationsChange, defaultCheckboxes, checkboxChange} from "../../actions/ArticleViewer/ArticleActions";
 import {find} from "underscore";
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
     }
     return {
         article,
+        sources: state.articleViewer.sources,
         fetchInProgressCalled: state.searchResults.fetchInProgressCalled,
         annotations: state.articleViewer.annotations,
         mediaType: state.browser.mediaType
@@ -27,6 +28,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleAnnotationSwitch: (annotations) => {
             dispatch(annotationsChange(annotations));
+        },
+        handleDefaultCheckboxes: (article) => {
+            dispatch(defaultCheckboxes(article));
+        },
+        handleCheckboxChange: (event, source) => {
+            dispatch(checkboxChange(event.target.checked, source));
         }
     }
 };

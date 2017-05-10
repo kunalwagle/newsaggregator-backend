@@ -4,10 +4,16 @@
 import React from "react";
 import {Checkbox} from "react-bootstrap";
 import {getColour} from "../../UtilityMethods";
+import {contains} from "underscore";
 
-export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled, mediaType, handleAnnotationSwitch}) => {
+export const ArticlesSummarised = ({article, sources, annotations, fetchInProgressCalled, mediaType, handleAnnotationSwitch, handleDefaultCheckboxes, handleCheckboxChange}) => {
 
     if (!fetchInProgressCalled || article == null || article.articles[0] == null) {
+        return (<div></div>);
+    }
+
+    if (sources.length === 0) {
+        handleDefaultCheckboxes(article);
         return (<div></div>);
     }
 
@@ -39,7 +45,8 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-below">
                             <label className="switch">
-                                <input type="checkbox"/>
+                                <input type="checkbox" checked={contains(sources, art.source)}
+                                       onChange={event => handleCheckboxChange(event, art.source)}/>
                                 <div className="slider round"></div>
                             </label>
                         </div>
@@ -51,13 +58,20 @@ export const ArticlesSummarised = ({article, annotations, fetchInProgressCalled,
             return (
                 <div key={index} className="row">
                     <div>
-                        <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                             {articleImage(imageSource, art.source)}
                         </div>
-                        <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9 margin-below">
+                        <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 margin-below">
                             <b>{art.title}</b>
                             <br/>
                             <a href={art.articleUrl}>Original Article</a>
+                        </div>
+                        <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-below">
+                            <label className="switch">
+                                <input type="checkbox" checked={contains(sources, art.source)}
+                                       onChange={event => handleCheckboxChange(event, art.source)}/>
+                                <div className="slider round"></div>
+                            </label>
                         </div>
                     </div>
                     <br/><br/><br/><br/>
