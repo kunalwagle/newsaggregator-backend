@@ -4,7 +4,6 @@
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/SentenceSourcesComponent.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,16 +24,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="147" column="33" lean-forward="true" selection-start-line="147" selection-start-column="33" selection-end-line="147" selection-end-column="33" />
+              <caret line="131" column="33" lean-forward="false" selection-start-line="131" selection-start-column="33" selection-end-line="131" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1494666469000" expanded="true" signature="2236:2487" ph="..." />
+                <marker date="1494666942000" expanded="true" signature="1647:1898" ph="..." />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="associated-press.png" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/public/outlets/associated-press.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="business-insider-uk.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/public/outlets/business-insider-uk.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
@@ -92,19 +105,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClusterHolder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="39" column="108" lean-forward="false" selection-start-line="39" selection-start-column="108" selection-end-line="39" selection-end-column="108" />
-              <folding>
-                <element signature="e#1918#1919#0" expanded="true" />
-                <element signature="e#1950#1951#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ArticleSummarisedContainer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/ArticleViewer/ArticleSummarisedContainer.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -116,22 +116,6 @@
                 <element signature="e#363#856#0" expanded="true" />
                 <element signature="e#532#593#0" expanded="true" />
                 <element signature="e#1189#1268#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArticleContent.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/ArticleViewer/ArticleContent.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#48#84#0" expanded="true" />
-                <element signature="e#323#777#0" expanded="true" />
-                <element signature="e#462#523#0" expanded="true" />
-                <element signature="e#877#935#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2145,14 +2129,7 @@
       <workItem from="1492002902704" duration="27962000" />
       <workItem from="1492430182328" duration="128984000" />
       <workItem from="1493313787752" duration="60245000" />
-      <workItem from="1494247395281" duration="27768000" />
-    </task>
-    <task id="LOCAL-00250" summary="Stripping articles complete">
-      <created>1493677992568</created>
-      <option name="number" value="00250" />
-      <option name="presentableId" value="LOCAL-00250" />
-      <option name="project" value="LOCAL" />
-      <updated>1493677992568</updated>
+      <workItem from="1494247395281" duration="27911000" />
     </task>
     <task id="LOCAL-00251" summary="Clustering thresholds lowered">
       <created>1493719466728</created>
@@ -2490,7 +2467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494456433178</updated>
     </task>
-    <option name="localTasksCounter" value="299" />
+    <task id="LOCAL-00299" summary="Flynn put into database">
+      <created>1494666944936</created>
+      <option name="number" value="00299" />
+      <option name="presentableId" value="LOCAL-00299" />
+      <option name="project" value="LOCAL" />
+      <updated>1494666944936</updated>
+    </task>
+    <option name="localTasksCounter" value="300" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2523,7 +2507,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="560176000" />
+    <option name="totallyTimeSpent" value="560319000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2578,7 +2562,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added default image to panel" />
     <MESSAGE value="Grid system roughly works" />
     <MESSAGE value="Grid system works" />
     <MESSAGE value="Jumbotron resizing" />
@@ -2603,7 +2586,8 @@
     <MESSAGE value="Added checkboxes" />
     <MESSAGE value="Article source buttons" />
     <MESSAGE value="Can alter summaries at the drop of a hat" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can alter summaries at the drop of a hat" />
+    <MESSAGE value="Flynn put into database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Flynn put into database" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2636,7 +2620,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java</url>
-          <line>152</line>
+          <line>136</line>
           <properties />
           <option name="timeStamp" value="685" />
         </line-breakpoint>
@@ -2659,22 +2643,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Newsweek.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -3155,12 +3123,22 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="147" column="33" lean-forward="true" selection-start-line="147" selection-start-column="33" selection-end-line="147" selection-end-column="33" />
+          <caret line="131" column="33" lean-forward="false" selection-start-line="131" selection-start-column="33" selection-end-line="131" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1494666469000" expanded="true" signature="2236:2487" ph="..." />
+            <marker date="1494666942000" expanded="true" signature="1647:1898" ph="..." />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/public/outlets/business-insider-uk.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/public/outlets/associated-press.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
   </component>
