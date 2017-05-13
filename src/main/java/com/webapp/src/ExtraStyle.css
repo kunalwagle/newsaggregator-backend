@@ -327,6 +327,16 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
+.popover {
+    max-width: 40%;
+    background-color: #032436;
+}
+
+.popover-cell {
+    background-color: #032436;
+    color: white;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);

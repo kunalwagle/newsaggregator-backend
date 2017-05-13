@@ -2,9 +2,10 @@
  * Created by kunalwagle on 20/04/2017.
  */
 import React from "react";
-import {PageHeader, Image} from "react-bootstrap";
+import {PageHeader, Image, OverlayTrigger} from "react-bootstrap";
 import {pluck, isEmpty, isEqual} from "underscore";
 import {getColour} from "../../UtilityMethods";
+import SentenceSourcesComponent from "./SentenceSourcesComponent";
 
 export const ArticleContent = ({article, sources, topicId, annotations, fetchInProgressCalled, handleReloadNeeded}) => {
 
@@ -31,23 +32,42 @@ export const ArticleContent = ({article, sources, topicId, annotations, fetchInP
             .reduce((nodes, node) => nodes.concat(node), []);
     };
 
+    const sentencePopover = (text) => {
+
+        let sentences = [text];
+        sentences = sentences.concat(text.relatedNodes);
+
+        return (
+            <SentenceSourcesComponent sentences={sentences}/>
+        );
+    };
+
     const paragraphsAnnotated = (node) => {
         return node.map((text, index) => {
             if (text.relatedNodes == undefined) {
                 return (
-                    <p key={index} style={{"backgroundColor": getColour(text.source)}}>
-                        {text.sentence}
-                    </p>
+                    <OverlayTrigger key={index} container={this} trigger="click" rootClose placement="top"
+                                    overlay={sentencePopover(text)}>
+                        <p key={index} style={{"backgroundColor": getColour(text.source)}}>
+                            {text.sentence}
+                        </p>
+                    </OverlayTrigger>
                 )
             } else if (text.relatedNodes.length === 0) {
                 return (
-                    <p key={index} style={{"backgroundColor": getColour(text.source)}}>
-                        {text.sentence}
-                    </p>
+                    <OverlayTrigger key={index} container={this} trigger="click" rootClose placement="top"
+                                    overlay={sentencePopover(text)}>
+                        <p key={index} style={{"backgroundColor": getColour(text.source)}}>
+                            {text.sentence}
+                        </p>
+                    </OverlayTrigger>
                 )
             } else {
                 return (
-                    <p key={index}>{text.sentence}</p>
+                    <OverlayTrigger key={index} container={this} trigger="click" rootClose placement="top"
+                                    overlay={sentencePopover(text)}>
+                        <p key={index}>{text.sentence}</p>
+                    </OverlayTrigger>
                 )
             }
         })
