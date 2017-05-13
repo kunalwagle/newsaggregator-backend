@@ -62,7 +62,9 @@ export const NavBarComponent = ({loggedIn, user, handleEmailChange, handleLoginC
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
                 <Navbar.Brand>
-                    <a href="/">News Aggregator</a>
+                    <a href="/">
+                        <img src={"/LogoShortForm.png"} className="navbar-image"/>
+                    </a>
                 </Navbar.Brand>
                 <Navbar.Toggle />
             </Navbar.Header>

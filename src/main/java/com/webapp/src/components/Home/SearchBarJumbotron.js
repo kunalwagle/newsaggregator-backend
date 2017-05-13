@@ -10,10 +10,7 @@ export const SearchBarJumbotron = () => (
     <div>
         <Jumbotron
             className="jumbotron col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
-            <h1 style={{"textAlign": "center"}}>
-                NewSumm
-            </h1>
-            <br></br>
+            <img src={"/LogoFullForm.png"} className="jumbotron-image"/>
             <p style={{"textAlign": "center"}}>
                 News Aggregator and Summariser
             </p>
