@@ -16,8 +16,9 @@ const mapStateToProps = (state, ownProps) => {
     }
 
     if (loggedIn) {
-        const labels = pluck(state.loggedIn.user.topics, "id");
-        isSubscribed = contains(labels, ownProps.topicId);
+        const labels = pluck(state.loggedIn.user.topics, "labelHolder");
+        const labelNames = pluck(labels, "id");
+        isSubscribed = contains(labelNames, ownProps.topicId);
     }
 
     return {
