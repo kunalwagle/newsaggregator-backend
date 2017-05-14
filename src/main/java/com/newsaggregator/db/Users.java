@@ -49,7 +49,7 @@ public class Users {
         }
     }
 
-    public void updateUser(User user) {
+    private void updateUser(User user) {
         try {
             Document document = user.createDocument();
             collection.replaceOne(new BasicDBObject().append("_id", user.get_id()), document);
