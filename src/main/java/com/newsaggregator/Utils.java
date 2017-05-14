@@ -1,14 +1,18 @@
 package com.newsaggregator;
 
 
+import com.google.common.collect.Lists;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
+import com.newsaggregator.base.Outlet;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -69,6 +73,14 @@ public class Utils {
         MongoClientOptions opts = builder.build();
         MongoClient mongoClient = new MongoClient(new ServerAddress("178.62.27.53", 27017), opts);
         return mongoClient.getDatabase("NewsAggregator");
+    }
+
+    public static List<String> allSources() {
+        ArrayList<String> list = Lists.newArrayList();
+        for (Outlet outlet : Outlet.values()) {
+            list.add(outlet.getSourceString());
+        }
+        return list;
     }
 
 
