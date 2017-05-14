@@ -1,6 +1,7 @@
 package com.newsaggregator.routes;
 
 import com.newsaggregator.Utils;
+import com.newsaggregator.base.Subscription;
 import com.newsaggregator.db.Topics;
 import com.newsaggregator.server.LabelHolder;
 
@@ -14,16 +15,16 @@ public class UserHolder {
 
     private String id;
     private String emailAddress;
-    private List<LabelHolder> topics;
+    private List<LabelHolderWithSettings> topics;
 
-    public UserHolder(String id, String emailAddress, List<String> topics) {
+    public UserHolder(String id, String emailAddress, List<Subscription> topics) {
         this.id = id;
         Topics topicManager = new Topics(Utils.getDatabase());
-        List<LabelHolder> labelHolders = new ArrayList<>();
-        for (String topicId : topics) {
-            LabelHolder labelHolder = topicManager.getTopicById(topicId);
+        List<LabelHolderWithSettings> labelHolders = new ArrayList<>();
+        for (Subscription topic : topics) {
+            LabelHolder labelHolder = topicManager.getTopicById(topic.getTopicId());
             if (labelHolder != null) {
-                labelHolders.add(labelHolder);
+                labelHolders.add(new LabelHolderWithSettings(labelHolder, topic.isDigests(), topic.getSources()));
             }
         }
         this.topics = labelHolders;
@@ -38,7 +39,44 @@ public class UserHolder {
         return id;
     }
 
-    public List<LabelHolder> getTopics() {
+    public List<LabelHolderWithSettings> getTopics() {
         return topics;
+    }
+
+    private class LabelHolderWithSettings {
+
+        private LabelHolder labelHolder;
+        private boolean digests;
+        private List<String> sources;
+
+        public LabelHolderWithSettings(LabelHolder labelHolder, boolean digests, List<String> sources) {
+            this.labelHolder = labelHolder;
+            this.digests = digests;
+            this.sources = sources;
+        }
+
+        public LabelHolder getLabelHolder() {
+            return labelHolder;
+        }
+
+        public boolean isDigests() {
+            return digests;
+        }
+
+        public List<String> getSources() {
+            return sources;
+        }
+
+        public void setLabelHolder(LabelHolder labelHolder) {
+            this.labelHolder = labelHolder;
+        }
+
+        public void setDigests(boolean digests) {
+            this.digests = digests;
+        }
+
+        public void setSources(List<String> sources) {
+            this.sources = sources;
+        }
     }
 }

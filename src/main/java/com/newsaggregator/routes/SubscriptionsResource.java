@@ -3,6 +3,7 @@ package com.newsaggregator.routes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
+import com.newsaggregator.base.Subscription;
 import com.newsaggregator.base.User;
 import com.newsaggregator.db.Users;
 import org.apache.log4j.Logger;
@@ -32,7 +33,7 @@ public class SubscriptionsResource extends ServerResource {
                 userManager.writeUser(response);
                 response = userManager.getSingleUser(user);
             }
-            List<String> topics = response.getTopicIds();
+            List<Subscription> topics = response.getTopicIds();
             return new ObjectMapper().writeValueAsString(new UserHolder(response.getId(), response.getEmailAddress(), topics));
         } catch (Exception e) {
             logger.error("Exception occurred getting subscriptions", e);

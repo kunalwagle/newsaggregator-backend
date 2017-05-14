@@ -1,5 +1,8 @@
 package com.newsaggregator.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -8,6 +11,8 @@ import java.util.List;
 /**
  * Created by kunalwagle on 21/04/2017.
  */
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements DatabaseStorage {
 
     private String emailAddress;
@@ -63,7 +68,14 @@ public class User implements DatabaseStorage {
         }
         doc.put("_id", _id);
         doc.put("emailAddress", emailAddress);
-        doc.put("topicIds", topicIds);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String topics = "[]";
+        try {
+            topics = objectMapper.writeValueAsString(topicIds);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        doc.put("topicIds", topics);
 
         return doc;
     }

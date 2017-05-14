@@ -6,6 +6,7 @@ import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.newsaggregator.base.Subscription;
 import com.newsaggregator.base.User;
 import org.apache.log4j.Logger;
 import org.bson.Document;
@@ -32,8 +33,8 @@ public class Users {
         if (user == null) {
             user = new User(email, new ArrayList<>());
         }
-        if (!user.getTopicIds().contains(topicId)) {
-            user.getTopicIds().add(topicId);
+        if (user.getTopicIds().stream().noneMatch(sub -> sub.getTopicId().equals(topicId))) {
+            user.getTopicIds().add(new Subscription(topicId));
         }
         writeUser(user);
     }
@@ -65,8 +66,10 @@ public class Users {
             if (iterator.hasNext()) {
                 Document document = iterator.next();
                 String address = document.getString("emailAddress");
-                List<String> topicIds = (List<String>) document.get("topicIds");
-                User user = new User(address, topicIds);
+                String topicIds = document.getString("topicIds");
+                ObjectMapper objectMapper = new ObjectMapper();
+                List<Subscription> subs = objectMapper.readValue(topicIds, objectMapper.getTypeFactory().constructCollectionType(List.class, Subscription.class));
+                User user = new User(address, subs);
                 user.set_id(document.getObjectId("_id"));
                 user.setId(user.get_id().toHexString());
                 return user;

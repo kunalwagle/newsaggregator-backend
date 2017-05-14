@@ -1,5 +1,7 @@
 package com.newsaggregator.base;
 
+import com.newsaggregator.Utils;
+
 import java.util.List;
 
 /**
@@ -15,6 +17,15 @@ public class Subscription {
         this.topicId = topicId;
         this.sources = sources;
         this.digests = digests;
+    }
+
+    public Subscription() {
+    }
+
+    public Subscription(String topicId) {
+        this.topicId = topicId;
+        this.sources = Utils.allSources();
+        this.digests = false;
     }
 
     public void setTopicId(String topicId) {
