@@ -9,6 +9,7 @@ import {
     FETCH_STARTED,
     SUBSCRIBE_COMPLETE
 } from "../actions/LoginModalActions";
+import {REHYDRATE} from "redux-persist/constants";
 
 const initialState = {
     loggedIn: false,
@@ -50,6 +51,10 @@ export default function loggedIn(state, action) {
             return Object.assign({}, state, {
                 user: action.json
             });
+        case REHYDRATE:
+            const incoming = action.payload.loggedIn;
+            if (incoming) return {...state, ...incoming};
+            return state;
         default:
             return state
     }

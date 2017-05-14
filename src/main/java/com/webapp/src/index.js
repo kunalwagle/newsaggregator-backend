@@ -6,6 +6,8 @@ import {SearchBarJumbotron} from "./components/Home/SearchBarJumbotron";
 import {Route, IndexRoute, browserHistory, Router} from "react-router";
 import {syncHistoryWithStore, routerMiddleware} from "react-router-redux";
 import {responsiveStoreEnhancer} from "redux-responsive";
+import {persistStore, autoRehydrate} from "redux-persist";
+import localForage from "localforage";
 import App from "./App";
 import "babel-polyfill";
 import thunk from "redux-thunk";
@@ -19,9 +21,10 @@ import {SubscriptionPage} from "./components/Subscriptions/Subscriptions";
 
 
 const middleware = routerMiddleware(browserHistory);
-const store = createStore(App, compose(responsiveStoreEnhancer, applyMiddleware(thunk, middleware)));
+const store = createStore(App, compose(responsiveStoreEnhancer, autoRehydrate({log: true}), applyMiddleware(thunk, middleware)));
 const rootEl = document.getElementById('root');
 const history = syncHistoryWithStore(browserHistory, store);
+
 
 class NavigationBar extends React.Component {
     render() {
@@ -34,8 +37,25 @@ class NavigationBar extends React.Component {
     }
 }
 
-const render = () => {
-    ReactDOM.render((
+class AppProvider extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {rehydrated: false}
+    }
+
+    componentWillMount() {
+        // persistStore(store, {storage: localForage}).purge();
+        persistStore(store, {whitelist: ['loggedIn'], storage: localForage}, () => {
+            this.setState({rehydrated: true});
+        });
+    }
+
+    render() {
+        if (!this.state.rehydrated) {
+            return <div className="loader"></div>
+        }
+        return (
             <Provider store={store}>
                 <Router history={history}>
                     <Route path="/" component={NavigationBar}>
@@ -48,6 +68,13 @@ const render = () => {
                     </Route>
                 </Router>
             </Provider>
+        )
+    }
+}
+
+const render = () => {
+    ReactDOM.render((
+            <AppProvider/>
         ),
         rootEl
     );

@@ -52,7 +52,7 @@ export function logout() {
 export function subscribe(topic, email) {
     return (dispatch, getState) => {
         if (email == undefined) {
-            email = getState().loggedIn.email;
+            email = getState().loggedIn.user.emailAddress;
         }
         return fetch(getIPAddress() + "user/subscribe/" + email + "/" + topic)
             .then(response => response.json())
