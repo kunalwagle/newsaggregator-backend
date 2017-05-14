@@ -30,7 +30,7 @@ export const TopicTopBar = ({label, loggedIn, isSubscribed, topicId, handleLogin
             )
         }
         return (
-            <button className="col-md-2 col-lg-2 col-sm-12 col-xs-12 pull-right btn-danger">Unsubscribe</button>
+            <button className="col-md-2 col-lg-2 col-sm-12 col-xs-12 pull-right danger-button">Unsubscribe</button>
         )
 
     };

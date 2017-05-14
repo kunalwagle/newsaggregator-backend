@@ -21,11 +21,14 @@ export default class LoginModal extends Component {
     render() {
         return (
             <Popover title="Login" id="loginModalPopover" {...this.props}>
-                <strong>Give an email address to log in</strong>
+                <strong className="white centred-div">Registering is simple. As no sensitive data is stored we just need
+                    your email address.</strong>
                 <br/><br/><br/>
-                <input onChange={this.handleEmailChange} placeholder="Email address" value={this.state.emailAddress}/>
+                <input className="bar-standard" onChange={this.handleEmailChange} placeholder="Email address"
+                       value={this.state.emailAddress}/>
                 <br/><br/><br/>
-                <button onClick={() => this.props.handleLoginClicked(this.state.emailAddress, this.props.action)}>Login
+                <button className="login-button"
+                        onClick={() => this.props.handleLoginClicked(this.state.emailAddress, this.props.action)}>Login
                 </button>
             </Popover>
         );
