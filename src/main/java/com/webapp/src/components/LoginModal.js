@@ -1,20 +1,20 @@
 /**
  * Created by kunalwagle on 20/04/2017.
  */
-import React from "react";
+import React, {Component} from "react";
 import {Popover} from "react-bootstrap";
-import FacebookLogin from "react-facebook-login";
-import GoogleLogin from "react-google-login";
 
-export const LoginModal = ({handleFacebookLogin, handleGoogleSuccess, handleGoogleFailure}) => (
-    <Popover title="Login" id="loginModalPopover">
-        <FacebookLogin appId="540333079424464"
-                       autoLoad={true}
-                       fields="name,email,picture"
-                       callback={handleFacebookLogin}/>
-        <br/><br/><br/>
-        <GoogleLogin onSuccess={handleGoogleSuccess}
-                     onFailure={handleGoogleFailure}
-                     clientId="454694778698-pcb41ncbaqevjkcgvnko36faneenrb73.apps.googleusercontent.com"/>
-    </Popover>
-);
+export default class LoginModal extends Component {
+    render() {
+        return (
+            <Popover title="Login" id="loginModalPopover" {...this.props}>
+                <strong>Give an email address to log in</strong>
+                <br/><br/><br/>
+                <input onChange={this.props.handleEmailChange} placeholder="Email address"/>
+                <br/><br/><br/>
+                <button onClick={() => this.props.handleLoginClicked(this.props.loggedIn, this.props.action)}>Login
+                </button>
+            </Popover>
+        );
+    }
+};

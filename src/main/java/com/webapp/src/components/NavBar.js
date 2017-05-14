@@ -4,32 +4,30 @@
 import React from "react";
 import {Navbar, Nav, NavItem, OverlayTrigger, Popover, Button} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
+import LoginModal from "./LoginModal";
 
-const loginPopover = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked) => {
+const loginPopover = (emailAddress, handleEmailChange, handleLoginClicked, action) => {
     return (
-        <Popover title="Login" id="loginModalPopover">
-            <strong>Give an email address to log in</strong>
-            <br/><br/><br/>
-            <input onChange={handleEmailChange} placeholder="Email address"/>
-            <br/><br/><br/>
-            <Button onClick={() => handleLoginClicked(loggedIn)}>Login</Button>
-        </Popover>
+        <LoginModal handleEmailChange={handleEmailChange} handleLoginClicked={handleLoginClicked} action={action}
+                    emailAddress={emailAddress}/>
     );
 };
 
 const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked, handleSubscriptionSearch) => {
     if (!loggedIn) {
         return (
-            <OverlayTrigger trigger="click" rootClose placement="bottom"
-                            overlay={loginPopover(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}>
-                <NavItem eventKey={2}>Register</NavItem>
+            <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
+                            overlay={loginPopover(emailAddress, handleEmailChange, handleLoginClicked, handleSubscriptionSearch)}>
+                <NavItem eventKey={2}>
+                    My Topics
+                </NavItem>
             </OverlayTrigger>
         )
     } else {
         return (
             <NavItem eventKey={2} onSelect={() => handleSubscriptionSearch()}>
                     My Topics
-                </NavItem>
+            </NavItem>
 
         )
     }
@@ -38,14 +36,14 @@ const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClick
 const rightNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked) => {
     if (!loggedIn) {
         return (
-            <OverlayTrigger trigger="click" rootClose placement="bottom"
-                            overlay={loginPopover(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}>
-                <NavItem eventKey={3}>Sign In</NavItem>
+            <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
+                            overlay={loginPopover(emailAddress, handleEmailChange, handleLoginClicked, () => handleLoginClicked(false))}>
+                <NavItem eventKey={3}>Settings</NavItem>
             </OverlayTrigger>
         )
     } else {
         return (
-            <NavItem eventKey={3} onSelect={() => handleLoginClicked(loggedIn)}>Log Out</NavItem>
+            <NavItem eventKey={3} onSelect={() => handleLoginClicked(loggedIn)}>Settings</NavItem>
         )
     }
 };

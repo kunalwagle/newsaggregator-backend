@@ -21,12 +21,13 @@ export function emailAddressChanged(text) {
     };
 }
 
-export function login() {
+export function login(action) {
     return (dispatch, getState) => {
         dispatch(startSubscriptionFetch());
         return fetch(getIPAddress() + "user/subscriptions/" + getState().loggedIn.email)
             .then(response => response.json())
             .then(json => dispatch(logged(json)))
+            .then(dispatch(action()))
     }
 }
 

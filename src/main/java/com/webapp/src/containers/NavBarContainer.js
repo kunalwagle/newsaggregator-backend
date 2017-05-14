@@ -15,9 +15,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleLoginClicked: (loggedIn) => {
+        handleLoginClicked: (loggedIn, action) => {
             if (!loggedIn) {
-                dispatch(login());
+                dispatch(login(action));
             } else {
                 dispatch(logout());
             }
