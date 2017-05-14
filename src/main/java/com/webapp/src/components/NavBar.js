@@ -6,18 +6,17 @@ import {Navbar, Nav, NavItem, OverlayTrigger, Popover, Button} from "react-boots
 import {LinkContainer} from "react-router-bootstrap";
 import LoginModal from "./LoginModal";
 
-const loginPopover = (emailAddress, handleEmailChange, handleLoginClicked, action) => {
+const loginPopover = (handleLoginClicked, action) => {
     return (
-        <LoginModal handleEmailChange={handleEmailChange} handleLoginClicked={handleLoginClicked} action={action}
-                    emailAddress={emailAddress}/>
+        <LoginModal handleLoginClicked={handleLoginClicked} action={action}/>
     );
 };
 
-const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked, handleSubscriptionSearch) => {
+const leftNavItem = (loggedIn, handleLoginClicked, handleSubscriptionSearch) => {
     if (!loggedIn) {
         return (
             <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
-                            overlay={loginPopover(emailAddress, handleEmailChange, handleLoginClicked, handleSubscriptionSearch)}>
+                            overlay={loginPopover(handleLoginClicked, handleSubscriptionSearch)}>
                 <NavItem eventKey={2}>
                     My Topics
                 </NavItem>
@@ -33,11 +32,11 @@ const leftNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClick
     }
 };
 
-const rightNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClicked) => {
+const rightNavItem = (loggedIn, handleLoginClicked) => {
     if (!loggedIn) {
         return (
             <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
-                            overlay={loginPopover(emailAddress, handleEmailChange, handleLoginClicked, () => handleLoginClicked(false))}>
+                            overlay={loginPopover(handleLoginClicked, () => handleLoginClicked(false))}>
                 <NavItem eventKey={3}>Settings</NavItem>
             </OverlayTrigger>
         )
@@ -49,11 +48,6 @@ const rightNavItem = (loggedIn, emailAddress, handleEmailChange, handleLoginClic
 };
 
 export const NavBarComponent = ({loggedIn, user, handleEmailChange, handleLoginClicked, handleSubscriptionSearch}) => {
-
-    let emailAddress = "";
-    if (user != undefined) {
-        emailAddress = user.emailAddress;
-    }
 
     return (
     <div>
@@ -71,8 +65,8 @@ export const NavBarComponent = ({loggedIn, user, handleEmailChange, handleLoginC
                     <NavItem eventKey={1} href="#">About</NavItem>
                 </Nav>
                 <Nav pullRight>
-                    {leftNavItem(loggedIn, emailAddress, handleEmailChange, handleLoginClicked, handleSubscriptionSearch)}
-                    {rightNavItem(loggedIn, emailAddress, handleEmailChange, handleLoginClicked)}
+                    {leftNavItem(loggedIn, handleLoginClicked, handleSubscriptionSearch)}
+                    {rightNavItem(loggedIn, handleLoginClicked)}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

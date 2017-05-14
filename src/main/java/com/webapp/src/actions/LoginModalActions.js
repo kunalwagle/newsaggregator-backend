@@ -21,13 +21,13 @@ export function emailAddressChanged(text) {
     };
 }
 
-export function login(action) {
-    return (dispatch, getState) => {
+export function login(email, action) {
+    return (dispatch) => {
         dispatch(startSubscriptionFetch());
-        return fetch(getIPAddress() + "user/subscriptions/" + getState().loggedIn.email)
+        return fetch(getIPAddress() + "user/subscriptions/" + email)
             .then(response => response.json())
             .then(json => dispatch(logged(json)))
-            .then(dispatch(action()))
+            .then(action(email))
     }
 }
 
@@ -49,9 +49,11 @@ export function logout() {
     }
 }
 
-export function subscribe(topic) {
+export function subscribe(topic, email) {
     return (dispatch, getState) => {
-        const email = getState().loggedIn.email;
+        if (email == undefined) {
+            email = getState().loggedIn.email;
+        }
         return fetch(getIPAddress() + "user/subscribe/" + email + "/" + topic)
             .then(response => response.json())
             .then(json => dispatch(subscribeComplete(json)))

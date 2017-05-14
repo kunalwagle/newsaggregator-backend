@@ -7,7 +7,7 @@ import TopicTopBarContainer from "../../containers/TopicViewer/TopicTopBarContai
 
 export const TopicViewerPage = ({params}) => (
     <div>
-        <TopicTopBarContainer/>
+        <TopicTopBarContainer topicId={params.topicId}/>
         <br/> <br/><br/>
         <TopicPanelContainer topicId={params.topicId}/>
     </div>
