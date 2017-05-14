@@ -10,10 +10,12 @@ export const ARTICLES_RECEIVED = 'ARTICLES_RECEIVED';
 export const SUBSCRIPTION_TAB_SELECTED = 'SUBSCRIPTION_TAB_SELECTED';
 
 
-export function viewClicked(title) {
+export function viewClicked(title, topic) {
     return (dispatch) => {
         dispatch(viewStarted());
-        dispatch(push("/topic/" + title));
+        if (topic == undefined) {
+            dispatch(push("/topic/" + title));
+        }
         return fetch(getIPAddress() + "topic/" + title)
             .then(response => response.json())
             .then(json => dispatch(articlesReceived(json)))
@@ -42,9 +44,10 @@ export function articlesReceived(json) {
     }
 }
 
-export function subscriptionTabSelected(articles) {
+export function subscriptionTabSelected(articles, index) {
     return {
         type: SUBSCRIPTION_TAB_SELECTED,
-        articles
+        articles,
+        index
     }
 }

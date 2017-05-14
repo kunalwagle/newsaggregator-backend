@@ -8,17 +8,21 @@ import {articleClicked} from "../../actions/SearchResults/SearchResultsActions";
 
 const mapStateToProps = (state, ownProps) => {
     let article = {};
-    if (state.searchResults.fetchInProgressCalled) {
+    let fetchInProgressCalled = state.searchResults.fetchInProgressCalled;
+    if (fetchInProgressCalled) {
         article = find(state.searchResults.articles, (art) => {
             return art.id === ownProps.articleId;
         });
+    }
+    if (article == undefined || article == {}) {
+        fetchInProgressCalled = false;
     }
     return {
         article,
         sources: state.articleViewer.sources,
         annotations: state.articleViewer.annotations,
         topicId: ownProps.topicId,
-        fetchInProgressCalled: state.searchResults.fetchInProgressCalled
+        fetchInProgressCalled
     }
 };
 

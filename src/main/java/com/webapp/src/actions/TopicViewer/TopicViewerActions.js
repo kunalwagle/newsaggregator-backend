@@ -12,7 +12,9 @@ export function articleClicked(topicId, articleId) {
         let article = find(getState().searchResults.articles, (art) => {
             return art.id === articleId;
         });
-        dispatch(defaultCheckboxes(article));
+        if (article != undefined) {
+            dispatch(defaultCheckboxes(article));
+        }
         dispatch(push("/topic/" + topicId + "/article/" + articleId));
         return {
             type: ARTICLE_CLICKED

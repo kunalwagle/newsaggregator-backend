@@ -6,17 +6,22 @@ import {SubscriptionComponent} from "../../components/Subscriptions/Subscription
 import {subscriptionTabSelected} from "../../actions/SearchResults/SearchResultsActions";
 
 const mapStateToProps = (state) => {
+    let index = 0;
+    if (state.searchResults.activeIndex != undefined) {
+        index = state.searchResults.activeIndex;
+    }
     return {
         fetchInProgress: state.loggedIn.fetchInProgress,
         topics: state.loggedIn.user.topics,
-        loggedIn: state.loggedIn.loggedIn
+        loggedIn: state.loggedIn.loggedIn,
+        index
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleTopicChange: (articles) => {
-            dispatch(subscriptionTabSelected(articles));
+        handleTopicChange: (articles, index) => {
+            dispatch(subscriptionTabSelected(articles, index));
         }
     }
 };

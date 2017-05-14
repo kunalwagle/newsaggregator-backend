@@ -8,8 +8,12 @@ import {contains, pluck} from "underscore";
 
 const mapStateToProps = (state, ownProps) => {
     const loggedIn = state.loggedIn.loggedIn;
-    const label = state.searchResults.label;
+    let label = state.searchResults.label;
     let isSubscribed = false;
+
+    if (ownProps.topic) {
+        label = ownProps.topic.label;
+    }
 
     if (loggedIn) {
         const labels = pluck(state.loggedIn.user.topics, "id");

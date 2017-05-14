@@ -2,10 +2,10 @@
  * Created by kunalwagle on 21/04/2017.
  */
 import React from "react";
-import TopicPanelContainer from "../../containers/TopicViewer/TopicPanelContainer";
+import {TopicViewerPage} from "../TopicViewer/TopicViewer";
 import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
 
-export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handleTopicChange}) => {
+export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, index, handleTopicChange}) => {
 
     if (!loggedIn) {
         return (
@@ -15,7 +15,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handle
 
     if (fetchInProgress) {
         return (
-            <div className="loader">Loading...</div>
+            <div className="loader"></div>
         )
     }
 
@@ -27,22 +27,20 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handle
 
     const tabMap = topics.map((topic, index) => {
         return (
-            <NavItem onSelect={() => handleTopicChange(topic)} eventKey={index} key={index}>
+            <NavItem onSelect={() => handleTopicChange(topic, index)} eventKey={index} key={index}>
                 {topic.label}
             </NavItem>
         )
     });
 
-    const contentMap = topics.map((topic, index) => {
-        return (
-            <Tab.Pane eventKey={index} key={index}>
-                <TopicPanelContainer topic={topic}/>
+    const contentMap = (
+        <Tab.Pane eventKey={0}>
+            <TopicViewerPage params={{topicId: topics[index].id, topic: topics[index]}}/>
             </Tab.Pane>
-        )
-    });
+    );
 
     return (
-        <Tab.Container id="left-tabs-example" defaultActiveKey={0}>
+        <Tab.Container id="left-tabs-example" defaultActiveKey={index}>
             <Row className="clearfix">
                 <Col sm={3}>
                     <Nav bsStyle="pills" stacked>
@@ -50,9 +48,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, handle
                     </Nav>
                 </Col>
                 <Col sm={8}>
-                    <Tab.Content animation>
-                        {contentMap}
-                    </Tab.Content>
+                    <TopicViewerPage params={{topicId: topics[index].id, topic: topics[index]}}/>
                 </Col>
             </Row>
         </Tab.Container>

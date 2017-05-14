@@ -11,7 +11,8 @@ const initialState = {
     label: "",
     fetchInProgress: false,
     fetchInProgressCalled: false,
-    articles: []
+    articles: [],
+    activeIndex: 0
 };
 
 export default function searchResults(state, action) {
@@ -34,7 +35,8 @@ export default function searchResults(state, action) {
             });
         case SUBSCRIPTION_TAB_SELECTED:
             return Object.assign({}, state, {
-                articles: action.articles
+                articles: action.articles,
+                activeIndex: action.index
             })
     }
 

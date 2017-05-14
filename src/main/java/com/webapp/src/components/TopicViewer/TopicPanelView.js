@@ -207,7 +207,7 @@ const xs = (articles, handleArticleClick, topicId) => {
 };
 
 
-const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCalled, topicId, handleReloadNeeded, handleArticleClick}) => {
+const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCalled, topicId, topic, handleReloadNeeded, handleArticleClick}) => {
 
     if (fetchInProgress) {
         return (
@@ -216,7 +216,7 @@ const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCa
     }
 
     if (!fetchInProgressCalled) {
-        handleReloadNeeded(topicId);
+        handleReloadNeeded(topicId, topic);
         return (
             <div className="loader"></div>
         )

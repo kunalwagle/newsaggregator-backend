@@ -10,14 +10,17 @@ const mapStateToProps = (state, ownProps) => {
     let articles = state.searchResults.articles;
     let topicId = ownProps.topicId;
     let fetchInProgressCalled = state.searchResults.fetchInProgressCalled;
+    const topic = ownProps.topic;
     if (ownProps.topic !== undefined) {
-        articles = ownProps.topic.clusters;
         topicId = ownProps.topic.id;
+        articles = ownProps.topic.clusters;
+        //fetchInProgressCalled = state.searchResults.label === ownProps.topic.label;
         fetchInProgressCalled = true;
     }
     return {
         topicId,
         articles,
+        topic,
         fetchInProgress: state.searchResults.fetchInProgress,
         fetchInProgressCalled,
         mediaType: state.browser.mediaType
@@ -30,8 +33,8 @@ const mapDispatchToProps = (dispatch) => {
             event.preventDefault();
             dispatch(articleClicked(topicId, articleId));
         },
-        handleReloadNeeded: (topicId) => {
-            dispatch(viewClicked(topicId));
+        handleReloadNeeded: (topicId, topic) => {
+            dispatch(viewClicked(topicId, topic));
         }
     }
 };
