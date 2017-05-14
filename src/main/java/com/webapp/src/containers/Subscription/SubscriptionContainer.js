@@ -2,6 +2,7 @@
  * Created by kunalwagle on 07/02/2017.
  */
 import {connect} from "react-redux";
+import {pluck} from "underscore";
 import {SubscriptionComponent} from "../../components/Subscriptions/SubscriptionComponent";
 import {subscriptionTabSelected} from "../../actions/SearchResults/SearchResultsActions";
 
@@ -12,7 +13,7 @@ const mapStateToProps = (state) => {
     }
     return {
         fetchInProgress: state.loggedIn.fetchInProgress,
-        topics: state.loggedIn.user.topics,
+        topics: pluck(state.loggedIn.user.topics, "labelHolder"),
         loggedIn: state.loggedIn.loggedIn,
         index
     }
