@@ -28,16 +28,10 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, index,
     const tabMap = topics.map((topic, index) => {
         return (
             <NavItem onSelect={() => handleTopicChange(topic, index)} eventKey={index} key={index}>
-                {topic.label}
+                <div className="white">{topic.label}</div>
             </NavItem>
         )
     });
-
-    const contentMap = (
-        <Tab.Pane eventKey={0}>
-            <TopicViewerPage params={{topicId: topics[index].id, topic: topics[index]}}/>
-            </Tab.Pane>
-    );
 
     return (
         <Tab.Container id="left-tabs-example" defaultActiveKey={index}>

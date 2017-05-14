@@ -14,8 +14,8 @@ const mapStateToProps = (state, ownProps) => {
     if (ownProps.topic !== undefined) {
         topicId = ownProps.topic.id;
         articles = ownProps.topic.clusters;
-        //fetchInProgressCalled = state.searchResults.label === ownProps.topic.label;
-        fetchInProgressCalled = true;
+        fetchInProgressCalled = state.searchResults.label === ownProps.topic.label;
+        // fetchInProgressCalled = true;
     }
     return {
         topicId,
