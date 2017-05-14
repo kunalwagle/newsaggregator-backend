@@ -21,6 +21,7 @@ public class LabelHolder implements DatabaseStorage {
     private String label;
     private List<OutletArticle> articles = new ArrayList<>();
     private List<ClusterHolder> clusters = new ArrayList<>();
+    private boolean isSubscribed = false;
 
     public LabelHolder(String label) {
         this.label = label;
@@ -75,6 +76,10 @@ public class LabelHolder implements DatabaseStorage {
     public void set_id(ObjectId _id) {
         this._id = _id;
         this.id = _id.toHexString();
+    }
+
+    public void setSubscribed(boolean subscribed) {
+        isSubscribed = subscribed;
     }
 
     @Override
