@@ -11,11 +11,11 @@ import java.util.List;
 public class User implements DatabaseStorage {
 
     private String emailAddress;
-    private List<String> topicIds;
+    private List<Subscription> topicIds;
     private ObjectId _id;
     private String id;
 
-    public User(String emailAddress, List<String> topicIds) {
+    public User(String emailAddress, List<Subscription> topicIds) {
         this.emailAddress = emailAddress;
         this.topicIds = topicIds;
     }
@@ -35,7 +35,7 @@ public class User implements DatabaseStorage {
         return emailAddress;
     }
 
-    public List<String> getTopicIds() {
+    public List<Subscription> getTopicIds() {
         return topicIds;
     }
 
@@ -43,7 +43,7 @@ public class User implements DatabaseStorage {
         this.emailAddress = emailAddress;
     }
 
-    public void setTopicIds(List<String> topicIds) {
+    public void setTopicIds(List<Subscription> topicIds) {
         this.topicIds = topicIds;
     }
 
