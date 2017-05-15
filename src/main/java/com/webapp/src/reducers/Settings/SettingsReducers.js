@@ -13,7 +13,7 @@ const initialState = {
 
 };
 
-export default function searchResults(state, action) {
+export default function settings(state, action) {
     if (typeof state === 'undefined') {
         return initialState;
     }
