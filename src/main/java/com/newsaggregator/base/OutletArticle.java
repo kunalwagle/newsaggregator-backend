@@ -12,6 +12,7 @@ public class OutletArticle extends Article implements DatabaseStorage {
     private String body;
     private String articleUrl;
     private String lastPublished;
+    private boolean isLabelled;
     private String id;
 
     public OutletArticle(String title, String body, String imageUrl, String articleUrl, String source, String lastPublished) {
@@ -60,6 +61,18 @@ public class OutletArticle extends Article implements DatabaseStorage {
         this._id = _id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isLabelled() {
+        return isLabelled;
+    }
+
+    public void setLabelled(boolean labelled) {
+        isLabelled = labelled;
+    }
+
     @Override
     public Document createDocument() {
         Document doc = new Document();
@@ -73,6 +86,7 @@ public class OutletArticle extends Article implements DatabaseStorage {
         doc.put("ArticleURL", articleUrl);
         doc.put("Source", source);
         doc.put("LastPublished", lastPublished);
+        doc.put("isLabelled", isLabelled);
 
         return doc;
     }
