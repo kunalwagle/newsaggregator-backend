@@ -23,7 +23,8 @@ public class TopicResource extends ServerResource {
             MongoDatabase db = Utils.getDatabase();
             Topics topicManager = new Topics(db);
             LabelHolder labelHolder = topicManager.getTopicById(searchTerm);
-            return new ObjectMapper().writeValueAsString(labelHolder);
+            LabelHolderWithSettings labelHolderWithSettings = new LabelHolderWithSettings(labelHolder, false, Utils.allSources());
+            return new ObjectMapper().writeValueAsString(labelHolderWithSettings);
         } catch (Exception e) {
             logger.error("An error occurred whilst retrieving a topic", e);
             return null;

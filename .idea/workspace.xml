@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/UserHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/UserHolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicUserResource.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicUserResource.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -38,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopicUserResource.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TopicUserResource.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicUserResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="31" column="31" lean-forward="false" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+            <state relative-caret-position="298">
+              <caret line="36" column="65" lean-forward="false" selection-start-line="36" selection-start-column="65" selection-end-line="36" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -82,8 +82,18 @@
       <file leaf-file-name="TopicSettingsResource.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicSettingsResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
+            <state relative-caret-position="223">
               <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TopicResource.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="25" column="12" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="26" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -101,14 +111,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LabelHolderWithSettings.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LabelHolderWithSettings.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
+            <state relative-caret-position="225">
+              <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#LabelHolderWithSettings#0;class#LabelHolderWithSettings#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,16 +132,6 @@
                 <element signature="n#!!block;n#subscribe#0" expanded="true" />
                 <element signature="e#1277#1574#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RouterApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/RouterApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="31" column="32" lean-forward="false" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -237,8 +236,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/Subscription.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Subscription/SubscriptionContainer.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicUserResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java" />
@@ -270,6 +267,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Settings/TopicSettings.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/UserHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicUserResource.java" />
       </list>
     </option>
   </component>
@@ -2306,14 +2305,7 @@
       <workItem from="1492002902704" duration="27962000" />
       <workItem from="1492430182328" duration="128984000" />
       <workItem from="1493313787752" duration="60245000" />
-      <workItem from="1494247395281" duration="65624000" />
-    </task>
-    <task id="LOCAL-00284" summary="Changed Wikipedia Search functions, ensuring best results come first">
-      <created>1494323958372</created>
-      <option name="number" value="00284" />
-      <option name="presentableId" value="LOCAL-00284" />
-      <option name="project" value="LOCAL" />
-      <updated>1494323958372</updated>
+      <workItem from="1494247395281" duration="65892000" />
     </task>
     <task id="LOCAL-00285" summary="Added fonts">
       <created>1494332740588</created>
@@ -2651,7 +2643,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494865996327</updated>
     </task>
-    <option name="localTasksCounter" value="333" />
+    <task id="LOCAL-00333" summary="Made Label Holder with settings public">
+      <created>1494866133844</created>
+      <option name="number" value="00333" />
+      <option name="presentableId" value="LOCAL-00333" />
+      <option name="project" value="LOCAL" />
+      <updated>1494866133844</updated>
+    </task>
+    <option name="localTasksCounter" value="334" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2684,7 +2683,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="598032000" />
+    <option name="totallyTimeSpent" value="598300000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2771,7 +2770,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Login Modal styling" />
     <MESSAGE value="Persists state" />
     <MESSAGE value="Subscription page done" />
     <MESSAGE value="TopicViewer now reloads each time" />
@@ -2796,7 +2794,8 @@
     <MESSAGE value="Sources can be selected" />
     <MESSAGE value="Settings page" />
     <MESSAGE value="Settings pages complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="Settings pages complete" />
+    <MESSAGE value="Made Label Holder with settings public" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made Label Holder with settings public" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -3117,16 +3116,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-          <folding>
-            <element signature="method#topic#0;class#TopicResource#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -3204,8 +3193,8 @@
         <state relative-caret-position="165">
           <caret line="28" column="13" lean-forward="true" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#703#1243#0" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#703#1243#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3264,8 +3253,8 @@
         <state relative-caret-position="75">
           <caret line="32" column="29" lean-forward="true" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#736#1334#0" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#736#1334#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3351,22 +3340,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicUserResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="31" column="31" lean-forward="false" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicSettingsResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/UserHolder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
@@ -3379,12 +3352,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
+        <state relative-caret-position="225">
+          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#LabelHolderWithSettings#0;class#LabelHolderWithSettings#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="25" column="12" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="26" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicSettingsResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicUserResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="36" column="65" lean-forward="false" selection-start-line="36" selection-start-column="65" selection-end-line="36" selection-end-column="65" />
+          <folding />
         </state>
       </provider>
     </entry>
