@@ -1,12 +1,16 @@
 /**
  * Created by kunalwagle on 15/05/2017.
  */
-import {OUTLET_CHANGE, DIGEST_CHANGE} from "../../actions/Settings/SettingsActions";
+import {OUTLET_CHANGE, DIGEST_CHANGE, CHANGE_TOPIC} from "../../actions/Settings/SettingsActions";
 import {contains, reject} from "underscore";
 
 const initialState = {
     digest: false,
-    chosenOutlets: []
+    chosenOutlets: [],
+    activeIndex: 0,
+    topicName: "",
+    topicId: ""
+
 };
 
 export default function searchResults(state, action) {
@@ -29,6 +33,14 @@ export default function searchResults(state, action) {
         case DIGEST_CHANGE:
             return Object.assign({}, state, {
                 digest: action.digest
+            });
+        case CHANGE_TOPIC:
+            return Object.assign({}, state, {
+                topicName: action.topic.labelHolder.label,
+                topicId: action.topic.labelHolder.id,
+                digest: action.topic.digests,
+                chosenOutlets: action.topic.sources,
+                activeIndex: action.index
             })
     }
 

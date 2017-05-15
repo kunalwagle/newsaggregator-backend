@@ -4,7 +4,7 @@
 import {connect} from "react-redux";
 import {pluck} from "underscore";
 import {SettingsComponent} from "../../components/Settings/SettingsComponent";
-import {subscriptionTabSelected} from "../../actions/SearchResults/SearchResultsActions";
+import {changeTopic} from "../../actions/Settings/SettingsActions";
 
 const mapStateToProps = (state) => {
     let index = 0;
@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
     }
     return {
         fetchInProgress: state.loggedIn.fetchInProgress,
-        topics: pluck(state.loggedIn.user.topics, "labelHolder"),
+        topics: state.loggedIn.user.topics,
         loggedIn: state.loggedIn.loggedIn,
         index
     }
@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleTopicChange: (topic, index) => {
-            dispatch(subscriptionTabSelected(topic, index));
+            dispatch(changeTopic(topic, index));
         }
     }
 };
