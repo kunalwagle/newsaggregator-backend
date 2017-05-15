@@ -166,4 +166,46 @@ public class Topics {
             logger.error("Updating user error", e);
         }
     }
+
+    public List<LabelHolder> getClusteringTopics() {
+        try {
+            BasicDBObject queryObject = new BasicDBObject().append("NeedsClustering", true);
+            MongoCursor<Document> iterator = collection.find(queryObject).iterator();
+            Articles articleManager = new Articles(database);
+            Summaries summaryManager = new Summaries(database);
+            List<LabelHolder> labelHolders = new ArrayList<>();
+            while (iterator.hasNext()) {
+                Document document = iterator.next();
+                String item = document.toJson();
+                JSONObject jsonObject = new JSONObject(item);
+                List<OutletArticle> articles = new ArrayList<>();
+                try {
+                    JSONArray articleIds = jsonObject.getJSONArray("Articles");
+                    for (int i = 0; i < articleIds.length(); i++) {
+                        String articleId = articleIds.getJSONObject(i).getString("$oid");
+                        articles.add(articleManager.getArticleFromId(articleId));
+                    }
+                } catch (Exception e) {
+                    logger.error("An error occurred whilst getting articles for a single topic", e);
+                }
+                List<ClusterHolder> clusters = new ArrayList<>();
+                try {
+                    JSONArray summaryIds = jsonObject.getJSONArray("Clusters");
+                    for (int i = 0; i < summaryIds.length(); i++) {
+                        String summaryId = summaryIds.getJSONObject(i).getString("$oid");
+                        clusters.add(summaryManager.getSingleCluster(summaryId));
+                    }
+                } catch (Exception e) {
+                    logger.error("An error occurred whilst getting clusters for a single topic", e);
+                }
+                LabelHolder labelHolder = new LabelHolder(jsonObject.getString("Label"), articles, clusters);
+                labelHolder.set_id(document.getObjectId("_id"));
+                labelHolders.add(labelHolder);
+            }
+            return labelHolders;
+        } catch (Exception e) {
+            logger.error("An error occurred whilst getting a single topic", e);
+        }
+        return null;
+    }
 }

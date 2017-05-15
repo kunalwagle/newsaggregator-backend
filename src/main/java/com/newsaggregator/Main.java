@@ -1,7 +1,7 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.jobs.TopicLabelRunnable;
+import com.newsaggregator.server.jobs.ClusteringRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
@@ -42,7 +42,8 @@ public class Main {
 //                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 1L, TimeUnit.HOURS);
 
 //                scheduleManager.execute(new ArticleFetchRunnable());
-                scheduleManager.execute(new TopicLabelRunnable());
+//                scheduleManager.execute(new TopicLabelRunnable());
+                scheduleManager.execute(new ClusteringRunnable());
 
                 serverInitialised = true;
 

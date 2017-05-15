@@ -33,6 +33,13 @@ public class Articles {
         collection.insertMany(documents);
     }
 
+    public void updateArticles(List<OutletArticle> articles) {
+        for (OutletArticle article : articles) {
+            Document document = article.createDocument();
+            collection.replaceOne(new BasicDBObject().append("_id", article.get_id()), document);
+        }
+    }
+
     public List<OutletArticle> articlesToAdd(List<OutletArticle> articles) {
         return articles.stream().filter(article -> !articleExists(article)).collect(Collectors.toList());
     }

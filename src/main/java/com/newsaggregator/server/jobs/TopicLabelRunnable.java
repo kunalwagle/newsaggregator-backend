@@ -69,6 +69,10 @@ public class TopicLabelRunnable implements Runnable {
                 }
             }
 
+            unlabelledArticles.forEach(article -> article.setLabelled(true));
+
+            articles.updateArticles(unlabelledArticles);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
