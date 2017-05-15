@@ -7,6 +7,7 @@ import {
     SUBSCRIPTION_TAB_SELECTED
 } from "../../actions/SearchResults/SearchResultsActions";
 import {SUBSCRIBE_COMPLETE} from "../../actions/LoginModalActions";
+import {allOutlets} from "../../UtilityMethods";
 
 
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
     fetchInProgressCalled: false,
     articles: [],
     activeIndex: 0,
-    isSubscribed: false
+    isSubscribed: false,
+    defaultCheckbox: allOutlets
 };
 
 export default function searchResults(state, action) {
@@ -33,9 +35,10 @@ export default function searchResults(state, action) {
         case ARTICLES_RECEIVED:
             return Object.assign({}, state, {
                 fetchInProgress: false,
-                label: action.json.label,
-                articles: action.json.clusters,
-                isSubscribed: action.json.subscribed
+                label: action.json.labelHolder.label,
+                articles: action.json.labelHolder.clusters,
+                isSubscribed: action.json.labelHolder.subscribed,
+                defaultCheckbox: action.json.sources
             });
         case SUBSCRIPTION_TAB_SELECTED:
             return Object.assign({}, state, {
@@ -44,7 +47,7 @@ export default function searchResults(state, action) {
             });
         case SUBSCRIBE_COMPLETE:
             return Object.assign({}, state, {
-                isSubscribed: action.json.subscribed
+                isSubscribed: action.json.labelHolder.subscribed
             });
     }
 

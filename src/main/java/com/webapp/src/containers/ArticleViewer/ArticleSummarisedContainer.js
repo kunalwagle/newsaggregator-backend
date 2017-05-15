@@ -19,15 +19,15 @@ const mapStateToProps = (state, ownProps) => {
         if (article == undefined) {
             fetchInProgressCalled = false;
         } else {
-            let newSources = map(article.articles, (art) => {
-                return art.source;
-            });
-            newSources = uniq(newSources);
-            const sourceString = "[" + newSources.sort().toString() + "]";
-            const oldSourceString = "[" + sources.sort().toString() + "]"
-            if (sourceString !== oldSourceString) {
-                sources = [];
-            }
+            // let newSources = map(article.articles, (art) => {
+            //     return art.source;
+            // });
+            // newSources = uniq(newSources);
+            // const sourceString = "[" + newSources.sort().toString() + "]";
+            // const oldSourceString = "[" + sources.sort().toString() + "]"
+            // if (sourceString !== oldSourceString) {
+            //     sources = [];
+            // }
 
         }
     }

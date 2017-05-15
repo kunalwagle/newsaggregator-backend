@@ -37,6 +37,7 @@ public class TopicUserResource extends ServerResource {
                     labelHolderWithSettings.setSources(subscription.getSources());
                     labelHolderWithSettings.setDigests(subscription.isDigests());
                 }
+                labelHolder.setSubscribed(subscribed);
             }
             return new ObjectMapper().writeValueAsString(labelHolderWithSettings);
         } catch (Exception e) {

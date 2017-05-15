@@ -33,7 +33,7 @@ export default function articleViewer(state, action) {
         }
         case DEFAULT_CHECKBOXES:
             return Object.assign({}, state, {
-                sources: action.sources
+                sources: action.finalSources
             })
 
     }

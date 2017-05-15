@@ -1,7 +1,7 @@
 /**
  * Created by kunalwagle on 03/05/2017.
  */
-import {map, uniq} from "underscore";
+import {map, uniq, intersection} from "underscore";
 
 export const ANNOTATIONS_CHANGE = "ANNOTATIONS_CHANGE";
 export const CHECKBOX_CHANGE = "CHECKBOX_CHANGE";
@@ -23,13 +23,25 @@ export function checkboxChange(on, source) {
 }
 
 export function defaultCheckboxes(article) {
-    let sources = map(article.articles, (art) => {
-        return art.source;
-    });
-    sources = uniq(sources);
+    return (dispatch, getState) => {
+        const defaultSources = getState().searchResults.defaultCheckbox;
+
+        let sources = map(article.articles, (art) => {
+            return art.source;
+        });
+
+        sources = uniq(sources);
+
+        const finalSources = intersection(defaultSources, sources);
+
+        return dispatch(checkboxes(finalSources))
+    }
+}
+
+export function checkboxes(finalSources) {
     return {
         type: DEFAULT_CHECKBOXES,
-        sources
+        finalSources
     }
 }
 
