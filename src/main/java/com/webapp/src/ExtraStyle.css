@@ -389,6 +389,23 @@ input:checked + .slider:before {
     color: white;
 }
 
+.outletBox {
+    color: white;
+    text-align: center;
+    width: 120px;
+    height: 150px;
+    margin-bottom: 15px;
+}
+
+.outletBox-image {
+    width: 80%;
+    margin-top: 5%;
+}
+
+.selected {
+    background-color: #032436;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);

@@ -7,19 +7,19 @@ import React from "react";
 
 export const TopicSettings = ({chosenOutlets, digests, topicName, handleOutletChange, handleDigestChange}) => {
 
-    const outlets = allOutlets.map((outlet) => {
+    const outlets = allOutlets.map((outlet, index) => {
 
-        let selected = "outletBox";
+        let selected = "outletBox col-lg-3 col-md-3 col-sm-3 col-xs-3";
 
         if (contains(chosenOutlets, outlet)) {
-            selected = "outletBox selected";
+            selected = selected + " selected";
         }
 
         const imageSource = "/outlets/" + outlet + ".png";
 
         return (
-            <div className={selected} onClick={() => handleOutletChange(outlet)}>
-                <img src={imageSource}/>
+            <div key={index} className={selected} onClick={() => handleOutletChange(outlet)}>
+                <img src={imageSource} className="outletBox-image"/>
                 <p>{getPublicationName(outlet)}</p>
             </div>
         )
