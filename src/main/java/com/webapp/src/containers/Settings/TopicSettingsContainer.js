@@ -4,13 +4,15 @@
 import {connect} from "react-redux";
 import {pluck} from "underscore";
 import {TopicSettings} from "../../components/Settings/TopicSettings";
-import {digestChange, outletChange} from "../../actions/Settings/SettingsActions";
+import {digestChange, outletChange, save} from "../../actions/Settings/SettingsActions";
+import {unsubscribe} from "../../actions/LoginModalActions";
 
 const mapStateToProps = (state) => {
     return {
         chosenOutlets: state.settings.chosenOutlets,
         digest: state.settings.digest,
-        topicName: state.settings.topicName
+        topicName: state.settings.topicName,
+        topicId: state.settings.topicId
     }
 };
 
@@ -21,6 +23,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleOutletChange: (outlet) => {
             dispatch(outletChange(outlet));
+        },
+        handleSave: () => {
+            dispatch(save());
+        },
+        handleUnsubscribe: (topicId) => {
+            dispatch(unsubscribe(topicId))
         }
     }
 

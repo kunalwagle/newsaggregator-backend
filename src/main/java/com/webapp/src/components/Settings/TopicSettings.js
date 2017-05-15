@@ -5,7 +5,7 @@ import {allOutlets, getPublicationName} from "../../UtilityMethods";
 import {contains} from "underscore";
 import React from "react";
 
-export const TopicSettings = ({chosenOutlets, digests, topicName, handleOutletChange, handleDigestChange}) => {
+export const TopicSettings = ({chosenOutlets, digests, topicName, topicId, handleOutletChange, handleDigestChange, handleSave, handleUnsubscribe}) => {
 
     const outlets = allOutlets.map((outlet, index) => {
 
@@ -31,6 +31,7 @@ export const TopicSettings = ({chosenOutlets, digests, topicName, handleOutletCh
             <br/>
             <h3>Default sources for summaries</h3>
             {outlets}
+            <br/><br/>
             <div className="row">
                 <div className="col-lg-8 col-md-8 col-xs-8 col-sm-8">
                     Include in daily digest:
@@ -43,6 +44,16 @@ export const TopicSettings = ({chosenOutlets, digests, topicName, handleOutletCh
                     </label>
                 </div>
             </div>
+            <br/><br/>
+            <div className="row">
+                <button className="danger-button col-lg-5 col-md-5 col-xs-5 col-sm-5"
+                        onClick={() => handleUnsubscribe(topicId)}>Unsubscribe
+                </button>
+                <button className="search-bar-button col-lg-5 col-md-5 col-xs-5 col-sm-5" onClick={() => handleSave()}>
+                    Save
+                </button>
+            </div>
+
         </div>
     );
 
