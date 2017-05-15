@@ -6,13 +6,16 @@ import {
     ARTICLES_RECEIVED,
     SUBSCRIPTION_TAB_SELECTED
 } from "../../actions/SearchResults/SearchResultsActions";
+import {SUBSCRIBE_COMPLETE} from "../../actions/LoginModalActions";
+
 
 const initialState = {
     label: "",
     fetchInProgress: false,
     fetchInProgressCalled: false,
     articles: [],
-    activeIndex: 0
+    activeIndex: 0,
+    isSubscribed: false
 };
 
 export default function searchResults(state, action) {
@@ -31,13 +34,18 @@ export default function searchResults(state, action) {
             return Object.assign({}, state, {
                 fetchInProgress: false,
                 label: action.json.label,
-                articles: action.json.clusters
+                articles: action.json.clusters,
+                isSubscribed: action.json.subscribed
             });
         case SUBSCRIPTION_TAB_SELECTED:
             return Object.assign({}, state, {
                 articles: action.articles,
                 activeIndex: action.index
-            })
+            });
+        case SUBSCRIBE_COMPLETE:
+            return Object.assign({}, state, {
+                isSubscribed: action.json.subscribed
+            });
     }
 
     return state;

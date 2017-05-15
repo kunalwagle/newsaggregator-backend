@@ -1,14 +1,7 @@
 /**
  * Created by kunalwagle on 20/04/2017.
  */
-import {
-    EMAIL_CHANGED,
-    LOG_IN,
-    LOG_OUT,
-    FETCH_ENDED,
-    FETCH_STARTED,
-    SUBSCRIBE_COMPLETE
-} from "../actions/LoginModalActions";
+import {EMAIL_CHANGED, LOG_IN, LOG_OUT, FETCH_ENDED, FETCH_STARTED} from "../actions/LoginModalActions";
 import {REHYDRATE} from "redux-persist/constants";
 
 const initialState = {
@@ -46,10 +39,6 @@ export default function loggedIn(state, action) {
             return Object.assign({}, state, {
                 topics: action.json,
                 fetchInProgress: false
-            });
-        case SUBSCRIBE_COMPLETE:
-            return Object.assign({}, state, {
-                user: action.json
             });
         case REHYDRATE:
             const incoming = action.payload.loggedIn;

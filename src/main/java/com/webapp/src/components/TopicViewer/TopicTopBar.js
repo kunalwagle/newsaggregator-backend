@@ -18,7 +18,7 @@ export const TopicTopBar = ({label, loggedIn, isSubscribed, topicId, handleLogin
         if (!loggedIn) {
             return (
                 <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
-                                overlay={loginPopover(handleLoginClicked, (email) => handleSubscribeClicked(topicId, email))}>
+                                overlay={loginPopover(handleLoginClicked, (email) => handleSubscribeClicked(isSubscribed, topicId, email))}>
                     <button
                         className="col-md-2 col-lg-2 col-sm-12 col-xs-12 pull-right primary-button">{buttonText}</button>
                 </OverlayTrigger>
@@ -26,11 +26,12 @@ export const TopicTopBar = ({label, loggedIn, isSubscribed, topicId, handleLogin
         } else if (!isSubscribed) {
             return (
                 <button className="col-md-2 col-lg-2 col-sm-12 col-xs-12 pull-right primary-button"
-                        onClick={() => handleSubscribeClicked(topicId)}>{buttonText}</button>
+                        onClick={() => handleSubscribeClicked(isSubscribed, topicId)}>{buttonText}</button>
             )
         }
         return (
-            <button className="col-md-2 col-lg-2 col-sm-12 col-xs-12 pull-right danger-button">Unsubscribe</button>
+            <button className="col-md-2 col-lg-2 col-sm-12 col-xs-12 pull-right danger-button"
+                    onClick={() => handleSubscribeClicked(isSubscribed, topicId)}>Unsubscribe</button>
         )
 
     };

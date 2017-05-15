@@ -3,28 +3,21 @@
  */
 import {connect} from "react-redux";
 import {TopicTopBar} from "../../components/TopicViewer/TopicTopBar";
-import {subscribe, login} from "../../actions/LoginModalActions";
+import {subscribe, unsubscribe, login} from "../../actions/LoginModalActions";
 import {contains, pluck} from "underscore";
 
 const mapStateToProps = (state, ownProps) => {
     const loggedIn = state.loggedIn.loggedIn;
     let label = state.searchResults.label;
-    let isSubscribed = false;
 
     if (ownProps.topic) {
         label = ownProps.topic.label;
     }
 
-    if (loggedIn) {
-        const labels = pluck(state.loggedIn.user.topics, "labelHolder");
-        const labelNames = pluck(labels, "id");
-        isSubscribed = contains(labelNames, ownProps.topicId);
-    }
-
     return {
         label,
         loggedIn,
-        isSubscribed,
+        isSubscribed: state.searchResults.isSubscribed,
         topicId: ownProps.topicId
     }
 };
@@ -34,8 +27,12 @@ const mapDispatchToProps = (dispatch) => {
         handleLoginClicked: (email, action) => {
             dispatch(login(email, action));
         },
-        handleSubscribeClicked: (topic, email) => {
-            dispatch(subscribe(topic, email));
+        handleSubscribeClicked: (isSubscribed, topic, email) => {
+            if (isSubscribed) {
+                dispatch(unsubscribe(topic, email));
+            } else {
+                dispatch(subscribe(topic, email));
+            }
         }
     }
 };

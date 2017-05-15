@@ -60,6 +60,17 @@ export function subscribe(topic, email) {
     }
 }
 
+export function unsubscribe(topic, email) {
+    return (dispatch, getState) => {
+        if (email == undefined) {
+            email = getState().loggedIn.user.emailAddress;
+        }
+        return fetch(getIPAddress() + "user/unsubscribe/" + email + "/" + topic)
+            .then(response => response.json())
+            .then(json => dispatch(subscribeComplete(json)))
+    }
+}
+
 export function subscribeComplete(json) {
     return {
         type: SUBSCRIBE_COMPLETE,
