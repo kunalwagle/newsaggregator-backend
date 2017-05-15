@@ -5,11 +5,18 @@ import React from "react";
 import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
 import TopicSettingsContainer from "../../containers/Settings/TopicSettingsContainer";
 
-export const SettingsComponent = ({loggedIn, fetchInProgress, topics, index, handleTopicChange}) => {
+export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressCalled, topics, index, handleTopicChange, handleReloadNeeded}) => {
 
     if (!loggedIn) {
         return (
             <div>You must be logged in to access this feature</div>
+        )
+    }
+
+    if (!fetchInProgressCalled) {
+        handleReloadNeeded(topics[0]);
+        return (
+            <div className="loader"></div>
         )
     }
 
@@ -28,7 +35,7 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, topics, index, han
     const tabMap = topics.map((topic, index) => {
         return (
             <NavItem onSelect={() => handleTopicChange(topic, index)} eventKey={index} key={index}>
-                <div className="white">{topic.label}</div>
+                <div className="white">{topic.labelHolder.label}</div>
             </NavItem>
         )
     });

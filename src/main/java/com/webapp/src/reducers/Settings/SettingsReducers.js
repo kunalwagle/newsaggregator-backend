@@ -9,7 +9,8 @@ const initialState = {
     chosenOutlets: [],
     activeIndex: 0,
     topicName: "",
-    topicId: ""
+    topicId: "",
+    fetchInProgressCalled: false
 
 };
 
@@ -40,7 +41,8 @@ export default function settings(state, action) {
                 topicId: action.topic.labelHolder.id,
                 digest: action.topic.digests,
                 chosenOutlets: action.topic.sources,
-                activeIndex: action.index
+                activeIndex: action.index,
+                fetchInProgressCalled: true
             });
         case INITIALISE:
             return Object.assign({}, state, {
@@ -48,7 +50,8 @@ export default function settings(state, action) {
                 topicId: action.topic.labelHolder.id,
                 digest: action.topic.digests,
                 chosenOutlets: action.topic.sources,
-                activeIndex: 0
+                activeIndex: 0,
+                fetchInProgressCalled: true
             })
     }
 

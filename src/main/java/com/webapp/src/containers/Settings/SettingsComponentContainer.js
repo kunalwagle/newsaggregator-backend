@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
     }
     return {
         fetchInProgress: state.loggedIn.fetchInProgress,
+        fetchInProgressCalled: state.settings.fetchInProgressCalled,
         topics: state.loggedIn.user.topics,
         loggedIn: state.loggedIn.loggedIn,
         index
@@ -23,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleTopicChange: (topic, index) => {
             dispatch(changeTopic(topic, index));
+        },
+        handleReloadNeeded: (topic) => {
+            dispatch(changeTopic(topic, 0));
         }
     }
 };

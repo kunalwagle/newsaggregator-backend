@@ -26,7 +26,7 @@ export const TopicSettings = ({chosenOutlets, digests, topicName, handleOutletCh
     });
 
     return (
-        <div>
+        <div className="white">
             <h1>{topicName}</h1>
             <br/>
             <h3>Default sources for summaries</h3>
@@ -36,9 +36,11 @@ export const TopicSettings = ({chosenOutlets, digests, topicName, handleOutletCh
                     Include in daily digest:
                 </div>
                 <div className="col-lg-4 col-md-4 col-xs-4 col-sm-4 pull-right">
-                    <input type="checkbox" checked={digests}
-                           onChange={event => handleDigestChange(digests)}/>
-                    <div className="slider round"></div>
+                    <label className="switch">
+                        <input type="checkbox" checked={digests}
+                               onChange={event => handleDigestChange(digests)}/>
+                        <div className="slider round"></div>
+                    </label>
                 </div>
             </div>
         </div>
