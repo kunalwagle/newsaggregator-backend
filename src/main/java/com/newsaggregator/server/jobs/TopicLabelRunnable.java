@@ -1,5 +1,6 @@
 package com.newsaggregator.server.jobs;
 
+import com.google.common.collect.Lists;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.api.outlets.Guardian;
@@ -54,6 +55,12 @@ public class TopicLabelRunnable implements Runnable {
                 try {
                     String label = labelPair.getKey();
                     LabelHolder labelHolder = topics.getTopic(label);
+                    if (labelHolder == null) {
+                        labelHolder = new LabelHolder(label, labelPair.getValue(), new ArrayList<>());
+                        labelHolder.setNeedsClustering(true);
+                        topics.saveTopics(Lists.newArrayList(labelHolder));
+                        break;
+                    }
                     labelHolder.addArticles(labelPair.getValue());
                     labelHolder.setNeedsClustering(true);
                     topics.saveTopic(labelHolder);
