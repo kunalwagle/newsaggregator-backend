@@ -2,6 +2,7 @@ package com.newsaggregator.server;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newsaggregator.base.DatabaseStorage;
+import com.newsaggregator.base.Outlet;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.summarisation.Extractive.Node;
 import org.bson.Document;
@@ -20,6 +21,9 @@ public class ClusterHolder implements DatabaseStorage {
 
     private ObjectId _id;
     private String id;
+    private String title;
+    private String lastPublished;
+    private String imageUrl;
     private List<OutletArticle> articles;
     private List<List<Node>> summaries = new ArrayList<>();
     private Map<String, List<Node>> summaryMap = new HashMap<>();
@@ -27,6 +31,7 @@ public class ClusterHolder implements DatabaseStorage {
 
     public ClusterHolder(List<OutletArticle> articles) {
         this.articles = articles;
+        initialise();
     }
 
     public ClusterHolder(List<OutletArticle> articles, List<List<Node>> summaries) {
@@ -39,6 +44,27 @@ public class ClusterHolder implements DatabaseStorage {
             sources = sources.stream().distinct().collect(Collectors.toList());
             String source = sources.stream().sorted().collect(Collectors.toList()).toString().replace(" ", "");
             summaryMap.put(source, nodes);
+        }
+        initialise();
+    }
+
+    private void initialise() {
+        if (articles.stream().anyMatch(article -> article.getSource().equals(Outlet.AssociatedPress.getSourceString()))) {
+            this.title = articles.stream().filter(article -> article.getSource().equals(Outlet.AssociatedPress.getSourceString())).findFirst().get().getTitle();
+        } else if (articles.stream().anyMatch(article -> article.getSource().equals(Outlet.Reuters.getSourceString()))) {
+            this.title = articles.stream().filter(article -> article.getSource().equals(Outlet.Reuters.getSourceString())).findFirst().get().getTitle();
+        } else {
+            if (articles.size() > 0) {
+                this.title = articles.get(0).getTitle();
+            }
+        }
+        if (articles.size() > 0) {
+            this.lastPublished = articles.get(0).getLastPublished();
+        }
+        try {
+            this.imageUrl = articles.stream().filter(article -> article.getImageUrl() != null).findAny().get().getImageUrl();
+        } catch (Exception e) {
+            this.imageUrl = null;
         }
     }
 
