@@ -103,4 +103,23 @@ public class Articles {
         return collection.count();
     }
 
+    public List<OutletArticle> getUnlabelledArticles() {
+
+        BasicDBObject queryObject = new BasicDBObject().append("isLabelled", false);
+
+        List<OutletArticle> articles = new ArrayList<>();
+
+        try {
+            MongoCursor<Document> iterator = collection.find(queryObject).iterator();
+            while (iterator.hasNext()) {
+                Document item = iterator.next();
+                articles.add(new OutletArticle(item));
+            }
+
+        } catch (Exception e) {
+            logger.error("Caught an exception getting unlabelled articles", e);
+        }
+
+        return articles;
+    }
 }

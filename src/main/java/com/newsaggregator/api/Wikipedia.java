@@ -21,10 +21,10 @@ import java.util.stream.Collectors;
 
 public class Wikipedia {
 
-    public static List<WikipediaArticle> getArticles(String searchTerm) {
+    public static List<WikipediaArticle> getArticles(String searchTerm, int total) {
 //        ArrayList<WikipediaArticle> articles = queryAndParseArticles(searchTerm, null);
         ArrayList<String> titles = titles(searchTerm);
-        List<WikipediaArticle> articles = titles.stream().map(Wikipedia::convertToArticle).filter(Objects::nonNull).collect(Collectors.toList());
+        List<WikipediaArticle> articles = titles.stream().limit(total).collect(Collectors.toList()).stream().map(Wikipedia::convertToArticle).filter(Objects::nonNull).collect(Collectors.toList());
         Topics topicManager = new Topics(Utils.getDatabase());
         for (WikipediaArticle article : articles) {
             LabelHolder labelHolder = topicManager.getTopic(article.getTitle());
@@ -36,8 +36,8 @@ public class Wikipedia {
         return articles;
     }
 
-    public static WikipediaArticle getNearMatchArticle(String searchTerm) {
-        List<WikipediaArticle> articles = queryAndParseArticles(searchTerm, "nearmatch");
+    public static String getNearMatchArticle(String searchTerm) {
+        List<String> articles = titles(searchTerm);
         if (articles.size() > 0) {
             return articles.get(0);
         }

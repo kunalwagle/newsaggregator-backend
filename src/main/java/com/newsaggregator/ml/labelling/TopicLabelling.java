@@ -19,9 +19,21 @@ public class TopicLabelling {
         List<String> secondaryLabels = new ArrayList<>();
         List<TopicWord> topicWords = model.getTopWords();
         List<CandidateLabel> primaryCandidates = new ArrayList<>();
+        List<String> nameCandidates = new ArrayList<>();
+
+        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+        List<String> names = extractSentenceTypes.nameFinder(outletArticle.getBody());
+
+        for (String topicWord : names) {
+            String article = Wikipedia.getNearMatchArticle(topicWord);
+            if (article != null) {
+                nameCandidates.add(article);
+            }
+            //primaryLabels.addAll(extractTitles(Wikipedia.getArticles(topicWord.getWord())));
+        }
 
         for (TopicWord topicWord : topicWords) {
-            List<WikipediaArticle> articles = Wikipedia.getArticles(topicWord.getWord());
+            List<WikipediaArticle> articles = Wikipedia.getArticles(topicWord.getWord(), 8);
             for (WikipediaArticle article : articles) {
                 primaryCandidates.add(new CandidateLabel(article.getTitle(), article, topicWord.getDistribution()));
             }
@@ -43,7 +55,11 @@ public class TopicLabelling {
 //        primaryCandidates.addAll(secondaryCandidates);
 
 
-        return performCandidateRanking(primaryCandidates, topicWords, outletArticle);
+        List<String> results = performCandidateRanking(primaryCandidates, topicWords, outletArticle);
+
+        nameCandidates.addAll(results);
+
+        return nameCandidates;
     }
 
     private static boolean secondaryLabelViable(List<CandidateLabel> primaryCandidates, CandidateLabel secondaryCandidate) {
@@ -113,7 +129,7 @@ public class TopicLabelling {
     }
 
     private static boolean isWikipediaArticle(String secondaryLabel) {
-        WikipediaArticle article = Wikipedia.getNearMatchArticle(secondaryLabel);
+        String article = Wikipedia.getNearMatchArticle(secondaryLabel);
         return article != null;
     }
 

@@ -157,4 +157,13 @@ public class Topics {
         BasicDBObject query = new BasicDBObject("_id", inClause);
         collection.deleteMany(query);
     }
+
+    public void saveTopic(LabelHolder labelHolder) {
+        try {
+            Document document = labelHolder.createDocument();
+            collection.replaceOne(new BasicDBObject().append("_id", labelHolder.get_id()), document);
+        } catch (Exception e) {
+            logger.error("Updating user error", e);
+        }
+    }
 }

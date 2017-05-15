@@ -80,4 +80,12 @@ public class ExtractSentenceTypes {
     public boolean isVerb(String tag) {
         return tag.startsWith("V");
     }
+
+    public List<String> nameFinder(String document) {
+        String sentences[] = sentenceDetector.detectSentences(document);
+        List<String> tokens = tokeniser.findTokens(sentences);
+        String toks[] = new String[tokens.size()];
+        List<String> strings = new NameFinder().findNames(tokens.toArray(toks));
+        return strings;
+    }
 }

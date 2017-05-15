@@ -22,6 +22,7 @@ public class LabelHolder implements DatabaseStorage {
     private List<OutletArticle> articles = new ArrayList<>();
     private List<ClusterHolder> clusters = new ArrayList<>();
     private boolean isSubscribed = false;
+    private boolean needsClustering;
 
     public LabelHolder(String label) {
         this.label = label;
@@ -96,10 +97,22 @@ public class LabelHolder implements DatabaseStorage {
         document.put("Label", label);
         document.put("Articles", articles.stream().map(OutletArticle::get_id).collect(Collectors.toList()));
         document.put("Clusters", clusters.stream().map(ClusterHolder::get_id).collect(Collectors.toList()));
+        document.put("NeedsClustering", needsClustering);
         return document;
     }
 
     public String getLabel() {
         return label;
+    }
+
+    public void addArticles(List<OutletArticle> value) {
+        if (articles == null) {
+            articles = new ArrayList<>();
+        }
+        articles.addAll(value);
+    }
+
+    public void setNeedsClustering(boolean needsClustering) {
+        this.needsClustering = needsClustering;
     }
 }
