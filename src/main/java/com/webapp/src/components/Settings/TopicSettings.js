@@ -6,7 +6,7 @@ import {contains} from "underscore";
 
 export const TopicSettings = ({chosenOutlets, digests, topicName, handleOutletChange, handleDigestChange}) => {
 
-    const outlets = allOutlets.map((outlet, index) => {
+    const outlets = allOutlets.map((outlet) => {
 
         let selected = "outletBox";
 

@@ -3,6 +3,7 @@
  */
 import React from "react";
 import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
+import TopicSettingsContainer from "../../containers/Settings/TopicSettingsContainer";
 
 export const SettingsComponent = ({loggedIn, fetchInProgress, topics, index, handleTopicChange}) => {
 
