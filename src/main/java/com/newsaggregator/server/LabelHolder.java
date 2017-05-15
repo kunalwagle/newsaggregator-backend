@@ -82,6 +82,10 @@ public class LabelHolder implements DatabaseStorage {
         isSubscribed = subscribed;
     }
 
+    public boolean isSubscribed() {
+        return isSubscribed;
+    }
+
     @Override
     public Document createDocument() {
         Document document = new Document();

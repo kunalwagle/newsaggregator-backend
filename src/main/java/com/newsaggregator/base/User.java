@@ -7,6 +7,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 21/04/2017.
@@ -78,5 +79,9 @@ public class User implements DatabaseStorage {
         doc.put("topicIds", topics);
 
         return doc;
+    }
+
+    public void removeTopic(String topic) {
+        this.topicIds = this.topicIds.stream().filter(sub -> !sub.getTopicId().equals(topic)).collect(Collectors.toList());
     }
 }

@@ -100,4 +100,9 @@ public class Users {
     }
 
 
+    public void removeTopic(String user, String topic) {
+        User thisUser = getSingleUser(user);
+        thisUser.removeTopic(topic);
+        writeUser(thisUser);
+    }
 }
