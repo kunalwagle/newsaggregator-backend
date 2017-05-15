@@ -67,3 +67,5 @@ export const getPublicationName = (source) => {
             return "";
     }
 };
+
+export const allOutlets = ["associated-press", "the-guardian-uk", "independent", "reuters", "business-insider-uk", "daily-mail", "espn-cric-info", "metro", "mirror", "newsweek", "the-telegraph", "the-times-of-india"];

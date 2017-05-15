@@ -2,7 +2,6 @@
  * Created by kunalwagle on 21/04/2017.
  */
 import React from "react";
-import {TopicViewerPage} from "../TopicViewer/TopicViewer";
 import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
 
 export const SettingsComponent = ({loggedIn, fetchInProgress, topics, index, handleTopicChange}) => {
@@ -42,7 +41,7 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, topics, index, han
                     </Nav>
                 </Col>
                 <Col sm={8}>
-                    <TopicViewerPage params={{topicId: topics[index].id, topic: topics[index]}}/>
+                    <TopicSettingsContainer />
                 </Col>
             </Row>
         </Tab.Container>
