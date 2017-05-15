@@ -17,6 +17,7 @@ import {SummaryEvaluation} from "./components/SummaryEvaluation/SummaryEvaluatio
 import {TopicViewerPage} from "./components/TopicViewer/TopicViewer";
 import {ArticleViewerPage} from "./components/ArticleViewer/ArticleViewerPage";
 import {SubscriptionPage} from "./components/Subscriptions/Subscriptions";
+import {TopicsList} from "./components/Settings/TopicsList";
 //import {reducers} from './reducers'
 
 
@@ -65,6 +66,7 @@ class AppProvider extends React.Component {
                         <Route path="topic/:topicId" component={TopicViewerPage}/>
                         <Route path="topic/:topicId/article/:articleId" component={ArticleViewerPage}/>
                         <Route path="subscription/:userId" component={SubscriptionPage}/>
+                        <Route path="settings" component={TopicsList}/>
                     </Route>
                 </Router>
             </Provider>

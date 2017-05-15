@@ -4,6 +4,7 @@
 import {connect} from "react-redux";
 import {NavBarComponent} from "../components/NavBar";
 import {emailAddressChanged, login, getSubscriptions} from "../actions/LoginModalActions";
+import {initialise} from "../actions/Settings/SettingsActions";
 
 
 const mapStateToProps = (state) => {
@@ -23,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleSubscriptionSearch: () => {
             dispatch(getSubscriptions())
+        },
+        handleSettingsSearch: () => {
+            dispatch(initialise());
         }
     }
 };

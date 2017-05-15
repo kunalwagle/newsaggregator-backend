@@ -3,6 +3,7 @@
  */
 import {allOutlets, getPublicationName} from "../../UtilityMethods";
 import {contains} from "underscore";
+import React from "react";
 
 export const TopicSettings = ({chosenOutlets, digests, topicName, handleOutletChange, handleDigestChange}) => {
 

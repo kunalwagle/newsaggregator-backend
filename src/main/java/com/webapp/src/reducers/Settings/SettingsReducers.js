@@ -1,7 +1,7 @@
 /**
  * Created by kunalwagle on 15/05/2017.
  */
-import {OUTLET_CHANGE, DIGEST_CHANGE, CHANGE_TOPIC} from "../../actions/Settings/SettingsActions";
+import {OUTLET_CHANGE, DIGEST_CHANGE, CHANGE_TOPIC, INITIALISE} from "../../actions/Settings/SettingsActions";
 import {contains, reject} from "underscore";
 
 const initialState = {
@@ -41,6 +41,14 @@ export default function settings(state, action) {
                 digest: action.topic.digests,
                 chosenOutlets: action.topic.sources,
                 activeIndex: action.index
+            });
+        case INITIALISE:
+            return Object.assign({}, state, {
+                topicName: action.topic.labelHolder.label,
+                topicId: action.topic.labelHolder.id,
+                digest: action.topic.digests,
+                chosenOutlets: action.topic.sources,
+                activeIndex: 0
             })
     }
 

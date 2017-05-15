@@ -32,7 +32,7 @@ const leftNavItem = (loggedIn, handleLoginClicked, handleSubscriptionSearch) => 
     }
 };
 
-const rightNavItem = (loggedIn, handleLoginClicked) => {
+const rightNavItem = (loggedIn, handleLoginClicked, handleSettingsSearch) => {
     if (!loggedIn) {
         return (
             <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
@@ -42,12 +42,12 @@ const rightNavItem = (loggedIn, handleLoginClicked) => {
         )
     } else {
         return (
-            <NavItem eventKey={3} onSelect={() => handleLoginClicked(loggedIn)}>Settings</NavItem>
+            <NavItem eventKey={3} onSelect={() => handleSettingsSearch()}>Settings</NavItem>
         )
     }
 };
 
-export const NavBarComponent = ({loggedIn, user, handleEmailChange, handleLoginClicked, handleSubscriptionSearch}) => {
+export const NavBarComponent = ({loggedIn, user, handleSettingsSearch, handleLoginClicked, handleSubscriptionSearch}) => {
 
     return (
     <div>
@@ -66,7 +66,7 @@ export const NavBarComponent = ({loggedIn, user, handleEmailChange, handleLoginC
                 </Nav>
                 <Nav pullRight>
                     {leftNavItem(loggedIn, handleLoginClicked, handleSubscriptionSearch)}
-                    {rightNavItem(loggedIn, handleLoginClicked)}
+                    {rightNavItem(loggedIn, handleLoginClicked, handleSettingsSearch)}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
