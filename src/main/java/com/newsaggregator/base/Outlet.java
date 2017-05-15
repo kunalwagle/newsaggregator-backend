@@ -8,7 +8,7 @@ public enum Outlet {
     Guardian("the-guardian-uk", "latest"),
     Wikipedia("wikipedia", "latest"),
     Independent("independent", "top"),
-    AssociatedPress("associated-press", "latest"),
+    AssociatedPress("associated-press", "top"),
     Reuters("reuters", "latest"),
     BusinessInsiderUK("business-insider-uk", "latest"),
     DailyMail("daily-mail", "latest"),

@@ -40,6 +40,8 @@ public class Main {
 //                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 1L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 1L, TimeUnit.HOURS);
 
+//                scheduleManager.execute(new ArticleFetchRunnable());
+
                 serverInitialised = true;
 
 //                Topics topics = new Topics(Utils.getDatabase());
