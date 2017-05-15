@@ -29,6 +29,7 @@ public class RouterApplication extends Application {
         router.attach("/summarise/", SummaryEvaluationResource.class);
         router.attach("/topic/{topic}", TopicResource.class);
         router.attach("/topic/{topic}/user/{user}", TopicUserResource.class);
+        router.attach("/settings", TopicSettingsResource.class);
         router.attach("/user/subscribe/{user}/{topic}", SubscribeUserResource.class);
         router.attach("/user/unsubscribe/{user}/{topic}", UnsubscribeUserResource.class);
         router.attach("/user/subscriptions/{user}", SubscriptionsResource.class);
