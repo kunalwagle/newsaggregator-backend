@@ -12,10 +12,9 @@ import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.server.LabelHolder;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 15/05/2017.
@@ -34,14 +33,15 @@ public class TopicLabelRunnable implements Runnable {
 
             topicModelling.trainTopics(Guardian.getArticles());
 
-            List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles();
+            List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles().stream().limit(15).collect(Collectors.toList());
 
             Map<String, List<OutletArticle>> articleTopicMap = new HashMap<>();
 
             int counter = 1;
 
             for (OutletArticle article : unlabelledArticles) {
-                System.out.println("Labelling " + counter + " of " + unlabelledArticles.size());
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                System.out.println(timeStamp + " Labelling " + counter + " of " + unlabelledArticles.size());
                 Topic topic = topicModelling.getModel(article);
                 List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
                 for (String topicLabel : topicLabels) {
@@ -57,7 +57,8 @@ public class TopicLabelRunnable implements Runnable {
 
             counter = 1;
             for (Map.Entry<String, List<OutletArticle>> labelPair : articleTopicMap.entrySet()) {
-                System.out.println("Saving " + counter + " of " + articleTopicMap.entrySet().size());
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                System.out.println(timeStamp + " Saving " + counter + " of " + articleTopicMap.entrySet().size());
                 try {
                     String label = labelPair.getKey();
                     LabelHolder labelHolder = topics.getTopic(label);

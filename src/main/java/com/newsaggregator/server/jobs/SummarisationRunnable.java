@@ -9,10 +9,8 @@ import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.ClusterHolder;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,7 +31,8 @@ public class SummarisationRunnable implements Runnable {
             int counter = 1;
             int total = 0;
             for (ClusterHolder clusterHolder : clusterHolders) {
-                System.out.println("Clustering " + counter + " of " + clusterHolders.size() + ". Done " + total + " summaries so far");
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                System.out.println(timeStamp + " Summarising " + counter + " of " + clusterHolders.size() + ". Done " + total + " summaries so far");
                 List<OutletArticle> articles = clusterHolder.getArticles();
                 Set<OutletArticle> clusterArticles = new HashSet<>(articles);
                 Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());

@@ -1,7 +1,10 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
+import com.newsaggregator.server.jobs.ArticleFetchRunnable;
+import com.newsaggregator.server.jobs.ClusteringRunnable;
 import com.newsaggregator.server.jobs.SummarisationRunnable;
+import com.newsaggregator.server.jobs.TopicLabelRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
@@ -39,10 +42,10 @@ public class Main {
 
                 TaskService scheduleManager = new TaskService();
 
-//                scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
-//                scheduleManager.schedule(new TopicLabelRunnable(), 1L, TimeUnit.MINUTES);
-//                scheduleManager.schedule(new ClusteringRunnable(), 15L, TimeUnit.SECONDS);
-                scheduleManager.schedule(new SummarisationRunnable(), 1L, TimeUnit.SECONDS);
+                scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
+                scheduleManager.schedule(new TopicLabelRunnable(), 1L, TimeUnit.MINUTES);
+                scheduleManager.schedule(new ClusteringRunnable(), 20L, TimeUnit.MINUTES);
+                scheduleManager.schedule(new SummarisationRunnable(), 27L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 1L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 1L, TimeUnit.HOURS);
 

@@ -11,8 +11,10 @@ import com.newsaggregator.ml.clustering.Clusterer;
 import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +41,8 @@ public class ClusteringRunnable implements Runnable {
 
             int counter = 1;
             for (LabelHolder labelHolder : labelHolders) {
-                System.out.println("Clustering " + counter + " of " + labelHolders.size());
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                System.out.println(timeStamp + " Clustering " + counter + " of " + labelHolders.size());
                 labelHolder.setClusters(new ArrayList<>());
                 Clusterer clusterer = new Clusterer(labelHolder.getArticles());
                 List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
