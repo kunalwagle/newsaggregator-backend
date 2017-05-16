@@ -37,7 +37,9 @@ public class ClusteringRunnable implements Runnable {
             List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
             List<ClusterHolder> brandNewClusters = new ArrayList<>();
 
+            int counter = 1;
             for (LabelHolder labelHolder : labelHolders) {
+                System.out.println("Clustering " + counter + " of " + labelHolders.size());
                 labelHolder.setClusters(new ArrayList<>());
                 Clusterer clusterer = new Clusterer(labelHolder.getArticles());
                 List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
@@ -53,6 +55,7 @@ public class ClusteringRunnable implements Runnable {
                     }
                 }
                 labelHolder.setNeedsClustering(false);
+                counter++;
             }
 
             summaries.saveSummaries(brandNewClusters);

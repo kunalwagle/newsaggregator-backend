@@ -6,6 +6,8 @@ import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class Main {
 
@@ -37,14 +39,17 @@ public class Main {
 
                 TaskService scheduleManager = new TaskService();
 
-//                scheduleManager.schedule(new RemoveDuplicatesRunnable(), 1L, TimeUnit.SECONDS);
+//                scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
+//                scheduleManager.schedule(new TopicLabelRunnable(), 1L, TimeUnit.MINUTES);
+//                scheduleManager.schedule(new ClusteringRunnable(), 15L, TimeUnit.SECONDS);
+                scheduleManager.schedule(new SummarisationRunnable(), 1L, TimeUnit.SECONDS);
 //                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 1L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 1L, TimeUnit.HOURS);
 
 //                scheduleManager.execute(new ArticleFetchRunnable());
 //                scheduleManager.execute(new TopicLabelRunnable());
 //                scheduleManager.execute(new ClusteringRunnable());
-                scheduleManager.execute(new SummarisationRunnable());
+//                scheduleManager.execute(new SummarisationRunnable());
 
                 serverInitialised = true;
 

@@ -38,7 +38,10 @@ public class TopicLabelRunnable implements Runnable {
 
             Map<String, List<OutletArticle>> articleTopicMap = new HashMap<>();
 
+            int counter = 1;
+
             for (OutletArticle article : unlabelledArticles) {
+                System.out.println("Labelling " + counter + " of " + unlabelledArticles.size());
                 Topic topic = topicModelling.getModel(article);
                 List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
                 for (String topicLabel : topicLabels) {
@@ -49,9 +52,12 @@ public class TopicLabelRunnable implements Runnable {
                     arts.add(article);
                     articleTopicMap.put(topicLabel, arts);
                 }
+                counter++;
             }
 
+            counter = 1;
             for (Map.Entry<String, List<OutletArticle>> labelPair : articleTopicMap.entrySet()) {
+                System.out.println("Saving " + counter + " of " + articleTopicMap.entrySet().size());
                 try {
                     String label = labelPair.getKey();
                     LabelHolder labelHolder = topics.getTopic(label);
@@ -59,7 +65,8 @@ public class TopicLabelRunnable implements Runnable {
                         labelHolder = new LabelHolder(label, labelPair.getValue(), new ArrayList<>());
                         labelHolder.setNeedsClustering(true);
                         topics.saveTopics(Lists.newArrayList(labelHolder));
-                        break;
+                        counter++;
+                        continue;
                     }
                     labelHolder.addArticles(labelPair.getValue());
                     labelHolder.setNeedsClustering(true);
@@ -67,6 +74,7 @@ public class TopicLabelRunnable implements Runnable {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                counter++;
             }
 
             unlabelledArticles.forEach(article -> article.setLabelled(true));
