@@ -21,6 +21,7 @@ public class LabelHolder implements DatabaseStorage {
     private String label;
     private List<OutletArticle> articles = new ArrayList<>();
     private List<ClusterHolder> clusters = new ArrayList<>();
+    private String imageUrl;
     private boolean isSubscribed = false;
     private boolean needsClustering;
 
@@ -87,6 +88,14 @@ public class LabelHolder implements DatabaseStorage {
         return isSubscribed;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     @Override
     public Document createDocument() {
         Document document = new Document();
@@ -98,6 +107,9 @@ public class LabelHolder implements DatabaseStorage {
         document.put("Articles", articles.stream().map(OutletArticle::get_id).collect(Collectors.toList()));
         document.put("Clusters", clusters.stream().map(ClusterHolder::get_id).collect(Collectors.toList()));
         document.put("NeedsClustering", needsClustering);
+        if (imageUrl != null) {
+            document.put("imageUrl", imageUrl);
+        }
         return document;
     }
 

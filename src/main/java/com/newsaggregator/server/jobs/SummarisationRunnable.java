@@ -31,7 +31,7 @@ public class SummarisationRunnable implements Runnable {
             MongoDatabase db = Utils.getDatabase();
             Summaries summaries = new Summaries(db);
 
-            List<ClusterHolder> clusterHolders = summaries.getUnsummarisedClusters();
+            List<ClusterHolder> clusterHolders = summaries.getUnsummarisedClusters().stream().limit(25).collect(Collectors.toList());
 
             int counter = 1;
             int total = 0;

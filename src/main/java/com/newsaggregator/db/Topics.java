@@ -123,6 +123,7 @@ public class Topics {
             }
             LabelHolder labelHolder = new LabelHolder(jsonObject.getString("Label"), articles, clusters);
             labelHolder.set_id(document.getObjectId("_id"));
+            labelHolder.setImageUrl(document.getString("imageUrl"));
             return labelHolder;
         }
         return null;

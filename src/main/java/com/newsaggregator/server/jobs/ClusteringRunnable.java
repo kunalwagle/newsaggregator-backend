@@ -34,7 +34,7 @@ public class ClusteringRunnable implements Runnable {
             Summaries summaries = new Summaries(db);
             Topics topics = new Topics(db);
 
-            List<LabelHolder> labelHolders = topics.getClusteringTopics();
+            List<LabelHolder> labelHolders = topics.getClusteringTopics().stream().limit(15).collect(Collectors.toList());
 
 
             List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());

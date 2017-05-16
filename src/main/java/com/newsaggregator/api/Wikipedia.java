@@ -31,6 +31,10 @@ public class Wikipedia {
             if (labelHolder == null) {
                 labelHolder = topicManager.createBlankTopic(article.getTitle());
             }
+            if (labelHolder.getImageUrl() == null) {
+                labelHolder.setImageUrl(article.getImageUrl());
+                topicManager.saveTopic(labelHolder);
+            }
             article.set_id(labelHolder.get_id().toString());
         }
         return articles;
@@ -116,7 +120,7 @@ public class Wikipedia {
         try {
             title = title.replace(' ', '+');
             title = title.replace("%20", "+");
-            URL wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cpageimages&exsentences=1&exintro=1&explaintext=1&piprop=original&titles=" + title);
+            URL wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cpageimages&exchars=300&exintro=1&explaintext=1&piprop=original&titles=" + title);
             URLConnection wikipediaURLConnection = wikipediaURL.openConnection();
             wikipediaURLConnection.connect();
             JSONObject response = new JSONObject(IOUtils.toString(wikipediaURLConnection.getInputStream(), Charset.forName("UTF-8"))).getJSONObject("query").getJSONObject("pages");
