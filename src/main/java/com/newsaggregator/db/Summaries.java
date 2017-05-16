@@ -75,10 +75,14 @@ public class Summaries {
 
     public List<ClusterHolder> getAllClusters() {
         List<ClusterHolder> clusters = new ArrayList<>();
+        MongoCursor<Document> iterator = collection.find().iterator();
+        return getClusterHolders(clusters, iterator);
+    }
+
+    private List<ClusterHolder> getClusterHolders(List<ClusterHolder> clusters, MongoCursor<Document> iterator) {
         Articles articleManager = new Articles(database);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            MongoCursor<Document> iterator = collection.find().iterator();
             while (iterator.hasNext()) {
                 Document document = iterator.next();
                 String item = document.toJson();
@@ -124,5 +128,12 @@ public class Summaries {
             Document document = clusterHolder.createDocument();
             collection.replaceOne(new BasicDBObject().append("_id", clusterHolder.get_id()), document);
         }
+    }
+
+    public List<ClusterHolder> getUnsummarisedClusters() {
+        BasicDBObject queryObject = new BasicDBObject().append("Summaries", new Document("$size", 0));
+        MongoCursor<Document> iterator = collection.find(queryObject).iterator();
+
+        return getClusterHolders(new ArrayList<>(), iterator);
     }
 }
