@@ -35,6 +35,7 @@ public class ClusteringRunnable implements Runnable {
 
 
             List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
+            List<ClusterHolder> brandNewClusters = new ArrayList<>();
 
             for (LabelHolder labelHolder : labelHolders) {
                 labelHolder.setClusters(new ArrayList<>());
@@ -45,6 +46,7 @@ public class ClusteringRunnable implements Runnable {
                     if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(clusterArticles))) {
                         ClusterHolder clusterHolder = new ClusterHolder(clusterArticles);
                         clusters.add(clusterHolder);
+                        brandNewClusters.add(clusterHolder);
                         labelHolder.addCluster(clusterHolder);
                     } else {
                         labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(clusterArticles)).findAny().get());
@@ -53,7 +55,7 @@ public class ClusteringRunnable implements Runnable {
                 labelHolder.setNeedsClustering(false);
             }
 
-            summaries.updateSummaries(clusters);
+            summaries.saveSummaries(brandNewClusters);
 
             topics.updateTopics(labelHolders);
 
