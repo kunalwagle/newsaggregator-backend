@@ -38,7 +38,7 @@ public class Main {
 //                new TopicModelling();
 
                 TaskService scheduleManager = new TaskService();
-
+//
                 scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
                 scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
                 scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 2L, 2L, TimeUnit.MINUTES);
