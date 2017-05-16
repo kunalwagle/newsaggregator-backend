@@ -1,7 +1,7 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.jobs.ClusteringRunnable;
+import com.newsaggregator.server.jobs.SummarisationRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
@@ -43,7 +43,8 @@ public class Main {
 
 //                scheduleManager.execute(new ArticleFetchRunnable());
 //                scheduleManager.execute(new TopicLabelRunnable());
-                scheduleManager.execute(new ClusteringRunnable());
+//                scheduleManager.execute(new ClusteringRunnable());
+                scheduleManager.execute(new SummarisationRunnable());
 
                 serverInitialised = true;
 

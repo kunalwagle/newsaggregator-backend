@@ -131,7 +131,7 @@ public class Summaries {
     }
 
     public List<ClusterHolder> getUnsummarisedClusters() {
-        BasicDBObject queryObject = new BasicDBObject().append("Summaries", new Document("$size", 0));
+        BasicDBObject queryObject = new BasicDBObject().append("Summaries.0", new Document("$exists", false));
         MongoCursor<Document> iterator = collection.find(queryObject).iterator();
 
         return getClusterHolders(new ArrayList<>(), iterator);
