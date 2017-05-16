@@ -3,7 +3,6 @@ package com.newsaggregator.server.jobs;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
-import com.newsaggregator.api.outlets.Guardian;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.Topic;
 import com.newsaggregator.db.Articles;
@@ -36,7 +35,7 @@ public class TopicLabelRunnable implements Runnable {
         try {
             TopicModelling topicModelling = new TopicModelling();
 
-            topicModelling.trainTopics(Guardian.getArticles());
+            topicModelling.trainTopics(articles.getAllArticles());
 
             List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles().stream().limit(25).collect(Collectors.toList());
 
