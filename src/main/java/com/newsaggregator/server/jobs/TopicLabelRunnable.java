@@ -11,9 +11,12 @@ import com.newsaggregator.db.Topics;
 import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.server.LabelHolder;
+import org.apache.log4j.Logger;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +27,8 @@ public class TopicLabelRunnable implements Runnable {
     @Override
     public void run() {
 
+        Logger logger = Logger.getLogger(getClass());
+        
         MongoDatabase db = Utils.getDatabase();
         Articles articles = new Articles(db);
         Topics topics = new Topics(db);
@@ -33,15 +38,14 @@ public class TopicLabelRunnable implements Runnable {
 
             topicModelling.trainTopics(Guardian.getArticles());
 
-            List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles().stream().limit(15).collect(Collectors.toList());
+            List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles().stream().limit(25).collect(Collectors.toList());
 
             Map<String, List<OutletArticle>> articleTopicMap = new HashMap<>();
 
             int counter = 1;
 
             for (OutletArticle article : unlabelledArticles) {
-                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-                System.out.println(timeStamp + " Labelling " + counter + " of " + unlabelledArticles.size());
+                logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
                 Topic topic = topicModelling.getModel(article);
                 List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
                 for (String topicLabel : topicLabels) {
@@ -57,8 +61,7 @@ public class TopicLabelRunnable implements Runnable {
 
             counter = 1;
             for (Map.Entry<String, List<OutletArticle>> labelPair : articleTopicMap.entrySet()) {
-                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-                System.out.println(timeStamp + " Saving " + counter + " of " + articleTopicMap.entrySet().size());
+                logger.info("Saving " + counter + " of " + articleTopicMap.entrySet().size());
                 try {
                     String label = labelPair.getKey();
                     LabelHolder labelHolder = topics.getTopic(label);
@@ -73,7 +76,7 @@ public class TopicLabelRunnable implements Runnable {
                     labelHolder.setNeedsClustering(true);
                     topics.saveTopic(labelHolder);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error("An Error in the Topic Label Runnable", e);
                 }
                 counter++;
             }
@@ -83,7 +86,7 @@ public class TopicLabelRunnable implements Runnable {
             articles.updateArticles(unlabelledArticles);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("An Error in the Topic Label Runnable", e);
         }
 
     }

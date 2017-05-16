@@ -10,11 +10,10 @@ import com.newsaggregator.ml.clustering.Cluster;
 import com.newsaggregator.ml.clustering.Clusterer;
 import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
+import org.apache.log4j.Logger;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +25,8 @@ public class ClusteringRunnable implements Runnable {
 
     @Override
     public void run() {
+
+        Logger logger = Logger.getLogger(getClass());
 
         try {
 
@@ -41,8 +42,7 @@ public class ClusteringRunnable implements Runnable {
 
             int counter = 1;
             for (LabelHolder labelHolder : labelHolders) {
-                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-                System.out.println(timeStamp + " Clustering " + counter + " of " + labelHolders.size());
+                logger.info("Clustering " + counter + " of " + labelHolders.size());
                 labelHolder.setClusters(new ArrayList<>());
                 Clusterer clusterer = new Clusterer(labelHolder.getArticles());
                 List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
@@ -67,7 +67,7 @@ public class ClusteringRunnable implements Runnable {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("An Error in the Clustering Runnable", e);
         }
 
     }

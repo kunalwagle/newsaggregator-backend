@@ -8,9 +8,12 @@ import com.newsaggregator.db.Summaries;
 import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.ClusterHolder;
+import org.apache.log4j.Logger;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -20,6 +23,8 @@ public class SummarisationRunnable implements Runnable {
 
     @Override
     public void run() {
+
+        Logger logger = Logger.getLogger(getClass());
 
         try {
 
@@ -31,8 +36,7 @@ public class SummarisationRunnable implements Runnable {
             int counter = 1;
             int total = 0;
             for (ClusterHolder clusterHolder : clusterHolders) {
-                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-                System.out.println(timeStamp + " Summarising " + counter + " of " + clusterHolders.size() + ". Done " + total + " summaries so far");
+                logger.info("Summarising " + counter + " of " + clusterHolders.size() + ". Done " + total + " summaries so far");
                 List<OutletArticle> articles = clusterHolder.getArticles();
                 Set<OutletArticle> clusterArticles = new HashSet<>(articles);
                 Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
@@ -46,7 +50,7 @@ public class SummarisationRunnable implements Runnable {
             summaries.updateSummaries(clusterHolders);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("An Error in the Summarisation Runnable", e);
         }
 
     }

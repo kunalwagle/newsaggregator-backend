@@ -107,7 +107,7 @@ public class Wikipedia {
                 result.add(searchResult.getString("title"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return result;
     }
@@ -126,7 +126,7 @@ public class Wikipedia {
             }
             return article;
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return null;
     }
@@ -165,7 +165,7 @@ public class Wikipedia {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return articles;
     }
