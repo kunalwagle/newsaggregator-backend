@@ -42,7 +42,7 @@ public class SummarisationRunnable implements Runnable {
                 Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
                 List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
                 List<Summary> summs = extractives.parallelStream().map(Extractive::summarise).collect(Collectors.toList());
-                clusterHolder.setSummary(summs.stream().map(Summary::getNodes).collect(Collectors.toList()));
+                clusterHolder.setSummary(summs);
                 total += summs.size();
                 counter++;
             }

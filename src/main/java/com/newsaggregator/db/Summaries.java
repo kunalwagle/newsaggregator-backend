@@ -1,5 +1,6 @@
 package com.newsaggregator.db;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -57,13 +59,10 @@ public class Summaries {
                     String articleId = articleIds.getJSONObject(i).getString("$oid");
                     articles.add(articleManager.getArticleFromId(articleId));
                 }
-                JSONArray nodes = jsonObject.getJSONArray("Summaries");
-                List<List<Node>> summaries = new ArrayList<>();
-                for (int i = 0; i < nodes.length(); i++) {
-                    String node = nodes.getString(i);
-                    summaries.add(objectMapper.readValue(node, objectMapper.getTypeFactory().constructCollectionType(List.class, Node.class)));
-                }
-                ClusterHolder clusterHolder = new ClusterHolder(articles, summaries);
+                String summs = jsonObject.getString("Summaries");
+                ClusterHolder clusterHolder = new ClusterHolder(articles);
+                clusterHolder.setSummaryMap(objectMapper.readValue(summs, new TypeReference<Map<String, List<Node>>>() {
+                }));
                 clusterHolder.set_id(document.getObjectId("_id"));
                 return clusterHolder;
             }
@@ -93,13 +92,10 @@ public class Summaries {
                     String articleId = articleIds.getJSONObject(i).getString("$oid");
                     articles.add(articleManager.getArticleFromId(articleId));
                 }
-                JSONArray nodes = jsonObject.getJSONArray("Summaries");
-                List<List<Node>> summaries = new ArrayList<>();
-                for (int i = 0; i < summaries.size(); i++) {
-                    String node = nodes.getString(i);
-                    summaries.add(objectMapper.readValue(node, objectMapper.getTypeFactory().constructCollectionType(List.class, Node.class)));
-                }
-                ClusterHolder clusterHolder = new ClusterHolder(articles, summaries);
+                String summs = jsonObject.getString("Summaries");
+                ClusterHolder clusterHolder = new ClusterHolder(articles);
+                clusterHolder.setSummaryMap(objectMapper.readValue(summs, new TypeReference<Map<String, List<Node>>>() {
+                }));
                 clusterHolder.set_id(document.getObjectId("_id"));
                 clusters.add(clusterHolder);
             }

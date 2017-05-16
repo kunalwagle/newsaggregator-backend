@@ -5,6 +5,7 @@ import com.newsaggregator.base.DatabaseStorage;
 import com.newsaggregator.base.Outlet;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.summarisation.Extractive.Node;
+import com.newsaggregator.ml.summarisation.Summary;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -25,7 +26,6 @@ public class ClusterHolder implements DatabaseStorage {
     private String lastPublished;
     private String imageUrl;
     private List<OutletArticle> articles;
-    private List<List<Node>> summaries = new ArrayList<>();
     private Map<String, List<Node>> summaryMap = new HashMap<>();
     private List<String> labels = new ArrayList<>();
 
@@ -34,16 +34,12 @@ public class ClusterHolder implements DatabaseStorage {
         initialise();
     }
 
-    public ClusterHolder(List<OutletArticle> articles, List<List<Node>> summaries) {
+    public ClusterHolder(List<OutletArticle> articles, List<Summary> summaries) {
         this.articles = articles;
-        this.summaries = summaries;
-        for (List<Node> nodes : summaries) {
-            List<String> sources = nodes.stream().map(Node::getSource).distinct().collect(Collectors.toList());
-            List<String> related = nodes.stream().flatMap(node -> node.getRelatedNodes().stream()).collect(Collectors.toList()).stream().map(Node::getSource).distinct().collect(Collectors.toList());
-            sources.addAll(related);
-            sources = sources.stream().distinct().collect(Collectors.toList());
+        for (Summary summary : summaries) {
+            List<String> sources = summary.getArticles().stream().map(OutletArticle::getSource).collect(Collectors.toList());
             String source = sources.stream().sorted().collect(Collectors.toList()).toString().replace(" ", "");
-            summaryMap.put(source, nodes);
+            summaryMap.put(source, summary.getNodes());
         }
         initialise();
     }
@@ -77,15 +73,11 @@ public class ClusterHolder implements DatabaseStorage {
     }
 
     public List<List<Node>> getSummary() {
-        return summaries;
+        return summaryMap.values().stream().collect(Collectors.toList());
     }
 
     public List<String> getLabels() {
         return labels;
-    }
-
-    public void setSummary(List<List<Node>> summaries) {
-        this.summaries.addAll(summaries);
     }
 
     public void addLabel(String label) {
@@ -145,15 +137,23 @@ public class ClusterHolder implements DatabaseStorage {
             document.put("_id", _id);
             document.put("Articles", articles.stream().map(OutletArticle::get_id).collect(Collectors.toList()));
             ObjectMapper objectMapper = new ObjectMapper();
-            List<String> sums = new ArrayList<>();
-            for (List<Node> sum : summaries) {
-                sums.add(objectMapper.writeValueAsString(sum));
-            }
-            document.put("Summaries", sums);
+            document.put("Summaries", objectMapper.writeValueAsString(summaryMap));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
         return document;
+    }
+
+    public void setSummary(List<Summary> summaries) {
+        for (Summary summary : summaries) {
+            List<String> sources = summary.getArticles().stream().map(OutletArticle::getSource).collect(Collectors.toList());
+            String source = sources.stream().sorted().collect(Collectors.toList()).toString().replace(" ", "");
+            summaryMap.put(source, summary.getNodes());
+        }
+    }
+
+    public void setSummaryMap(Map<String, List<Node>> summaryMap) {
+        this.summaryMap = summaryMap;
     }
 }

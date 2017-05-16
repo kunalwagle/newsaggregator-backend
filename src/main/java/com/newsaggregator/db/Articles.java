@@ -55,7 +55,7 @@ public class Articles {
 
     public OutletArticle getSingleArticle(String url) {
         try {
-            BasicDBObject queryObject = new BasicDBObject().append("ArticleUrl", url);
+            BasicDBObject queryObject = new BasicDBObject().append("ArticleURL", url);
             MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             if (iterator.hasNext()) {
                 Document item = iterator.next();
