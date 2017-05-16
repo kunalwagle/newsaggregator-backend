@@ -4,6 +4,7 @@
 import React from "react";
 import {Navbar, Nav, NavItem, OverlayTrigger, Popover, Button} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
+import SearchBarContainer from "../containers/Home/SearchBarContainer";
 import LoginModal from "./LoginModal";
 
 const loginPopover = (handleLoginClicked, action) => {
@@ -17,14 +18,14 @@ const leftNavItem = (loggedIn, handleLoginClicked, handleSubscriptionSearch) => 
         return (
             <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
                             overlay={loginPopover(handleLoginClicked, handleSubscriptionSearch)}>
-                <NavItem eventKey={2}>
+                <NavItem eventKey={3}>
                     My Topics
                 </NavItem>
             </OverlayTrigger>
         )
     } else {
         return (
-            <NavItem eventKey={2} onSelect={() => handleSubscriptionSearch()}>
+            <NavItem eventKey={3} onSelect={() => handleSubscriptionSearch()}>
                     My Topics
             </NavItem>
 
@@ -37,12 +38,12 @@ const rightNavItem = (loggedIn, handleLoginClicked, handleSettingsSearch) => {
         return (
             <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
                             overlay={loginPopover(handleLoginClicked, () => handleLoginClicked(false))}>
-                <NavItem eventKey={3}>Settings</NavItem>
+                <NavItem eventKey={4}>Settings</NavItem>
             </OverlayTrigger>
         )
     } else {
         return (
-            <NavItem eventKey={3} onSelect={() => handleSettingsSearch()}>Settings</NavItem>
+            <NavItem eventKey={4} onSelect={() => handleSettingsSearch()}>Settings</NavItem>
         )
     }
 };
@@ -65,6 +66,9 @@ export const NavBarComponent = ({loggedIn, user, handleSettingsSearch, handleLog
                     <NavItem eventKey={1} href="#">About</NavItem>
                 </Nav>
                 <Nav pullRight>
+                    <NavItem eventKey={2}>
+                        <SearchBarContainer hidden={true}/>
+                    </NavItem>
                     {leftNavItem(loggedIn, handleLoginClicked, handleSubscriptionSearch)}
                     {rightNavItem(loggedIn, handleLoginClicked, handleSettingsSearch)}
                 </Nav>

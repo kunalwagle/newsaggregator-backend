@@ -5,18 +5,31 @@ import React from "react";
 import {Jumbotron, Button, Form, FormGroup, FormControl} from "react-bootstrap";
 import {Link} from "react-router";
 
-export const SearchBar = ({searchValue, handleSearchValueChanged, handleSearchButtonPressed}) => (
-    <Form inline type="submit" bsClass="centred-div">
-        <FormGroup bsClass="col-lg-8 col-sm-7 col-xs-5 col-md-8" controlId="searchForm">
-            <FormControl bsClass="col-lg-12 search-bar-standard" type="text"
-                         placeholder="Search Keywords" value={searchValue}
-                         onChange={(searchValue) => handleSearchValueChanged(searchValue.target.value)}
-            />
-        </FormGroup>
-        {'  '}
-        <Button onClick={event => handleSearchButtonPressed(event)}
-                bsClass="search-bar-button col-lg-3 col-sm-3 col-xs-3 col-md-3" type="submit">
-            Search
-        </Button>
-    </Form>
-);
+export const SearchBar = ({searchValue, hidden, handleSearchValueChanged, handleSearchButtonPressed}) => {
+
+    let overallClassName = "col-lg-8 col-sm-7 col-xs-5 col-md-8";
+    let searchBarClassName = "search-bar-standard";
+    let buttonClassName = "search-bar-button col-lg-3 col-sm-3 col-xs-3 col-md-3";
+
+    if (hidden) {
+        buttonClassName = "";
+        overallClassName = "col-lg-12 col-sm-12 col-xs-12 col-md-12"
+        searchBarClassName = "search-bar-small";
+    }
+
+    return (
+        <Form inline type="submit" bsClass="centred-div">
+            <FormGroup bsClass={overallClassName} controlId="searchForm">
+                <FormControl bsClass={"col-lg-12 " + searchBarClassName} type="text"
+                             placeholder="Search Keywords" value={searchValue}
+                             onChange={(searchValue) => handleSearchValueChanged(searchValue.target.value)}
+                />
+            </FormGroup>
+            {'  '}
+            <Button onClick={event => handleSearchButtonPressed(event)} hidden={hidden}
+                    bsClass={buttonClassName} type="submit">
+                Search
+            </Button>
+        </Form>
+    )
+};

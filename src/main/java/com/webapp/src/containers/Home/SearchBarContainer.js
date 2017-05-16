@@ -5,9 +5,10 @@ import {connect} from "react-redux";
 import {SearchBar} from "../../components/Home/SearchBar";
 import {searchValueChanged, search} from "../../actions/Home/SearchBarActions";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        searchValue: state.searchBar.searchValue
+        searchValue: state.searchBar.searchValue,
+        hidden: ownProps.hidden
     }
 };
 
