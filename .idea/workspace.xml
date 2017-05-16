@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="">
+    <list default="true" id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="Limiting runnables">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SummarisationRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SummarisationRunnable.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -28,6 +23,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="49" column="68" lean-forward="true" selection-start-line="49" selection-start-column="68" selection-end-line="49" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="SubscriptionsResource.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/SubscriptionsResource.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -109,7 +114,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SummarisationRunnable.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SummarisationRunnable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SummarisationRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="103">
@@ -125,26 +130,6 @@
             <state relative-caret-position="178">
               <caret line="36" column="122" lean-forward="false" selection-start-line="36" selection-start-column="122" selection-end-line="36" selection-end-column="122" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LabelHolder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-              <folding>
-                <element signature="docComment;class#LabelHolder#0" expanded="true" />
-                <element signature="e#2621#2622#0" expanded="true" />
-                <element signature="e#2652#2653#0" expanded="true" />
-                <element signature="e#2700#2701#0" expanded="true" />
-                <element signature="e#2740#2741#0" expanded="true" />
-                <element signature="method#createDocument#0;class#LabelHolder#0" expanded="true" />
-                <element signature="method#addArticles#0;class#LabelHolder#0" expanded="true" />
-                <element signature="e#3801#3802#0" expanded="true" />
-                <element signature="e#3841#3842#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -264,13 +249,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/Mongo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Utils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/Connection.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SummarisationRunnable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
       </list>
     </option>
   </component>
@@ -1653,14 +1638,7 @@
       <workItem from="1492002902704" duration="27962000" />
       <workItem from="1492430182328" duration="128984000" />
       <workItem from="1493313787752" duration="60245000" />
-      <workItem from="1494247395281" duration="94576000" />
-    </task>
-    <task id="LOCAL-00307" summary="Subscribing now works with login modal">
-      <created>1494751784169</created>
-      <option name="number" value="00307" />
-      <option name="presentableId" value="LOCAL-00307" />
-      <option name="project" value="LOCAL" />
-      <updated>1494751784171</updated>
+      <workItem from="1494247395281" duration="94693000" />
     </task>
     <task id="LOCAL-00308" summary="Login Modal styling">
       <created>1494752916537</created>
@@ -1998,7 +1976,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494937287575</updated>
     </task>
-    <option name="localTasksCounter" value="356" />
+    <task id="LOCAL-00356" summary="Limiting runnables">
+      <created>1494959415571</created>
+      <option name="number" value="00356" />
+      <option name="presentableId" value="LOCAL-00356" />
+      <option name="project" value="LOCAL" />
+      <updated>1494959415571</updated>
+    </task>
+    <option name="localTasksCounter" value="357" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2031,7 +2016,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="626984000" />
+    <option name="totallyTimeSpent" value="627101000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2118,7 +2103,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Sources can be selected" />
     <MESSAGE value="Settings page" />
     <MESSAGE value="Settings pages complete" />
     <MESSAGE value="Made Label Holder with settings public" />
@@ -2143,7 +2127,8 @@
     <MESSAGE value="Added server jobs" />
     <MESSAGE value="Made singleton instance of mongo connection" />
     <MESSAGE value="Instance of mongo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Instance of mongo" />
+    <MESSAGE value="Limiting runnables" />
+    <option name="LAST_COMMIT_MESSAGE" value="Limiting runnables" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2496,16 +2481,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="15" column="46" lean-forward="true" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/Connection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -2692,6 +2667,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
           <caret line="40" column="77" lean-forward="false" selection-start-line="40" selection-start-column="77" selection-end-line="40" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="49" column="68" lean-forward="true" selection-start-line="49" selection-start-column="68" selection-end-line="49" selection-end-column="68" />
           <folding />
         </state>
       </provider>
