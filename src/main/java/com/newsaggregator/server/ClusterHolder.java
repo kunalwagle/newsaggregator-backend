@@ -111,6 +111,29 @@ public class ClusterHolder implements DatabaseStorage {
         return _id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getLastPublished() {
+        return lastPublished;
+    }
+
+    public void setLastPublished(String lastPublished) {
+        this.lastPublished = lastPublished;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     @Override
     public Document createDocument() {

@@ -115,4 +115,8 @@ public class LabelHolder implements DatabaseStorage {
     public void setNeedsClustering(boolean needsClustering) {
         this.needsClustering = needsClustering;
     }
+
+    public void setClusters(List<ClusterHolder> clusters) {
+        this.clusters = clusters;
+    }
 }
