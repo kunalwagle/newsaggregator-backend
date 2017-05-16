@@ -13,7 +13,7 @@ export const SearchBar = ({searchValue, hidden, handleSearchValueChanged, handle
 
     if (hidden) {
         buttonClassName = "";
-        overallClassName = "col-lg-12 col-sm-12 col-xs-12 col-md-12"
+        overallClassName = "col-lg-12 col-sm-9 col-xs-9 col-md-9 pull-left";
         searchBarClassName = "search-bar-small";
     }
 

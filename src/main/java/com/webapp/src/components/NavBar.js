@@ -37,7 +37,7 @@ const rightNavItem = (loggedIn, handleLoginClicked, handleSettingsSearch) => {
     if (!loggedIn) {
         return (
             <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
-                            overlay={loginPopover(handleLoginClicked, () => handleLoginClicked(false))}>
+                            overlay={loginPopover(handleLoginClicked, handleSettingsSearch)}>
                 <NavItem eventKey={4}>Settings</NavItem>
             </OverlayTrigger>
         )
@@ -60,15 +60,16 @@ export const NavBarComponent = ({loggedIn, user, handleSettingsSearch, handleLog
                     </a>
                 </Navbar.Brand>
                 <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
                 <Nav>
-                    <NavItem eventKey={1} href="#">About</NavItem>
-                </Nav>
-                <Nav pullRight>
                     <NavItem eventKey={2}>
                         <SearchBarContainer hidden={true}/>
                     </NavItem>
+                </Nav>
+            </Navbar.Header>
+
+            <Navbar.Collapse>
+                <Nav pullRight>
+                    <NavItem eventKey={1} href="#">About</NavItem>
                     {leftNavItem(loggedIn, handleLoginClicked, handleSubscriptionSearch)}
                     {rightNavItem(loggedIn, handleLoginClicked, handleSettingsSearch)}
                 </Nav>
