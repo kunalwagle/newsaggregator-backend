@@ -18,6 +18,7 @@ import {TopicViewerPage} from "./components/TopicViewer/TopicViewer";
 import {ArticleViewerPage} from "./components/ArticleViewer/ArticleViewerPage";
 import {SubscriptionPage} from "./components/Subscriptions/Subscriptions";
 import {TopicsList} from "./components/Settings/TopicsList";
+import ReduxToastr from "react-redux-toastr";
 //import {reducers} from './reducers'
 
 
@@ -58,17 +59,25 @@ class AppProvider extends React.Component {
         }
         return (
             <Provider store={store}>
-                <Router history={history}>
-                    <Route path="/" component={NavigationBar}>
-                        <IndexRoute component={SearchBarJumbotron}/>
-                        <Route path="searchResults/:searchTerm" component={SearchResultPage}/>
-                        <Route path="summaryEvaluation" component={SummaryEvaluation}/>
-                        <Route path="topic/:topicId" component={TopicViewerPage}/>
-                        <Route path="topic/:topicId/article/:articleId" component={ArticleViewerPage}/>
-                        <Route path="subscription/:userId" component={SubscriptionPage}/>
-                        <Route path="settings" component={TopicsList}/>
-                    </Route>
-                </Router>
+                <div>
+                    <Router history={history}>
+                        <Route path="/" component={NavigationBar}>
+                            <IndexRoute component={SearchBarJumbotron}/>
+                            <Route path="searchResults/:searchTerm" component={SearchResultPage}/>
+                            <Route path="summaryEvaluation" component={SummaryEvaluation}/>
+                            <Route path="topic/:topicId" component={TopicViewerPage}/>
+                            <Route path="topic/:topicId/article/:articleId" component={ArticleViewerPage}/>
+                            <Route path="subscription/:userId" component={SubscriptionPage}/>
+                            <Route path="settings" component={TopicsList}/>
+                        </Route>
+                    </Router>
+                    <ReduxToastr
+                        timeOut={4000}
+                        newestOnTop={false}
+                        position="bottom-right"
+                        transitionIn="fadeIn"
+                        transitionOut="fadeOut"/>
+                </div>
             </Provider>
         )
     }

@@ -47,7 +47,7 @@ export default function searchResults(state, action) {
             });
         case SUBSCRIBE_COMPLETE:
             return Object.assign({}, state, {
-                isSubscribed: action.json.labelHolder.subscribed
+                isSubscribed: action.json.subscribed
             });
     }
 

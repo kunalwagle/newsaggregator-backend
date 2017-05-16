@@ -5,6 +5,7 @@ import fetch from "isomorphic-fetch";
 import {subscriptionTabSelected} from "./SearchResults/SearchResultsActions";
 import {push} from "react-router-redux";
 import {getIPAddress} from "../UtilityMethods";
+import {toastr} from "react-redux-toastr";
 
 export const EMAIL_CHANGED = 'EMAIL_CHANGED';
 export const LOG_IN = 'LOG_IN';
@@ -35,6 +36,9 @@ export function logged(user) {
     let loggedIn = true;
     if (user.length > 0) {
         loggedIn = false;
+        toastr.error("Failure", "Unable to log in for some reason. Sorry about that");
+    } else {
+        toastr.success('Success', 'Logged in succesfully');
     }
     return {
         type: LOG_IN,
@@ -56,7 +60,7 @@ export function subscribe(topic, email) {
         }
         return fetch(getIPAddress() + "user/subscribe/" + email + "/" + topic)
             .then(response => response.json())
-            .then(json => dispatch(subscribeComplete(json)))
+            .then(json => dispatch(subscribeComplete(json, "subscribe")))
     }
 }
 
@@ -67,11 +71,16 @@ export function unsubscribe(topic, email) {
         }
         return fetch(getIPAddress() + "user/unsubscribe/" + email + "/" + topic)
             .then(response => response.json())
-            .then(json => dispatch(subscribeComplete(json)))
+            .then(json => dispatch(subscribeComplete(json, "unsubscribe")))
     }
 }
 
-export function subscribeComplete(json) {
+export function subscribeComplete(json, subscribeType) {
+    if (json) {
+        toastr.success("Success", "Successfully " + subscribeType + "d this topic");
+    } else {
+        toastr.error("Error", "Couldn't succesfully " + subscribeType + " this topic");
+    }
     return {
         type: SUBSCRIBE_COMPLETE,
         json

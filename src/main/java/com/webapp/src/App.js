@@ -11,6 +11,7 @@ import settings from "./reducers/Settings/SettingsReducers";
 import {routerReducer} from "react-router-redux";
 import {responsiveStateReducer} from "redux-responsive";
 import {combineReducers} from "redux";
+import {reducer as toastrReducer} from "react-redux-toastr";
 
 const App = combineReducers({
     searchBar,
@@ -20,6 +21,7 @@ const App = combineReducers({
     loggedIn,
     articleViewer,
     settings,
+    toastr: toastrReducer,
     routing: routerReducer,
     browser: responsiveStateReducer
 });
