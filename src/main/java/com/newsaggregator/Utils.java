@@ -3,10 +3,9 @@ package com.newsaggregator;
 
 import com.google.common.collect.Lists;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.base.Outlet;
+import com.newsaggregator.server.Connection;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -67,11 +66,8 @@ public class Utils {
     }
 
     public static MongoDatabase getDatabase() {
-        MongoClientOptions.Builder builder = new MongoClientOptions.Builder();
-        //build the connection options
-        MongoClientOptions opts = builder.build();
-        MongoClient mongoClient = new MongoClient(new ServerAddress("178.62.27.53", 27017), opts);
-        return mongoClient.getDatabase("NewsAggregator");
+        MongoClient client = Connection.MONGO.getClient();
+        return client.getDatabase("NewsAggregator");
     }
 
     public static List<String> allSources() {

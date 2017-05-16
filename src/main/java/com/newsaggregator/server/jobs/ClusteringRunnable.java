@@ -61,7 +61,9 @@ public class ClusteringRunnable implements Runnable {
                 counter++;
             }
 
-            summaries.saveSummaries(brandNewClusters);
+            if (brandNewClusters.size() > 0) {
+                summaries.saveSummaries(brandNewClusters);
+            }
 
             topics.updateTopics(labelHolders);
 

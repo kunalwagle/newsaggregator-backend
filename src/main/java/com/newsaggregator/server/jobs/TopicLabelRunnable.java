@@ -37,7 +37,7 @@ public class TopicLabelRunnable implements Runnable {
 
             topicModelling.trainTopics(articles.getAllArticles());
 
-            List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles().stream().limit(25).collect(Collectors.toList());
+            List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles().stream().limit(15).collect(Collectors.toList());
 
             Map<String, List<OutletArticle>> articleTopicMap = new HashMap<>();
 
