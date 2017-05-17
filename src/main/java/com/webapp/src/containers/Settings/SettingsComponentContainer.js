@@ -27,8 +27,8 @@ const mapDispatchToProps = (dispatch) => {
         handleTopicChange: (topic, index) => {
             dispatch(changeTopic(topic, index));
         },
-        handleReloadNeeded: () => {
-            dispatch(changeTopic());
+        handleReloadNeeded: (topic) => {
+            dispatch(changeTopic(topic, 0));
         },
         handleReloadLogin: () => {
             dispatch(login());

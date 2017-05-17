@@ -28,7 +28,8 @@ export default function loggedIn(state, action) {
                 loggedIn: action.loggedIn,
                 user: action.user,
                 email: action.user.emailAddress,
-                fetchInProgressCalled: true
+                fetchInProgressCalled: true,
+                fetchInProgress: false
             });
         case LOG_OUT:
             return Object.assign({}, state, {

@@ -7,6 +7,10 @@ import React from "react";
 
 export const TopicSettings = ({chosenOutlets, digests, topic, handleOutletChange, handleDigestChange, handleSave, handleUnsubscribe}) => {
 
+    if (topic == undefined) {
+        return (<div></div>)
+    }
+
     const outlets = allOutlets.map((outlet, index) => {
 
         let selected = "outletBox col-lg-3 col-md-3 col-sm-3 col-xs-3";
