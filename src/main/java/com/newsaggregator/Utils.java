@@ -78,6 +78,10 @@ public class Utils {
         return list;
     }
 
+    public static String getWebAddress() {
+        return "http://localhost:3000";
+    }
+
 
 
 }

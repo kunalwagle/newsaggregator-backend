@@ -1,12 +1,10 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.jobs.*;
+import com.newsaggregator.server.jobs.DigestRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
-
-import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -39,19 +37,19 @@ public class Main {
 
                 TaskService scheduleManager = new TaskService();
 //
-                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
-                scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
-                scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 1L, 1L, TimeUnit.MINUTES);
-                scheduleManager.scheduleWithFixedDelay(new SummarisationRunnable(), 1L, 1L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 1L, TimeUnit.MINUTES);
-                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 30L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
+//                scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 1L, 1L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleWithFixedDelay(new SummarisationRunnable(), 1L, 1L, TimeUnit.MINUTES);
+////                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 1L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 30L, TimeUnit.MINUTES);
 
 //                scheduleManager.execute(new ArticleFetchRunnable());
 //                scheduleManager.execute(new TopicLabelRunnable());
 //                scheduleManager.execute(new ClusteringRunnable());
 //                scheduleManager.execute(new SummarisationRunnable());
 //                scheduleManager.execute(new SendEmailRunnable());
-//                scheduleManager.execute(new DigestRunnable());
+                scheduleManager.execute(new DigestRunnable());
 
                 serverInitialised = true;
 

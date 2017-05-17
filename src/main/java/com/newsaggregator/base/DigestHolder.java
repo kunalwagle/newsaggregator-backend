@@ -90,9 +90,10 @@ public class DigestHolder implements DatabaseStorage {
         Document document = new Document();
         if (_id == null) {
             this._id = new ObjectId();
+            this.id = _id.toHexString();
         }
         document.put("_id", _id);
-        document.put("id", _id.toHexString());
+        document.put("id", id);
         ObjectMapper objectMapper = new ObjectMapper();
         String ah = "[]";
         try {
