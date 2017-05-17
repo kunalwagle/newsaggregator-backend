@@ -54,6 +54,7 @@ public class SendEmailRunnable implements Runnable {
 
         } catch (MessagingException mex) {
             mex.printStackTrace();
+            Utils.sendExceptionEmail(mex);
         }
 
     }

@@ -6,8 +6,10 @@ import {REHYDRATE} from "redux-persist/constants";
 
 const initialState = {
     loggedIn: false,
+    email: "",
     user: {},
     fetchInProgress: false,
+    fetchInProgressCalled: false,
     topics: []
 };
 
@@ -24,16 +26,20 @@ export default function loggedIn(state, action) {
         case LOG_IN:
             return Object.assign({}, state, {
                 loggedIn: action.loggedIn,
-                user: action.user
+                user: action.user,
+                email: action.user.emailAddress,
+                fetchInProgressCalled: true
             });
         case LOG_OUT:
             return Object.assign({}, state, {
                 loggedIn: false,
-                user: {}
+                user: {},
+                email: ""
             });
         case FETCH_STARTED:
             return Object.assign({}, state, {
-                fetchInProgress: true
+                fetchInProgress: true,
+                fetchInProgressCalled: true
             });
         case FETCH_ENDED:
             return Object.assign({}, state, {
@@ -42,7 +48,11 @@ export default function loggedIn(state, action) {
             });
         case REHYDRATE:
             const incoming = action.payload.loggedIn;
-            if (incoming) return {...state, ...incoming};
+            if (incoming) return Object.assign({
+                email: incoming.email,
+                loggedIn: incoming.loggedIn,
+                fetchInProgressCalled: false
+            });
             return state;
         default:
             return state

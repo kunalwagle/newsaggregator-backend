@@ -11,8 +11,7 @@ const mapStateToProps = (state) => {
     return {
         chosenOutlets: state.settings.chosenOutlets,
         digest: state.settings.digest,
-        topicName: state.settings.topicName,
-        topicId: state.settings.topicId
+        topic: state.settings.topic
     }
 };
 

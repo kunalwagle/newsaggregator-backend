@@ -5,7 +5,7 @@ import React from "react";
 import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
 import TopicSettingsContainer from "../../containers/Settings/TopicSettingsContainer";
 
-export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressCalled, topics, index, handleTopicChange, handleReloadNeeded}) => {
+export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLoginCalled, fetchInProgressCalled, user, index, handleReloadLogin, handleTopicChange, handleReloadNeeded}) => {
 
     if (!loggedIn) {
         return (
@@ -13,8 +13,15 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressCal
         )
     }
 
+    if (!fetchInProgressLoginCalled || user == undefined) {
+        handleReloadLogin();
+        return (
+            <div className="loader"></div>
+        )
+    }
+
     if (!fetchInProgressCalled) {
-        handleReloadNeeded(topics[0]);
+        handleReloadNeeded(user.topics[0]);
         return (
             <div className="loader"></div>
         )
@@ -26,13 +33,13 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressCal
         )
     }
 
-    if (topics.length === 0) {
+    if (user.topics.length === 0) {
         return (
             <div>You have no subscriptions</div>
         )
     }
 
-    const tabMap = topics.map((topic, index) => {
+    const tabMap = user.topics.map((topic, index) => {
         return (
             <NavItem onSelect={() => handleTopicChange(topic, index)} eventKey={index} key={index}>
                 <div className="white">{topic.labelHolder.label}</div>

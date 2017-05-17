@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {pluck} from "underscore";
 import {SettingsComponent} from "../../components/Settings/SettingsComponent";
 import {changeTopic} from "../../actions/Settings/SettingsActions";
+import {login} from "../../actions/LoginModalActions";
 
 const mapStateToProps = (state) => {
     let index = 0;
@@ -13,8 +14,9 @@ const mapStateToProps = (state) => {
     }
     return {
         fetchInProgress: state.loggedIn.fetchInProgress,
+        fetchInProgressLoginCalled: state.loggedIn.fetchInProgressCalled,
         fetchInProgressCalled: state.settings.fetchInProgressCalled,
-        topics: state.loggedIn.user.topics,
+        user: state.loggedIn.user,
         loggedIn: state.loggedIn.loggedIn,
         index
     }
@@ -25,8 +27,11 @@ const mapDispatchToProps = (dispatch) => {
         handleTopicChange: (topic, index) => {
             dispatch(changeTopic(topic, index));
         },
-        handleReloadNeeded: (topic) => {
-            dispatch(changeTopic(topic, 0));
+        handleReloadNeeded: () => {
+            dispatch(changeTopic());
+        },
+        handleReloadLogin: () => {
+            dispatch(login());
         }
     }
 };

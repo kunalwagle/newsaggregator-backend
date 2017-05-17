@@ -116,10 +116,10 @@ public class Extractive implements Summarisation {
                     resultNodes.add(currentNode);
                 }
             } else {
-                boolean canAdd = examineQuotation(nodes, currentNode);
-                if (canAdd) {
+//                boolean canAdd = examineQuotation(nodes, currentNode);
+//                if (canAdd) {
                     resultNodes.add(currentNode);
-                }
+//                }
             }
         }
         return resultNodes;

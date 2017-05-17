@@ -5,7 +5,7 @@ import {allOutlets, getPublicationName} from "../../UtilityMethods";
 import {contains} from "underscore";
 import React from "react";
 
-export const TopicSettings = ({chosenOutlets, digests, topicName, topicId, handleOutletChange, handleDigestChange, handleSave, handleUnsubscribe}) => {
+export const TopicSettings = ({chosenOutlets, digests, topic, handleOutletChange, handleDigestChange, handleSave, handleUnsubscribe}) => {
 
     const outlets = allOutlets.map((outlet, index) => {
 
@@ -27,7 +27,7 @@ export const TopicSettings = ({chosenOutlets, digests, topicName, topicId, handl
 
     return (
         <div className="white">
-            <h1>{topicName}</h1>
+            <h1>{topic.labelHolder.label}</h1>
             <br/>
             <h3>Default sources for summaries</h3>
             {outlets}
@@ -47,7 +47,7 @@ export const TopicSettings = ({chosenOutlets, digests, topicName, topicId, handl
             <br/><br/>
             <div className="row">
                 <button className="danger-button col-lg-5 col-md-5 col-xs-5 col-sm-5"
-                        onClick={() => handleUnsubscribe(topicId)}>Unsubscribe
+                        onClick={() => handleUnsubscribe(topic.labelHolder.id)}>Unsubscribe
                 </button>
                 <button className="search-bar-button col-lg-5 col-md-5 col-xs-5 col-sm-5" onClick={() => handleSave()}>
                     Save

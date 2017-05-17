@@ -35,24 +35,36 @@ export default function settings(state, action) {
             return Object.assign({}, state, {
                 digest: action.digest
             });
-        case CHANGE_TOPIC:
+        case CHANGE_TOPIC: {
+            let digest = false;
+            let chosenOutlets = [];
+            if (action.topic != undefined) {
+                digest = action.topic.digests;
+                chosenOutlets = action.topic.sources
+            }
             return Object.assign({}, state, {
-                topicName: action.topic.labelHolder.label,
-                topicId: action.topic.labelHolder.id,
-                digest: action.topic.digests,
-                chosenOutlets: action.topic.sources,
+                topic: action.topic,
+                digest,
+                chosenOutlets,
                 activeIndex: action.index,
                 fetchInProgressCalled: true
             });
-        case INITIALISE:
+        }
+        case INITIALISE: {
+            let digest = false;
+            let chosenOutlets = [];
+            if (action.topic != undefined) {
+                digest = action.topic.digests;
+                chosenOutlets = action.topic.sources
+            }
             return Object.assign({}, state, {
-                topicName: action.topic.labelHolder.label,
-                topicId: action.topic.labelHolder.id,
-                digest: action.topic.digests,
-                chosenOutlets: action.topic.sources,
+                topic: action.topic,
+                digest,
+                chosenOutlets,
                 activeIndex: 0,
                 fetchInProgressCalled: true
             })
+        }
     }
 
 
