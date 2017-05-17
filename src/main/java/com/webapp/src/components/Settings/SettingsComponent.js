@@ -5,7 +5,7 @@ import React from "react";
 import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
 import TopicSettingsContainer from "../../containers/Settings/TopicSettingsContainer";
 
-export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLoginCalled, fetchInProgressCalled, user, index, handleReloadLogin, handleTopicChange, handleReloadNeeded}) => {
+export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLoginCalled, fetchInProgressCalled, user, index, handleLogout, handleReloadLogin, handleTopicChange, handleReloadNeeded}) => {
 
     if (!loggedIn) {
         return (
@@ -54,6 +54,10 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLog
                     <Nav bsStyle="pills" stacked>
                         {tabMap}
                     </Nav>
+                    <br/><br/>
+                    <button className="danger-button col-lg-10 col-md-10 col-xs-10 col-sm-10 margined"
+                            onClick={handleLogout}>Log Out
+                    </button>
                 </Col>
                 <Col sm={8}>
                     <TopicSettingsContainer />

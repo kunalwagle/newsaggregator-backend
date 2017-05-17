@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {pluck} from "underscore";
 import {SettingsComponent} from "../../components/Settings/SettingsComponent";
 import {changeTopic} from "../../actions/Settings/SettingsActions";
-import {login} from "../../actions/LoginModalActions";
+import {login, logout} from "../../actions/LoginModalActions";
 
 const mapStateToProps = (state) => {
     let index = 0;
@@ -32,6 +32,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleReloadLogin: () => {
             dispatch(login());
+        },
+        handleLogout: () => {
+            dispatch(logout());
         }
     }
 };
