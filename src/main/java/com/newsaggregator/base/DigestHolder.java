@@ -1,8 +1,9 @@
 package com.newsaggregator.base;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newsaggregator.Utils;
 import com.newsaggregator.db.Topics;
-import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -81,55 +82,15 @@ public class DigestHolder implements DatabaseStorage {
         }
         document.put("_id", _id);
         document.put("id", _id.toHexString());
-        document.put("articleHolders", articleHolders);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String ah = "[]";
+        try {
+            ah = objectMapper.writeValueAsString(articleHolders);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        document.put("articleHolders", ah);
         document.put("emailAddress", emailAddress);
         return document;
-    }
-
-
-    private class ArticleHolder {
-
-        private String topicId;
-        private ClusterHolder clusterHolder;
-
-        public ArticleHolder(String topicId, ClusterHolder clusterHolder) {
-            this.topicId = topicId;
-            this.clusterHolder = clusterHolder;
-        }
-
-        public String getTopicId() {
-            return topicId;
-        }
-
-        public ClusterHolder getClusterHolder() {
-            return clusterHolder;
-        }
-    }
-
-    private class ArticleString {
-
-        private String topicId;
-        private String clusterId;
-
-        public ArticleString(String topicId, String clusterId) {
-            this.topicId = topicId;
-            this.clusterId = clusterId;
-        }
-
-        public String getTopicId() {
-            return topicId;
-        }
-
-        public void setTopicId(String topicId) {
-            this.topicId = topicId;
-        }
-
-        public String getClusterId() {
-            return clusterId;
-        }
-
-        public void setClusterId(String clusterId) {
-            this.clusterId = clusterId;
-        }
     }
 }
