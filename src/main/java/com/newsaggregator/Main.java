@@ -1,9 +1,12 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
+import com.newsaggregator.server.jobs.*;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -36,12 +39,12 @@ public class Main {
 
                 TaskService scheduleManager = new TaskService();
 //
-//                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
-//                scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 2L, 2L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleWithFixedDelay(new SummarisationRunnable(), 5L, 10L, TimeUnit.MINUTES);
-////                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 1L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 30L, 30L, TimeUnit.MINUTES);
+                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
+                scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
+                scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 2L, 2L, TimeUnit.MINUTES);
+                scheduleManager.scheduleWithFixedDelay(new SummarisationRunnable(), 5L, 10L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 1L, TimeUnit.MINUTES);
+                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 30L, 30L, TimeUnit.MINUTES);
 
 //                scheduleManager.execute(new ArticleFetchRunnable());
 //                scheduleManager.execute(new TopicLabelRunnable());
@@ -158,10 +161,28 @@ public class Main {
 //                Topics topicsManager = new Topics(Utils.getDatabase());
 //                Articles articleManager = new Articles(Utils.getDatabase());
 //                Summaries summaryManager = new Summaries(Utils.getDatabase());
-////////
-////                List<OutletArticle> articles = Lists.newArrayList(articleManager.getSingleArticle("https://www.theguardian.com/us-news/2017/feb/13/michael-flynn-resigns-quits-trump-national-security-adviser-russia"), articleManager.getSingleArticle("http://www.dailymail.co.uk/news/article-4221958/Michael-Flynn-compromised-DOJ-warns-White-House.html"), articleManager.getSingleArticle("http://www.telegraph.co.uk/news/2017/03/31/mike-flynn-certainly-has-story-tell-trumps-fired-national-security/"));
-//////                ClusterHolder clusterHolder = summaryManager.getSingleCluster("5913468c5dc53f2aa6e203dd");
-////////
+//////////
+//////                List<OutletArticle> articles = Lists.newArrayList(articleManager.getSingleArticle("https://www.theguardian.com/us-news/2017/feb/13/michael-flynn-resigns-quits-trump-national-security-adviser-russia"), articleManager.getSingleArticle("http://www.dailymail.co.uk/news/article-4221958/Michael-Flynn-compromised-DOJ-warns-White-House.html"), articleManager.getSingleArticle("http://www.telegraph.co.uk/news/2017/03/31/mike-flynn-certainly-has-story-tell-trumps-fired-national-security/"));
+//                List<ClusterHolder> clusterHolder = summaryManager.getUnsummarisedClusters();
+
+//                List<LabelHolder> topics = topicsManager.getAllTopics();
+//
+//                int counter = 1;
+//                for (LabelHolder topic : topics) {
+//                    System.out.println("Starting for " + counter + " out of " + topics.size());
+//                    List<OutletArticle> articles = topic.getArticles();
+//                    List<OutletArticle> newArticles = new ArrayList<>();
+//                    for (OutletArticle article : articles) {
+//                        if (newArticles.stream().noneMatch(a -> a.getArticleUrl().equals(article.getArticleUrl()))) {
+//                            newArticles.add(article);
+//                        }
+//                    }
+//                    topic.setArticles(articles);
+//                }
+//
+//                System.out.println("Reached here");
+
+//////
 ////                LabelHolder labelHolder = new LabelHolder("Michael T. Flynn", articles, new ArrayList<>());
 ////////
 ////                topicsManager.saveTopics(Lists.newArrayList(labelHolder));

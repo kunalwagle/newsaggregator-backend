@@ -121,7 +121,11 @@ public class LabelHolder implements DatabaseStorage {
         if (articles == null) {
             articles = new ArrayList<>();
         }
-        articles.addAll(value);
+        for (OutletArticle art : value) {
+            if (articles.stream().noneMatch(a -> a.getArticleUrl().equals(art.getArticleUrl()))) {
+                articles.add(art);
+            }
+        }
     }
 
     public void setNeedsClustering(boolean needsClustering) {
