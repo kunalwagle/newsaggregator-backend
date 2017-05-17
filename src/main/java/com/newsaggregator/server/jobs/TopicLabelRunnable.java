@@ -28,7 +28,7 @@ public class TopicLabelRunnable implements Runnable {
     public void run() {
 
         Logger logger = Logger.getLogger(getClass());
-        
+
         MongoDatabase db = Utils.getDatabase();
         Articles articles = new Articles(db);
         Topics topics = new Topics(db);
@@ -52,15 +52,19 @@ public class TopicLabelRunnable implements Runnable {
 
             for (OutletArticle article : unlabelledArticles) {
                 logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
-                Topic topic = topicModelling.getModel(article);
-                List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
-                for (String topicLabel : topicLabels) {
-                    List<OutletArticle> arts = articleTopicMap.get(topicLabel);
-                    if (arts == null) {
-                        arts = new ArrayList<>();
+                try {
+                    Topic topic = topicModelling.getModel(article);
+                    List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
+                    for (String topicLabel : topicLabels) {
+                        List<OutletArticle> arts = articleTopicMap.get(topicLabel);
+                        if (arts == null) {
+                            arts = new ArrayList<>();
+                        }
+                        arts.add(article);
+                        articleTopicMap.put(topicLabel, arts);
                     }
-                    arts.add(article);
-                    articleTopicMap.put(topicLabel, arts);
+                } catch (Exception e) {
+                    logger.error("An error in the labelling part of a topic. Moving on", e);
                 }
                 counter++;
             }

@@ -8,7 +8,11 @@ import com.newsaggregator.server.LabelHolder;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +43,8 @@ public class DigestHolder implements DatabaseStorage {
                 articleHolders.addAll(articles);
             }
         }
-        this.articleHolders = articleHolders;
+
+        this.articleHolders = articleHolders.stream().sorted(byLastPublished).limit(10).collect(Collectors.toList());
         this.emailAddress = user.getEmailAddress();
         this.topicCount = subs.size();
     }
@@ -99,4 +104,19 @@ public class DigestHolder implements DatabaseStorage {
         document.put("emailAddress", emailAddress);
         return document;
     }
+
+    Comparator<ArticleHolder> byLastPublished = (left, right) -> {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        try {
+
+            Date leftDate = formatter.parse(left.getClusterHolder().getLastPublished().replaceAll("Z$", "+0000"));
+            Date rightDate = formatter.parse(right.getClusterHolder().getLastPublished().replaceAll("Z$", "+0000"));
+
+            return leftDate.compareTo(rightDate);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 1;
+    };
 }
