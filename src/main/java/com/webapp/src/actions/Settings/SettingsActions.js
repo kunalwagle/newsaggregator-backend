@@ -54,13 +54,13 @@ export const setup = (user) => {
     }
 };
 
-export const save = () => {
+export const save = (topicId) => {
     return (dispatch, getState) => {
         const value = {
             "sources": getState().settings.chosenOutlets,
             "digest": getState().settings.digest,
             "user": getState().loggedIn.user.emailAddress,
-            "topicId": getState().settings.topicId
+            "topicId": topicId
         };
         const data = JSON.stringify(value);
         return fetch(getIPAddress() + "settings", {

@@ -53,7 +53,8 @@ export const TopicSettings = ({chosenOutlets, digests, topic, handleOutletChange
                 <button className="danger-button col-lg-5 col-md-5 col-xs-5 col-sm-5"
                         onClick={() => handleUnsubscribe(topic.labelHolder.id)}>Unsubscribe
                 </button>
-                <button className="search-bar-button col-lg-5 col-md-5 col-xs-5 col-sm-5" onClick={() => handleSave()}>
+                <button className="search-bar-button col-lg-5 col-md-5 col-xs-5 col-sm-5"
+                        onClick={() => handleSave(topic.labelHolder.id)}>
                     Save
                 </button>
             </div>

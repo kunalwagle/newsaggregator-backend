@@ -23,7 +23,7 @@ public class DigestRunnable implements Runnable {
 
         List<DigestHolder> digestHolders = users.stream().map(DigestHolder::new).filter(d -> d.getTopicCount() > 0).collect(Collectors.toList());
 
-
+        System.out.println("Reached here");
 
     }
 }

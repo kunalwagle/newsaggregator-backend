@@ -23,8 +23,8 @@ const mapDispatchToProps = (dispatch) => {
         handleOutletChange: (outlet) => {
             dispatch(outletChange(outlet));
         },
-        handleSave: () => {
-            dispatch(save());
+        handleSave: (topic) => {
+            dispatch(save(topic));
         },
         handleUnsubscribe: (topicId) => {
             dispatch(unsubscribe(topicId))

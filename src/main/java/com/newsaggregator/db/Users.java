@@ -103,9 +103,15 @@ public class Users {
 
         while (iterator.hasNext()) {
             try {
-                String item = iterator.next().toJson();
+                Document document = iterator.next();
+                String address = document.getString("emailAddress");
+                String topicIds = document.getString("topicIds");
                 ObjectMapper objectMapper = new ObjectMapper();
-                users.add(objectMapper.readValue(item, User.class));
+                List<Subscription> subs = objectMapper.readValue(topicIds, objectMapper.getTypeFactory().constructCollectionType(List.class, Subscription.class));
+                User user = new User(address, subs);
+                user.set_id(document.getObjectId("_id"));
+                user.setId(user.get_id().toHexString());
+                users.add(user);
             } catch (Exception e) {
                 logger.error("An error occurred retrieving a single user", e);
             }
