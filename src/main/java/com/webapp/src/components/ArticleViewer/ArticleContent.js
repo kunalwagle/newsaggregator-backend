@@ -3,7 +3,7 @@
  */
 import React from "react";
 import {PageHeader, Image, OverlayTrigger} from "react-bootstrap";
-import {pluck, isEmpty, isEqual} from "underscore";
+import {pluck, isEmpty, isEqual, uniq} from "underscore";
 import {getColour} from "../../UtilityMethods";
 import SentenceSourcesComponent from "./SentenceSourcesComponent";
 
@@ -17,12 +17,18 @@ export const ArticleContent = ({article, sources, topicId, annotations, fetchInP
     }
 
     const getSummary = () => {
+        sources = sources.sort();
+        let uniqsources = uniq(sources, true);
+        let summaryMap = [];
         for (let key in article.summaryMap) {
             if (!article.summaryMap.hasOwnProperty(key)) continue;
-            if ("[" + sources.sort().toString() + "]" === key) {
-                return article.summaryMap[key];
+            if ("[" + sources.toString() + "]" === key) {
+                summaryMap = article.summaryMap[key];
+            } else if ("[" + uniqsources.toString() + "]" === key) {
+                summaryMap = article.summaryMap[key];
             }
         }
+        return summaryMap;
     };
 
     const stripIntoSentences = (summary) => pluck(summary, "sentence");

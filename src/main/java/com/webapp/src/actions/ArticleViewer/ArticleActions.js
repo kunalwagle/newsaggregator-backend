@@ -1,7 +1,7 @@
 /**
  * Created by kunalwagle on 03/05/2017.
  */
-import {map, uniq, intersection} from "underscore";
+import {map, uniq, contains} from "underscore";
 
 export const ANNOTATIONS_CHANGE = "ANNOTATIONS_CHANGE";
 export const CHECKBOX_CHANGE = "CHECKBOX_CHANGE";
@@ -30,9 +30,13 @@ export function defaultCheckboxes(article) {
             return art.source;
         });
 
-        sources = uniq(sources);
+        const finalSources = [];
 
-        const finalSources = intersection(defaultSources, sources);
+        for (let i = 0; i < sources.length; i++) {
+            if (contains(defaultSources, sources[i])) {
+                finalSources.push(sources[i]);
+            }
+        }
 
         return dispatch(checkboxes(finalSources))
     }
