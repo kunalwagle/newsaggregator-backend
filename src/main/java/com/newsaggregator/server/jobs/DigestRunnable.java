@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class DigestRunnable implements Runnable {
 
-    Logger logger = Logger.getLogger(getClass());
+    private Logger logger = Logger.getLogger(getClass());
 
     @Override
     public void run() {
