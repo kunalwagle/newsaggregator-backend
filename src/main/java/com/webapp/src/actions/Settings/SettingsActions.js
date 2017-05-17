@@ -3,6 +3,7 @@
  */
 import {push} from "react-router-redux";
 import {getIPAddress} from "../../UtilityMethods";
+import {login} from "../LoginModalActions";
 
 export const DIGEST_CHANGE = "DIGEST_CHANGE";
 export const OUTLET_CHANGE = "OUTLET_CHANGE";
@@ -35,14 +36,21 @@ export const changeTopic = (topic, index) => {
 export const initialise = () => {
     return (dispatch, getState) => {
         dispatch(push("/settings"));
-        return dispatch(setup(getState().loggedIn.user));
+        if (getState().loggedIn.loggedIn) {
+            return dispatch(login(getState().loggedIn.email, setup));
+        }
     }
 };
 
 export const setup = (user) => {
-    return {
-        type: INITIALISE,
-        topic: user.topics[0]
+    return (dispatch, getState) => {
+        if (user == undefined) {
+            user = getState().loggedIn.user;
+        }
+        return {
+            type: INITIALISE,
+            topic: user.topics[0]
+        }
     }
 };
 
