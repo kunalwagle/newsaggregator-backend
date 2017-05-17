@@ -9,7 +9,6 @@ import com.newsaggregator.ml.summarisation.Summarisation;
 import com.newsaggregator.ml.summarisation.Summary;
 import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -65,7 +64,7 @@ public class Extractive implements Summarisation {
                         if (firstTotal > 0.6) {
                             node.addNode(secondNode);
                         }
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

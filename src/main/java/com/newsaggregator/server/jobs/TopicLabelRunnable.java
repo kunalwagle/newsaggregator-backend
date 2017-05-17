@@ -72,12 +72,14 @@ public class TopicLabelRunnable implements Runnable {
                     String label = labelPair.getKey();
                     LabelHolder labelHolder = topics.getTopic(label);
                     if (labelHolder == null) {
+                        logger.info(" 1 Saving " + counter + " of " + articleTopicMap.entrySet().size());
                         labelHolder = new LabelHolder(label, labelPair.getValue(), new ArrayList<>());
                         labelHolder.setNeedsClustering(true);
                         topics.saveTopics(Lists.newArrayList(labelHolder));
                         counter++;
                         continue;
                     }
+                    logger.info("2 Saving " + counter + " of " + articleTopicMap.entrySet().size());
                     labelHolder.addArticles(labelPair.getValue());
                     labelHolder.setNeedsClustering(true);
                     topics.saveTopic(labelHolder);

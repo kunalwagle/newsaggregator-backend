@@ -105,4 +105,31 @@ public class DigestHolder implements DatabaseStorage {
             return clusterHolder;
         }
     }
+
+    private class ArticleString {
+
+        private String topicId;
+        private String clusterId;
+
+        public ArticleString(String topicId, String clusterId) {
+            this.topicId = topicId;
+            this.clusterId = clusterId;
+        }
+
+        public String getTopicId() {
+            return topicId;
+        }
+
+        public void setTopicId(String topicId) {
+            this.topicId = topicId;
+        }
+
+        public String getClusterId() {
+            return clusterId;
+        }
+
+        public void setClusterId(String clusterId) {
+            this.clusterId = clusterId;
+        }
+    }
 }

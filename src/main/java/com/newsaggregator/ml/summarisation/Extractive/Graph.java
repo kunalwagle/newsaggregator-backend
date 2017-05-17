@@ -7,7 +7,6 @@ import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -94,7 +93,7 @@ public class Graph {
                 connection.setDistance(cosineSimilarity);
             }
             normaliseDistances(max);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -20,15 +20,21 @@ public class ArticleFetchRunnable implements Runnable {
 
         try {
 
+            System.out.println("Starting fetch");
+
             MongoDatabase db = Utils.getDatabase();
             Articles articleManager = new Articles(db);
 
             List<OutletArticle> articleList = ArticleFetch.fetchArticles();
             List<OutletArticle> allArticles = articleManager.getAllArticles();
+            System.out.println("Starting filter");
             articleList.removeIf(art -> allArticles.stream().anyMatch(a -> a.getArticleUrl().equals(art.getArticleUrl())));
             articleList.forEach(outletArticle -> outletArticle.setLabelled(false));
+            System.out.println("Starting save");
 
-            articleManager.saveArticles(articleList);
+            if (articleList.size() > 0) {
+                articleManager.saveArticles(articleList);
+            }
 
         } catch (Exception e) {
             logger.error("Caught an exception in ArticleFetchRunnable", e);
