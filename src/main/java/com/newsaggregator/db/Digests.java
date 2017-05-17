@@ -1,13 +1,12 @@
 package com.newsaggregator.db;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.newsaggregator.base.ArticleHolder;
 import com.newsaggregator.base.DigestHolder;
+import com.newsaggregator.base.DigestString;
 import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -64,21 +63,17 @@ public class Digests {
         }
     }
 
-    public DigestHolder getSingleDigest(String id) {
+    public DigestString getSingleDigest(String id) {
         try {
             BasicDBObject queryObject = new BasicDBObject().append("_id", new ObjectId(id));
             MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             if (iterator.hasNext()) {
                 Document document = iterator.next();
                 String address = document.getString("emailAddress");
-                DigestHolder digestHolder = new DigestHolder();
+                DigestString digestHolder = new DigestString();
                 digestHolder.setEmailAddress(address);
-                ObjectMapper objectMapper = new ObjectMapper();
-                String ah = document.getString("articleHolders");
-                List<ArticleHolder> articleHolders = objectMapper.readValue(ah, objectMapper.getTypeFactory().constructCollectionType(List.class, ArticleHolder.class));
-                digestHolder.set_id(document.getObjectId("_id"));
-                digestHolder.setId(digestHolder.get_id().toHexString());
-                digestHolder.setArticleHolders(articleHolders);
+                digestHolder.setArticleHolders(document.getString("articleHolders"));
+                digestHolder.setId(document.getObjectId("_id").toHexString());
                 return digestHolder;
             }
         } catch (Exception e) {

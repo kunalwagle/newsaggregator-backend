@@ -10,6 +10,10 @@ public class ArticleHolder {
     private String topicId;
     private ClusterHolder clusterHolder;
 
+    public ArticleHolder() {
+
+    }
+
     public ArticleHolder(String topicId, ClusterHolder clusterHolder) {
         this.topicId = topicId;
         this.clusterHolder = clusterHolder;

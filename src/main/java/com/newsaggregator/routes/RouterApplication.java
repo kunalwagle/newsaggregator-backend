@@ -33,6 +33,7 @@ public class RouterApplication extends Application {
         router.attach("/user/subscribe/{user}/{topic}", SubscribeUserResource.class);
         router.attach("/user/unsubscribe/{user}/{topic}", UnsubscribeUserResource.class);
         router.attach("/user/subscriptions/{user}", SubscriptionsResource.class);
+        router.attach("/digest/{digestId}", DigestResource.class);
         return router;
     }
 }

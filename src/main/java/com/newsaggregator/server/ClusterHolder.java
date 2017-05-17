@@ -29,6 +29,10 @@ public class ClusterHolder implements DatabaseStorage {
     private Map<String, List<Node>> summaryMap = new HashMap<>();
     private List<String> labels = new ArrayList<>();
 
+    public ClusterHolder() {
+
+    }
+
     public ClusterHolder(List<OutletArticle> articles) {
         this.articles = articles;
         initialise();

@@ -15,7 +15,7 @@ export default function digest(state, action) {
         return initialState;
     }
 
-    switch (action) {
+    switch (action.type) {
         case DIGEST_STARTED:
             return Object.assign({}, state, {
                 fetchInProgress: true,
@@ -25,7 +25,7 @@ export default function digest(state, action) {
             return Object.assign({}, state, {
                 fetchInProgress: false,
                 fetchInProgressCalled: true,
-                articles: action.json.articleHolders
+                articles: JSON.parse(action.json.articleHolders)
             });
         case DIGEST_CLICKED:
             return initialState;
