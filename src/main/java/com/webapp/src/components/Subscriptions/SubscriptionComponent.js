@@ -5,11 +5,18 @@ import React from "react";
 import {TopicViewerPage} from "../TopicViewer/TopicViewer";
 import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
 
-export const SubscriptionComponent = ({loggedIn, fetchInProgress, topics, index, handleTopicChange}) => {
+export const SubscriptionComponent = ({loggedIn, fetchInProgressLoginCalled, handleReloadLogin, fetchInProgress, topics, index, handleTopicChange}) => {
 
     if (!loggedIn) {
         return (
             <div>You must be logged in to access this feature</div>
+        )
+    }
+
+    if (!fetchInProgressLoginCalled) {
+        handleReloadLogin();
+        return (
+            <div className="loader"></div>
         )
     }
 

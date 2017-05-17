@@ -109,14 +109,18 @@ export function startSubscriptionFetch() {
 }
 
 export function fetchedSubscriptions(json) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         let articles = [];
         if (json.id !== undefined) {
             dispatch(push("/subscription/" + json.id));
             if (json.topics.length > 0) {
                 articles = json.topics[0].clusterHolder;
             }
-            dispatch(subscriptionTabSelected(articles));
+            if (getState().loggedIn.loggedIn) {
+                return dispatch(login(getState().loggedIn.email, subscriptionTabSelected));
+            } else {
+                dispatch(subscriptionTabSelected(articles));
+            }
         }
         return dispatch(populateSubscriptions(json));
     };

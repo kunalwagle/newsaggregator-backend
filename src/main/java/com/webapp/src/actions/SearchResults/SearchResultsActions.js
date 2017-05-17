@@ -48,9 +48,19 @@ export function articlesReceived(json) {
 }
 
 export function subscriptionTabSelected(articles, index) {
-    return {
-        type: SUBSCRIPTION_TAB_SELECTED,
-        articles,
-        index
+    return (dispatch, getState) => {
+        if (index == undefined) {
+            index = 0;
+        }
+
+        if (articles == undefined && getState().loggedIn.user != undefined) {
+            articles = getState().loggedIn.user.topics[0];
+        }
+
+        return {
+            type: SUBSCRIPTION_TAB_SELECTED,
+            articles,
+            index
+        }
     }
 }

@@ -222,6 +222,7 @@ const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCa
         )
     }
 
+
     articles = filter(articles, function (article) {
         return article.articles.length && article.articles[0] != null;
     });
