@@ -4,11 +4,11 @@
 import {PageHeader, OverlayTrigger} from "react-bootstrap";
 import React from "react";
 
-export const DigestTopBar = ({label}) => {
+export const DigestTopBar = () => {
 
     return (
         <div style={{"verticalAlign": "text-bottom"}}>
-            <h1 className="col-md-9 col-lg-9 col-sm-12 col-xs-12 whited">{label}</h1>
+            <h1 className="col-md-9 col-lg-9 col-sm-12 col-xs-12 whited">Your Daily Digest</h1>
         </div>
     );
 };

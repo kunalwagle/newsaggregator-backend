@@ -2,10 +2,12 @@
  * Created by kunalwagle on 18/04/2017.
  */
 import React from "react";
+import DigestPanelContainer from "../../containers/Digest/DigestPanelContainer";
+import {DigestTopBar} from "./DigestTopBar";
 
-export const TopicViewerPage = ({params}) => (
+export const DigestViewerPage = ({params}) => (
     <div>
-        <DigestTopBarContainer digestId={params.digestId}/>
+        <DigestTopBar />
         <br/> <br/><br/>
         <DigestPanelContainer digestId={params.digestId}/>
     </div>

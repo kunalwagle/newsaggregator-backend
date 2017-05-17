@@ -89,7 +89,7 @@ const md = (articles, handleArticleClick) => {
     )
 };
 
-const lg = (articles, handleArticleClick, topicId) => {
+const lg = (articles, handleArticleClick) => {
     const largePanels = articles.slice(0, 2);
     const smallPanels = articles.slice(2);
 
@@ -168,7 +168,7 @@ const sm = (articles, handleArticleClick) => {
     )
 };
 
-const xs = (articles, handleArticleClick, topicId) => {
+const xs = (articles, handleArticleClick) => {
     const largePanels = articles.slice(0, 2);
     const smallPanels = articles.slice(2);
 
@@ -259,4 +259,4 @@ const DigestPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressC
 
 };
 
-export default TopicPanelView;
+export default DigestPanelView;

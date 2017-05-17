@@ -1,7 +1,6 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.jobs.DigestRunnable;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
@@ -49,7 +48,7 @@ public class Main {
 //                scheduleManager.execute(new ClusteringRunnable());
 //                scheduleManager.execute(new SummarisationRunnable());
 //                scheduleManager.execute(new SendEmailRunnable());
-                scheduleManager.execute(new DigestRunnable());
+//                scheduleManager.execute(new DigestRunnable());
 
                 serverInitialised = true;
 
@@ -121,6 +120,13 @@ public class Main {
 //                System.out.println(labelledArticleList.get(i).getLabels().toString());
 //            }
 
+//                Articles articles = new Articles(Utils.getDatabase());
+//                List<OutletArticle> article = Lists.newArrayList(articles.getArticleFromId("591c2759acea8240c68fa08b"));
+//
+//                List<Extractive> extractives = article.stream().map(a -> new Extractive(article)).collect(Collectors.toList());
+//                List<Summary> summaries = extractives.stream().map(Extractive::summarise).collect(Collectors.toList());
+//
+//                System.out.println("Reached here");
 
 ////            TOI ap = new TOI();
 //            List<OutletArticle> articles = new ArrayList<>();

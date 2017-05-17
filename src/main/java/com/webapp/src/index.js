@@ -18,6 +18,7 @@ import {TopicViewerPage} from "./components/TopicViewer/TopicViewer";
 import {ArticleViewerPage} from "./components/ArticleViewer/ArticleViewerPage";
 import {SubscriptionPage} from "./components/Subscriptions/Subscriptions";
 import {TopicsList} from "./components/Settings/TopicsList";
+import {DigestViewerPage} from "./components/Digest/DigestViewer";
 import ReduxToastr from "react-redux-toastr";
 //import {reducers} from './reducers'
 
@@ -69,6 +70,7 @@ class AppProvider extends React.Component {
                             <Route path="topic/:topicId/article/:articleId" component={ArticleViewerPage}/>
                             <Route path="subscription/:userId" component={SubscriptionPage}/>
                             <Route path="settings" component={TopicsList}/>
+                            <Route path="digest/:digestId" component={DigestViewerPage}/>
                         </Route>
                     </Router>
                     <ReduxToastr

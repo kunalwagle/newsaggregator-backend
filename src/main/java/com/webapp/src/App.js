@@ -8,6 +8,7 @@ import topicViewer from "./reducers/TopicViewer/TopicViewerReducers";
 import loggedIn from "./reducers/LoginModalReducers";
 import articleViewer from "./reducers/ArticleViewer/ArticleReducers";
 import settings from "./reducers/Settings/SettingsReducers";
+import digest from "./reducers/Digest/DigestReducers";
 import {routerReducer} from "react-router-redux";
 import {responsiveStateReducer} from "redux-responsive";
 import {combineReducers} from "redux";
@@ -21,6 +22,7 @@ const App = combineReducers({
     loggedIn,
     articleViewer,
     settings,
+    digest,
     toastr: toastrReducer,
     routing: routerReducer,
     browser: responsiveStateReducer

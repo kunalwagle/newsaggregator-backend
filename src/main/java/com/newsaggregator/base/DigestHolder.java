@@ -44,6 +44,7 @@ public class DigestHolder implements DatabaseStorage {
             }
         }
 
+
         this.articleHolders = articleHolders.stream().sorted(byLastPublished).limit(10).collect(Collectors.toList());
         this.emailAddress = user.getEmailAddress();
         this.topicCount = subs.size();
