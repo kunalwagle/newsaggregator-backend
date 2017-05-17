@@ -43,21 +43,24 @@ public class ClusteringRunnable implements Runnable {
             int counter = 1;
             for (LabelHolder labelHolder : labelHolders) {
                 logger.info("Clustering " + counter + " of " + labelHolders.size());
-                labelHolder.setClusters(new ArrayList<>());
-                Clusterer clusterer = new Clusterer(labelHolder.getArticles());
-                List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
-                logger.info("Clustering " + counter + " of " + labelHolders.size());
-                for (Cluster<ArticleVector> cluster : newClusters) {
-                    List<OutletArticle> clusterArticles = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
-                    if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(clusterArticles))) {
-                        logger.info("1 Clustering " + counter + " of " + labelHolders.size());
-                        ClusterHolder clusterHolder = new ClusterHolder(clusterArticles);
-                        clusters.add(clusterHolder);
-                        brandNewClusters.add(clusterHolder);
-                        labelHolder.addCluster(clusterHolder);
-                    } else {
-                        logger.info("2 Clustering " + counter + " of " + labelHolders.size());
-                        labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(clusterArticles)).findAny().get());
+                logger.info("Number of articles: " + labelHolder.getArticles().size());
+                if (labelHolder.getArticles().size() > 0) {
+                    labelHolder.setClusters(new ArrayList<>());
+                    Clusterer clusterer = new Clusterer(labelHolder.getArticles());
+                    List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
+                    logger.info("Clustering " + counter + " of " + labelHolders.size());
+                    for (Cluster<ArticleVector> cluster : newClusters) {
+                        List<OutletArticle> clusterArticles = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
+                        if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(clusterArticles))) {
+                            logger.info("1 Clustering " + counter + " of " + labelHolders.size());
+                            ClusterHolder clusterHolder = new ClusterHolder(clusterArticles);
+                            clusters.add(clusterHolder);
+                            brandNewClusters.add(clusterHolder);
+                            labelHolder.addCluster(clusterHolder);
+                        } else {
+                            logger.info("2 Clustering " + counter + " of " + labelHolders.size());
+                            labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(clusterArticles)).findAny().get());
+                        }
                     }
                 }
                 labelHolder.setNeedsClustering(false);

@@ -95,6 +95,25 @@ public class Users {
         return null;
     }
 
+    public List<User> getAllUsers() {
+
+        MongoCursor<Document> iterator = collection.find().iterator();
+
+        List<User> users = new ArrayList<>();
+
+        while (iterator.hasNext()) {
+            try {
+                String item = iterator.next().toJson();
+                ObjectMapper objectMapper = new ObjectMapper();
+                users.add(objectMapper.readValue(item, User.class));
+            } catch (Exception e) {
+                logger.error("An error occurred retrieving a single user", e);
+            }
+        }
+
+        return users;
+    }
+
     private MongoCollection<Document> getCollection() {
         return database.getCollection("Users");
     }

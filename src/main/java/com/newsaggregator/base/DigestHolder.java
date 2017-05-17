@@ -20,6 +20,7 @@ public class DigestHolder implements DatabaseStorage {
     private ObjectId _id;
     private String id;
     private String emailAddress;
+    private int topicCount;
     private List<ArticleHolder> articleHolders;
 
     public DigestHolder() {
@@ -40,6 +41,11 @@ public class DigestHolder implements DatabaseStorage {
         }
         this.articleHolders = articleHolders;
         this.emailAddress = user.getEmailAddress();
+        this.topicCount = subs.size();
+    }
+
+    public int getTopicCount() {
+        return topicCount;
     }
 
     public String getEmailAddress() {
