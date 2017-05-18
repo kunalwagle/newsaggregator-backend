@@ -13,6 +13,7 @@ import com.newsaggregator.base.TopicWord;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class TopicModelling {
         nounifier = new ExtractSentenceTypes();
     }
 
-    public List<TopicLabel> trainTopics(List<OutletArticle> articleList) throws Exception {
+    public void trainTopics(List<OutletArticle> articleList) throws Exception {
 
         logger.info("Starting to train topics");
 
@@ -53,16 +54,17 @@ public class TopicModelling {
         FeatureSequence tokens = (FeatureSequence) model.getData().get(0).instance.getData();
         LabelSequence topics = model.getData().get(0).topicSequence;
 
-        List<TopicLabel> topicList = generateTopics(model.getSortedWords(), numTopics, dataAlphabet);
-
-
         Formatter out = new Formatter(new StringBuilder(), Locale.US);
         for (int position = 0; position < tokens.getLength(); position++) {
             out.format("%s-%d ", dataAlphabet.lookupObject(tokens.getIndexAtPosition(position)), topics.getIndexAtPosition(position));
         }
         logger.info(out);
 
-        return topicList;
+        File file = new File("./model");
+
+        file.createNewFile();
+
+        model.write(file);
     }
 
     private InstanceList getInstances() throws Exception {
@@ -77,40 +79,52 @@ public class TopicModelling {
 
     public Topic getModel(OutletArticle article) {
 
-        String document = article.getBody();
-
-        String title = nounifier.nounifyDocument(article.getTitle());
-
-        String nounifiedDocument = nounifier.nounifyDocument(document);
-
-        InstanceList testing = new InstanceList(instances.getPipe());
-        testing.addThruPipe(new Instance(nounifiedDocument, null, "document", null));
-
-        TopicInferencer inferencer = model.getInferencer();
-        double[] testProbabilities = inferencer.getSampledDistribution(testing.get(0), 2500, 40, 50);
-        List<TopicLabel> labels = new ArrayList<>(generateTopics(model.getSortedWords(), numTopics, dataAlphabet));
-        for (int i = 0; i < testProbabilities.length; i++) {
-            int finalI = i;
-            TopicLabel label = labels.stream().filter(topicLabel -> topicLabel.getLabel().equals("Topic" + finalI)).findFirst().get();
-            label.getTopic().getTopWords().forEach(topicWord -> topicWord.setDistribution(testProbabilities[finalI]));
-        }
-        List<TopicWord> allWords = getAllWords(labels);
-        List<TopicWord> topWords = allWords.stream().filter(topicWord -> isInArticle(topicWord.getWord(), document)).sorted(Comparator.comparing(TopicWord::getDistribution).reversed()).limit(10).collect(Collectors.toList());
-        List<TopicWord> titleWords = new ArrayList<>();
-
         try {
-            titleWords = Arrays.stream(title.split(" ")).map(string -> new TopicWord(string, topWords.get(0).getDistribution() * 2)).collect(Collectors.toList());
-        } catch (Exception e) {
-            logger.error("Got an exception in topic modelling, but can continue", e);
-        }
 
-        titleWords.addAll(topWords);
-        List<TopicWord> finalWords = titleWords.stream().limit(10).collect(Collectors.toList());
+            File file = new File("./model");
+            model = ParallelTopicModel.read(file);
+
+            String document = article.getBody();
+
+            String title = nounifier.nounifyDocument(article.getTitle());
+
+            String nounifiedDocument = nounifier.nounifyDocument(document);
+
+            dataAlphabet = model.getAlphabet();
+
+            InstanceList testing = new InstanceList(instances.getPipe());
+            testing.addThruPipe(new Instance(nounifiedDocument, null, "document", null));
+
+            TopicInferencer inferencer = model.getInferencer();
+            double[] testProbabilities = inferencer.getSampledDistribution(testing.get(0), 2500, 40, 50);
+            List<TopicLabel> labels = new ArrayList<>(generateTopics(model.getSortedWords(), numTopics, dataAlphabet));
+            for (int i = 0; i < testProbabilities.length; i++) {
+                int finalI = i;
+                TopicLabel label = labels.stream().filter(topicLabel -> topicLabel.getLabel().equals("Topic" + finalI)).findFirst().get();
+                label.getTopic().getTopWords().forEach(topicWord -> topicWord.setDistribution(testProbabilities[finalI]));
+            }
+            List<TopicWord> allWords = getAllWords(labels);
+            List<TopicWord> topWords = allWords.stream().filter(topicWord -> isInArticle(topicWord.getWord(), document)).sorted(Comparator.comparing(TopicWord::getDistribution).reversed()).limit(10).collect(Collectors.toList());
+            List<TopicWord> titleWords = new ArrayList<>();
+
+            try {
+                titleWords = Arrays.stream(title.split(" ")).map(string -> new TopicWord(string, topWords.get(0).getDistribution() * 2)).collect(Collectors.toList());
+            } catch (Exception e) {
+                logger.error("Got an exception in topic modelling, but can continue", e);
+            }
+
+            titleWords.addAll(topWords);
+            List<TopicWord> finalWords = titleWords.stream().limit(10).collect(Collectors.toList());
 
 //        for (TopicWord word : finalWords) {
 //            logger.info(word.getWord());
 //        }
-        return new Topic(finalWords);
+            return new Topic(finalWords);
+
+        } catch (Exception e) {
+            logger.error("Got an error in topic modelling. This is a real issue", e);
+            return new Topic(new ArrayList<>());
+        }
     }
 
     private boolean isInArticle(String word, String document) {

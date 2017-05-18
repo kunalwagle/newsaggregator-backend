@@ -9,7 +9,6 @@ import com.newsaggregator.db.Articles;
 import com.newsaggregator.db.Topics;
 import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.ml.modelling.TopicModelling;
-import com.newsaggregator.server.ArticleFetch;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
@@ -35,14 +34,6 @@ public class TopicLabelRunnable implements Runnable {
 
         try {
             TopicModelling topicModelling = new TopicModelling();
-
-            List<OutletArticle> modelArticles = articles.getAllArticles();
-
-            if (modelArticles.size() == 0) {
-                modelArticles = ArticleFetch.fetchArticles();
-            }
-
-            topicModelling.trainTopics(modelArticles);
 
             List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles().stream().limit(15).collect(Collectors.toList());
 
