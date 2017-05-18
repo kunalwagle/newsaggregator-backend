@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -37,7 +38,7 @@ public class ClusteringRunnable implements Runnable {
             List<LabelHolder> labelHolders = topics.getClusteringTopics().stream().limit(15).collect(Collectors.toList());
 
 
-            List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
+            List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
             List<ClusterHolder> brandNewClusters = new ArrayList<>();
 
             int counter = 1;
@@ -50,7 +51,7 @@ public class ClusteringRunnable implements Runnable {
                     List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
                     logger.info("Clustering " + counter + " of " + labelHolders.size());
                     for (Cluster<ArticleVector> cluster : newClusters) {
-                        List<OutletArticle> clusterArticles = cluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
+                        List<OutletArticle> clusterArticles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
                         if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(clusterArticles))) {
                             logger.info("1 Clustering " + counter + " of " + labelHolders.size());
                             ClusterHolder clusterHolder = new ClusterHolder(clusterArticles);

@@ -121,8 +121,12 @@ public class Summaries {
 
     public void updateSummaries(List<ClusterHolder> clusters) {
         for (ClusterHolder clusterHolder : clusters) {
-            Document document = clusterHolder.createDocument();
-            collection.replaceOne(new BasicDBObject().append("_id", clusterHolder.get_id()), document);
+            try {
+                Document document = clusterHolder.createDocument();
+                collection.replaceOne(new BasicDBObject().append("_id", clusterHolder.get_id()), document);
+            } catch (Exception e) {
+                logger.error("Failed whilst trying to update a cluster", e);
+            }
         }
     }
 

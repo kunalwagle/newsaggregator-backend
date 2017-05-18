@@ -8,6 +8,7 @@ import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.summarisation.Summarisation;
 import com.newsaggregator.ml.summarisation.Summary;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,16 +28,21 @@ public class Extractive implements Summarisation {
 
     @Override
     public Summary summarise() {
-        Graph graph = createGraph();
-        graph = applyCosineSimilarities(graph, texts);
-        graph = filterGraph(graph);
-        List<Node> finalNodes = applyPageRank(graph);
-        finalNodes = getRelatedNodes(finalNodes);
-        graph = new Graph();
-        finalNodes = fixQuotationOrdering(finalNodes);
-        finalNodes = generateFinalStringFromList(finalNodes, getSize(finalNodes));
-        graph.addNodes(finalNodes);
-        return new Summary(graph.getNodes(), generateFinalString(finalNodes), articles);
+        try {
+            Graph graph = createGraph();
+            graph = applyCosineSimilarities(graph, texts);
+            graph = filterGraph(graph);
+            List<Node> finalNodes = applyPageRank(graph);
+            finalNodes = getRelatedNodes(finalNodes);
+            graph = new Graph();
+            finalNodes = fixQuotationOrdering(finalNodes);
+            finalNodes = generateFinalStringFromList(finalNodes, getSize(finalNodes));
+            graph.addNodes(finalNodes);
+            return new Summary(graph.getNodes(), generateFinalString(finalNodes), articles);
+        } catch (Exception e) {
+            Logger.getLogger(getClass()).error("An error in summarisation", e);
+            return null;
+        }
     }
 
     private List<Node> getRelatedNodes(List<Node> strippedNodes) {

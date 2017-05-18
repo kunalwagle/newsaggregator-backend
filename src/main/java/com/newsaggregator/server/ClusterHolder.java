@@ -87,9 +87,12 @@ public class ClusterHolder implements DatabaseStorage {
     }
 
     public boolean sameCluster(List<OutletArticle> holder) {
-        List<String> otherUrls = holder.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
-        List<String> theseUrls = articles.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
-        return otherUrls.size() == theseUrls.size() && theseUrls.stream().allMatch(otherUrls::contains);
+        if (holder != null) {
+            List<String> otherUrls = holder.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
+            List<String> theseUrls = articles.stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
+            return otherUrls.size() == theseUrls.size() && theseUrls.stream().allMatch(otherUrls::contains);
+        }
+        return false;
     }
 
     public void set_id(ObjectId _id) {

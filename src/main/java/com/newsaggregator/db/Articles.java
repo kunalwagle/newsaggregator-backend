@@ -36,9 +36,13 @@ public class Articles {
 
     public void updateArticles(List<OutletArticle> articles) {
         for (OutletArticle article : articles) {
-            Document document = article.createDocument();
-            if (document != null) {
-                collection.replaceOne(new BasicDBObject().append("_id", article.get_id()), document);
+            try {
+                Document document = article.createDocument();
+                if (document != null) {
+                    collection.replaceOne(new BasicDBObject().append("_id", article.get_id()), document);
+                }
+            } catch (Exception e) {
+                logger.error("Failed whilst trying to update an article", e);
             }
         }
     }

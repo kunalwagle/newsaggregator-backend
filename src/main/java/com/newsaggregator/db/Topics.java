@@ -213,8 +213,12 @@ public class Topics {
 
     public void updateTopics(List<LabelHolder> labelHolders) {
         for (LabelHolder labelHolder : labelHolders) {
-            Document document = labelHolder.createDocument();
-            collection.replaceOne(new BasicDBObject().append("_id", labelHolder.get_id()), document);
+            try {
+                Document document = labelHolder.createDocument();
+                collection.replaceOne(new BasicDBObject().append("_id", labelHolder.get_id()), document);
+            } catch (Exception e) {
+                logger.error("Failed whilst trying to update a topic", e);
+            }
         }
     }
 }
