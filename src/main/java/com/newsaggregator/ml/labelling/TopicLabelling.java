@@ -16,32 +16,34 @@ public class TopicLabelling {
 
     public static List<String> generateTopicLabel(Topic model, OutletArticle outletArticle) {
 
-        List<String> primaryLabels = new ArrayList<>();
-        List<String> secondaryLabels = new ArrayList<>();
-        List<TopicWord> topicWords = model.getTopWords();
-        List<CandidateLabel> primaryCandidates = new ArrayList<>();
-        List<String> nameCandidates = new ArrayList<>();
+        try {
 
-        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
-        List<String> names = extractSentenceTypes.nameFinder(outletArticle.getBody());
+            List<String> primaryLabels = new ArrayList<>();
+            List<String> secondaryLabels = new ArrayList<>();
+            List<TopicWord> topicWords = model.getTopWords();
+            List<CandidateLabel> primaryCandidates = new ArrayList<>();
+            List<String> nameCandidates = new ArrayList<>();
 
-        for (String topicWord : names) {
-            String article = Wikipedia.getNearMatchArticle(topicWord);
-            if (article != null) {
-                nameCandidates.add(article);
+            ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+            List<String> names = extractSentenceTypes.nameFinder(outletArticle.getBody());
+
+            for (String topicWord : names) {
+                String article = Wikipedia.getNearMatchArticle(topicWord);
+                if (article != null) {
+                    nameCandidates.add(article);
+                }
+                //primaryLabels.addAll(extractTitles(Wikipedia.getArticles(topicWord.getWord())));
             }
-            //primaryLabels.addAll(extractTitles(Wikipedia.getArticles(topicWord.getWord())));
-        }
 
-        for (TopicWord topicWord : topicWords) {
-            List<WikipediaArticle> articles = Wikipedia.getArticles(topicWord.getWord(), 8);
-            for (WikipediaArticle article : articles) {
-                primaryCandidates.add(new CandidateLabel(article.getTitle(), article, topicWord.getDistribution()));
+            for (TopicWord topicWord : topicWords) {
+                List<WikipediaArticle> articles = Wikipedia.getArticles(topicWord.getWord(), 8);
+                for (WikipediaArticle article : articles) {
+                    primaryCandidates.add(new CandidateLabel(article.getTitle(), article, topicWord.getDistribution()));
+                }
+                //primaryLabels.addAll(extractTitles(Wikipedia.getArticles(topicWord.getWord())));
             }
-            //primaryLabels.addAll(extractTitles(Wikipedia.getArticles(topicWord.getWord())));
-        }
 
-        //List<CandidateLabel> primaryCandidates = primaryLabels.parallelStream().map(label -> new CandidateLabel(label, Wikipedia.getNearMatchArticle(label))).collect(Collectors.toList());
+            //List<CandidateLabel> primaryCandidates = primaryLabels.parallelStream().map(label -> new CandidateLabel(label, Wikipedia.getNearMatchArticle(label))).collect(Collectors.toList());
 
 //        for (String primaryLabel : primaryLabels) {
 //            secondaryLabels.addAll(isolateNounChunks(primaryLabel));
@@ -56,11 +58,15 @@ public class TopicLabelling {
 //        primaryCandidates.addAll(secondaryCandidates);
 
 
-        List<String> results = performCandidateRanking(primaryCandidates, topicWords, outletArticle);
+            List<String> results = performCandidateRanking(primaryCandidates, topicWords, outletArticle);
 
-        nameCandidates.addAll(results);
+            nameCandidates.addAll(results);
 
-        return nameCandidates;
+            return nameCandidates;
+        } catch (Exception e) {
+            Logger.getLogger(TopicLabelling.class).error("An error in labelling", e);
+            return null;
+        }
     }
 
     private static boolean secondaryLabelViable(List<CandidateLabel> primaryCandidates, CandidateLabel secondaryCandidate) {
