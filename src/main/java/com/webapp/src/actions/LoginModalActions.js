@@ -62,7 +62,7 @@ export function logout() {
 export function subscribe(topic, email) {
     return (dispatch, getState) => {
         if (email == undefined) {
-            email = getState().loggedIn.user.emailAddress;
+            email = getState().loggedIn.email;
         }
         return fetch(getIPAddress() + "user/subscribe/" + email + "/" + topic)
             .then(response => response.json())
@@ -73,7 +73,7 @@ export function subscribe(topic, email) {
 export function unsubscribe(topic, email) {
     return (dispatch, getState) => {
         if (email == undefined) {
-            email = getState().loggedIn.user.emailAddress;
+            email = getState().loggedIn.email;
         }
         return fetch(getIPAddress() + "user/unsubscribe/" + email + "/" + topic)
             .then(response => response.json())

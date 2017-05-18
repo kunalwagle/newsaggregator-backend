@@ -5,7 +5,7 @@ import {allOutlets, getPublicationName} from "../../UtilityMethods";
 import {contains} from "underscore";
 import React from "react";
 
-export const TopicSettings = ({chosenOutlets, digests, topic, handleOutletChange, handleDigestChange, handleSave, handleUnsubscribe}) => {
+export const TopicSettings = ({chosenOutlets, digest, topic, handleOutletChange, handleDigestChange, handleSave, handleUnsubscribe}) => {
 
     if (topic == undefined) {
         return (<div></div>)
@@ -42,8 +42,8 @@ export const TopicSettings = ({chosenOutlets, digests, topic, handleOutletChange
                 </div>
                 <div className="col-lg-4 col-md-4 col-xs-4 col-sm-4 pull-right">
                     <label className="switch">
-                        <input type="checkbox" checked={digests}
-                               onChange={event => handleDigestChange(digests)}/>
+                        <input type="checkbox" checked={digest}
+                               onChange={event => handleDigestChange(digest)}/>
                         <div className="slider round"></div>
                     </label>
                 </div>

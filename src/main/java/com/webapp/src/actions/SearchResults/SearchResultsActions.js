@@ -17,7 +17,7 @@ export function viewClicked(title, topic) {
             dispatch(push("/topic/" + title));
         }
         if (getState().loggedIn.loggedIn) {
-            title = title + "/user/" + getState().loggedIn.user.emailAddress;
+            title = title + "/user/" + getState().loggedIn.email;
         }
         return fetch(getIPAddress() + "topic/" + title)
             .then(response => response.json())
@@ -26,8 +26,11 @@ export function viewClicked(title, topic) {
 }
 
 export function articleClicked(title) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch(viewStarted());
+        if (getState().loggedIn.loggedIn) {
+            title = title + "/user/" + getState().loggedIn.email;
+        }
         return fetch(getIPAddress() + "topic/" + title)
             .then(response => response.json())
             .then(json => dispatch(articlesReceived(json)))
@@ -57,10 +60,15 @@ export function subscriptionTabSelected(articles, index) {
             articles = getState().loggedIn.user.topics[0];
         }
 
-        return {
-            type: SUBSCRIPTION_TAB_SELECTED,
-            articles,
-            index
-        }
+        return dispatch(changeTab(articles, index));
+
+    }
+}
+
+export function changeTab(articles, index) {
+    return {
+        type: SUBSCRIPTION_TAB_SELECTED,
+        articles,
+        index
     }
 }

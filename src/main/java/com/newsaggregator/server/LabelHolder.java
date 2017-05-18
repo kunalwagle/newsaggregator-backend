@@ -1,9 +1,7 @@
 package com.newsaggregator.server;
 
-import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.DatabaseStorage;
 import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.ml.clustering.Cluster;
 import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -52,8 +50,8 @@ public class LabelHolder implements DatabaseStorage {
         articles.add(article);
     }
 
-    public boolean clusterExists(Cluster<ArticleVector> otherCluster) {
-        List<OutletArticle> otherArticles = otherCluster.getClusterItems().stream().map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
+    private boolean clusterExists(ClusterHolder otherCluster) {
+        List<OutletArticle> otherArticles = otherCluster.getArticles().stream().filter(Objects::nonNull).collect(Collectors.toList());
         return clusters.stream().anyMatch(ch -> ch.sameCluster(otherArticles));
     }
 
@@ -69,7 +67,9 @@ public class LabelHolder implements DatabaseStorage {
         if (clusters == null) {
             clusters = new ArrayList<>();
         }
-        clusters.add(articlesForSummary);
+        if (!clusterExists(articlesForSummary)) {
+            clusters.add(articlesForSummary);
+        }
     }
 
     public ObjectId get_id() {
