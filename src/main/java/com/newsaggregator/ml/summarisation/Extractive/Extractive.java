@@ -22,7 +22,7 @@ public class Extractive implements Summarisation {
 
     public Extractive(List<OutletArticle> articles) {
         this.articles = articles;
-        this.texts = articles.stream().map(OutletArticle::getBody).collect(Collectors.toList());
+        this.texts = articles.stream().map(OutletArticle::getBody).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Extractive implements Summarisation {
 
     private String generateFinalString(List<Node> strippedNodes) {
 //        List<String> finalStrings = stripClausesAndSentences(strippedNodes, strippedNodes.stream().map(Node::getSentence).collect(Collectors.toList()));
-        return Combiner.combineStrings(strippedNodes.stream().map(Node::getSentence).collect(Collectors.toList()));
+        return Combiner.combineStrings(strippedNodes.stream().map(Node::getSentence).filter(Objects::nonNull).collect(Collectors.toList()));
     }
 
     private List<Node> fixQuotationOrdering(List<Node> nodes) {
