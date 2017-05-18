@@ -27,6 +27,20 @@ public class DigestHolder implements DatabaseStorage {
     private String emailAddress;
     private int topicCount;
     private List<ArticleHolder> articleHolders;
+    private Comparator<ArticleHolder> byLastPublished = (left, right) -> {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        try {
+
+            Date leftDate = formatter.parse(left.getClusterHolder().getLastPublished().replaceAll("Z$", "+0000"));
+            Date rightDate = formatter.parse(right.getClusterHolder().getLastPublished().replaceAll("Z$", "+0000"));
+
+            return leftDate.compareTo(rightDate);
+
+        } catch (ParseException e) {
+            Logger.getLogger(getClass()).error("Error in last published", e);
+        }
+        return 1;
+    };
 
     public DigestHolder() {
 
@@ -42,6 +56,7 @@ public class DigestHolder implements DatabaseStorage {
             List<ArticleHolder> articles = labelHolder.getClusters().stream().map(c -> new ArticleHolder(topicId, c)).collect(Collectors.toList());
             if (articles != null && articles.size() > 0) {
                 articleHolders.addAll(articles);
+                articleHolders = distinct(articleHolders);
             }
         }
 
@@ -49,6 +64,16 @@ public class DigestHolder implements DatabaseStorage {
         this.articleHolders = articleHolders.stream().sorted(byLastPublished).limit(10).collect(Collectors.toList());
         this.emailAddress = user.getEmailAddress();
         this.topicCount = subs.size();
+    }
+
+    private List<ArticleHolder> distinct(List<ArticleHolder> articleHolders) {
+        List<ArticleHolder> newArticleHolders = new ArrayList<>();
+        for (ArticleHolder articleHolder : articleHolders) {
+            if (newArticleHolders.stream().noneMatch(a -> a.getClusterHolder().getId().equals(articleHolder.getClusterHolder().getId()))) {
+                newArticleHolders.add(articleHolder);
+            }
+        }
+        return newArticleHolders;
     }
 
     public int getTopicCount() {
@@ -107,19 +132,4 @@ public class DigestHolder implements DatabaseStorage {
         document.put("emailAddress", emailAddress);
         return document;
     }
-
-    Comparator<ArticleHolder> byLastPublished = (left, right) -> {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        try {
-
-            Date leftDate = formatter.parse(left.getClusterHolder().getLastPublished().replaceAll("Z$", "+0000"));
-            Date rightDate = formatter.parse(right.getClusterHolder().getLastPublished().replaceAll("Z$", "+0000"));
-
-            return leftDate.compareTo(rightDate);
-
-        } catch (ParseException e) {
-            Logger.getLogger(getClass()).error("Error in last published", e);
-        }
-        return 1;
-    };
 }
