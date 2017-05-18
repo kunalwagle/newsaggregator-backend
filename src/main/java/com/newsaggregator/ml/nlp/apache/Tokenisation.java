@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -47,7 +48,7 @@ public class Tokenisation {
 
         Tokenizer finalTokeniser = tokeniser;
         if (finalTokeniser != null) {
-            return sentenceList.stream().map(finalTokeniser::tokenize).map(Arrays::asList).flatMap(List::stream).collect(Collectors.toList());
+            return sentenceList.stream().map(finalTokeniser::tokenize).filter(Objects::nonNull).map(Arrays::asList).flatMap(List::stream).collect(Collectors.toList());
         }
         return null;
     }
