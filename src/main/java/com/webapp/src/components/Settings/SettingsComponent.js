@@ -2,14 +2,32 @@
  * Created by kunalwagle on 21/04/2017.
  */
 import React from "react";
-import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
+import {Tab, NavItem, Row, Col, Nav, OverlayTrigger} from "react-bootstrap";
+import LoginModal from "../LoginModal";
 import TopicSettingsContainer from "../../containers/Settings/TopicSettingsContainer";
 
-export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLoginCalled, fetchInProgressCalled, user, index, handleLogout, handleReloadLogin, handleTopicChange, handleReloadNeeded}) => {
+export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLoginCalled, fetchInProgressCalled, user, index, handleLogout, handleReloadLogin, handleTopicChange, handleLoginClicked, handleSettingsSearch, handleReloadNeeded}) => {
+
+    const loginPopover = (handleLoginClicked, action) => {
+        return (
+            <LoginModal handleLoginClicked={handleLoginClicked} action={action}/>
+        );
+    };
 
     if (!loggedIn) {
         return (
-            <div className="nothing">You must be logged in to access this feature</div>
+            <div>
+                <div className="nothing">You must be logged in to access this feature.
+                    <br/><br/>
+                    <h3>How about registering now? It's simple</h3>
+                    <br/><br/>
+                    <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
+                                    overlay={loginPopover(handleLoginClicked, handleSettingsSearch)}>
+                        <button className="search-bar-button">Register or Login</button>
+                    </OverlayTrigger>
+                </div>
+            </div>
+
         )
     }
 
