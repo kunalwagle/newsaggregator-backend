@@ -1,9 +1,16 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
+import com.newsaggregator.server.jobs.*;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -35,13 +42,24 @@ public class Main {
 //                new TopicModelling();
 
                 TaskService scheduleManager = new TaskService();
+
+                LocalDateTime localNow = LocalDateTime.now();
+                ZoneId currentZone = ZoneId.of("Europe/London");
+                ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
+                ZonedDateTime zonedNext5;
+                zonedNext5 = zonedNow.withHour(19).withMinute(0).withSecond(0);
+                if (zonedNow.compareTo(zonedNext5) > 0)
+                    zonedNext5 = zonedNext5.plusDays(1);
+
+                Duration duration = Duration.between(zonedNow, zonedNext5);
+                long initalDelay = duration.getSeconds();
 //
-//                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
-//                scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 1L, 1L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleWithFixedDelay(new SummarisationRunnable(), 1L, 1L, TimeUnit.MINUTES);
-////                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 1L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 30L, TimeUnit.MINUTES);
+                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
+                scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
+                scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 1L, 1L, TimeUnit.MINUTES);
+                scheduleManager.scheduleWithFixedDelay(new SummarisationRunnable(), 1L, 1L, TimeUnit.MINUTES);
+                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 30L, TimeUnit.MINUTES);
+                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initalDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 
 //                scheduleManager.execute(new ArticleFetchRunnable());
 //                scheduleManager.execute(new TopicLabelRunnable());
