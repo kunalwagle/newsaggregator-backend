@@ -4,11 +4,13 @@ import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.DatabaseStorage;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.clustering.Cluster;
+import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -99,16 +101,20 @@ public class LabelHolder implements DatabaseStorage {
     @Override
     public Document createDocument() {
         Document document = new Document();
-        if (_id == null) {
-            this._id = new ObjectId();
-        }
-        document.put("_id", _id);
-        document.put("Label", label);
-        document.put("Articles", articles.stream().map(OutletArticle::get_id).collect(Collectors.toList()));
-        document.put("Clusters", clusters.stream().map(ClusterHolder::get_id).collect(Collectors.toList()));
-        document.put("NeedsClustering", needsClustering);
-        if (imageUrl != null) {
-            document.put("imageUrl", imageUrl);
+        try {
+            if (_id == null) {
+                this._id = new ObjectId();
+            }
+            document.put("_id", _id);
+            document.put("Label", label);
+            document.put("Articles", articles.stream().map(OutletArticle::get_id).filter(Objects::nonNull).collect(Collectors.toList()));
+            document.put("Clusters", clusters.stream().map(ClusterHolder::get_id).collect(Collectors.toList()));
+            document.put("NeedsClustering", needsClustering);
+            if (imageUrl != null) {
+                document.put("imageUrl", imageUrl);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass()).error("Got exception creating topic doc, but it's fine", e);
         }
         return document;
     }

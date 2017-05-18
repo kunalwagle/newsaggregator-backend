@@ -1,5 +1,6 @@
 package com.newsaggregator.base;
 
+import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -75,19 +76,24 @@ public class OutletArticle extends Article implements DatabaseStorage {
 
     @Override
     public Document createDocument() {
-        Document doc = new Document();
-        if (_id == null) {
-            this._id = new ObjectId();
-        }
-        doc.put("_id", _id);
-        doc.put("Title", title);
-        doc.put("Body", body);
-        doc.put("ImageURL", imageUrl);
-        doc.put("ArticleURL", articleUrl);
-        doc.put("Source", source);
-        doc.put("LastPublished", lastPublished);
-        doc.put("isLabelled", isLabelled);
+        try {
+            Document doc = new Document();
+            if (_id == null) {
+                this._id = new ObjectId();
+            }
+            doc.put("_id", _id);
+            doc.put("Title", title);
+            doc.put("Body", body);
+            doc.put("ImageURL", imageUrl);
+            doc.put("ArticleURL", articleUrl);
+            doc.put("Source", source);
+            doc.put("LastPublished", lastPublished);
+            doc.put("isLabelled", isLabelled);
 
-        return doc;
+            return doc;
+        } catch (Exception e) {
+            Logger.getLogger(getClass()).error("Got exception creating article doc, but it's fine", e);
+            return null;
+        }
     }
 }

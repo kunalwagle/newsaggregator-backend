@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Topics {
@@ -31,7 +32,7 @@ public class Topics {
     }
 
     public void saveTopics(Collection<LabelHolder> topics) {
-        List<Document> documents = topics.stream().map(LabelHolder::createDocument).collect(Collectors.toList());
+        List<Document> documents = topics.stream().map(LabelHolder::createDocument).filter(Objects::nonNull).collect(Collectors.toList());
         collection.insertMany(documents);
     }
 
@@ -151,7 +152,7 @@ public class Topics {
     }
 
     public void removeTopics(List<LabelHolder> topics) {
-        List<ObjectId> objectIds = topics.stream().map(LabelHolder::get_id).collect(Collectors.toList());
+        List<ObjectId> objectIds = topics.stream().map(LabelHolder::get_id).filter(Objects::nonNull).collect(Collectors.toList());
         BasicDBList list = new BasicDBList();
         list.addAll(objectIds);
         BasicDBObject inClause = new BasicDBObject("$in", list);

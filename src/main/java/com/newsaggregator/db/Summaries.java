@@ -38,7 +38,7 @@ public class Summaries {
 
     public void saveSummaries(List<ClusterHolder> clusterHolders) {
         MongoCollection<Document> articleCollection = getCollection();
-        List<Document> documents = clusterHolders.stream().map(ClusterHolder::createDocument).collect(Collectors.toList());
+        List<Document> documents = clusterHolders.stream().map(ClusterHolder::createDocument).filter(Objects::nonNull).collect(Collectors.toList());
         documents = documents.stream().filter(Objects::nonNull).collect(Collectors.toList());
         articleCollection.insertMany(documents);
     }

@@ -6,6 +6,7 @@ import com.newsaggregator.base.Outlet;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.summarisation.Extractive.Node;
 import com.newsaggregator.ml.summarisation.Summary;
+import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -143,7 +144,7 @@ public class ClusterHolder implements DatabaseStorage {
             ObjectMapper objectMapper = new ObjectMapper();
             document.put("Summaries", objectMapper.writeValueAsString(summaryMap));
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(getClass()).error("Got exception creating cluster doc, but it's fine", e);
             return null;
         }
         return document;

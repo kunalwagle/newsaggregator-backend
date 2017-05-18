@@ -11,6 +11,7 @@ import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -29,14 +30,16 @@ public class Articles {
     }
 
     public void saveArticles(List<OutletArticle> articles) {
-        List<Document> documents = articles.stream().map(OutletArticle::createDocument).collect(Collectors.toList());
+        List<Document> documents = articles.stream().map(OutletArticle::createDocument).filter(Objects::nonNull).collect(Collectors.toList());
         collection.insertMany(documents);
     }
 
     public void updateArticles(List<OutletArticle> articles) {
         for (OutletArticle article : articles) {
             Document document = article.createDocument();
-            collection.replaceOne(new BasicDBObject().append("_id", article.get_id()), document);
+            if (document != null) {
+                collection.replaceOne(new BasicDBObject().append("_id", article.get_id()), document);
+            }
         }
     }
 
