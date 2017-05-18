@@ -1,16 +1,9 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.jobs.*;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.TaskService;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -43,23 +36,23 @@ public class Main {
 
                 TaskService scheduleManager = new TaskService();
 
-                LocalDateTime localNow = LocalDateTime.now();
-                ZoneId currentZone = ZoneId.of("Europe/London");
-                ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
-                ZonedDateTime zonedNext5;
-                zonedNext5 = zonedNow.withHour(19).withMinute(0).withSecond(0);
-                if (zonedNow.compareTo(zonedNext5) > 0)
-                    zonedNext5 = zonedNext5.plusDays(1);
-
-                Duration duration = Duration.between(zonedNow, zonedNext5);
-                long initalDelay = duration.getSeconds();
-////
-                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
-                scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
-                scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 1L, 1L, TimeUnit.MINUTES);
-                scheduleManager.scheduleWithFixedDelay(new SummarisationRunnable(), 1L, 1L, TimeUnit.MINUTES);
-                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
-                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initalDelay, 24 * 60 * 60, TimeUnit.SECONDS);
+//                LocalDateTime localNow = LocalDateTime.now();
+//                ZoneId currentZone = ZoneId.of("Europe/London");
+//                ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
+//                ZonedDateTime zonedNext5;
+//                zonedNext5 = zonedNow.withHour(19).withMinute(0).withSecond(0);
+//                if (zonedNow.compareTo(zonedNext5) > 0)
+//                    zonedNext5 = zonedNext5.plusDays(1);
+//
+//                Duration duration = Duration.between(zonedNow, zonedNext5);
+//                long initalDelay = duration.getSeconds();
+//////
+//                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
+//                scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 1L, 1L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleWithFixedDelay(new SummarisationRunnable(), 1L, 1L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initalDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 
 //               TopicModelling topicModelling = new TopicModelling();
 //                OutletArticle murrayBBC = new OutletArticle("Murray set to miss Davis Cup tie", "Andy Murray is set to miss Davis Cup tie. Andy Murray is unlikely to play in Great Britain's Davis Cup quarter-final against France next month as he recovers from an elbow injury. GB captain Leon Smith will name his team for the tie, in Rouen from 7-9 April, at 12:00 BST on Tuesday. Murray, 29, pulled out of the Miami Open almost a week before his opening match because of an elbow injury. The world number one needs to rest \"some sort of tear\", his brother Jamie told reporters in Florida. He said Andy told him he could \"do everything except serve\" and \"rest was all he had to do\". \"I am not planning that he is going to be there,\" he added. \"If he is, then obviously that's great for the team and we'll see what happens, but the most important thing for him is just to get healthy.\" Smith is likely to call on Dan Evans and Kyle Edmund for the singles matches in Rouen, with Jamie Murray and Dom Inglot in line for the doubles. The tie will be played indoors on clay at the Kindarena.", "http://www.hellomagazine.com/imagenes//celebrities/2016100433872/andy-murray-stalked-hotel-maid/0-175-236/murray-d.jpg", "http://telegraph.co.uk/fakemurray", "the-telegraph", "2017-03-28T11:35:22Z");

@@ -53,6 +53,7 @@ export function logged(user) {
 }
 
 export function logout() {
+    toastr.success('Success', 'Logged out succesfully');
     return {
         type: LOG_OUT
     }

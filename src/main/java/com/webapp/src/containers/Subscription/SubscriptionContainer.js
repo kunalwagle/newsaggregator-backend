@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {pluck} from "underscore";
 import {SubscriptionComponent} from "../../components/Subscriptions/SubscriptionComponent";
 import {subscriptionTabSelected} from "../../actions/SearchResults/SearchResultsActions";
-import {login} from "../../actions/LoginModalActions";
+import {login, getSubscriptions} from "../../actions/LoginModalActions";
 
 const mapStateToProps = (state) => {
     let index = 0;
@@ -35,6 +35,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleReloadLogin: () => {
             dispatch(login());
+        },
+        handleLoginClicked: (email, action) => {
+            dispatch(login(email, action));
+        },
+        handleSubscriptionSearch: () => {
+            dispatch(getSubscriptions())
         }
     }
 };

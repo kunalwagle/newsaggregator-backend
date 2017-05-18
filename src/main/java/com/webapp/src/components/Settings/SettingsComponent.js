@@ -9,7 +9,7 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLog
 
     if (!loggedIn) {
         return (
-            <div>You must be logged in to access this feature</div>
+            <div className="nothing">You must be logged in to access this feature</div>
         )
     }
 
@@ -35,7 +35,14 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLog
 
     if (user.topics.length === 0) {
         return (
-            <div className="nothing">You have no subscriptions</div>
+            <div>
+                <div className="nothing">You have no subscriptions</div>
+                <br/><br/>
+                <button
+                    className="danger-button col-lg-2 col-md-2 col-xs-6 col-sm-12 col-lg-offset-5 col-md-offset-5 col-xs-offset-3"
+                    onClick={handleLogout}>Log Out
+                </button>
+            </div>
         )
     }
 

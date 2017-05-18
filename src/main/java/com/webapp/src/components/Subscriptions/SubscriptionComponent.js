@@ -3,13 +3,31 @@
  */
 import React from "react";
 import {TopicViewerPage} from "../TopicViewer/TopicViewer";
-import {Tab, NavItem, Row, Col, Nav} from "react-bootstrap";
+import LoginModal from "../LoginModal";
+import {Tab, NavItem, Row, Col, Nav, OverlayTrigger} from "react-bootstrap";
 
-export const SubscriptionComponent = ({loggedIn, fetchInProgressLoginCalled, handleReloadLogin, fetchInProgress, topics, index, handleTopicChange}) => {
+export const SubscriptionComponent = ({loggedIn, fetchInProgressLoginCalled, handleReloadLogin, fetchInProgress, topics, index, handleLoginClicked, handleSubscriptionSearch, handleTopicChange}) => {
+
+    const loginPopover = (handleLoginClicked, action) => {
+        return (
+            <LoginModal handleLoginClicked={handleLoginClicked} action={action}/>
+        );
+    };
 
     if (!loggedIn) {
         return (
-            <div>You must be logged in to access this feature</div>
+            <div>
+                <div className="nothing">You must be logged in to access this feature.
+                    <br/><br/>
+                    <h3>How about registering now? It's simple</h3>
+                    <br/><br/>
+                    <OverlayTrigger trigger="click" rootClose placement="bottom" container={this}
+                                    overlay={loginPopover(handleLoginClicked, handleSubscriptionSearch)}>
+                        <button className="search-bar-button">Register or Login</button>
+                    </OverlayTrigger>
+                </div>
+            </div>
+
         )
     }
 
