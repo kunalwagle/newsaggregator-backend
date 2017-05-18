@@ -66,6 +66,9 @@ public class LabelHolder implements DatabaseStorage {
     }
 
     public void addCluster(ClusterHolder articlesForSummary) {
+        if (clusters == null) {
+            clusters = new ArrayList<>();
+        }
         clusters.add(articlesForSummary);
     }
 

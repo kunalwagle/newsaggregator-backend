@@ -33,6 +33,7 @@ public class SummarisationRunnable implements Runnable {
             int counter = 1;
             int total = 0;
             for (ClusterHolder clusterHolder : clusterHolders) {
+                logger.info("Summarisation id: " + clusterHolder.getId());
                 logger.info("Summarising " + counter + " of " + clusterHolders.size() + ". Done " + total + " summaries so far");
                 List<OutletArticle> articles = clusterHolder.getArticles();
                 Set<OutletArticle> clusterArticles = new HashSet<>(articles);

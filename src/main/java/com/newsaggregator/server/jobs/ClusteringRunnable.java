@@ -46,6 +46,7 @@ public class ClusteringRunnable implements Runnable {
                 logger.info("Clustering " + counter + " of " + labelHolders.size());
                 logger.info("Number of articles: " + labelHolder.getArticles().size());
                 if (labelHolder.getArticles().size() > 0) {
+                    logger.info("Label id:" + labelHolder.getId());
                     labelHolder.setClusters(new ArrayList<>());
                     Clusterer clusterer = new Clusterer(labelHolder.getArticles());
                     List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
