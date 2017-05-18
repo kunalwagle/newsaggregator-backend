@@ -58,7 +58,7 @@ public class Main {
                 scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
                 scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 1L, 1L, TimeUnit.MINUTES);
                 scheduleManager.scheduleWithFixedDelay(new SummarisationRunnable(), 1L, 1L, TimeUnit.MINUTES);
-                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 30L, TimeUnit.MINUTES);
+                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
                 scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initalDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 
 //                scheduleManager.execute(new ArticleFetchRunnable());
