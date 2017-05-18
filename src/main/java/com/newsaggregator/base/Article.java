@@ -22,6 +22,9 @@ public class Article {
     }
 
     public String getSource() {
+        if (source == null) {
+            return "";
+        }
         return source;
     }
 

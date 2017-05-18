@@ -10,10 +10,7 @@ import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -42,7 +39,7 @@ public class ClusterHolder implements DatabaseStorage {
     public ClusterHolder(List<OutletArticle> articles, List<Summary> summaries) {
         this.articles = articles;
         for (Summary summary : summaries) {
-            List<String> sources = summary.getArticles().stream().map(OutletArticle::getSource).collect(Collectors.toList());
+            List<String> sources = summary.getArticles().stream().map(OutletArticle::getSource).filter(Objects::nonNull).collect(Collectors.toList());
             String source = sources.stream().sorted().collect(Collectors.toList()).toString().replace(" ", "");
             summaryMap.put(source, summary.getNodes());
         }
@@ -78,7 +75,7 @@ public class ClusterHolder implements DatabaseStorage {
     }
 
     public List<List<Node>> getSummary() {
-        return summaryMap.values().stream().collect(Collectors.toList());
+        return new ArrayList<>(summaryMap.values());
     }
 
     public List<String> getLabels() {
@@ -140,7 +137,7 @@ public class ClusterHolder implements DatabaseStorage {
                 this._id = new ObjectId();
             }
             document.put("_id", _id);
-            document.put("Articles", articles.stream().map(OutletArticle::get_id).collect(Collectors.toList()));
+            document.put("Articles", articles.stream().map(OutletArticle::get_id).filter(Objects::nonNull).collect(Collectors.toList()));
             ObjectMapper objectMapper = new ObjectMapper();
             document.put("Summaries", objectMapper.writeValueAsString(summaryMap));
         } catch (Exception e) {

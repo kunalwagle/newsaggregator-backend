@@ -53,7 +53,7 @@ public class LabelHolder implements DatabaseStorage {
     }
 
     public boolean clusterExists(Cluster<ArticleVector> otherCluster) {
-        List<OutletArticle> otherArticles = otherCluster.getClusterItems().stream().map(ArticleVector::getArticle).collect(Collectors.toList());
+        List<OutletArticle> otherArticles = otherCluster.getClusterItems().stream().map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
         return clusters.stream().anyMatch(ch -> ch.sameCluster(otherArticles));
     }
 
@@ -108,7 +108,7 @@ public class LabelHolder implements DatabaseStorage {
             document.put("_id", _id);
             document.put("Label", label);
             document.put("Articles", articles.stream().map(OutletArticle::get_id).filter(Objects::nonNull).collect(Collectors.toList()));
-            document.put("Clusters", clusters.stream().map(ClusterHolder::get_id).collect(Collectors.toList()));
+            document.put("Clusters", clusters.stream().map(ClusterHolder::get_id).filter(Objects::nonNull).collect(Collectors.toList()));
             document.put("NeedsClustering", needsClustering);
             if (imageUrl != null) {
                 document.put("imageUrl", imageUrl);
