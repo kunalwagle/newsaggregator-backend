@@ -1,6 +1,7 @@
 package com.newsaggregator.base;
 
 import com.newsaggregator.ml.tfidf.TfIdfScores;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -19,13 +20,19 @@ public class ArticleVector implements ClusterItem {
 
     @Override
     public double getSimilarityScore(ClusterItem otherItem) {
-        double result;
-        VectorScore otherVectorScore = otherItem.getVector();
-        result = findSimilarities(otherVectorScore);
-        if (result > 0.0005) {
-            return result / factorInTimeStamp(otherVectorScore);
+        try {
+            double result;
+            VectorScore otherVectorScore = otherItem.getVector();
+            result = findSimilarities(otherVectorScore);
+            if (result > 0.0005) {
+                return result / factorInTimeStamp(otherVectorScore);
+            }
+            return -1;
+        } catch (Exception e) {
+            Logger.getLogger(getClass()).error("An error in the clusterer", e);
+            return -1;
         }
-        return -1;
+
     }
 
     private double factorInTimeStamp(VectorScore otherVectorScore) {

@@ -29,7 +29,7 @@ public class Clusterer {
         if (articles.size() == 1) {
             createDummyClusterFromArticle(articles);
         } else {
-            tfIdf = new TfIdf(articles.stream().map(OutletArticle::getBody).collect(Collectors.toList()));
+            tfIdf = new TfIdf(articles.stream().map(OutletArticle::getBody).filter(s -> s.length() > 0).collect(Collectors.toList()));
             articles.forEach(this::createNewClusterFromArticle);
         }
     }
