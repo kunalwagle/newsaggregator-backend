@@ -1,6 +1,7 @@
 package com.newsaggregator.ml.tfidf;
 
 import com.google.common.collect.Lists;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,9 +25,12 @@ public class TfIdf {
 
     public double performTfIdf(String document, String term) {
         Map<String, Long> frequencies = calculateFrequencies(document);
-        double tf = calculateTf(frequencies, term);
-        double idf = calculateIdf(term);
-        return tf * idf;
+        if (frequencies != null) {
+            double tf = calculateTf(frequencies, term);
+            double idf = calculateIdf(term);
+            return tf * idf;
+        }
+        return 0;
     }
 
     public double performTfIdfCosineSimilarities(String sentence1, String sentence2) {
@@ -117,10 +121,15 @@ public class TfIdf {
     }
 
     private Map<String, Long> calculateFrequencies(String document) {
-        Stream<String> stream = Stream.of(document.toLowerCase().split("\\W+")).parallel();
+        try {
+            Stream<String> stream = Stream.of(document.toLowerCase().split("\\W+")).parallel();
 
-        return stream
-                .collect(Collectors.groupingBy(String::toString, Collectors.counting()));
+            return stream
+                    .collect(Collectors.groupingBy(String::toString, Collectors.counting()));
+        } catch (Exception e) {
+            Logger.getLogger(getClass()).error("An error calculating frequencies", e);
+            return null;
+        }
     }
 
 }

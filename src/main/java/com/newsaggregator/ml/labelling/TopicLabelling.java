@@ -5,6 +5,7 @@ import com.newsaggregator.base.*;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -68,7 +69,7 @@ public class TopicLabelling {
 
     private static List<String> performCandidateRanking(List<CandidateLabel> labels, List<TopicWord> topicWords, OutletArticle outletArticle) {
         ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
-        TfIdf tfIdf = new TfIdf(labels.stream().map(label -> stripArticleBodies(label, extractSentenceTypes)).collect(Collectors.toList()));
+        TfIdf tfIdf = new TfIdf(labels.stream().map(label -> stripArticleBodies(label, extractSentenceTypes)).filter(s -> s.length() > 0).collect(Collectors.toList()));
 
         List<TfIdfScores> potentialLabels = new ArrayList<>();
 
@@ -94,7 +95,12 @@ public class TopicLabelling {
     }
 
     private static String stripArticleBodies(CandidateLabel label, ExtractSentenceTypes extractor) {
-        return extractor.nounifyDocument(label.getArticleBody());
+        try {
+            return extractor.nounifyDocument(label.getArticleBody());
+        } catch (Exception e) {
+            Logger.getLogger(TopicLabelling.class).error("An error stripping article bodies", e);
+            return "";
+        }
     }
 
     private static double racoScore(CandidateLabel secondaryLabel, List<CandidateLabel> primaryLabels) {
