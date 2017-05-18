@@ -40,7 +40,7 @@ const thumbnails = (loggedIn, user, carousel, handleViewClicked, handleSubscribe
 const carousels = (loggedIn, user, searchResults, handleViewClicked, handleSubscribeClicked) => {
     if (searchResults.length == 0) {
         return (
-            <div>No Search Results...</div>
+            <div className="nothing">No Search Results...</div>
         )
     }
     // let carousels = [];

@@ -28,7 +28,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgressLoginCalled, han
 
     if (topics.length === 0) {
         return (
-            <div>You have no subscriptions</div>
+            <div className="nothing">You have no subscriptions</div>
         )
     }
 

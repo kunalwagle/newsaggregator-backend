@@ -43,9 +43,11 @@ public class TopicLabelRunnable implements Runnable {
 
             for (OutletArticle article : unlabelledArticles) {
                 logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
+                logger.info(article.getId());
                 try {
                     Topic topic = topicModelling.getModel(article);
                     List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
+                    logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
                     for (String topicLabel : topicLabels) {
                         List<OutletArticle> arts = articleTopicMap.get(topicLabel);
                         if (arts == null) {
@@ -54,6 +56,7 @@ public class TopicLabelRunnable implements Runnable {
                         arts.add(article);
                         articleTopicMap.put(topicLabel, arts);
                     }
+                    logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
                 } catch (Exception e) {
                     logger.error("An error in the labelling part of a topic. Moving on", e);
                 }

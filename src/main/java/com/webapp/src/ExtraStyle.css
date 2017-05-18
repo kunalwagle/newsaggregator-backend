@@ -17,6 +17,10 @@ h1 {
     font-family: "Avenir Next Bold";
 }
 
+h3 {
+    font-family: "Avenir Next Regular";
+}
+
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
@@ -416,6 +420,14 @@ input:checked + .slider:before {
 
 .margined {
     margin-left: 5%;
+}
+
+.nothing {
+    text-align: center;
+    color: white;
+    font-family: "Avenir Next Bold";
+    margin-top: 30px;
+    font-size: 32px;
 }
 
 @keyframes spin {

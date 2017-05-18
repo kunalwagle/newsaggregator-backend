@@ -229,7 +229,7 @@ const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCa
 
     if (articles.length === 0) {
         return (
-            <div>There is no recent news for this topic</div>
+            <div className="nothing">There is no recent news for this topic</div>
         )
     }
 
