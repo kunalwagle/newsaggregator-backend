@@ -43,6 +43,9 @@ public class OutletArticle extends Article implements DatabaseStorage {
     }
 
     public String getArticleUrl() {
+        if (articleUrl == null) {
+            return "";
+        }
         return articleUrl;
     }
 
