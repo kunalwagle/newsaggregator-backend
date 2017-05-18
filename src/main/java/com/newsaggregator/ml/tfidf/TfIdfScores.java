@@ -15,6 +15,9 @@ public class TfIdfScores {
     }
 
     public String getLabel() {
+        if (label == null) {
+            return "";
+        }
         return label;
     }
 

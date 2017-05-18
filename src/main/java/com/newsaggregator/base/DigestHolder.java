@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newsaggregator.Utils;
 import com.newsaggregator.db.Topics;
 import com.newsaggregator.server.LabelHolder;
+import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -117,7 +118,7 @@ public class DigestHolder implements DatabaseStorage {
             return leftDate.compareTo(rightDate);
 
         } catch (ParseException e) {
-            e.printStackTrace();
+            Logger.getLogger(getClass()).error("Error in last published", e);
         }
         return 1;
     };

@@ -7,6 +7,7 @@ import com.newsaggregator.base.WikipediaArticle;
 import com.newsaggregator.db.Topics;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -130,6 +131,7 @@ public class Wikipedia {
             }
             return article;
         } catch (Exception e) {
+            Logger.getLogger(Wikipedia.class).error("An error in Wikipedia", e);
 //            e.printStackTrace();
         }
         return null;

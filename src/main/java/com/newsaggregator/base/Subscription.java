@@ -41,6 +41,9 @@ public class Subscription {
     }
 
     public String getTopicId() {
+        if (topicId == null) {
+            return "";
+        }
         return topicId;
     }
 
