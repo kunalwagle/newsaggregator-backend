@@ -12,6 +12,8 @@ import org.restlet.data.Status;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 
+import java.util.Objects;
+
 /**
  * Created by kunalwagle on 21/04/2017.
  */
@@ -31,7 +33,7 @@ public class SubscribeUserResource extends ServerResource {
             LabelHolder labelHolder = topicManager.getTopicById(topic);
             if (user != null) {
                 User currentUser = userManager.getSingleUser(user);
-                labelHolder.setSubscribed(currentUser.getTopicIds().stream().anyMatch(sub -> sub.getTopicId().equals(topic)));
+                labelHolder.setSubscribed(currentUser.getTopicIds().stream().filter(Objects::nonNull).anyMatch(sub -> sub.getTopicId().equals(topic)));
             }
             return new ObjectMapper().writeValueAsString(labelHolder);
         } catch (Exception e) {

@@ -15,6 +15,7 @@ import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by kunalwagle on 15/05/2017.
@@ -38,7 +39,7 @@ public class TopicSettingsResource extends ServerResource {
                 sources.add(sourcesJSON.getString(i));
             }
             User currentUser = userManager.getSingleUser(user);
-            Subscription subscription = currentUser.getTopicIds().stream().filter(sub -> sub.getTopicId().equals(topic)).findFirst().get();
+            Subscription subscription = currentUser.getTopicIds().stream().filter(Objects::nonNull).filter(sub -> sub.getTopicId().equals(topic)).findFirst().get();
             subscription.setDigests(digest);
             subscription.setSources(sources);
             userManager.writeUser(currentUser);

@@ -103,7 +103,11 @@ public class TfIdf {
     }
 
     private double idfCalculation(String term, List<Map<String, Long>> corpusSizes, int corpusSize) {
-        int numberOfDocumentsWithTerm = corpusSizes.stream().filter(map -> map.containsKey(term.toLowerCase())).collect(Collectors.toList()).size();
+        if (term == null) {
+            term = "";
+        }
+        String finalTerm = term;
+        int numberOfDocumentsWithTerm = corpusSizes.stream().filter(map -> map.containsKey(finalTerm.toLowerCase())).collect(Collectors.toList()).size();
         if (numberOfDocumentsWithTerm == 0) {
             numberOfDocumentsWithTerm++;
         }
