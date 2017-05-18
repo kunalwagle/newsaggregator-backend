@@ -3,10 +3,11 @@ package com.newsaggregator.routes;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
+import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -32,6 +33,7 @@ public class LabelHolderWithSettings {
                 newClusterHolders.add(clusterHolder);
             }
         }
+        newClusterHolders = newClusterHolders.stream().sorted(byLastPublished).collect(Collectors.toList());
         labelHolder.setClusters(newClusterHolders);
         return labelHolder;
     }
@@ -64,4 +66,19 @@ public class LabelHolderWithSettings {
     public void setSources(List<String> sources) {
         this.sources = sources;
     }
+
+    Comparator<ClusterHolder> byLastPublished = (left, right) -> {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        try {
+
+            Date leftDate = formatter.parse(left.getLastPublished().replaceAll("Z$", "+0000"));
+            Date rightDate = formatter.parse(right.getLastPublished().replaceAll("Z$", "+0000"));
+
+            return leftDate.compareTo(rightDate);
+
+        } catch (ParseException e) {
+            Logger.getLogger(getClass()).error("Error in last published", e);
+        }
+        return 1;
+    };
 }

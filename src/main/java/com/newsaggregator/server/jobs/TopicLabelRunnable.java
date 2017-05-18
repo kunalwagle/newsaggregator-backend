@@ -12,10 +12,7 @@ import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -37,8 +34,6 @@ public class TopicLabelRunnable implements Runnable {
 
             List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles().stream().limit(15).collect(Collectors.toList());
 
-            Map<String, List<OutletArticle>> articleTopicMap = new HashMap<>();
-
             int counter = 1;
 
             for (OutletArticle article : unlabelledArticles) {
@@ -50,12 +45,15 @@ public class TopicLabelRunnable implements Runnable {
                     logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
                     if (topicLabels != null) {
                         for (String topicLabel : topicLabels) {
-                            List<OutletArticle> arts = articleTopicMap.get(topicLabel);
-                            if (arts == null) {
-                                arts = new ArrayList<>();
+                            try {
+                                LabelHolder labelHolder = topics.getTopic(topicLabel);
+                                labelHolder.addArticle(article);
+                                article.setLabelled(true);
+                                topics.saveTopic(labelHolder);
+                                articles.updateArticles(Lists.newArrayList(article));
+                            } catch (Exception e) {
+                                logger.error("An error in the saving part of a topic label. Moving on", e);
                             }
-                            arts.add(article);
-                            articleTopicMap.put(topicLabel, arts);
                         }
                     }
                     logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
@@ -64,34 +62,6 @@ public class TopicLabelRunnable implements Runnable {
                 }
                 counter++;
             }
-
-            counter = 1;
-            for (Map.Entry<String, List<OutletArticle>> labelPair : articleTopicMap.entrySet()) {
-                logger.info("Saving " + counter + " of " + articleTopicMap.entrySet().size());
-                try {
-                    String label = labelPair.getKey();
-                    LabelHolder labelHolder = topics.getTopic(label);
-                    if (labelHolder == null) {
-                        logger.info(" 1 Saving " + counter + " of " + articleTopicMap.entrySet().size());
-                        labelHolder = new LabelHolder(label, labelPair.getValue(), new ArrayList<>());
-                        labelHolder.setNeedsClustering(true);
-                        topics.saveTopics(Lists.newArrayList(labelHolder));
-                        counter++;
-                        continue;
-                    }
-                    logger.info("2 Saving " + counter + " of " + articleTopicMap.entrySet().size());
-                    labelHolder.addArticles(labelPair.getValue());
-                    labelHolder.setNeedsClustering(true);
-                    topics.saveTopic(labelHolder);
-                } catch (Exception e) {
-                    logger.error("An Error in the Topic Label Runnable", e);
-                }
-                counter++;
-            }
-
-            unlabelledArticles.forEach(article -> article.setLabelled(true));
-
-            articles.updateArticles(unlabelledArticles);
 
         } catch (Exception e) {
             logger.error("An Error in the Topic Label Runnable", e);
