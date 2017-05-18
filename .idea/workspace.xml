@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
-    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Settings Compoonent Login buttons">
+    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Unique clusters">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/LoginModalActions.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/LoginModalActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Settings/TopicSettings.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Settings/TopicSettings.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,6 +24,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="28" column="77" lean-forward="false" selection-start-line="28" selection-start-column="77" selection-end-line="28" selection-end-column="77" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="LabelHolderWithSettings.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -49,12 +56,14 @@
             <state relative-caret-position="210">
               <caret line="21" column="23" lean-forward="false" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="n#!!block;n#articleClicked#0" expanded="true" />
                 <element signature="e#917#1240#0" expanded="true" />
-                <element signature="n#!!block;n#subscriptionTabSelected#0" expanded="true" />
-                <element signature="e#1526#1803#0" expanded="true" />
                 <element signature="n#!!block;n#changeTab#0" expanded="true" />
+                <marker date="1495145280000" expanded="true" signature="387:840" ph="{...}" />
+                <marker date="1495145280000" expanded="true" signature="424:838" ph="{...}" />
+                <marker date="1495145280000" expanded="true" signature="592:669" ph="{...}" />
+                <marker date="1495145280000" expanded="true" signature="880:1242" ph="{...}" />
+                <marker date="1495145280000" expanded="true" signature="1489:1805" ph="{...}" />
+                <marker date="1495145280000" expanded="true" signature="1526:1803" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -82,12 +91,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginModalActions.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LoginModalActions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/LoginModalActions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state relative-caret-position="1020">
+              <caret line="129" column="43" lean-forward="true" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="44" />
               <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#48#85#0" expanded="true" />
                 <element signature="n#!!block;n#logged#0" expanded="true" />
                 <element signature="n#!!block;n#subscribe#0" expanded="true" />
                 <element signature="e#1677#1975#0" expanded="true" />
@@ -113,7 +124,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Settings/TopicSettings.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="38" column="33" lean-forward="true" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+              <caret line="38" column="33" lean-forward="false" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -128,16 +139,6 @@
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#570#961#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingsComponentContainer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Settings/SettingsComponentContainer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="41" column="29" lean-forward="true" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -272,13 +273,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Subscriptions/SubscriptionComponent.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Settings/SettingsComponentContainer.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Settings/SettingsComponent.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/TopicResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Settings/TopicSettings.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/SearchResults/SearchResultsActions.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/actions/LoginModalActions.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
       </list>
     </option>
   </component>
@@ -2404,13 +2405,6 @@
       <workItem from="1493313787752" duration="60245000" />
       <workItem from="1494247395281" duration="107312000" />
     </task>
-    <task id="LOCAL-00355" summary="Instance of mongo">
-      <created>1494937287575</created>
-      <option name="number" value="00355" />
-      <option name="presentableId" value="LOCAL-00355" />
-      <option name="project" value="LOCAL" />
-      <updated>1494937287575</updated>
-    </task>
     <task id="LOCAL-00356" summary="Limiting runnables">
       <created>1494959415571</created>
       <option name="number" value="00356" />
@@ -2488,7 +2482,7 @@
       <option name="presentableId" value="LOCAL-00366" />
       <option name="project" value="LOCAL" />
       <updated>1495014415338</updated>
-      <workItem from="1495014415395" duration="44858000" />
+      <workItem from="1495014415395" duration="45312000" />
     </task>
     <task id="LOCAL-00367" summary="Caching works on settings page">
       <created>1495015393845</created>
@@ -2749,7 +2743,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495141721685</updated>
     </task>
-    <option name="localTasksCounter" value="404" />
+    <task id="LOCAL-00404" summary="Unique clusters">
+      <created>1495145508539</created>
+      <option name="number" value="00404" />
+      <option name="presentableId" value="LOCAL-00404" />
+      <option name="project" value="LOCAL" />
+      <updated>1495145508540</updated>
+    </task>
+    <option name="localTasksCounter" value="405" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -2783,7 +2784,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="684578000" />
+    <option name="totallyTimeSpent" value="685032000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2870,7 +2871,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Adjusting clustering runnable" />
     <MESSAGE value="Settings done" />
     <MESSAGE value="Topic Label runnable try statement added" />
     <MESSAGE value="Digest gets sent" />
@@ -2895,7 +2895,8 @@
     <MESSAGE value="Even more print lines" />
     <MESSAGE value="Subscription Component works" />
     <MESSAGE value="Settings Compoonent Login buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Settings Compoonent Login buttons" />
+    <MESSAGE value="Unique clusters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Unique clusters" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -3252,16 +3253,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="53" column="78" lean-forward="false" selection-start-line="53" selection-start-column="78" selection-end-line="53" selection-end-column="78" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -3309,8 +3300,8 @@
             <element signature="method#set_id#0;class#LabelHolder#0" expanded="true" />
             <element signature="method#createDocument#0;class#LabelHolder#0" expanded="true" />
             <element signature="method#addArticles#0;class#LabelHolder#0" expanded="true" />
-            <element signature="e#4409#4410#0" expanded="true" />
-            <element signature="e#4449#4450#0" expanded="true" />
+            <element signature="e#4314#4315#0" expanded="true" />
+            <element signature="e#4354#4355#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3386,7 +3377,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/Settings/TopicSettings.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="38" column="33" lean-forward="true" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+          <caret line="38" column="33" lean-forward="false" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -3406,12 +3397,14 @@
         <state relative-caret-position="210">
           <caret line="21" column="23" lean-forward="false" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="n#!!block;n#articleClicked#0" expanded="true" />
             <element signature="e#917#1240#0" expanded="true" />
-            <element signature="n#!!block;n#subscriptionTabSelected#0" expanded="true" />
-            <element signature="e#1526#1803#0" expanded="true" />
             <element signature="n#!!block;n#changeTab#0" expanded="true" />
+            <marker date="1495145280000" expanded="true" signature="387:840" ph="{...}" />
+            <marker date="1495145280000" expanded="true" signature="424:838" ph="{...}" />
+            <marker date="1495145280000" expanded="true" signature="592:669" ph="{...}" />
+            <marker date="1495145280000" expanded="true" signature="880:1242" ph="{...}" />
+            <marker date="1495145280000" expanded="true" signature="1489:1805" ph="{...}" />
+            <marker date="1495145280000" expanded="true" signature="1526:1803" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -3446,15 +3439,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/LoginModalActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+        <state relative-caret-position="1020">
+          <caret line="129" column="43" lean-forward="true" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="44" />
           <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#48#85#0" expanded="true" />
             <element signature="n#!!block;n#logged#0" expanded="true" />
             <element signature="n#!!block;n#subscribe#0" expanded="true" />
             <element signature="e#1677#1975#0" expanded="true" />
             <element signature="n#!!block;n#unsubscribe#0" expanded="true" />
             <element signature="e#2058#2360#0" expanded="true" />
             <element signature="n#!!block;n#populateSubscriptions#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="28" column="77" lean-forward="false" selection-start-line="28" selection-start-column="77" selection-end-line="28" selection-end-column="77" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
