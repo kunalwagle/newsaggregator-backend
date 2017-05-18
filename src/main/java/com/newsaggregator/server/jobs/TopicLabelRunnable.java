@@ -13,7 +13,6 @@ import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 15/05/2017.
@@ -32,7 +31,7 @@ public class TopicLabelRunnable implements Runnable {
         try {
             TopicModelling topicModelling = new TopicModelling();
 
-            List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles().stream().limit(15).collect(Collectors.toList());
+            List<OutletArticle> unlabelledArticles = Lists.newArrayList(articles.getArticleFromId("591df7cfacea820abe29709f"));//articles.getUnlabelledArticles().stream().limit(15).collect(Collectors.toList());
 
             int counter = 1;
 
@@ -47,6 +46,9 @@ public class TopicLabelRunnable implements Runnable {
                         for (String topicLabel : topicLabels) {
                             try {
                                 LabelHolder labelHolder = topics.getTopic(topicLabel);
+                                if (labelHolder == null) {
+                                    labelHolder = new LabelHolder(topicLabel);
+                                }
                                 labelHolder.addArticle(article);
                                 article.setLabelled(true);
                                 topics.saveTopic(labelHolder);

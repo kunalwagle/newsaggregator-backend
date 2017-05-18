@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
-    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Changed port to 8185">
+    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Updating latest topic labelling runnable attempt">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -29,8 +28,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="21" column="54" lean-forward="false" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
+            <state relative-caret-position="285">
+              <caret line="61" column="76" lean-forward="true" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,8 +40,8 @@
       <file leaf-file-name="TopicLabelRunnable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="52" column="64" lean-forward="true" selection-start-line="52" selection-start-column="64" selection-end-line="52" selection-end-column="64" />
+            <state relative-caret-position="690">
+              <caret line="61" column="65" lean-forward="true" selection-start-line="61" selection-start-column="65" selection-end-line="61" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -136,10 +135,9 @@
       <file leaf-file-name="LabelHolderWithSettings.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="42" column="53" lean-forward="true" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
+            <state relative-caret-position="585">
+              <caret line="41" column="53" lean-forward="false" selection-start-line="41" selection-start-column="53" selection-end-line="41" selection-end-column="53" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="method#LabelHolderWithSettings#0;class#LabelHolderWithSettings#0" expanded="true" />
                 <element signature="method#distinct#0;class#LabelHolderWithSettings#0" expanded="true" />
               </folding>
@@ -2465,13 +2463,6 @@
       <workItem from="1493313787752" duration="60245000" />
       <workItem from="1494247395281" duration="107312000" />
     </task>
-    <task id="LOCAL-00357" summary="Adjusted timers to runnables">
-      <created>1494959533650</created>
-      <option name="number" value="00357" />
-      <option name="presentableId" value="LOCAL-00357" />
-      <option name="project" value="LOCAL" />
-      <updated>1494959533650</updated>
-    </task>
     <task id="LOCAL-00358" summary="Restarting server with new database">
       <created>1494962226720</created>
       <option name="number" value="00358" />
@@ -2535,7 +2526,7 @@
       <option name="presentableId" value="LOCAL-00366" />
       <option name="project" value="LOCAL" />
       <updated>1495014415338</updated>
-      <workItem from="1495014415395" duration="47970000" />
+      <workItem from="1495014415395" duration="48420000" />
     </task>
     <task id="LOCAL-00367" summary="Caching works on settings page">
       <created>1495015393845</created>
@@ -2810,7 +2801,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495146191655</updated>
     </task>
-    <option name="localTasksCounter" value="406" />
+    <task id="LOCAL-00406" summary="Updating latest topic labelling runnable attempt">
+      <created>1495150294544</created>
+      <option name="number" value="00406" />
+      <option name="presentableId" value="LOCAL-00406" />
+      <option name="project" value="LOCAL" />
+      <updated>1495150294544</updated>
+    </task>
+    <option name="localTasksCounter" value="407" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -2844,7 +2842,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="687690000" />
+    <option name="totallyTimeSpent" value="688140000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2931,7 +2929,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Topic Label runnable try statement added" />
     <MESSAGE value="Digest gets sent" />
     <MESSAGE value="Created digest components" />
     <MESSAGE value="Ready to receive digests" />
@@ -2956,7 +2953,8 @@
     <MESSAGE value="Settings Compoonent Login buttons" />
     <MESSAGE value="Unique clusters" />
     <MESSAGE value="Changed port to 8185" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed port to 8185" />
+    <MESSAGE value="Updating latest topic labelling runnable attempt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating latest topic labelling runnable attempt" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -2984,6 +2982,12 @@
           </properties>
           <option name="timeStamp" value="871" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java</url>
+          <line>34</line>
+          <properties />
+          <option name="timeStamp" value="880" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -2994,7 +2998,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="880" />
+      <option name="time" value="881" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -3448,10 +3452,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="42" column="53" lean-forward="true" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
+        <state relative-caret-position="585">
+          <caret line="41" column="53" lean-forward="false" selection-start-line="41" selection-start-column="53" selection-end-line="41" selection-end-column="53" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#LabelHolderWithSettings#0;class#LabelHolderWithSettings#0" expanded="true" />
             <element signature="method#distinct#0;class#LabelHolderWithSettings#0" expanded="true" />
           </folding>
@@ -3492,16 +3495,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="52" column="64" lean-forward="true" selection-start-line="52" selection-start-column="64" selection-end-line="52" selection-end-column="64" />
+        <state relative-caret-position="690">
+          <caret line="61" column="65" lean-forward="true" selection-start-line="61" selection-start-column="65" selection-end-line="61" selection-end-column="65" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="21" column="54" lean-forward="false" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
+        <state relative-caret-position="285">
+          <caret line="61" column="76" lean-forward="true" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
