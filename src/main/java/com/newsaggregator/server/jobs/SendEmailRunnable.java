@@ -1,14 +1,22 @@
 package com.newsaggregator.server.jobs;
 
+import com.google.common.collect.Lists;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.db.Articles;
 import com.newsaggregator.db.Summaries;
 import com.newsaggregator.db.Topics;
 
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
@@ -52,7 +60,10 @@ public class SendEmailRunnable implements Runnable {
             // Send message
             Transport.send(message);
 
-        } catch (MessagingException mex) {
+            Path file = Paths.get("timestamp.txt");
+            Files.write(file, Lists.newArrayList(String.valueOf(articleManager.count())), Charset.forName("UTF-8"));
+
+        } catch (Exception mex) {
             mex.printStackTrace();
             Utils.sendExceptionEmail(mex);
         }

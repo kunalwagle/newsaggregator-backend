@@ -21,7 +21,7 @@ public class Main {
 
         Component component = new Component();
 
-        component.getServers().add(Protocol.HTTP, 8182);
+        component.getServers().add(Protocol.HTTP, 8185);
 
         component.getDefaultHost().attach("/api", new RouterApplication());
 
@@ -44,6 +44,8 @@ public class Main {
 //                new TopicModelling();
 
                 TaskService scheduleManager = TaskServiceSingleton.getInstance();
+
+                Utils.sendServerRestartEmail();
 
                 LocalDateTime localNow = LocalDateTime.now();
                 ZoneId currentZone = ZoneId.of("Europe/London");

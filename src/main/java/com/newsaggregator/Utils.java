@@ -65,6 +65,42 @@ public class Utils {
         }
     }
 
+    public static void sendServerRestartEmail() {
+
+        String to = "kmw13@ic.ac.uk";
+
+        final String username = "kunalnewsaggregator@gmail.com";
+        final String password = "imperial";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("Restarted server");
+            message.setText("Hello, the server has been restarted");
+
+            // Send message
+            Transport.send(message);
+            System.out.println("Message sent successfully....");
+
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+    }
+
     public static MongoDatabase getDatabase() {
         MongoClient client = Connection.MONGO.getClient();
         return client.getDatabase("NewsAggregator");
