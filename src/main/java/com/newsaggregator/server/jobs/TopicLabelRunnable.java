@@ -42,11 +42,19 @@ public class TopicLabelRunnable implements Runnable {
                     articles.updateArticles(Lists.newArrayList(article));
                     continue;
                 }
+                article = articles.getArticleFromId(article.getId());
+                if (article.isLabelled()) {
+                    continue;
+                }
                 logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
                 logger.info(article.getId());
                 try {
                     Topic topic = topicModelling.getModel(article);
                     List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
+                    article = articles.getArticleFromId(article.getId());
+                    if (article.isLabelled()) {
+                        continue;
+                    }
                     logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
                     if (topicLabels != null) {
                         for (String topicLabel : topicLabels) {
