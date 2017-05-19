@@ -26,6 +26,8 @@ public class DigestRunnable implements Runnable {
     @Override
     public void run() {
 
+        logger.info("Starting digests");
+
         Users userManager = new Users(Utils.getDatabase());
         Digests digestsManager = new Digests(Utils.getDatabase());
 
@@ -35,7 +37,11 @@ public class DigestRunnable implements Runnable {
 
         try {
 
+            logger.info("It's time");
+
             digestHolders = users.stream().map(DigestHolder::new).filter(d -> d.getTopicCount() > 0).collect(Collectors.toList());
+
+            logger.info("Number of digests is " + digestHolders.size());
 
             digestsManager.saveDigests(digestHolders);
 

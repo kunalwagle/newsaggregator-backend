@@ -49,7 +49,7 @@ public class Digests {
             } catch (MongoWriteException e) {
                 updateDigest(digestHolder);
             } catch (Exception e) {
-                logger.error("Writing user error", e);
+                logger.error("Writing digest error", e);
             }
         }
     }
