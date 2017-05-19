@@ -3,7 +3,7 @@
  */
 
 export const getIPAddress = () => {
-    return "http://localhost:8182/api/";
+    return "http://178.62.27.53:8182/api/";
 };
 
 export const getColour = (source) => {
