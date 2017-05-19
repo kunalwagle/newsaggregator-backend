@@ -79,7 +79,7 @@ public class Utils {
     }
 
     public static String getWebAddress() {
-        return "http://localhost:3000";
+        return "http://kunalnewsaggregator.co.uk";
     }
 
 

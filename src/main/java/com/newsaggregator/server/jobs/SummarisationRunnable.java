@@ -1,5 +1,6 @@
 package com.newsaggregator.server.jobs;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
@@ -33,6 +34,10 @@ public class SummarisationRunnable implements Runnable {
             int counter = 1;
             int total = 0;
             for (ClusterHolder clusterHolder : clusterHolders) {
+                clusterHolder = summaries.getSingleCluster(clusterHolder.getId());
+                if (clusterHolder.getSummaryMap().size() > 0) {
+                    continue;
+                }
                 logger.info("Summarisation id: " + clusterHolder.getId());
                 logger.info("Summarising " + counter + " of " + clusterHolders.size() + ". Done " + total + " summaries so far");
                 List<OutletArticle> articles = clusterHolder.getArticles();
@@ -46,9 +51,8 @@ public class SummarisationRunnable implements Runnable {
                 total += summs.size();
                 logger.info("Summarising " + counter + " of " + clusterHolders.size() + ". Done " + total + " summaries so far");
                 counter++;
+                summaries.updateSummaries(Lists.newArrayList(clusterHolder));
             }
-
-            summaries.updateSummaries(clusterHolders);
 
         } catch (Exception e) {
             logger.error("An Error in the Summarisation Runnable", e);

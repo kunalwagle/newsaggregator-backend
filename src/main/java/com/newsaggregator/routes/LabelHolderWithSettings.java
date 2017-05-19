@@ -15,12 +15,27 @@ import java.util.stream.Collectors;
  */
 public class LabelHolderWithSettings {
 
+    Comparator<ClusterHolder> byLastPublished = (left, right) -> {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        try {
+
+            Date leftDate = formatter.parse(left.getLastPublished().replaceAll("Z$", "+0000"));
+            Date rightDate = formatter.parse(right.getLastPublished().replaceAll("Z$", "+0000"));
+
+            return leftDate.compareTo(rightDate);
+
+        } catch (ParseException e) {
+            Logger.getLogger(getClass()).error("Error in last published", e);
+        }
+        return 1;
+    };
     private LabelHolder labelHolder;
     private boolean digests;
     private List<String> sources;
 
     public LabelHolderWithSettings(LabelHolder labelHolder, boolean digests, List<String> sources) {
         this.labelHolder = distinct(labelHolder);
+        this.labelHolder.setClusters(this.labelHolder.getClusters().stream().filter(c -> c.getSummaryMap().size() > 0).collect(Collectors.toList()));
         this.digests = digests;
         this.sources = sources;
     }
@@ -47,38 +62,23 @@ public class LabelHolderWithSettings {
         return labelHolder;
     }
 
-    public boolean isDigests() {
-        return digests;
-    }
-
-    public List<String> getSources() {
-        return sources;
-    }
-
     public void setLabelHolder(LabelHolder labelHolder) {
         this.labelHolder = labelHolder;
+    }
+
+    public boolean isDigests() {
+        return digests;
     }
 
     public void setDigests(boolean digests) {
         this.digests = digests;
     }
 
+    public List<String> getSources() {
+        return sources;
+    }
+
     public void setSources(List<String> sources) {
         this.sources = sources;
     }
-
-    Comparator<ClusterHolder> byLastPublished = (left, right) -> {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        try {
-
-            Date leftDate = formatter.parse(left.getLastPublished().replaceAll("Z$", "+0000"));
-            Date rightDate = formatter.parse(right.getLastPublished().replaceAll("Z$", "+0000"));
-
-            return leftDate.compareTo(rightDate);
-
-        } catch (ParseException e) {
-            Logger.getLogger(getClass()).error("Error in last published", e);
-        }
-        return 1;
-    };
 }

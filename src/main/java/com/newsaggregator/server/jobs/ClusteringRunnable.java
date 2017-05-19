@@ -39,10 +39,14 @@ public class ClusteringRunnable implements Runnable {
 
 
             List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
-            List<ClusterHolder> brandNewClusters = new ArrayList<>();
 
             int counter = 1;
             for (LabelHolder labelHolder : labelHolders) {
+                List<ClusterHolder> brandNewClusters = new ArrayList<>();
+                labelHolder = topics.getTopicById(labelHolder.getId());
+                if (!labelHolder.getNeedsClustering()) {
+                    continue;
+                }
                 logger.info("Clustering " + counter + " of " + labelHolders.size());
                 logger.info("Number of articles: " + labelHolder.getArticles().size());
                 if (labelHolder.getArticles().size() > 0) {
@@ -66,15 +70,15 @@ public class ClusteringRunnable implements Runnable {
                     }
                 }
                 labelHolder.setNeedsClustering(false);
+                topics.saveTopic(labelHolder);
+                if (brandNewClusters.size() > 0) {
+                    logger.info("Saving clusters");
+                    summaries.saveSummaries(brandNewClusters);
+                }
                 counter++;
             }
 
-            if (brandNewClusters.size() > 0) {
-                logger.info("Saving clusters");
-                summaries.saveSummaries(brandNewClusters);
-            }
 
-            topics.updateTopics(labelHolders);
 
 
         } catch (Exception e) {

@@ -103,6 +103,7 @@ public class Topics {
             String item = document.toJson();
             JSONObject jsonObject = new JSONObject(item);
             List<OutletArticle> articles = new ArrayList<>();
+            boolean needsClustering = jsonObject.getBoolean("NeedsClustering");
             try {
                 JSONArray articleIds = jsonObject.getJSONArray("Articles");
                 for (int i = 0; i < articleIds.length(); i++) {
@@ -123,6 +124,7 @@ public class Topics {
                 logger.error("An error occurred whilst getting clusters for a single topic", e);
             }
             LabelHolder labelHolder = new LabelHolder(jsonObject.getString("Label"), articles, clusters);
+            labelHolder.setNeedsClustering(needsClustering);
             labelHolder.set_id(document.getObjectId("_id"));
             labelHolder.setImageUrl(document.getString("imageUrl"));
             return labelHolder;

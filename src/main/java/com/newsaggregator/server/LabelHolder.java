@@ -35,10 +35,6 @@ public class LabelHolder implements DatabaseStorage {
         this.clusters = clusters;
     }
 
-    public void setArticles(List<OutletArticle> articles) {
-        this.articles = articles;
-    }
-
     public void addArticle(OutletArticle article) {
         if (articles == null) {
             articles = new ArrayList<>();
@@ -59,8 +55,16 @@ public class LabelHolder implements DatabaseStorage {
         return articles;
     }
 
+    public void setArticles(List<OutletArticle> articles) {
+        this.articles = articles;
+    }
+
     public List<ClusterHolder> getClusters() {
         return clusters;
+    }
+
+    public void setClusters(List<ClusterHolder> clusters) {
+        this.clusters = clusters;
     }
 
     public void addCluster(ClusterHolder articlesForSummary) {
@@ -76,21 +80,21 @@ public class LabelHolder implements DatabaseStorage {
         return _id;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public void set_id(ObjectId _id) {
         this._id = _id;
         this.id = _id.toHexString();
     }
 
-    public void setSubscribed(boolean subscribed) {
-        isSubscribed = subscribed;
+    public String getId() {
+        return id;
     }
 
     public boolean isSubscribed() {
         return isSubscribed;
+    }
+
+    public void setSubscribed(boolean subscribed) {
+        isSubscribed = subscribed;
     }
 
     public String getImageUrl() {
@@ -137,11 +141,11 @@ public class LabelHolder implements DatabaseStorage {
         }
     }
 
-    public void setNeedsClustering(boolean needsClustering) {
-        this.needsClustering = needsClustering;
+    public boolean getNeedsClustering() {
+        return needsClustering;
     }
 
-    public void setClusters(List<ClusterHolder> clusters) {
-        this.clusters = clusters;
+    public void setNeedsClustering(boolean needsClustering) {
+        this.needsClustering = needsClustering;
     }
 }
