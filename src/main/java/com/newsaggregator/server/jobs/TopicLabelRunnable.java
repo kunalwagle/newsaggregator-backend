@@ -56,6 +56,7 @@ public class TopicLabelRunnable implements Runnable {
                                     labelHolder = new LabelHolder(topicLabel);
                                 }
                                 labelHolder.addArticle(article);
+                                labelHolder.setNeedsClustering(true);
                                 article.setLabelled(true);
                                 topics.saveTopic(labelHolder);
                                 articles.updateArticles(Lists.newArrayList(article));
