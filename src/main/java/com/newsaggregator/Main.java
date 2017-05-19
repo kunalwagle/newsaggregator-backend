@@ -1,6 +1,7 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
+import com.newsaggregator.server.TaskServiceSingleton;
 import com.newsaggregator.server.jobs.*;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
@@ -41,7 +42,7 @@ public class Main {
 //            throw new Exception();
 //                new TopicModelling();
 
-                TaskService scheduleManager = new TaskService();
+                TaskService scheduleManager = TaskServiceSingleton.getInstance();
 
                 LocalDateTime localNow = LocalDateTime.now();
                 ZoneId currentZone = ZoneId.of("Europe/London");
@@ -55,10 +56,10 @@ public class Main {
                 long initialDelay = duration.getSeconds();
 ////
                 scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
-                scheduleManager.scheduleWithFixedDelay(new TopicLabelRunnable(), 1L, 1L, TimeUnit.MINUTES);
                 scheduleManager.scheduleWithFixedDelay(new ClusteringRunnable(), 1L, 1L, TimeUnit.MINUTES);
                 scheduleManager.scheduleWithFixedDelay(new SummarisationRunnable(), 1L, 1L, TimeUnit.MINUTES);
                 scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
+                scheduleManager.scheduleAtFixedRate(new LabellingRunnable(), 1L, 15L, TimeUnit.MINUTES);
                 scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 
 //               TopicModelling topicModelling = new TopicModelling();
@@ -66,7 +67,7 @@ public class Main {
 //               Topic topic = topicModelling.getModel(murrayBBC);
 //                System.out.println("Reached here");//Modeller.getInstance();
 //                scheduleManager.execute(new ArticleFetchRunnable());
-//                scheduleManager.execute(new TopicLabelRunnable());
+//                scheduleManager.execute(new LabellingRunnable());
 //                scheduleManager.execute(new ClusteringRunnable());
 //                scheduleManager.execute(new SummarisationRunnable());
 //                scheduleManager.execute(new SendEmailRunnable());
