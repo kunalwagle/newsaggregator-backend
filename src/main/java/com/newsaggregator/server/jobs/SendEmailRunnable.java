@@ -60,7 +60,7 @@ public class SendEmailRunnable implements Runnable {
             // Send message
             Transport.send(message);
 
-            Path file = Paths.get("timestamp.txt");
+            Path file = Paths.get("./timestamp.txt");
             Files.write(file, Lists.newArrayList(String.valueOf(articleManager.count())), Charset.forName("UTF-8"));
 
         } catch (Exception mex) {
