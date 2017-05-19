@@ -69,7 +69,6 @@ export const NavBarComponent = ({loggedIn, user, handleSettingsSearch, handleLog
 
             <Navbar.Collapse>
                 <Nav pullRight>
-                    <NavItem eventKey={1} href="#">About</NavItem>
                     {leftNavItem(loggedIn, handleLoginClicked, handleSubscriptionSearch)}
                     {rightNavItem(loggedIn, handleLoginClicked, handleSettingsSearch)}
                 </Nav>

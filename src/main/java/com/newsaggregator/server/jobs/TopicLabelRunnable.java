@@ -37,6 +37,11 @@ public class TopicLabelRunnable implements Runnable {
             int counter = 1;
 
             for (OutletArticle article : unlabelledArticles) {
+                if (article.getBody() == null || article.getBody().length() == 0) {
+                    article.setLabelled(true);
+                    articles.updateArticles(Lists.newArrayList(article));
+                    continue;
+                }
                 logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
                 logger.info(article.getId());
                 try {
