@@ -3,18 +3,26 @@ package com.newsaggregator.server.jobs;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
+import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.Topic;
 import com.newsaggregator.db.Articles;
+import com.newsaggregator.db.Summaries;
 import com.newsaggregator.db.Topics;
+import com.newsaggregator.ml.clustering.Cluster;
+import com.newsaggregator.ml.clustering.Clusterer;
 import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.server.ArticleFetch;
+import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 21/02/2017.
@@ -30,6 +38,7 @@ public class ArticleFetchRunnable implements Runnable {
         MongoDatabase db = Utils.getDatabase();
         Articles articleManager = new Articles(db);
         Topics topics = new Topics(db);
+        Summaries summaries = new Summaries(db);
 
         try {
 
@@ -50,6 +59,8 @@ public class ArticleFetchRunnable implements Runnable {
         } catch (Exception e) {
             logger.error("Caught an exception in ArticleFetchRunnable", e);
         }
+
+        List<String> labelStrings = new ArrayList<>();
 
 
         try {
@@ -78,6 +89,7 @@ public class ArticleFetchRunnable implements Runnable {
                             article.setLabelled(true);
                             topics.saveTopic(labelHolder);
                             articleManager.updateArticles(Lists.newArrayList(article));
+                            labelStrings.add(topicLabel);
                         } catch (Exception e) {
                             logger.error("An error in the saving part of a topic label. Moving on", e);
                         }
@@ -88,6 +100,51 @@ public class ArticleFetchRunnable implements Runnable {
         } catch (Exception e) {
             logger.error("Caught an exception labelling new articles", e);
         }
+
+        List<ClusterHolder> summaryClusters = new ArrayList<>();
+
+
+        try {
+
+            labelStrings = labelStrings.stream().distinct().collect(Collectors.toList());
+
+            List<LabelHolder> labelHolders = labelStrings.stream().map(topics::getTopic).collect(Collectors.toList());
+
+            List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
+
+            for (LabelHolder labelHolder : labelHolders) {
+                List<ClusterHolder> brandNewClusters = new ArrayList<>();
+                if (labelHolder.getArticles().size() > 0) {
+                    logger.info("Label id:" + labelHolder.getId());
+                    labelHolder.setClusters(new ArrayList<>());
+                    Clusterer clusterer = new Clusterer(labelHolder.getArticles());
+                    List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
+                    for (Cluster<ArticleVector> cluster : newClusters) {
+                        List<OutletArticle> clusterArticles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
+                        if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(clusterArticles))) {
+                            ClusterHolder clusterHolder = new ClusterHolder(clusterArticles);
+                            clusters.add(clusterHolder);
+                            brandNewClusters.add(clusterHolder);
+                            labelHolder.addCluster(clusterHolder);
+                        } else {
+                            labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(clusterArticles)).findAny().get());
+                        }
+                    }
+                }
+                labelHolder.setNeedsClustering(false);
+                topics.saveTopic(labelHolder);
+                if (brandNewClusters.size() > 0) {
+                    logger.info("Saving clusters");
+                    summaries.saveSummaries(brandNewClusters);
+                    summaryClusters.addAll(brandNewClusters);
+                }
+            }
+
+        } catch (Exception e) {
+            logger.error("Caught an exception clustering", e);
+        }
+
+
 
 //        try {
 //            logger.info("Fetching articles");
