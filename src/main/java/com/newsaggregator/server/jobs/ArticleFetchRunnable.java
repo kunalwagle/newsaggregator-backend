@@ -1,12 +1,19 @@
 package com.newsaggregator.server.jobs;
 
+import com.google.common.collect.Lists;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.base.OutletArticle;
+import com.newsaggregator.base.Topic;
 import com.newsaggregator.db.Articles;
+import com.newsaggregator.db.Topics;
+import com.newsaggregator.ml.labelling.TopicLabelling;
+import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.server.ArticleFetch;
+import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,14 +25,18 @@ public class ArticleFetchRunnable implements Runnable {
     public void run() {
         Logger logger = Logger.getLogger(getClass());
 
+        List<OutletArticle> articleList = new ArrayList<>();
+
+        MongoDatabase db = Utils.getDatabase();
+        Articles articleManager = new Articles(db);
+        Topics topics = new Topics(db);
+
         try {
 
             logger.info("Starting fetch");
 
-            MongoDatabase db = Utils.getDatabase();
-            Articles articleManager = new Articles(db);
 
-            List<OutletArticle> articleList = ArticleFetch.fetchArticles();
+            articleList = ArticleFetch.fetchArticles();
             List<OutletArticle> allArticles = articleManager.getAllArticles();
             logger.info("Starting filter");
             articleList.removeIf(art -> allArticles.stream().anyMatch(a -> a.getArticleUrl().equals(art.getArticleUrl())));
@@ -38,6 +49,44 @@ public class ArticleFetchRunnable implements Runnable {
 
         } catch (Exception e) {
             logger.error("Caught an exception in ArticleFetchRunnable", e);
+        }
+
+
+        try {
+
+            TopicModelling modelling = new TopicModelling();
+
+            for (OutletArticle article : articleList) {
+                if (article.getBody() == null || article.getBody().length() == 0) {
+                    article.setLabelled(true);
+                    articleManager.updateArticles(Lists.newArrayList(article));
+                    continue;
+                }
+
+                Topic topic = modelling.getModel(article);
+                List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
+
+                if (topicLabels != null) {
+                    for (String topicLabel : topicLabels) {
+                        try {
+                            LabelHolder labelHolder = topics.getTopic(topicLabel);
+                            if (labelHolder == null) {
+                                labelHolder = new LabelHolder(topicLabel);
+                            }
+                            labelHolder.addArticle(article);
+                            labelHolder.setNeedsClustering(true);
+                            article.setLabelled(true);
+                            topics.saveTopic(labelHolder);
+                            articleManager.updateArticles(Lists.newArrayList(article));
+                        } catch (Exception e) {
+                            logger.error("An error in the saving part of a topic label. Moving on", e);
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            logger.error("Caught an exception labelling new articles", e);
         }
 
 //        try {
