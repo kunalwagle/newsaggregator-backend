@@ -71,12 +71,11 @@ public class Main {
                         scheduleManager.scheduleAtFixedRate(new LabellingRunnable(), 1L, 15L, TimeUnit.MINUTES);
                         break;
                     }
-                    case 8183: {
+                    default: {
                         scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
+                        scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
                         break;
                     }
-                    default:
-                        scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
                 }
 
 

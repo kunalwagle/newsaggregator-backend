@@ -7,7 +7,6 @@ import com.newsaggregator.ml.nlp.apache.SentenceDetection;
 import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.summarisation.Summarisation;
 import com.newsaggregator.ml.summarisation.Summary;
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -59,15 +58,15 @@ public class Extractive implements Summarisation {
                     try {
                         String[] firstNodeWords = node.getSentence().toLowerCase().split("\\W+");
                         String[] secondNodeWords = secondNode.getSentence().toLowerCase().split("\\W+");
-                        List<String> stopList = IOUtils.readLines(getClass().getResourceAsStream("/en.txt"), "UTF-8");
-                        List<String> firstNodeList = Arrays.stream(firstNodeWords).filter(string -> !stopList.contains(string)).collect(Collectors.toList());
-                        List<String> secondNodeList = Arrays.stream(secondNodeWords).filter(string -> !stopList.contains(string)).collect(Collectors.toList());
+//                        List<String> stopList = IOUtils.readLines(getClass().getResourceAsStream("/en.txt"), "UTF-8");
+                        List<String> firstNodeList = Arrays.stream(firstNodeWords).collect(Collectors.toList());//.filter(string -> !stopList.contains(string)).collect(Collectors.toList());
+                        List<String> secondNodeList = Arrays.stream(secondNodeWords).collect(Collectors.toList());//.filter(string -> !stopList.contains(string)).collect(Collectors.toList());
                         double size = secondNodeList.size();
                         if (firstNodeList.size() > secondNodeList.size()) {
                             size = firstNodeList.size();
                         }
                         double firstTotal = firstNodeList.stream().filter(secondNodeList::contains).count() / size;
-                        if (firstTotal > 0.6) {
+                        if (firstTotal > 0.75) {
                             node.addNode(secondNode);
                         }
                     } catch (Exception e) {
