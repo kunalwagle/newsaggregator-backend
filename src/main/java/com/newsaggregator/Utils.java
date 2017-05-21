@@ -65,7 +65,7 @@ public class Utils {
         }
     }
 
-    public static void sendServerRestartEmail() {
+    public static void sendServerRestartEmail(int port) {
 
         String to = "kmw13@ic.ac.uk";
 
@@ -90,7 +90,7 @@ public class Utils {
             message.setFrom(new InternetAddress(username));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject("Restarted server");
-            message.setText("Hello, the server has been restarted");
+            message.setText("Hello, the server has been restarted on port " + port);
 
             // Send message
             Transport.send(message);

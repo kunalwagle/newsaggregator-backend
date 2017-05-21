@@ -2,7 +2,7 @@ package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
 import com.newsaggregator.server.TaskServiceSingleton;
-import com.newsaggregator.server.jobs.ArticleFetchRunnable;
+import com.newsaggregator.server.jobs.*;
 import org.apache.log4j.Logger;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
@@ -21,7 +21,9 @@ public class Main {
 
         Component component = new Component();
 
-        component.getServers().add(Protocol.HTTP, 8183);
+        int port = Integer.parseInt(args[0]);
+
+        component.getServers().add(Protocol.HTTP, port);
 
         component.getDefaultHost().attach("/api", new RouterApplication());
 
@@ -43,9 +45,10 @@ public class Main {
 //            throw new Exception();
 //                new TopicModelling();
 
+
                 TaskService scheduleManager = TaskServiceSingleton.getInstance();
 
-                Utils.sendServerRestartEmail();
+                Utils.sendServerRestartEmail(port);
 
                 LocalDateTime localNow = LocalDateTime.now();
                 ZoneId currentZone = ZoneId.of("Europe/London");
@@ -59,8 +62,25 @@ public class Main {
                 long initialDelay = duration.getSeconds();
 
                 Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
-////
-                scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
+
+                switch (port) {
+                    case 8185: {
+                        scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
+                        scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
+                        scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
+                        scheduleManager.scheduleAtFixedRate(new LabellingRunnable(), 1L, 15L, TimeUnit.MINUTES);
+                        break;
+                    }
+                    case 8183: {
+                        scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
+                        break;
+                    }
+                    default:
+                        scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
+                }
+
+
+
 //                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
