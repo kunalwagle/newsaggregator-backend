@@ -41,6 +41,11 @@ public class Wikipedia {
         return articles;
     }
 
+    public static List<String> titlesWithLimit(String searchTerm, int total) {
+        ArrayList<String> titles = titles(searchTerm);
+        return titles.stream().limit(total).collect(Collectors.toList());
+    }
+
     public static String getNearMatchArticle(String searchTerm) {
         List<String> articles = titles(searchTerm);
         if (articles.size() > 0) {
@@ -117,7 +122,7 @@ public class Wikipedia {
         return result;
     }
 
-    private static WikipediaArticle convertToArticle(String title) {
+    public static WikipediaArticle convertToArticle(String title) {
         try {
             title = title.replace(' ', '+');
             title = title.replace("%20", "+");

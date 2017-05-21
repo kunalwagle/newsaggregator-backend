@@ -27,6 +27,8 @@ public class TopicLabelling {
             ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
             List<String> names = extractSentenceTypes.nameFinder(outletArticle.getBody()).stream().distinct().collect(Collectors.toList());
 
+            List<String> words = new ArrayList<>(names);
+
             for (String topicWord : names) {
                 String article = Wikipedia.getNearMatchArticle(topicWord);
                 if (article != null) {
@@ -36,11 +38,19 @@ public class TopicLabelling {
             }
 
             for (TopicWord topicWord : topicWords) {
-                List<WikipediaArticle> articles = Wikipedia.getArticles(topicWord.getWord(), 8);
-                for (WikipediaArticle article : articles) {
-                    primaryCandidates.add(new CandidateLabel(article.getTitle(), article, topicWord.getDistribution()));
-                }
+                words.addAll(Wikipedia.titlesWithLimit(topicWord.getWord(), 8));
                 //primaryLabels.addAll(extractTitles(Wikipedia.getArticles(topicWord.getWord())));
+            }
+
+            words = words.stream().distinct().collect(Collectors.toList());
+
+            for (String word : words) {
+                if (!names.contains(word)) {
+                    WikipediaArticle article = Wikipedia.convertToArticle(word);
+                    if (article != null) {
+                        primaryCandidates.add(new CandidateLabel(article.getTitle(), article));
+                    }
+                }
             }
 
             //List<CandidateLabel> primaryCandidates = primaryLabels.parallelStream().map(label -> new CandidateLabel(label, Wikipedia.getNearMatchArticle(label))).collect(Collectors.toList());
@@ -62,7 +72,7 @@ public class TopicLabelling {
 
             nameCandidates.addAll(results);
 
-            return nameCandidates.stream().limit(20).collect(Collectors.toList());
+            return nameCandidates;
         } catch (Exception e) {
             Logger.getLogger(TopicLabelling.class).error("An error in labelling", e);
             return null;
@@ -82,7 +92,6 @@ public class TopicLabelling {
         for (CandidateLabel label : labels) {
             String strippedBody = stripArticleBodies(label, extractSentenceTypes);
             double calc = topicWords.stream().mapToDouble(term -> tfIdf.performTfIdf(strippedBody, term.getWord())).sum();
-            calc *= label.getCalc();
             List<String> articleNouns = extractSentenceTypes.individualNouns(outletArticle.getBody());
             List<String> wikipediaArticleNouns = extractSentenceTypes.individualNouns(label.getArticleBody());
             double crossover = 0.0;

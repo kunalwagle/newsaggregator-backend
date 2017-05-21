@@ -70,12 +70,24 @@ public class ClusterHolder implements DatabaseStorage {
         return summaryMap;
     }
 
+    public void setSummaryMap(Map<String, List<Node>> summaryMap) {
+        this.summaryMap = summaryMap;
+    }
+
     public List<OutletArticle> getArticles() {
         return articles;
     }
 
     public List<List<Node>> getSummary() {
         return new ArrayList<>(summaryMap.values());
+    }
+
+    public void setSummary(List<Summary> summaries) {
+        for (Summary summary : summaries) {
+            List<String> sources = summary.getArticles().stream().map(OutletArticle::getSource).collect(Collectors.toList());
+            String source = sources.stream().sorted().collect(Collectors.toList()).toString().replace(" ", "");
+            summaryMap.put(source, summary.getNodes());
+        }
     }
 
     public List<String> getLabels() {
@@ -95,17 +107,17 @@ public class ClusterHolder implements DatabaseStorage {
         return false;
     }
 
-    public void set_id(ObjectId _id) {
-        this._id = _id;
-        this.id = _id.toHexString();
-    }
-
     public String getId() {
         return id;
     }
 
     public ObjectId get_id() {
         return _id;
+    }
+
+    public void set_id(ObjectId _id) {
+        this._id = _id;
+        this.id = _id.toHexString();
     }
 
     public String getTitle() {
@@ -138,6 +150,7 @@ public class ClusterHolder implements DatabaseStorage {
         try {
             if (_id == null) {
                 this._id = new ObjectId();
+                this.id = this._id.toHexString();
             }
             document.put("_id", _id);
             document.put("Articles", articles.stream().map(OutletArticle::get_id).filter(Objects::nonNull).collect(Collectors.toList()));
@@ -148,17 +161,5 @@ public class ClusterHolder implements DatabaseStorage {
             return null;
         }
         return document;
-    }
-
-    public void setSummary(List<Summary> summaries) {
-        for (Summary summary : summaries) {
-            List<String> sources = summary.getArticles().stream().map(OutletArticle::getSource).collect(Collectors.toList());
-            String source = sources.stream().sorted().collect(Collectors.toList()).toString().replace(" ", "");
-            summaryMap.put(source, summary.getNodes());
-        }
-    }
-
-    public void setSummaryMap(Map<String, List<Node>> summaryMap) {
-        this.summaryMap = summaryMap;
     }
 }

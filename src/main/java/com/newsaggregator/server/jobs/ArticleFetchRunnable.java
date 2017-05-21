@@ -131,8 +131,13 @@ public class ArticleFetchRunnable implements Runnable {
                 List<ClusterHolder> brandNewClusters = new ArrayList<>();
                 if (labelHolder.getArticles().size() > 0) {
                     logger.info("Label id:" + labelHolder.getId());
+                    Clusterer clusterer;
+                    if (labelHolder.getClusters().size() > 0) {
+                        clusterer = new Clusterer(labelHolder.getClusters(), labelHolder.getArticles());
+                    } else {
+                        clusterer = new Clusterer(labelHolder.getArticles());
+                    }
                     labelHolder.setClusters(new ArrayList<>());
-                    Clusterer clusterer = new Clusterer(labelHolder.getArticles());
                     List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
                     for (Cluster<ArticleVector> cluster : newClusters) {
                         List<OutletArticle> clusterArticles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
@@ -147,12 +152,12 @@ public class ArticleFetchRunnable implements Runnable {
                     }
                 }
                 labelHolder.setNeedsClustering(false);
-                topics.saveTopic(labelHolder);
                 if (brandNewClusters.size() > 0) {
                     logger.info("Saving clusters");
                     summaries.saveSummaries(brandNewClusters);
                     summaryClusters.addAll(brandNewClusters);
                 }
+                topics.saveTopic(labelHolder);
             }
 
         } catch (Exception e) {
