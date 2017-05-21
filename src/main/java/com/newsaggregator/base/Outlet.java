@@ -18,7 +18,16 @@ public enum Outlet {
     Newsweek("newsweek", "latest"),
     SkySportsNews("sky-sports-news", "latest"),
     Telegraph("the-telegraph", "latest"),
-    TOI("the-times-of-india", "latest");
+    TOI("the-times-of-india", "latest"),
+    BBCNews("bbc-news", "top"),
+    BBCSport("bbc-sport", "top"),
+    Bloomberg("bloomberg", "top"),
+    CNN("cnn", "top"),
+    CNBC("cnbc", "top"),
+    ESPN("espn", "top"),
+    FourFourTwo("four-four-two", "latest"),
+    WashingtonPost("the-washington-post", "top"),
+    WSJ("the-wall-street-journal", "top");
 
 
     private final String sourceString;
