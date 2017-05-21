@@ -6,6 +6,7 @@ import com.newsaggregator.base.VectorScore;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
+import com.newsaggregator.server.ClusterHolder;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,6 +33,17 @@ public class Clusterer {
             tfIdf = new TfIdf(articles.stream().map(OutletArticle::getBody).filter(s -> s.length() > 0).collect(Collectors.toList()));
             articles.forEach(this::createNewClusterFromArticle);
         }
+    }
+
+    public Clusterer(List<ClusterHolder> clusterHolders, List<OutletArticle> articles) {
+        tfIdf = new TfIdf(articles.stream().map(OutletArticle::getBody).filter(s -> s.length() > 0).collect(Collectors.toList()));
+        List<String> clusteredArticles = new ArrayList<>();
+        for (ClusterHolder clusterHolder : clusterHolders) {
+            clusteredArticles.addAll(clusterHolder.getArticles().stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList()));
+            this.createNewClusterFromArticles(clusterHolder.getArticles());
+        }
+        articles = articles.stream().filter(a -> clusteredArticles.contains(a.getArticleUrl())).collect(Collectors.toList());
+        articles.forEach(this::createNewClusterFromArticle);
     }
 
     private void createDummyClusterFromArticle(List<OutletArticle> articles) {
@@ -105,6 +117,16 @@ public class Clusterer {
     }
 
     private void createNewClusterFromArticle(OutletArticle article) {
+        Cluster<ArticleVector> cluster = new Cluster<>(getArticleVectorForArticle(article));
+        clusters.add(cluster);
+    }
+
+    private void createNewClusterFromArticles(List<OutletArticle> articles) {
+        Cluster<ArticleVector> cluster = new Cluster<>(articles.stream().map(this::getArticleVectorForArticle).collect(Collectors.toList()));
+        clusters.add(cluster);
+    }
+
+    private ArticleVector getArticleVectorForArticle(OutletArticle article) {
         List<String> nouns = extractSentenceTypes.individualNouns(article.getBody());
         List<TfIdfScores> nounScores = new ArrayList<>();
         for (String noun : nouns) {
@@ -112,8 +134,7 @@ public class Clusterer {
         }
         double timeStampScore = generateTimeStampScore(article.getLastPublished());
         VectorScore vectorScore = new VectorScore(nounScores, timeStampScore);
-        Cluster<ArticleVector> cluster = new Cluster<>(new ArticleVector(article, vectorScore));
-        clusters.add(cluster);
+        return new ArticleVector(article, vectorScore);
     }
 
     private double generateTimeStampScore(String lastPublished) {

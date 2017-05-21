@@ -1,6 +1,7 @@
 package com.newsaggregator.server.jobs;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.base.ArticleVector;
@@ -13,15 +14,14 @@ import com.newsaggregator.ml.clustering.Cluster;
 import com.newsaggregator.ml.clustering.Clusterer;
 import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.ml.modelling.TopicModelling;
+import com.newsaggregator.ml.summarisation.Extractive.Extractive;
+import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.ArticleFetch;
 import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -65,9 +65,13 @@ public class ArticleFetchRunnable implements Runnable {
 
         try {
 
+            int counter = 0;
+
             TopicModelling modelling = new TopicModelling();
 
             for (OutletArticle article : articleList) {
+                counter++;
+                logger.info("Labelling " + counter + " of " + articleList.size());
                 if (article.getBody() == null || article.getBody().length() == 0) {
                     article.setLabelled(true);
                     articleManager.updateArticles(Lists.newArrayList(article));
@@ -78,11 +82,14 @@ public class ArticleFetchRunnable implements Runnable {
                 List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
 
                 if (topicLabels != null) {
+                    int number = 0;
                     for (String topicLabel : topicLabels) {
                         try {
+                            number++;
+                            logger.info("Setting " + number + " of " + topicLabels.size());
                             LabelHolder labelHolder = topics.getTopic(topicLabel);
                             if (labelHolder == null) {
-                                labelHolder = new LabelHolder(topicLabel);
+                                labelHolder = topics.createBlankTopic(topicLabel);
                             }
                             labelHolder.addArticle(article);
                             labelHolder.setNeedsClustering(true);
@@ -106,13 +113,21 @@ public class ArticleFetchRunnable implements Runnable {
 
         try {
 
+            int counter = 0;
+
             labelStrings = labelStrings.stream().distinct().collect(Collectors.toList());
 
-            List<LabelHolder> labelHolders = labelStrings.stream().map(topics::getTopic).collect(Collectors.toList());
+            List<LabelHolder> labelHolders = new ArrayList<>();
+            for (String labelString : labelStrings) {
+                LabelHolder labelHolder = topics.getTopic(labelString);
+                labelHolders.add(labelHolder);
+            }
 
             List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
 
             for (LabelHolder labelHolder : labelHolders) {
+                counter++;
+                logger.info("Clustering " + counter + " of " + labelHolders.size());
                 List<ClusterHolder> brandNewClusters = new ArrayList<>();
                 if (labelHolder.getArticles().size() > 0) {
                     logger.info("Label id:" + labelHolder.getId());
@@ -144,7 +159,30 @@ public class ArticleFetchRunnable implements Runnable {
             logger.error("Caught an exception clustering", e);
         }
 
+        try {
 
+            int counter = 1;
+            int total = 0;
+            for (ClusterHolder clusterHolder : summaryClusters) {
+                logger.info("Summarisation id: " + clusterHolder.getId());
+                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
+                List<OutletArticle> articles = clusterHolder.getArticles();
+                Set<OutletArticle> clusterArticles = new HashSet<>(articles);
+                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
+                Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
+                List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
+                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
+                List<Summary> summs = extractives.parallelStream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
+                clusterHolder.setSummary(summs);
+                total += summs.size();
+                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
+                counter++;
+                summaries.updateSummaries(Lists.newArrayList(clusterHolder));
+            }
+
+        } catch (Exception e) {
+            logger.error("Caught an exception summarising", e);
+        }
 
 //        try {
 //            logger.info("Fetching articles");

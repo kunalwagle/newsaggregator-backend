@@ -25,7 +25,7 @@ public class TopicLabelling {
             List<String> nameCandidates = new ArrayList<>();
 
             ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
-            List<String> names = extractSentenceTypes.nameFinder(outletArticle.getBody());
+            List<String> names = extractSentenceTypes.nameFinder(outletArticle.getBody()).stream().distinct().collect(Collectors.toList());
 
             for (String topicWord : names) {
                 String article = Wikipedia.getNearMatchArticle(topicWord);
@@ -58,11 +58,11 @@ public class TopicLabelling {
 //        primaryCandidates.addAll(secondaryCandidates);
 
 
-            List<String> results = performCandidateRanking(primaryCandidates, topicWords, outletArticle);
+            List<String> results = performCandidateRanking(primaryCandidates, topicWords, outletArticle).stream().distinct().collect(Collectors.toList());
 
             nameCandidates.addAll(results);
 
-            return nameCandidates;
+            return nameCandidates.stream().limit(20).collect(Collectors.toList());
         } catch (Exception e) {
             Logger.getLogger(TopicLabelling.class).error("An error in labelling", e);
             return null;

@@ -17,6 +17,10 @@ public class Cluster<E extends ClusterItem> {
         clusterItems.add(initialItem);
     }
 
+    public Cluster(List<E> clusterItems) {
+        this.clusterItems = clusterItems;
+    }
+
     public List<E> getClusterItems() {
         return clusterItems;
     }

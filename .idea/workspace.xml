@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
-    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Added label to new article fetch runnable">
+    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Added clustering to new ArticleFetchRunnable">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Cluster.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Cluster.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -24,75 +27,121 @@
     <favorites_list name="newsaggregator-backend" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="ArticleFetchRunnable.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="150">
-                  <caret line="146" column="8" lean-forward="false" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Clusterer.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="35" column="5" lean-forward="false" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-                  <folding>
-                    <element signature="method#Clusterer#0;class#Clusterer#0" expanded="true" />
-                    <element signature="method#createDummyClusterFromArticle#0;class#Clusterer#0" expanded="true" />
-                    <element signature="method#createNewClusterFromArticle#0;class#Clusterer#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Cluster.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Cluster.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="75">
-                  <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="TopicLabelRunnable.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="method#run#0;class#TopicLabelRunnable#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ClusteringRunnable.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="576">
-                  <caret line="76" column="17" lean-forward="true" selection-start-line="71" selection-start-column="16" selection-end-line="76" selection-end-column="17" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="555">
+              <caret line="73" column="52" lean-forward="false" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArticleFetchRunnable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-15">
+              <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#ArticleFetchRunnable#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Topics.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="170" column="0" lean-forward="false" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+              <folding>
+                <element signature="method#getTopic#0;class#Topics#0" expanded="true" />
+                <element signature="method#getLabelHolderFromIterator#0;class#Topics#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TopicLabelling.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="56" column="2" lean-forward="true" selection-start-line="56" selection-start-column="2" selection-end-line="56" selection-end-column="2" />
+              <folding>
+                <element signature="method#performCandidateRanking#0;class#TopicLabelling#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LabelHolder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="585">
+              <caret line="108" column="37" lean-forward="true" selection-start-line="108" selection-start-column="37" selection-end-line="108" selection-end-column="37" />
+              <folding>
+                <element signature="docComment;class#LabelHolder#0" expanded="true" />
+                <element signature="method#LabelHolder#1;class#LabelHolder#0" expanded="true" />
+                <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
+                <element signature="method#set_id#0;class#LabelHolder#0" expanded="true" />
+                <element signature="method#createDocument#0;class#LabelHolder#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Clusterer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="42" column="60" lean-forward="false" selection-start-line="42" selection-start-column="60" selection-end-line="42" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#Clusterer#0;class#Clusterer#0" expanded="true" />
+                <element signature="method#createDummyClusterFromArticle#0;class#Clusterer#0" expanded="true" />
+                <element signature="method#cluster#0;class#Clusterer#0" expanded="true" />
+                <element signature="method#combineIfPossible#0;class#Clusterer#0" expanded="true" />
+                <element signature="method#generateSimilarityMatrix#0;class#Clusterer#0" expanded="true" />
+                <element signature="method#findSimilarity#0;class#Clusterer#0" expanded="true" />
+                <element signature="method#createNewClusterFromArticle#0;class#Clusterer#0" expanded="true" />
+                <element signature="method#createNewClusterFromArticles#0;class#Clusterer#0" expanded="true" />
+                <element signature="method#getArticleVectorForArticle#0;class#Clusterer#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Cluster.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Cluster.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <folding>
+                <element signature="method#Cluster#0;class#Cluster#0" expanded="true" />
+                <element signature="e#435#436#0" expanded="true" />
+                <element signature="e#483#484#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArticleVector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/ArticleVector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="10" column="43" lean-forward="true" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+              <folding>
+                <element signature="method#ArticleVector#0;class#ArticleVector#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -166,7 +215,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/TopicLabel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/Tokenisation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/summarisation/Extractive/Connection.java" />
@@ -185,7 +233,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Digest/DigestPanelView.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/SearchResults/SearchResult.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/TopicViewer/TopicPanelView.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Subscription/SubscriptionContainer.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/ExtraStyle.css" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Subscriptions/SubscriptionComponent.js" />
@@ -213,10 +260,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Digests.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Utils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SendEmailRunnable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/test/test/java/com/newsaggregator/ml/TopicLabellingTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Cluster.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java" />
       </list>
     </option>
   </component>
@@ -2498,13 +2547,6 @@
       <workItem from="1493313787752" duration="60245000" />
       <workItem from="1494247395281" duration="107312000" />
     </task>
-    <task id="LOCAL-00371" summary="Created Digest Holder class">
-      <created>1495031279859</created>
-      <option name="number" value="00371" />
-      <option name="presentableId" value="LOCAL-00371" />
-      <option name="project" value="LOCAL" />
-      <updated>1495031279859</updated>
-    </task>
     <task id="LOCAL-00372" summary="Ready for return to server">
       <created>1495040413348</created>
       <option name="number" value="00372" />
@@ -2841,7 +2883,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495300414407</updated>
     </task>
-    <option name="localTasksCounter" value="420" />
+    <task id="LOCAL-00420" summary="Added clustering to new ArticleFetchRunnable">
+      <created>1495305417172</created>
+      <option name="number" value="00420" />
+      <option name="presentableId" value="LOCAL-00420" />
+      <option name="project" value="LOCAL" />
+      <updated>1495305417172</updated>
+    </task>
+    <option name="localTasksCounter" value="421" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -2875,7 +2924,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="702861000" />
+    <option name="totallyTimeSpent" value="710811000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2893,7 +2942,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39390388" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39390388" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2962,7 +3011,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Summariser streams" />
     <MESSAGE value="Extractive streams" />
     <MESSAGE value="Resource streams" />
     <MESSAGE value="Server streams" />
@@ -2987,7 +3035,8 @@
     <MESSAGE value="Print lines for digest runnable" />
     <MESSAGE value="Added timestamp text file" />
     <MESSAGE value="Added label to new article fetch runnable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added label to new article fetch runnable" />
+    <MESSAGE value="Added clustering to new ArticleFetchRunnable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added clustering to new ArticleFetchRunnable" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -2997,12 +3046,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java</url>
-          <line>54</line>
-          <properties />
-          <option name="timeStamp" value="823" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java</url>
           <line>30</line>
           <properties />
@@ -3010,11 +3053,21 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java</url>
-          <line>50</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="871" />
+          <line>62</line>
+          <properties />
+          <option name="timeStamp" value="886" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java</url>
+          <line>163</line>
+          <properties />
+          <option name="timeStamp" value="890" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java</url>
+          <line>117</line>
+          <properties />
+          <option name="timeStamp" value="892" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -3026,7 +3079,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="886" />
+      <option name="time" value="899" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -3035,35 +3088,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/reducers/SearchResults/SearchResultsReducers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="22" column="53" lean-forward="true" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#556#1589#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/SearchResults/SearchResultsContainer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Settings/SettingsComponentContainer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="41" column="29" lean-forward="true" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/containers/Subscription/SubscriptionContainer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -3192,14 +3216,6 @@
             <element signature="e#3170#3171#0" expanded="true" />
             <element signature="method#createDocument#0;class#DigestHolder#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="68" column="9" lean-forward="true" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3350,47 +3366,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="149" column="5" lean-forward="false" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
-          <folding>
-            <element signature="docComment;class#LabelHolder#0" expanded="true" />
-            <element signature="method#LabelHolder#1;class#LabelHolder#0" expanded="true" />
-            <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
-            <element signature="e#1823#1824#0" expanded="false" />
-            <element signature="e#1854#1855#0" expanded="false" />
-            <element signature="e#2135#2136#0" expanded="false" />
-            <element signature="method#set_id#0;class#LabelHolder#0" expanded="true" />
-            <element signature="e#2894#2895#0" expanded="false" />
-            <element signature="e#2934#2935#0" expanded="false" />
-            <element signature="e#3889#3890#0" expanded="false" />
-            <element signature="e#4280#4281#0" expanded="true" />
-            <element signature="e#4318#4319#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="164" column="16" lean-forward="false" selection-start-line="164" selection-start-column="16" selection-end-line="164" selection-end-column="16" />
-          <folding>
-            <element signature="method#getTopicById#0;class#Topics#0" expanded="false" />
-            <element signature="method#getLabelHolderFromIterator#0;class#Topics#0" expanded="false" />
-            <element signature="method#saveTopic#0;class#Topics#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SummarisationRunnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="36" column="82" lean-forward="false" selection-start-line="36" selection-start-column="82" selection-end-line="36" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/actions/Home/SearchBarActions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -3444,16 +3419,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="47" column="40" lean-forward="false" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-360">
@@ -3500,49 +3465,139 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+        <state relative-caret-position="246">
+          <caret line="57" column="35" lean-forward="false" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#run#0;class#TopicLabelRunnable#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Cluster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="35" column="5" lean-forward="false" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-          <folding>
-            <element signature="method#Clusterer#0;class#Clusterer#0" expanded="true" />
-            <element signature="method#createDummyClusterFromArticle#0;class#Clusterer#0" expanded="true" />
-            <element signature="method#createNewClusterFromArticle#0;class#Clusterer#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="76" column="17" lean-forward="true" selection-start-line="71" selection-start-column="16" selection-end-line="76" selection-end-column="17" />
+        <state relative-caret-position="606">
+          <caret line="84" column="18" lean-forward="false" selection-start-line="84" selection-start-column="18" selection-end-line="84" selection-end-column="18" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="73" column="52" lean-forward="false" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/net/SocketInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="93" column="23" lean-forward="false" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="170" column="0" lean-forward="false" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+          <folding>
+            <element signature="method#getTopic#0;class#Topics#0" expanded="true" />
+            <element signature="method#getLabelHolderFromIterator#0;class#Topics#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="146" column="8" lean-forward="false" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
+        <state relative-caret-position="-15">
+          <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="docComment;class#ArticleFetchRunnable#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="108" column="37" lean-forward="true" selection-start-line="108" selection-start-column="37" selection-end-line="108" selection-end-column="37" />
+          <folding>
+            <element signature="docComment;class#LabelHolder#0" expanded="true" />
+            <element signature="method#LabelHolder#1;class#LabelHolder#0" expanded="true" />
+            <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
+            <element signature="method#set_id#0;class#LabelHolder#0" expanded="true" />
+            <element signature="method#createDocument#0;class#LabelHolder#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="56" column="2" lean-forward="true" selection-start-line="56" selection-start-column="2" selection-end-line="56" selection-end-column="2" />
+          <folding>
+            <element signature="method#performCandidateRanking#0;class#TopicLabelling#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SummarisationRunnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="45" column="26" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/ClusterItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/ArticleVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="10" column="43" lean-forward="true" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+          <folding>
+            <element signature="method#ArticleVector#0;class#ArticleVector#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Cluster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="method#Cluster#0;class#Cluster#0" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
+            <element signature="e#483#484#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="42" column="60" lean-forward="false" selection-start-line="42" selection-start-column="60" selection-end-line="42" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Clusterer#0;class#Clusterer#0" expanded="true" />
+            <element signature="method#createDummyClusterFromArticle#0;class#Clusterer#0" expanded="true" />
+            <element signature="method#cluster#0;class#Clusterer#0" expanded="true" />
+            <element signature="method#combineIfPossible#0;class#Clusterer#0" expanded="true" />
+            <element signature="method#generateSimilarityMatrix#0;class#Clusterer#0" expanded="true" />
+            <element signature="method#findSimilarity#0;class#Clusterer#0" expanded="true" />
+            <element signature="method#createNewClusterFromArticle#0;class#Clusterer#0" expanded="true" />
+            <element signature="method#createNewClusterFromArticles#0;class#Clusterer#0" expanded="true" />
+            <element signature="method#getArticleVectorForArticle#0;class#Clusterer#0" expanded="true" />
           </folding>
         </state>
       </provider>

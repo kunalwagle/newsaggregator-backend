@@ -2,7 +2,7 @@ package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
 import com.newsaggregator.server.TaskServiceSingleton;
-import com.newsaggregator.server.jobs.*;
+import com.newsaggregator.server.jobs.ArticleFetchRunnable;
 import org.apache.log4j.Logger;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
@@ -61,11 +61,11 @@ public class Main {
                 Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
 ////
                 scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
-                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
-                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
-                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
-                scheduleManager.scheduleAtFixedRate(new LabellingRunnable(), 1L, 15L, TimeUnit.MINUTES);
-                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
+//                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleAtFixedRate(new LabellingRunnable(), 1L, 15L, TimeUnit.MINUTES);
+//                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 
 //               TopicModelling topicModelling = new TopicModelling();
 //                OutletArticle murrayBBC = new OutletArticle("Murray set to miss Davis Cup tie", "Andy Murray is set to miss Davis Cup tie. Andy Murray is unlikely to play in Great Britain's Davis Cup quarter-final against France next month as he recovers from an elbow injury. GB captain Leon Smith will name his team for the tie, in Rouen from 7-9 April, at 12:00 BST on Tuesday. Murray, 29, pulled out of the Miami Open almost a week before his opening match because of an elbow injury. The world number one needs to rest \"some sort of tear\", his brother Jamie told reporters in Florida. He said Andy told him he could \"do everything except serve\" and \"rest was all he had to do\". \"I am not planning that he is going to be there,\" he added. \"If he is, then obviously that's great for the team and we'll see what happens, but the most important thing for him is just to get healthy.\" Smith is likely to call on Dan Evans and Kyle Edmund for the singles matches in Rouen, with Jamie Murray and Dom Inglot in line for the doubles. The tie will be played indoors on clay at the Kindarena.", "http://www.hellomagazine.com/imagenes//celebrities/2016100433872/andy-murray-stalked-hotel-maid/0-175-236/murray-d.jpg", "http://telegraph.co.uk/fakemurray", "the-telegraph", "2017-03-28T11:35:22Z");
