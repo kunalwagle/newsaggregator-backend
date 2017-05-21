@@ -21,6 +21,10 @@ import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -39,6 +43,13 @@ public class ArticleFetchRunnable implements Runnable {
         Articles articleManager = new Articles(db);
         Topics topics = new Topics(db);
         Summaries summaries = new Summaries(db);
+
+        try {
+            Path file = Paths.get("./timestamp.txt");
+            Files.write(file, Lists.newArrayList(String.valueOf(articleManager.count())), Charset.forName("UTF-8"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
 

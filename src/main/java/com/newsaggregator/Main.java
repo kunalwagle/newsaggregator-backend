@@ -21,7 +21,7 @@ public class Main {
 
         Component component = new Component();
 
-        component.getServers().add(Protocol.HTTP, 8185);
+        component.getServers().add(Protocol.HTTP, 8183);
 
         component.getDefaultHost().attach("/api", new RouterApplication());
 
@@ -60,7 +60,7 @@ public class Main {
 
                 Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
 ////
-                scheduleManager.scheduleWithFixedDelay(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
+                scheduleManager.scheduleAtFixedRate(new ArticleFetchRunnable(), 1L, 300L, TimeUnit.SECONDS);
 //                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
