@@ -10,15 +10,23 @@ import com.newsaggregator.db.Topics;
 import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.server.LabelHolder;
+import com.newsaggregator.server.TaskServiceSingleton;
 import org.apache.log4j.Logger;
+import org.restlet.service.TaskService;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 15/05/2017.
  */
 public class TopicLabelRunnable implements Runnable {
+
+    private List<OutletArticle> articleList;
+
+    public TopicLabelRunnable(List<OutletArticle> articleList) {
+        this.articleList = articleList;
+    }
 
     @Override
     public void run() {
@@ -26,62 +34,60 @@ public class TopicLabelRunnable implements Runnable {
         Logger logger = Logger.getLogger(getClass());
 
         MongoDatabase db = Utils.getDatabase();
-        Articles articles = new Articles(db);
+        Articles articleManager = new Articles(db);
         Topics topics = new Topics(db);
 
+        List<String> labelStrings = new ArrayList<>();
+
         try {
-            TopicModelling topicModelling = new TopicModelling();
 
-            List<OutletArticle> unlabelledArticles = articles.getUnlabelledArticles().stream().limit(15).collect(Collectors.toList());
+            int counter = 0;
 
-            int counter = 1;
+            TopicModelling modelling = new TopicModelling();
 
-            for (OutletArticle article : unlabelledArticles) {
+            for (OutletArticle article : articleList) {
+                counter++;
+                logger.info("Labelling " + counter + " of " + articleList.size());
                 if (article.getBody() == null || article.getBody().length() == 0) {
                     article.setLabelled(true);
-                    articles.updateArticles(Lists.newArrayList(article));
+                    articleManager.updateArticles(Lists.newArrayList(article));
                     continue;
                 }
-                article = articles.getArticleFromId(article.getId());
-                if (article.isLabelled()) {
-                    continue;
-                }
-                logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
-                logger.info(article.getId());
-                try {
-                    Topic topic = topicModelling.getModel(article);
-                    List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
-                    article = articles.getArticleFromId(article.getId());
-                    if (article.isLabelled()) {
-                        continue;
-                    }
-                    logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
-                    if (topicLabels != null) {
-                        for (String topicLabel : topicLabels) {
-                            try {
-                                LabelHolder labelHolder = topics.getTopic(topicLabel);
-                                if (labelHolder == null) {
-                                    labelHolder = new LabelHolder(topicLabel);
-                                }
-                                labelHolder.addArticle(article);
-                                labelHolder.setNeedsClustering(true);
-                                article.setLabelled(true);
-                                topics.saveTopic(labelHolder);
-                                articles.updateArticles(Lists.newArrayList(article));
-                            } catch (Exception e) {
-                                logger.error("An error in the saving part of a topic label. Moving on", e);
+
+                Topic topic = modelling.getModel(article);
+                List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
+
+                if (topicLabels != null) {
+                    int number = 0;
+                    for (String topicLabel : topicLabels) {
+                        try {
+                            number++;
+                            logger.info("Setting " + number + " of " + topicLabels.size());
+                            LabelHolder labelHolder = topics.getTopic(topicLabel);
+                            if (labelHolder == null) {
+                                labelHolder = topics.createBlankTopic(topicLabel);
                             }
+                            labelHolder.addArticle(article);
+                            labelHolder.setNeedsClustering(true);
+                            article.setLabelled(true);
+                            topics.saveTopic(labelHolder);
+                            articleManager.updateArticles(Lists.newArrayList(article));
+                            labelStrings.add(topicLabel);
+                        } catch (Exception e) {
+                            logger.error("An error in the saving part of a topic label. Moving on", e);
                         }
                     }
-                    logger.info("Labelling " + counter + " of " + unlabelledArticles.size());
-                } catch (Exception e) {
-                    logger.error("An error in the labelling part of a topic. Moving on", e);
                 }
-                counter++;
             }
 
         } catch (Exception e) {
-            logger.error("An Error in the Topic Label Runnable", e);
+            logger.error("Caught an exception labelling new articles", e);
+        }
+
+        TaskService taskService = TaskServiceSingleton.getInstance();
+
+        if (labelStrings.size() > 0) {
+            taskService.execute(new ClusteringRunnable(labelStrings));
         }
 
     }

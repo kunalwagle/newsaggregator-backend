@@ -1,32 +1,24 @@
 package com.newsaggregator.server.jobs;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
-import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.base.Topic;
 import com.newsaggregator.db.Articles;
 import com.newsaggregator.db.Summaries;
 import com.newsaggregator.db.Topics;
-import com.newsaggregator.ml.clustering.Cluster;
-import com.newsaggregator.ml.clustering.Clusterer;
-import com.newsaggregator.ml.labelling.TopicLabelling;
-import com.newsaggregator.ml.modelling.TopicModelling;
-import com.newsaggregator.ml.summarisation.Extractive.Extractive;
-import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.ArticleFetch;
-import com.newsaggregator.server.ClusterHolder;
-import com.newsaggregator.server.LabelHolder;
+import com.newsaggregator.server.TaskServiceSingleton;
 import org.apache.log4j.Logger;
+import org.restlet.service.TaskService;
 
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by kunalwagle on 21/02/2017.
@@ -35,6 +27,7 @@ public class ArticleFetchRunnable implements Runnable {
 
     @Override
     public void run() {
+
         Logger logger = Logger.getLogger(getClass());
 
         List<OutletArticle> articleList = new ArrayList<>();
@@ -71,134 +64,150 @@ public class ArticleFetchRunnable implements Runnable {
             logger.error("Caught an exception in ArticleFetchRunnable", e);
         }
 
-        List<String> labelStrings = new ArrayList<>();
+        TaskService taskService = TaskServiceSingleton.getInstance();
+        taskService.schedule(new ArticleFetchRunnable(), 3L, TimeUnit.MINUTES);
 
-
-        try {
-
-            int counter = 0;
-
-            TopicModelling modelling = new TopicModelling();
-
-            for (OutletArticle article : articleList) {
-                counter++;
-                logger.info("Labelling " + counter + " of " + articleList.size());
-                if (article.getBody() == null || article.getBody().length() == 0) {
-                    article.setLabelled(true);
-                    articleManager.updateArticles(Lists.newArrayList(article));
-                    continue;
-                }
-
-                Topic topic = modelling.getModel(article);
-                List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
-
-                if (topicLabels != null) {
-                    int number = 0;
-                    for (String topicLabel : topicLabels) {
-                        try {
-                            number++;
-                            logger.info("Setting " + number + " of " + topicLabels.size());
-                            LabelHolder labelHolder = topics.getTopic(topicLabel);
-                            if (labelHolder == null) {
-                                labelHolder = topics.createBlankTopic(topicLabel);
-                            }
-                            labelHolder.addArticle(article);
-                            labelHolder.setNeedsClustering(true);
-                            article.setLabelled(true);
-                            topics.saveTopic(labelHolder);
-                            articleManager.updateArticles(Lists.newArrayList(article));
-                            labelStrings.add(topicLabel);
-                        } catch (Exception e) {
-                            logger.error("An error in the saving part of a topic label. Moving on", e);
-                        }
-                    }
-                }
-            }
-
-        } catch (Exception e) {
-            logger.error("Caught an exception labelling new articles", e);
+        if (articleList.size() > 0) {
+            taskService.execute(new TopicLabelRunnable(articleList));
         }
 
-        List<ClusterHolder> summaryClusters = new ArrayList<>();
+//        List<String> labelStrings = new ArrayList<>();
+//
+//
+//        try {
+//
+//            int counter = 0;
+//
+//            TopicModelling modelling = new TopicModelling();
+//
+//            for (OutletArticle article : articleList) {
+//                counter++;
+//                logger.info("Labelling " + counter + " of " + articleList.size());
+//                if (article.getBody() == null || article.getBody().length() == 0) {
+//                    article.setLabelled(true);
+//                    articleManager.updateArticles(Lists.newArrayList(article));
+//                    continue;
+//                }
+//
+//                Topic topic = modelling.getModel(article);
+//                List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
+//
+//                if (topicLabels != null) {
+//                    int number = 0;
+//                    for (String topicLabel : topicLabels) {
+//                        try {
+//                            number++;
+//                            logger.info("Setting " + number + " of " + topicLabels.size());
+//                            LabelHolder labelHolder = topics.getTopic(topicLabel);
+//                            if (labelHolder == null) {
+//                                labelHolder = topics.createBlankTopic(topicLabel);
+//                            }
+//                            labelHolder.addArticle(article);
+//                            labelHolder.setNeedsClustering(true);
+//                            article.setLabelled(true);
+//                            topics.saveTopic(labelHolder);
+//                            articleManager.updateArticles(Lists.newArrayList(article));
+//                            labelStrings.add(topicLabel);
+//                        } catch (Exception e) {
+//                            logger.error("An error in the saving part of a topic label. Moving on", e);
+//                        }
+//                    }
+//                }
+//            }
+//
+//        } catch (Exception e) {
+//            logger.error("Caught an exception labelling new articles", e);
+//        }
+//
+////        List<ClusterHolder> summaryClusters = new ArrayList<>();
+//
+//
+//        try {
+//
+//            int counter = 0;
+//
+//            labelStrings = labelStrings.stream().distinct().collect(Collectors.toList());
+//
+//            List<LabelHolder> labelHolders = new ArrayList<>();
+//            for (String labelString : labelStrings) {
+//                LabelHolder labelHolder = topics.getTopic(labelString);
+//                labelHolders.add(labelHolder);
+//            }
+//
+//            List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
+//
+//            for (LabelHolder labelHolder : labelHolders) {
+//                counter++;
+//                logger.info("Clustering " + counter + " of " + labelHolders.size());
+//                List<ClusterHolder> brandNewClusters = new ArrayList<>();
+//                if (labelHolder.getArticles().size() > 0) {
+//                    logger.info("Label id:" + labelHolder.getId());
+//                    Clusterer clusterer;
+//                    if (labelHolder.getClusters().size() > 0) {
+//                        clusterer = new Clusterer(labelHolder.getClusters(), labelHolder.getArticles());
+//                    } else {
+//                        clusterer = new Clusterer(labelHolder.getArticles());
+//                    }
+//                    labelHolder.setClusters(new ArrayList<>());
+//                    List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
+//                    for (Cluster<ArticleVector> cluster : newClusters) {
+//                        List<OutletArticle> articles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
+//                        if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(articles))) {
+//                            ClusterHolder clusterHolder = new ClusterHolder(articles);
+//                            Set<OutletArticle> clusterArticles = new HashSet<>(articles);
+//                            logger.info("Summarising");
+//                            Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
+//                            List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
+//                            List<Summary> summs = extractives.parallelStream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
+//                            logger.info("Summarising");
+//                            clusterHolder.setSummary(summs);
+//                            clusters.add(clusterHolder);
+//                            brandNewClusters.add(clusterHolder);
+//                            labelHolder.addCluster(clusterHolder);
+//                        } else {
+//                            labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());
+//                        }
+//                    }
+//                }
+//                labelHolder.setNeedsClustering(false);
+//                if (brandNewClusters.size() > 0) {
+//                    logger.info("Saving clusters");
+//                    summaries.saveSummaries(brandNewClusters);
+////                    summaryClusters.addAll(brandNewClusters);
+//                }
+//                topics.saveTopic(labelHolder);
+//            }
+//
+//        } catch (Exception e) {
+//            logger.error("Caught an exception clustering", e);
+//        }
+
+//        try {
+//
+//            int counter = 1;
+//            int total = 0;
+//            for (ClusterHolder clusterHolder : summaryClusters) {
+//                logger.info("Summarisation id: " + clusterHolder.getId());
+//                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
+//                List<OutletArticle> articles = clusterHolder.getArticles();
+//                Set<OutletArticle> clusterArticles = new HashSet<>(articles);
+//                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
+//                Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
+//                List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
+//                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
+//                List<Summary> summs = extractives.parallelStream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
+//                clusterHolder.setSummary(summs);
+//                total += summs.size();
+//                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
+//                counter++;
+//                summaries.updateSummaries(Lists.newArrayList(clusterHolder));
+//            }
+//
+//        } catch (Exception e) {
+//            logger.error("Caught an exception summarising", e);
+//        }
 
 
-        try {
-
-            int counter = 0;
-
-            labelStrings = labelStrings.stream().distinct().collect(Collectors.toList());
-
-            List<LabelHolder> labelHolders = new ArrayList<>();
-            for (String labelString : labelStrings) {
-                LabelHolder labelHolder = topics.getTopic(labelString);
-                labelHolders.add(labelHolder);
-            }
-
-            List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
-
-            for (LabelHolder labelHolder : labelHolders) {
-                counter++;
-                logger.info("Clustering " + counter + " of " + labelHolders.size());
-                List<ClusterHolder> brandNewClusters = new ArrayList<>();
-                if (labelHolder.getArticles().size() > 0) {
-                    logger.info("Label id:" + labelHolder.getId());
-                    Clusterer clusterer;
-                    if (labelHolder.getClusters().size() > 0) {
-                        clusterer = new Clusterer(labelHolder.getClusters(), labelHolder.getArticles());
-                    } else {
-                        clusterer = new Clusterer(labelHolder.getArticles());
-                    }
-                    labelHolder.setClusters(new ArrayList<>());
-                    List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
-                    for (Cluster<ArticleVector> cluster : newClusters) {
-                        List<OutletArticle> clusterArticles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
-                        if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(clusterArticles))) {
-                            ClusterHolder clusterHolder = new ClusterHolder(clusterArticles);
-                            clusters.add(clusterHolder);
-                            brandNewClusters.add(clusterHolder);
-                            labelHolder.addCluster(clusterHolder);
-                        } else {
-                            labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(clusterArticles)).findAny().get());
-                        }
-                    }
-                }
-                labelHolder.setNeedsClustering(false);
-                if (brandNewClusters.size() > 0) {
-                    logger.info("Saving clusters");
-                    summaries.saveSummaries(brandNewClusters);
-                    summaryClusters.addAll(brandNewClusters);
-                }
-                topics.saveTopic(labelHolder);
-            }
-
-        } catch (Exception e) {
-            logger.error("Caught an exception clustering", e);
-        }
-
-        try {
-
-            int counter = 1;
-            int total = 0;
-            for (ClusterHolder clusterHolder : summaryClusters) {
-                logger.info("Summarisation id: " + clusterHolder.getId());
-                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
-                List<OutletArticle> articles = clusterHolder.getArticles();
-                Set<OutletArticle> clusterArticles = new HashSet<>(articles);
-                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
-                Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
-                List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
-                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
-                List<Summary> summs = extractives.parallelStream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
-                clusterHolder.setSummary(summs);
-                total += summs.size();
-                logger.info("Summarising " + counter + " of " + summaryClusters.size() + ". Done " + total + " summaries so far");
-                counter++;
-                summaries.updateSummaries(Lists.newArrayList(clusterHolder));
-            }
-
-        } catch (Exception e) {
-            logger.error("Caught an exception summarising", e);
-        }
 
 //        try {
 //            logger.info("Fetching articles");

@@ -1,5 +1,6 @@
 package com.newsaggregator.server.jobs;
 
+import com.google.common.collect.Sets;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.base.ArticleVector;
@@ -8,14 +9,13 @@ import com.newsaggregator.db.Summaries;
 import com.newsaggregator.db.Topics;
 import com.newsaggregator.ml.clustering.Cluster;
 import com.newsaggregator.ml.clustering.Clusterer;
+import com.newsaggregator.ml.summarisation.Extractive.Extractive;
+import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -23,66 +23,80 @@ import java.util.stream.Collectors;
  */
 public class ClusteringRunnable implements Runnable {
 
+    private List<String> labelStrings;
+
+    public ClusteringRunnable(List<String> labelStrings) {
+        this.labelStrings = labelStrings;
+    }
+
 
     @Override
     public void run() {
 
         Logger logger = Logger.getLogger(getClass());
 
+        MongoDatabase db = Utils.getDatabase();
+        Topics topics = new Topics(db);
+        Summaries summaries = new Summaries(db);
+
         try {
 
-            MongoDatabase db = Utils.getDatabase();
-            Summaries summaries = new Summaries(db);
-            Topics topics = new Topics(db);
+            int counter = 0;
 
-            List<LabelHolder> labelHolders = topics.getClusteringTopics().stream().limit(15).collect(Collectors.toList());
+            labelStrings = labelStrings.stream().distinct().collect(Collectors.toList());
 
+            List<LabelHolder> labelHolders = new ArrayList<>();
+            for (String labelString : labelStrings) {
+                LabelHolder labelHolder = topics.getTopic(labelString);
+                labelHolders.add(labelHolder);
+            }
 
             List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
 
-            int counter = 1;
             for (LabelHolder labelHolder : labelHolders) {
-                List<ClusterHolder> brandNewClusters = new ArrayList<>();
-                labelHolder = topics.getTopicById(labelHolder.getId());
-                if (!labelHolder.getNeedsClustering()) {
-                    continue;
-                }
+                counter++;
                 logger.info("Clustering " + counter + " of " + labelHolders.size());
-                logger.info("Number of articles: " + labelHolder.getArticles().size());
+                List<ClusterHolder> brandNewClusters = new ArrayList<>();
                 if (labelHolder.getArticles().size() > 0) {
                     logger.info("Label id:" + labelHolder.getId());
+                    Clusterer clusterer;
+                    if (labelHolder.getClusters().size() > 0) {
+                        clusterer = new Clusterer(labelHolder.getClusters(), labelHolder.getArticles());
+                    } else {
+                        clusterer = new Clusterer(labelHolder.getArticles());
+                    }
                     labelHolder.setClusters(new ArrayList<>());
-                    Clusterer clusterer = new Clusterer(labelHolder.getArticles());
                     List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
-                    logger.info("Clustering " + counter + " of " + labelHolders.size());
                     for (Cluster<ArticleVector> cluster : newClusters) {
-                        List<OutletArticle> clusterArticles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
-                        if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(clusterArticles))) {
-                            logger.info("1 Clustering " + counter + " of " + labelHolders.size());
-                            ClusterHolder clusterHolder = new ClusterHolder(clusterArticles);
+                        List<OutletArticle> articles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
+                        if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(articles))) {
+                            ClusterHolder clusterHolder = new ClusterHolder(articles);
+                            Set<OutletArticle> clusterArticles = new HashSet<>(articles);
+                            logger.info("Summarising");
+                            Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
+                            List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
+                            List<Summary> summs = extractives.parallelStream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
+                            logger.info("Summarising");
+                            clusterHolder.setSummary(summs);
                             clusters.add(clusterHolder);
                             brandNewClusters.add(clusterHolder);
                             labelHolder.addCluster(clusterHolder);
                         } else {
-                            logger.info("2 Clustering " + counter + " of " + labelHolders.size());
-                            labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(clusterArticles)).findAny().get());
+                            labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());
                         }
                     }
                 }
                 labelHolder.setNeedsClustering(false);
-                topics.saveTopic(labelHolder);
                 if (brandNewClusters.size() > 0) {
                     logger.info("Saving clusters");
                     summaries.saveSummaries(brandNewClusters);
+//                    summaryClusters.addAll(brandNewClusters);
                 }
-                counter++;
+                topics.saveTopic(labelHolder);
             }
 
-
-
-
         } catch (Exception e) {
-            logger.error("An Error in the Clustering Runnable", e);
+            logger.error("Caught an exception clustering", e);
         }
 
     }
