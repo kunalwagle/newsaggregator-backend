@@ -1,7 +1,5 @@
 package com.newsaggregator;
 
-import com.newsaggregator.api.outlets.WSJ;
-import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.routes.RouterApplication;
 import com.newsaggregator.server.TaskServiceSingleton;
 import com.newsaggregator.server.jobs.ArticleRunnable;
@@ -15,7 +13,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -49,10 +46,10 @@ public class Main {
 //            throw new Exception();
 //                new TopicModelling();
 
-                WSJ bbcNews = new WSJ();
-                List<OutletArticle> articles = bbcNews.getArticles();
-
-                System.out.println(articles);
+//                WSJ bbcNews = new WSJ();
+//                List<OutletArticle> articles = bbcNews.getArticles();
+//
+//                System.out.println(articles);
 
 
                 TaskService scheduleManager = TaskServiceSingleton.getInstance();

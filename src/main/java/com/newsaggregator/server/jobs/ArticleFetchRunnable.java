@@ -1,21 +1,14 @@
 package com.newsaggregator.server.jobs;
 
-import com.google.common.collect.Lists;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.db.Articles;
-import com.newsaggregator.db.Summaries;
-import com.newsaggregator.db.Topics;
 import com.newsaggregator.server.ArticleFetch;
 import com.newsaggregator.server.TaskServiceSingleton;
 import org.apache.log4j.Logger;
 import org.restlet.service.TaskService;
 
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -34,15 +27,6 @@ public class ArticleFetchRunnable implements Runnable {
 
         MongoDatabase db = Utils.getDatabase();
         Articles articleManager = new Articles(db);
-        Topics topics = new Topics(db);
-        Summaries summaries = new Summaries(db);
-
-        try {
-            Path file = Paths.get("./timestamp.txt");
-            Files.write(file, Lists.newArrayList(String.valueOf(articleManager.count())), Charset.forName("UTF-8"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         try {
 
