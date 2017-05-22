@@ -66,7 +66,7 @@ public class Clusterer {
     }
 
     private boolean combineIfPossible(ScoreAddress score) {
-        if (score.getScore() > 0.001) {
+        if (score.getScore() > 0.005) {
             Cluster firstCluster = clusters.get(score.getI());
             Cluster secondCluster = clusters.get(score.getJ());
             firstCluster.combine(secondCluster);
