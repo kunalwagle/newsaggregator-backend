@@ -1,6 +1,6 @@
 package com.newsaggregator;
 
-import com.newsaggregator.api.outlets.FourFourTwo;
+import com.newsaggregator.api.outlets.WashingtonPost;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.routes.RouterApplication;
 import org.restlet.Component;
@@ -39,7 +39,7 @@ public class Main {
 //            throw new Exception();
 //                new TopicModelling();
 
-                FourFourTwo bbcNews = new FourFourTwo();
+                WashingtonPost bbcNews = new WashingtonPost();
                 List<OutletArticle> articles = bbcNews.getArticles();
 
                 System.out.println(articles);
