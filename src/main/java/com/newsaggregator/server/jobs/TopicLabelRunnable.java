@@ -16,6 +16,7 @@ import org.restlet.service.TaskService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by kunalwagle on 15/05/2017.
@@ -87,7 +88,7 @@ public class TopicLabelRunnable implements Runnable {
         TaskService taskService = TaskServiceSingleton.getInstance();
 
         if (labelStrings.size() > 0) {
-            taskService.execute(new ClusteringRunnable(labelStrings));
+            taskService.schedule(new ClusteringRunnable(labelStrings), 1L, TimeUnit.SECONDS);
         }
 
     }
