@@ -15,7 +15,12 @@ public class CNN extends NewsAPI {
 
     @Override
     protected String extractArticleText(Document page) throws NullPointerException {
-        //TODO Implement
-        return null;
+        String result = page.getElementsByClass("zn-body__paragraph").text();
+        if (result.contains("(CNN)")) {
+            result = result.substring(result.indexOf("(CNN)") + 5);
+        }
+
+        return result;
+
     }
 }
