@@ -1,6 +1,6 @@
 package com.newsaggregator;
 
-import com.newsaggregator.api.outlets.CNN;
+import com.newsaggregator.api.outlets.ESPN;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.routes.RouterApplication;
 import org.restlet.Component;
@@ -39,7 +39,7 @@ public class Main {
 //            throw new Exception();
 //                new TopicModelling();
 
-                CNN bbcNews = new CNN();
+                ESPN bbcNews = new ESPN();
                 List<OutletArticle> articles = bbcNews.getArticles();
 
                 System.out.println(articles);
