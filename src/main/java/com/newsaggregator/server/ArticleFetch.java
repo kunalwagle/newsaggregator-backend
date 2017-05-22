@@ -25,6 +25,15 @@ public class ArticleFetch {
         List<OutletArticle> r = fetchReutersArticles();
         List<OutletArticle> te = fetchTelegraphArticles();
         List<OutletArticle> toi = fetchTOIArticles();
+        List<OutletArticle> bbcn = fetchBBCNewsArticles();
+        List<OutletArticle> bbcs = fetchBBCSportArticles();
+        List<OutletArticle> bl = fetchBloombergArticles();
+        List<OutletArticle> espn = fetchESPNArticles();
+        List<OutletArticle> fft = fetchFourFourTwoArticles();
+        List<OutletArticle> wp = fetchWashingtonPostArticles();
+        List<OutletArticle> cnbc = fetchCNBCArticles();
+        List<OutletArticle> cnn = fetchCNNArticles();
+
         if (ap != null) {
             articles.addAll(ap);
         }
@@ -60,6 +69,30 @@ public class ArticleFetch {
         }
         if (toi != null) {
             articles.addAll(toi);
+        }
+        if (bbcn != null) {
+            articles.addAll(bbcn);
+        }
+        if (bbcs != null) {
+            articles.addAll(bbcs);
+        }
+        if (bl != null) {
+            articles.addAll(bl);
+        }
+        if (cnbc != null) {
+            articles.addAll(cnbc);
+        }
+        if (cnn != null) {
+            articles.addAll(cnn);
+        }
+        if (espn != null) {
+            articles.addAll(espn);
+        }
+        if (fft != null) {
+            articles.addAll(fft);
+        }
+        if (wp != null) {
+            articles.addAll(wp);
         }
         return articles;
     }
@@ -104,10 +137,6 @@ public class ArticleFetch {
         return new Reuters().getArticles();
     }
 
-    private static List<OutletArticle> fetchSSNArticles() {
-        return new SkySportsNews().getArticles();
-    }
-
     private static List<OutletArticle> fetchTelegraphArticles() {
         return new Telegraph().getArticles();
     }
@@ -115,5 +144,38 @@ public class ArticleFetch {
     private static List<OutletArticle> fetchTOIArticles() {
         return new TOI().getArticles();
     }
+
+    private static List<OutletArticle> fetchBBCNewsArticles() {
+        return new BBCNews().getArticles();
+    }
+
+    private static List<OutletArticle> fetchBBCSportArticles() {
+        return new BBCSport().getArticles();
+    }
+
+    private static List<OutletArticle> fetchBloombergArticles() {
+        return new Bloomberg().getArticles();
+    }
+
+    private static List<OutletArticle> fetchCNBCArticles() {
+        return new CNBC().getArticles();
+    }
+
+    private static List<OutletArticle> fetchCNNArticles() {
+        return new CNN().getArticles();
+    }
+
+    private static List<OutletArticle> fetchESPNArticles() {
+        return new ESPN().getArticles();
+    }
+
+    private static List<OutletArticle> fetchFourFourTwoArticles() {
+        return new FourFourTwo().getArticles();
+    }
+
+    private static List<OutletArticle> fetchWashingtonPostArticles() {
+        return new WashingtonPost().getArticles();
+    }
+
 
 }
