@@ -38,7 +38,7 @@ public class TopicLabelling {
             }
 
             for (TopicWord topicWord : topicWords) {
-                words.addAll(Wikipedia.titlesWithLimit(topicWord.getWord(), 8));
+                words.addAll(Wikipedia.titlesWithLimit(topicWord.getWord(), 15));
                 //primaryLabels.addAll(extractTitles(Wikipedia.getArticles(topicWord.getWord())));
             }
 
@@ -105,7 +105,7 @@ public class TopicLabelling {
             potentialLabels.add(new TfIdfScores(label.getLabel(), calc));
         }
 
-        return potentialLabels.stream().sorted(Comparator.comparing(TfIdfScores::getCalculation).reversed()).map(TfIdfScores::getLabel).distinct().limit(10).collect(Collectors.toList());
+        return potentialLabels.stream().sorted(Comparator.comparing(TfIdfScores::getCalculation).reversed()).map(TfIdfScores::getLabel).distinct().limit(18).collect(Collectors.toList());
 
     }
 

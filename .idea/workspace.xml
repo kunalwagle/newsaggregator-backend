@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
-    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Deploying new outlets to server">
+    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Changing threshold on clustering">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -34,16 +34,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArticleFetch.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleFetch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="27" column="58" lean-forward="true" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ArticleRunnable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -57,14 +47,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArticleFetchRunnable.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ArticleFetchRunnable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="42" column="41" lean-forward="true" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+            <state relative-caret-position="165">
+              <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="docComment;class#ArticleFetchRunnable#0" expanded="true" />
+                <element signature="method#run#0;class#ArticleFetchRunnable#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,9 +76,21 @@
       <file leaf-file-name="TopicLabelRunnable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1035">
-              <caret line="90" column="48" lean-forward="true" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
+            <state relative-caret-position="165">
+              <caret line="58" column="69" lean-forward="false" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TopicLabelling.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="21" column="61" lean-forward="true" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
+              <folding>
+                <element signature="method#performCandidateRanking#0;class#TopicLabelling#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -247,7 +249,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Cluster.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/CandidateLabel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NameFinder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Utils.java" />
@@ -274,6 +275,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/clustering/Clusterer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java" />
       </list>
     </option>
   </component>
@@ -750,6 +752,44 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Extractive" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ml" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="labelling" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1542,14 +1582,7 @@
       <workItem from="1492430182328" duration="128984000" />
       <workItem from="1493313787752" duration="60245000" />
       <workItem from="1494247395281" duration="107312000" />
-      <workItem from="1495394225541" duration="13698000" />
-    </task>
-    <task id="LOCAL-00396" summary="Pushing to server">
-      <created>1495106075681</created>
-      <option name="number" value="00396" />
-      <option name="presentableId" value="LOCAL-00396" />
-      <option name="project" value="LOCAL" />
-      <updated>1495106075681</updated>
+      <workItem from="1495394225541" duration="13815000" />
     </task>
     <task id="LOCAL-00397" summary="Pushing to server">
       <created>1495115056660</created>
@@ -1887,7 +1920,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495475545658</updated>
     </task>
-    <option name="localTasksCounter" value="445" />
+    <task id="LOCAL-00445" summary="Changing threshold on clustering">
+      <created>1495488042894</created>
+      <option name="number" value="00445" />
+      <option name="presentableId" value="LOCAL-00445" />
+      <option name="project" value="LOCAL" />
+      <updated>1495488042894</updated>
+    </task>
+    <option name="localTasksCounter" value="446" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1921,7 +1961,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="733873000" />
+    <option name="totallyTimeSpent" value="733990000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2008,7 +2048,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added label to new article fetch runnable" />
     <MESSAGE value="Added clustering to new ArticleFetchRunnable" />
     <MESSAGE value="New clusterer constructor" />
     <MESSAGE value="Update to runnable" />
@@ -2033,7 +2072,8 @@
     <MESSAGE value="New Fetch articles" />
     <MESSAGE value="Ready for new deployment" />
     <MESSAGE value="Deploying new outlets to server" />
-    <option name="LAST_COMMIT_MESSAGE" value="Deploying new outlets to server" />
+    <MESSAGE value="Changing threshold on clustering" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changing threshold on clustering" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -2122,6 +2162,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="32" lean-forward="true" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
+          <folding>
+            <element signature="method#CandidateLabel#1;class#CandidateLabel#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2133,16 +2176,6 @@
             <element signature="method#titlesWithLimit#0;class#Wikipedia#0" expanded="false" />
             <element signature="method#getNearMatchArticle#0;class#Wikipedia#0" expanded="false" />
             <element signature="method#convertToArticle#0;class#Wikipedia#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="method#performCandidateRanking#0;class#TopicLabelling#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2525,14 +2558,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="90" column="48" lean-forward="true" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -2546,11 +2571,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="42" column="41" lean-forward="true" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+        <state relative-caret-position="165">
+          <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#ArticleFetchRunnable#0" expanded="true" />
+            <element signature="method#run#0;class#ArticleFetchRunnable#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="58" column="69" lean-forward="false" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="21" column="61" lean-forward="true" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
+          <folding>
+            <element signature="method#performCandidateRanking#0;class#TopicLabelling#0" expanded="true" />
           </folding>
         </state>
       </provider>
