@@ -46,8 +46,10 @@ public class Main {
 //            throw new Exception();
 //                new TopicModelling();
 
-//                WSJ bbcNews = new WSJ();
+//                BBCNews bbcNews = new BBCNews();
 //                List<OutletArticle> articles = bbcNews.getArticles();
+
+//                TaskServiceSingleton.getInstance().execute(new TopicLabelRunnable(Lists.newArrayList(new Articles(Utils.getDatabase()).getSingleArticle("http://www.bbc.co.uk/sport/tennis/40003294"))));
 //
 //                System.out.println(articles);
 

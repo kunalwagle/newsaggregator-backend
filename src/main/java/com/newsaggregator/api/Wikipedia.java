@@ -181,4 +181,26 @@ public class Wikipedia {
         return articles;
     }
 
+    public static List<String> getCategories(String candidate) {
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            candidate = candidate.replace(' ', '+');
+            candidate = candidate.replace("%20", "+");
+            URL wikipediaURL = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=categories&cllimit=max&titles=" + candidate);
+            URLConnection wikipediaURLConnection = wikipediaURL.openConnection();
+            wikipediaURLConnection.connect();
+            JSONObject response = new JSONObject(IOUtils.toString(wikipediaURLConnection.getInputStream(), Charset.forName("UTF-8"))).getJSONObject("query").getJSONObject("pages");
+            for (String key : response.keySet()) {
+                JSONObject searchResult = response.getJSONObject(key);
+                JSONArray array = searchResult.getJSONArray("categories");
+                for (int i = 0; i < array.length(); i++) {
+                    String object = array.getJSONObject(i).getString("title").substring(9);
+                    result.add(object);
+                }
+            }
+        } catch (Exception e) {
+//            e.printStackTrace();
+        }
+        return result;
+    }
 }

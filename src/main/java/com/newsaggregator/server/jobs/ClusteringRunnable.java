@@ -3,6 +3,7 @@ package com.newsaggregator.server.jobs;
 import com.google.common.collect.Sets;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
+import com.newsaggregator.api.Wikipedia;
 import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.db.Summaries;
@@ -91,6 +92,16 @@ public class ClusteringRunnable implements Runnable {
                     if (brandNewClusters.size() > 0) {
                         logger.info("Saving clusters");
                         summaries.saveSummaries(brandNewClusters);
+                        List<String> categories = Wikipedia.getCategories(labelHolder.getLabel());
+                        for (String cat : categories) {
+                            LabelHolder catLabelHolder = topics.getTopic(cat);
+                            if (catLabelHolder == null) {
+                                catLabelHolder = new LabelHolder(cat, labelHolder.getArticles(), labelHolder.getClusters());
+                            } else {
+                                catLabelHolder.addClusters(brandNewClusters);
+                            }
+                            topics.saveTopic(catLabelHolder);
+                        }
 //                    summaryClusters.addAll(brandNewClusters);
                     }
                     topics.saveTopic(labelHolder);
