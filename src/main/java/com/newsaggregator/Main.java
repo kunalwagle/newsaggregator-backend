@@ -1,19 +1,12 @@
 package com.newsaggregator;
 
+import com.newsaggregator.api.outlets.BBCNews;
+import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.TaskServiceSingleton;
-import com.newsaggregator.server.jobs.ArticleRunnable;
-import com.newsaggregator.server.jobs.DigestRunnable;
-import org.apache.log4j.Logger;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
-import org.restlet.service.TaskService;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 
 public class Main {
@@ -46,29 +39,34 @@ public class Main {
 //            throw new Exception();
 //                new TopicModelling();
 
+                BBCNews bbcNews = new BBCNews();
+                List<OutletArticle> articles = bbcNews.getArticles();
 
-                TaskService scheduleManager = TaskServiceSingleton.getInstance();
+                System.out.println(articles);
 
-                Utils.sendServerRestartEmail(port);
 
-                LocalDateTime localNow = LocalDateTime.now();
-                ZoneId currentZone = ZoneId.of("Europe/London");
-                ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
-                ZonedDateTime zonedNext5;
-                zonedNext5 = zonedNow.withHour(11).withMinute(15).withSecond(0);
-                if (zonedNow.compareTo(zonedNext5) > 0)
-                    zonedNext5 = zonedNext5.plusDays(1);
-
-                Duration duration = Duration.between(zonedNow, zonedNext5);
-                long initialDelay = duration.getSeconds();
-
-                Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
-//                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleAtFixedRate(new LabellingRunnable(), 1L, 15L, TimeUnit.MINUTES);
-                scheduleManager.execute(new ArticleRunnable());
-                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
+//                TaskService scheduleManager = TaskServiceSingleton.getInstance();
+//
+//                Utils.sendServerRestartEmail(port);
+//
+//                LocalDateTime localNow = LocalDateTime.now();
+//                ZoneId currentZone = ZoneId.of("Europe/London");
+//                ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
+//                ZonedDateTime zonedNext5;
+//                zonedNext5 = zonedNow.withHour(11).withMinute(15).withSecond(0);
+//                if (zonedNow.compareTo(zonedNext5) > 0)
+//                    zonedNext5 = zonedNext5.plusDays(1);
+//
+//                Duration duration = Duration.between(zonedNow, zonedNext5);
+//                long initialDelay = duration.getSeconds();
+//
+//                Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
+////                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
+////                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
+////                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 15L, TimeUnit.MINUTES);
+////                scheduleManager.scheduleAtFixedRate(new LabellingRunnable(), 1L, 15L, TimeUnit.MINUTES);
+//                scheduleManager.execute(new ArticleRunnable());
+//                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 
 
 //                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
