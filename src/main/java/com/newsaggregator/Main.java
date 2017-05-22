@@ -1,6 +1,6 @@
 package com.newsaggregator;
 
-import com.newsaggregator.api.outlets.Bloomberg;
+import com.newsaggregator.api.outlets.CNBC;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.routes.RouterApplication;
 import org.restlet.Component;
@@ -39,7 +39,7 @@ public class Main {
 //            throw new Exception();
 //                new TopicModelling();
 
-                Bloomberg bbcNews = new Bloomberg();
+                CNBC bbcNews = new CNBC();
                 List<OutletArticle> articles = bbcNews.getArticles();
 
                 System.out.println(articles);
