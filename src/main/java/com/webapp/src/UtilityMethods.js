@@ -32,6 +32,22 @@ export const getColour = (source) => {
             return "darkblue";
         case "the-times-of-india":
             return "orange";
+        case "bbc-news":
+            return "maroon";
+        case "bbc-sport":
+            return "gold";
+        case "bloomberg":
+            return "blue";
+        case "cnbc":
+            return "darkgreen";
+        case "cnn":
+            return "firebrick";
+        case "espn":
+            return "mediumseagreen";
+        case "four-four-two":
+            return "peru";
+        case "the-washington-post":
+            return "steelblue";
         default:
             return "black";
     }
@@ -63,9 +79,25 @@ export const getPublicationName = (source) => {
             return "The Telegraph";
         case "the-times-of-india":
             return "The Times of India";
+        case "bbc-news":
+            return "BBC News";
+        case "bbc-sport":
+            return "BBC Sport";
+        case "bloomberg":
+            return "Bloomberg";
+        case "cnbc":
+            return "CNBC";
+        case "cnn":
+            return "CNN";
+        case "espn":
+            return "ESPN";
+        case "four-four-two":
+            return "FourFourTwo";
+        case "the-washington-post":
+            return "The Washington Post";
         default:
             return "";
     }
 };
 
-export const allOutlets = ["associated-press", "the-guardian-uk", "independent", "reuters", "business-insider-uk", "daily-mail", "espn-cric-info", "metro", "mirror", "newsweek", "the-telegraph", "the-times-of-india"];
+export const allOutlets = ["associated-press", "the-guardian-uk", "independent", "reuters", "business-insider-uk", "daily-mail", "espn-cric-info", "metro", "mirror", "newsweek", "the-telegraph", "the-times-of-india", "bbc-news", "bbc-sport", "bloomberg", "cnbc", "cnn", "espn", "four-four-two", "the-washington-post"];
