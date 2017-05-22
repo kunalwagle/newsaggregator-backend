@@ -54,46 +54,51 @@ public class ClusteringRunnable implements Runnable {
             List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
 
             for (LabelHolder labelHolder : labelHolders) {
-                counter++;
-                logger.info("Clustering " + counter + " of " + labelHolders.size());
-                List<ClusterHolder> brandNewClusters = new ArrayList<>();
-                if (labelHolder.getArticles().size() > 0) {
-                    logger.info("Label id:" + labelHolder.getId());
-                    Clusterer clusterer;
-                    if (labelHolder.getClusters().size() > 0) {
-                        clusterer = new Clusterer(labelHolder.getClusters(), labelHolder.getArticles());
-                    } else {
-                        clusterer = new Clusterer(labelHolder.getArticles());
-                    }
-                    labelHolder.setClusters(new ArrayList<>());
-                    List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
-                    for (Cluster<ArticleVector> cluster : newClusters) {
-                        List<OutletArticle> articles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
-                        if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(articles))) {
-                            ClusterHolder clusterHolder = new ClusterHolder(articles);
-                            Set<OutletArticle> clusterArticles = new HashSet<>(articles);
-                            logger.info("Summarising");
-                            Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
-                            List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
-                            List<Summary> summs = extractives.parallelStream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
-                            logger.info("Summarising");
-                            clusterHolder.setSummary(summs);
-                            clusters.add(clusterHolder);
-                            brandNewClusters.add(clusterHolder);
-                            labelHolder.addCluster(clusterHolder);
+                try {
+                    counter++;
+                    logger.info("Clustering " + counter + " of " + labelHolders.size());
+                    List<ClusterHolder> brandNewClusters = new ArrayList<>();
+                    if (labelHolder.getArticles().size() > 0) {
+                        logger.info("Label id:" + labelHolder.getId());
+                        Clusterer clusterer;
+                        if (labelHolder.getClusters().size() > 0) {
+                            clusterer = new Clusterer(labelHolder.getClusters(), labelHolder.getArticles());
                         } else {
-                            labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());
+                            clusterer = new Clusterer(labelHolder.getArticles());
+                        }
+                        labelHolder.setClusters(new ArrayList<>());
+                        List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
+                        for (Cluster<ArticleVector> cluster : newClusters) {
+                            List<OutletArticle> articles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
+                            if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(articles))) {
+                                ClusterHolder clusterHolder = new ClusterHolder(articles);
+                                Set<OutletArticle> clusterArticles = new HashSet<>(articles);
+                                logger.info("Summarising");
+                                Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
+                                List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
+                                List<Summary> summs = extractives.parallelStream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
+                                logger.info("Summarising");
+                                clusterHolder.setSummary(summs);
+                                clusters.add(clusterHolder);
+                                brandNewClusters.add(clusterHolder);
+                                labelHolder.addCluster(clusterHolder);
+                            } else {
+                                labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());
+                            }
                         }
                     }
-                }
-                labelHolder.setNeedsClustering(false);
-                if (brandNewClusters.size() > 0) {
-                    logger.info("Saving clusters");
-                    summaries.saveSummaries(brandNewClusters);
+                    labelHolder.setNeedsClustering(false);
+                    if (brandNewClusters.size() > 0) {
+                        logger.info("Saving clusters");
+                        summaries.saveSummaries(brandNewClusters);
 //                    summaryClusters.addAll(brandNewClusters);
+                    }
+                    topics.saveTopic(labelHolder);
+                } catch (Exception e) {
+                    logger.error("Caught an exception clustering within a topic but will continue", e);
                 }
-                topics.saveTopic(labelHolder);
             }
+
 
         } catch (Exception e) {
             logger.error("Caught an exception clustering", e);

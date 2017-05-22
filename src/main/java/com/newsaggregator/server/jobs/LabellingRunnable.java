@@ -12,7 +12,7 @@ public class LabellingRunnable implements Runnable {
 
     @Override
     public void run() {
-        TaskServiceSingleton.getInstance().schedule(new TopicLabelRunnable(), 1L, TimeUnit.SECONDS);
+        TaskServiceSingleton.getInstance().schedule(new TopicLabelRunnable(null), 1L, TimeUnit.SECONDS);
     }
 
 }
