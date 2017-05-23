@@ -51,6 +51,8 @@ public class ClusterHolder implements DatabaseStorage {
             this.title = articles.stream().filter(article -> article.getSource().equals(Outlet.AssociatedPress.getSourceString())).findFirst().get().getTitle();
         } else if (articles.stream().anyMatch(article -> article.getSource().equals(Outlet.Reuters.getSourceString()))) {
             this.title = articles.stream().filter(article -> article.getSource().equals(Outlet.Reuters.getSourceString())).findFirst().get().getTitle();
+        } else if (articles.stream().anyMatch(article -> article.getSource().equals(Outlet.BBCNews.getSourceString()))) {
+            this.title = articles.stream().filter(article -> article.getSource().equals(Outlet.BBCNews.getSourceString())).findFirst().get().getTitle();
         } else {
             if (articles.size() > 0) {
                 this.title = articles.get(0).getTitle();

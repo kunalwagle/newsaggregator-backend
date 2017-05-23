@@ -4,8 +4,14 @@ import com.newsaggregator.api.Wikipedia;
 import com.newsaggregator.base.*;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import com.newsaggregator.ml.nlp.apache.NLPSingleton;
+import com.newsaggregator.ml.nlp.stanford.StanfordAnalysis;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.util.CoreMap;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -25,8 +31,54 @@ public class TopicLabelling {
             List<CandidateLabel> primaryCandidates = new ArrayList<>();
             List<String> nameCandidates = new ArrayList<>();
 
-            ExtractSentenceTypes extractSentenceTypes = NLPSingleton.getInstance();
-            List<String> names = extractSentenceTypes.nameFinder(outletArticle.getBody()).stream().distinct().collect(Collectors.toList());
+            StanfordCoreNLP pipeline = new StanfordCoreNLP();
+            Annotation annotation = new Annotation(outletArticle.getBody());
+            pipeline.annotate(annotation);
+            StanfordAnalysis stanfordAnalysis = new StanfordAnalysis(outletArticle.getSource(), annotation);
+
+            StringBuilder sb = new StringBuilder();
+
+            List<String> names = new ArrayList<>();
+
+            for (CoreMap sentence : stanfordAnalysis.getSentences()) {
+                // traversing the words in the current sentence, "O" is a sensible default to initialise
+                // tokens to since we're not interested in unclassified / unknown things..
+                String prevNeToken = "O";
+                String currNeToken = "O";
+                boolean newToken = true;
+                for (CoreLabel token : sentence.get(CoreAnnotations.TokensAnnotation.class)) {
+                    currNeToken = token.get(CoreAnnotations.NamedEntityTagAnnotation.class);
+                    String word = token.get(CoreAnnotations.TextAnnotation.class);
+                    // Strip out "O"s completely, makes code below easier to understand
+                    if (currNeToken.equals("O")) {
+                        // LOG.debug("Skipping '{}' classified as {}", word, currNeToken);
+                        if (!prevNeToken.equals("O") && (sb.length() > 0)) {
+                            names.add(sb.toString());
+                            sb.setLength(0);
+                            newToken = true;
+                        }
+                        continue;
+                    }
+
+                    if (newToken) {
+                        prevNeToken = currNeToken;
+                        newToken = false;
+                        sb.append(" " + word);
+                        continue;
+                    }
+
+                    if (currNeToken.equals(prevNeToken)) {
+                        sb.append(" " + word);
+                    } else {
+                        // We're done with the current entity - print it out and reset
+                        names.add(sb.toString());
+                        sb.setLength(0);
+                        sb.append(word);
+                        newToken = true;
+                    }
+                    prevNeToken = currNeToken;
+                }
+            }
 
             List<String> words = new ArrayList<>(names);
 

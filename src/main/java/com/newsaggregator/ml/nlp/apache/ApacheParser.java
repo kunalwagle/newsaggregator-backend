@@ -39,40 +39,6 @@ public class ApacheParser {
         }
     }
 
-    public List<String> getNounPhrases(List<String> sentences) {
-
-        List<String> result = new ArrayList<>();
-
-        for (String sentence : sentences) {
-
-            Parse topParses[] = ParserTool.parseLine(sentence, parser, 1);
-
-            //call subroutine to extract noun phrases
-            for (Parse p : topParses)
-                result.addAll(getNounPhrases(p));
-
-        }
-
-        return result;
-    }
-
-    public List<String> getNounPhrases(List<String> sentences) {
-
-        List<String> result = new ArrayList<>();
-
-        for (String sentence : sentences) {
-
-            Parse topParses[] = ParserTool.parseLine(sentence, parser, 1);
-
-            //call subroutine to extract noun phrases
-            for (Parse p : topParses)
-                result.addAll(getNounPhrases(p));
-
-        }
-
-        return result;
-    }
-
     private static List<String> getNounPhrases(Parse p) {
 
         List<String> nounPhrases = new ArrayList<>();
@@ -84,6 +50,23 @@ public class ApacheParser {
             nounPhrases.addAll(getNounPhrases(child));
 
         return nounPhrases;
+    }
+
+    public List<String> getNounPhrases(List<String> sentences) {
+
+        List<String> result = new ArrayList<>();
+
+        for (String sentence : sentences) {
+
+            Parse topParses[] = ParserTool.parseLine(sentence, parser, 1);
+
+            //call subroutine to extract noun phrases
+            for (Parse p : topParses)
+                result.addAll(getNounPhrases(p));
+
+        }
+
+        return result;
     }
 
 }

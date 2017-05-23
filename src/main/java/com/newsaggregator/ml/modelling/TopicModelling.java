@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class TopicModelling {
 
-    private final int numTopics = 100;
+    private final int numTopics = 500;
     private ParallelTopicModel model;
     private Alphabet dataAlphabet;
     private InstanceList instances = getInstances();
@@ -45,7 +45,7 @@ public class TopicModelling {
         this.model = new ParallelTopicModel(numTopics, 1.0, 0.01);
         model.addInstances(instances);
         model.setNumThreads(2);
-        model.setNumIterations(1000);
+        model.setNumIterations(1500);
         model.estimate();
 
         logger.info("Performed the estimate");

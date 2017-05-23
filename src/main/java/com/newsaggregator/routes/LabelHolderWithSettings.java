@@ -48,7 +48,7 @@ public class LabelHolderWithSettings {
                 newClusterHolders.add(clusterHolder);
             }
         }
-        newClusterHolders = newClusterHolders.stream().sorted(byLastPublished).collect(Collectors.toList());
+        newClusterHolders = newClusterHolders.stream().sorted(byLastPublished.reversed()).collect(Collectors.toList());
         labelHolder.setClusters(newClusterHolders);
         return labelHolder;
     }
