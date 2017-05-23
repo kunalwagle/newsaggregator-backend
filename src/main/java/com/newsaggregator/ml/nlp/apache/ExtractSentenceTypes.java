@@ -1,5 +1,6 @@
 package com.newsaggregator.ml.nlp.apache;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,12 +12,14 @@ public class ExtractSentenceTypes {
     private SentenceDetection sentenceDetector;
     private POSTagger tagger;
     private Chunker chunker;
+    private ApacheParser parser;
 
     public ExtractSentenceTypes() {
         tokeniser = new Tokenisation();
         sentenceDetector = new SentenceDetection();
         tagger = new POSTagger();
         chunker = new Chunker();
+        parser = new ApacheParser();
     }
 
     public String nounifyDocument(String document) {
@@ -87,5 +90,10 @@ public class ExtractSentenceTypes {
         String toks[] = new String[tokens.size()];
         List<String> strings = new NameFinder().findNames(tokens.toArray(toks));
         return strings;
+    }
+
+    public List<String> nounPhrases(String document) {
+        List<String> sentences = Arrays.asList(sentenceDetector.detectSentences(document));
+        return parser.getNounPhrases(sentences);
     }
 }
