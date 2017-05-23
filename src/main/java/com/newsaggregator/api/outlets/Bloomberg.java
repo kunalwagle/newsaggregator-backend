@@ -25,10 +25,11 @@ public class Bloomberg extends NewsAPI {
             Element element = elementIterator.next();
             if (!element.tagName().equals("p")) {
                 elementIterator.remove();
-            }
-            Elements child = element.getElementsByAttributeValue("itemprop", "StoryLink");
-            if (child.size() > 0) {
-                elementIterator.remove();
+            } else {
+                Elements child = element.getElementsByAttributeValue("itemprop", "StoryLink");
+                if (child.size() > 0) {
+                    elementIterator.remove();
+                }
             }
         }
         return articleBody.text();

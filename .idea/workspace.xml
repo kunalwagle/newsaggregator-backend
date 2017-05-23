@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
-    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Changing number of topic labels developed">
+    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="New topic labelling style, and new clustering with categorisation">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Bloomberg.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Bloomberg.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -28,13 +24,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="495">
-              <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+              <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Bloomberg.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Bloomberg.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#extractArticleText#0;class#Bloomberg#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -43,24 +52,11 @@
       <file leaf-file-name="ArticleFetchRunnable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-360">
-              <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-              <folding>
-                <element signature="docComment;class#ArticleFetchRunnable#0" expanded="true" />
-                <element signature="method#run#0;class#ArticleFetchRunnable#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UtilityMethods.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
-              <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding>
-                <element signature="e#0#47#0" expanded="true" />
-                <element signature="e#1438#2734#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#ArticleFetchRunnable#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-15">
-              <caret line="49" column="42" lean-forward="true" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
+              <caret line="49" column="42" lean-forward="false" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
               <folding>
                 <element signature="method#performCandidateRanking#0;class#TopicLabelling#0" expanded="true" />
               </folding>
@@ -92,8 +88,9 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
-              <caret line="204" column="22" lean-forward="true" selection-start-line="204" selection-start-column="22" selection-end-line="204" selection-end-column="22" />
+              <caret line="203" column="22" lean-forward="false" selection-start-line="203" selection-start-column="22" selection-end-line="203" selection-end-column="22" />
               <folding>
+                <element signature="imports" expanded="false" />
                 <element signature="method#titles#0;class#Wikipedia#0" expanded="true" />
                 <element signature="method#queryAndParseArticles#0;class#Wikipedia#0" expanded="true" />
               </folding>
@@ -270,7 +267,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/BBCNews.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/BBCSport.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Independent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Bloomberg.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/CNBC.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/CNN.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/ESPN.java" />
@@ -286,6 +282,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Bloomberg.java" />
       </list>
     </option>
   </component>
@@ -1712,14 +1709,7 @@
       <workItem from="1492430182328" duration="128984000" />
       <workItem from="1493313787752" duration="60245000" />
       <workItem from="1494247395281" duration="107312000" />
-      <workItem from="1495394225541" duration="16860000" />
-    </task>
-    <task id="LOCAL-00398" summary="Adding model file">
-      <created>1495115165329</created>
-      <option name="number" value="00398" />
-      <option name="presentableId" value="LOCAL-00398" />
-      <option name="project" value="LOCAL" />
-      <updated>1495115165329</updated>
+      <workItem from="1495394225541" duration="17411000" />
     </task>
     <task id="LOCAL-00399" summary="404 page">
       <created>1495119162097</created>
@@ -2057,7 +2047,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495488151440</updated>
     </task>
-    <option name="localTasksCounter" value="447" />
+    <task id="LOCAL-00447" summary="New topic labelling style, and new clustering with categorisation">
+      <created>1495491267760</created>
+      <option name="number" value="00447" />
+      <option name="presentableId" value="LOCAL-00447" />
+      <option name="project" value="LOCAL" />
+      <updated>1495491267760</updated>
+    </task>
+    <option name="localTasksCounter" value="448" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -2091,11 +2088,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="737035000" />
+    <option name="totallyTimeSpent" value="737586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2120,7 +2117,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39390388" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39390388" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2178,7 +2175,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="New clusterer constructor" />
     <MESSAGE value="Update to runnable" />
     <MESSAGE value="New Article Fetch" />
     <MESSAGE value="Added port number as parameter" />
@@ -2203,7 +2199,8 @@
     <MESSAGE value="Deploying new outlets to server" />
     <MESSAGE value="Changing threshold on clustering" />
     <MESSAGE value="Changing number of topic labels developed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changing number of topic labels developed" />
+    <MESSAGE value="New topic labelling style, and new clustering with categorisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="New topic labelling style, and new clustering with categorisation" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -2218,6 +2215,12 @@
           <properties />
           <option name="timeStamp" value="846" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java</url>
+          <line>53</line>
+          <properties />
+          <option name="timeStamp" value="977" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -2228,7 +2231,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="977" />
+      <option name="time" value="978" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2552,17 +2555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Bloomberg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#extractArticleText#0;class#Bloomberg#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/WashingtonPost.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -2635,17 +2627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-360">
-          <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-          <folding>
-            <element signature="docComment;class#ArticleFetchRunnable#0" expanded="true" />
-            <element signature="method#run#0;class#ArticleFetchRunnable#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-120">
@@ -2657,8 +2638,9 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/Wikipedia.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="204" column="22" lean-forward="true" selection-start-line="204" selection-start-column="22" selection-end-line="204" selection-end-column="22" />
+          <caret line="203" column="22" lean-forward="false" selection-start-line="203" selection-start-column="22" selection-end-line="203" selection-end-column="22" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#titles#0;class#Wikipedia#0" expanded="true" />
             <element signature="method#queryAndParseArticles#0;class#Wikipedia#0" expanded="true" />
           </folding>
@@ -2703,7 +2685,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-15">
-          <caret line="49" column="42" lean-forward="true" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
+          <caret line="49" column="42" lean-forward="false" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
           <folding>
             <element signature="method#performCandidateRanking#0;class#TopicLabelling#0" expanded="true" />
           </folding>
@@ -2724,9 +2706,31 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
-          <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+          <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#ArticleFetchRunnable#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/Bloomberg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#extractArticleText#0;class#Bloomberg#0" expanded="true" />
           </folding>
         </state>
       </provider>
