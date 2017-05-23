@@ -5,6 +5,7 @@ import com.newsaggregator.base.*;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
 import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import com.newsaggregator.ml.nlp.stanford.StanfordAnalysis;
+import com.newsaggregator.ml.nlp.stanford.StanfordNLP;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
 import edu.stanford.nlp.ling.CoreAnnotations;
@@ -31,7 +32,7 @@ public class TopicLabelling {
             List<CandidateLabel> primaryCandidates = new ArrayList<>();
             List<String> nameCandidates = new ArrayList<>();
 
-            StanfordCoreNLP pipeline = new StanfordCoreNLP();
+            StanfordCoreNLP pipeline = StanfordNLP.getCoreNLP();
             Annotation annotation = new Annotation(outletArticle.getBody());
             pipeline.annotate(annotation);
             StanfordAnalysis stanfordAnalysis = new StanfordAnalysis(outletArticle.getSource(), annotation);
