@@ -6,6 +6,7 @@ import com.newsaggregator.Utils;
 import com.newsaggregator.db.Articles;
 import com.newsaggregator.db.Summaries;
 import com.newsaggregator.db.Topics;
+import org.apache.log4j.Logger;
 
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -51,6 +52,7 @@ public class SendEmailRunnable implements Runnable {
                 });
 
         try {
+            Logger.getLogger(getClass()).info("Starting email runnable");
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
@@ -59,6 +61,7 @@ public class SendEmailRunnable implements Runnable {
 
             // Send message
             Transport.send(message);
+            Logger.getLogger(getClass()).info("Sending email runnable");
 
             Path file = Paths.get("./timestamp.txt");
             Files.write(file, Lists.newArrayList(String.valueOf(articleManager.count())), Charset.forName("UTF-8"));
