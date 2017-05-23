@@ -34,7 +34,7 @@ public class StanfordNLP {
 
     public static StanfordCoreNLP getCoreNLP() {
         Properties props = new Properties();
-        props.setProperty("annotators", "tokenize,ssplit,pos,lemma,parse,ner,mention,depparse,coref");
+        props.setProperty("annotators", "tokenize,ssplit,ner");
         return new StanfordCoreNLP(props);
     }
 
