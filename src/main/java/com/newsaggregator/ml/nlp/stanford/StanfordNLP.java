@@ -2,6 +2,7 @@ package com.newsaggregator.ml.nlp.stanford;
 
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import com.newsaggregator.ml.summarisation.Extractive.Node;
 import edu.stanford.nlp.coref.CorefCoreAnnotations;
 import edu.stanford.nlp.coref.data.CorefChain;
@@ -37,17 +38,9 @@ public class StanfordNLP {
         return new StanfordCoreNLP(props);
     }
 
-    public StanfordAnalysis performAnalysis() {
-
-        pipeline.annotate(document);
-
-        return new StanfordAnalysis(article.getSource(), document);
-
-    }
-
     public static List<Node> performPronounResolution(List<Node> nodes, List<StanfordAnalysis> stanfordAnalyses) {
 
-        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+        ExtractSentenceTypes extractSentenceTypes = NLPSingleton.getInstance();
 
         for (StanfordAnalysis stanfordAnalysis : stanfordAnalyses) {
             Map<Integer, CorefChain> graph = stanfordAnalysis.getAnnotation().get(CorefCoreAnnotations.CorefChainAnnotation.class);
@@ -112,6 +105,14 @@ public class StanfordNLP {
             result.add(sentence.get(NaturalLogicAnnotations.RelationTriplesAnnotation.class));
         }
         return result;
+    }
+
+    public StanfordAnalysis performAnalysis() {
+
+        pipeline.annotate(document);
+
+        return new StanfordAnalysis(article.getSource(), document);
+
     }
 
     public Annotation getDocument() {

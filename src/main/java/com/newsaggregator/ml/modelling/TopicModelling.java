@@ -11,6 +11,7 @@ import com.newsaggregator.base.Topic;
 import com.newsaggregator.base.TopicLabel;
 import com.newsaggregator.base.TopicWord;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -20,15 +21,15 @@ import java.util.stream.Collectors;
 
 public class TopicModelling {
 
+    private final int numTopics = 100;
     private ParallelTopicModel model;
     private Alphabet dataAlphabet;
-    private final int numTopics = 100;
     private InstanceList instances = getInstances();
     private ExtractSentenceTypes nounifier;
     private Logger logger = Logger.getLogger(getClass());
 
     public TopicModelling() throws Exception {
-        nounifier = new ExtractSentenceTypes();
+        nounifier = NLPSingleton.getInstance();
     }
 
     public void trainTopics(List<OutletArticle> articleList) throws Exception {

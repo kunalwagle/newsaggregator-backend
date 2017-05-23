@@ -3,6 +3,7 @@ package com.newsaggregator.ml.summarisation.Extractive;
 import com.newsaggregator.Utils;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import com.newsaggregator.ml.nlp.apache.SentenceDetection;
 import com.newsaggregator.ml.summarisation.Combiner;
 import com.newsaggregator.ml.summarisation.Summarisation;
@@ -181,7 +182,7 @@ public class Extractive implements Summarisation {
     }
 
     private List<String> stripClausesAndSentences(List<Node> nodes, List<String> summaryStrings) {
-        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+        ExtractSentenceTypes extractSentenceTypes = NLPSingleton.getInstance();
         Iterator<Node> nodeIterator = nodes.iterator();
         while (nodeIterator.hasNext()) {
             Node firstNode = nodeIterator.next();

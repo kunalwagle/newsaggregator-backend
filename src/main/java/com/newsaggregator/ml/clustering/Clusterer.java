@@ -4,6 +4,7 @@ import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.OutletArticle;
 import com.newsaggregator.base.VectorScore;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
 import com.newsaggregator.server.ClusterHolder;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class Clusterer {
 
     private List<Cluster<ArticleVector>> clusters = new ArrayList<>();
-    private ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+    private ExtractSentenceTypes extractSentenceTypes = NLPSingleton.getInstance();
     private TfIdf tfIdf;
 
     public Clusterer(List<OutletArticle> articles) {

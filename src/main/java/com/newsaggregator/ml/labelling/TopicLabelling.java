@@ -3,6 +3,7 @@ package com.newsaggregator.ml.labelling;
 import com.newsaggregator.api.Wikipedia;
 import com.newsaggregator.base.*;
 import com.newsaggregator.ml.nlp.apache.ExtractSentenceTypes;
+import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
 import org.apache.log4j.Logger;
@@ -24,7 +25,7 @@ public class TopicLabelling {
             List<CandidateLabel> primaryCandidates = new ArrayList<>();
             List<String> nameCandidates = new ArrayList<>();
 
-            ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+            ExtractSentenceTypes extractSentenceTypes = NLPSingleton.getInstance();
             List<String> names = extractSentenceTypes.nameFinder(outletArticle.getBody()).stream().distinct().collect(Collectors.toList());
 
             List<String> words = new ArrayList<>(names);
@@ -84,7 +85,7 @@ public class TopicLabelling {
     }
 
     private static List<String> performCandidateRanking(List<CandidateLabel> labels, List<TopicWord> topicWords, OutletArticle outletArticle) {
-        ExtractSentenceTypes extractSentenceTypes = new ExtractSentenceTypes();
+        ExtractSentenceTypes extractSentenceTypes = NLPSingleton.getInstance();
         TfIdf tfIdf = new TfIdf(labels.stream().map(label -> stripArticleBodies(label, extractSentenceTypes)).filter(s -> s.length() > 0).collect(Collectors.toList()));
 
         List<TfIdfScores> potentialLabels = new ArrayList<>();
