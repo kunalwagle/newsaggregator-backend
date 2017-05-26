@@ -2,6 +2,7 @@ package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
 import com.newsaggregator.server.TaskServiceSingleton;
+import com.newsaggregator.server.jobs.ArticleRunnable;
 import com.newsaggregator.server.jobs.DigestRunnable;
 import com.newsaggregator.server.jobs.SendEmailRunnable;
 import org.apache.log4j.Logger;
@@ -134,8 +135,8 @@ public class Main {
 //                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
                 scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 30L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleAtFixedRate(new LabellingRunnable(), 1L, 15L, TimeUnit.MINUTES);
-//                scheduleManager.execute(new ArticleRunnable());
+//                scheduleManager.scheduleAtFixedRate(new TopicLabelRunnable(Lists.newArrayList(article)), 1L, 1L, TimeUnit.SECONDS);
+                scheduleManager.execute(new ArticleRunnable());
                 scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 
 

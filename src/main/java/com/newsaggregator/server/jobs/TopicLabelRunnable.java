@@ -16,6 +16,9 @@ import org.restlet.service.TaskService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -49,14 +52,26 @@ public class TopicLabelRunnable implements Runnable {
             for (OutletArticle article : articleList) {
                 counter++;
                 logger.info("Labelling " + counter + " of " + articleList.size());
+                logger.info("Article id: " + article.getId());
                 if (article.getBody() == null || article.getBody().length() == 0) {
                     article.setLabelled(true);
                     articleManager.updateArticles(Lists.newArrayList(article));
                     continue;
                 }
 
-                Topic topic = modelling.getModel(article);
-                List<String> topicLabels = TopicLabelling.generateTopicLabel(topic, article);
+                ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+                final Future<List<String>> handler = executor.submit(() -> {
+                    Topic topic = modelling.getModel(article);
+                    return TopicLabelling.generateTopicLabel(topic, article);
+                });
+
+                List<String> topicLabels = null;
+
+                try {
+                    topicLabels = handler.get(2L, TimeUnit.MINUTES);
+                } catch (Exception e) {
+                    logger.error("Topic labelling timed out", e);
+                }
 
                 if (topicLabels != null) {
                     int number = 0;
