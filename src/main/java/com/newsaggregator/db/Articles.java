@@ -117,6 +117,11 @@ public class Articles {
         return collection.count();
     }
 
+    public long unlabelledCount() {
+        BasicDBObject queryObject = new BasicDBObject().append("isLabelled", false);
+        return collection.count(queryObject);
+    }
+
     public List<OutletArticle> getUnlabelledArticles() {
 
         BasicDBObject queryObject = new BasicDBObject().append("isLabelled", false);

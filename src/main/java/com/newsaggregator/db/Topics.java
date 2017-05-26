@@ -171,6 +171,11 @@ public class Topics {
         }
     }
 
+    public long clusteringCount() {
+        BasicDBObject queryObject = new BasicDBObject().append("NeedsClustering", true);
+        return collection.count(queryObject);
+    }
+
     public List<LabelHolder> getClusteringTopics() {
         try {
             BasicDBObject queryObject = new BasicDBObject().append("NeedsClustering", true);

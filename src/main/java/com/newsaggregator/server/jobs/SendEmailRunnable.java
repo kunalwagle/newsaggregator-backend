@@ -57,7 +57,7 @@ public class SendEmailRunnable implements Runnable {
             message.setFrom(new InternetAddress(username));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject("News Aggregator Status Report");
-            message.setText("Hello, it's time for the latest database status report. \n\n There are currently " + articleManager.count() + " articles in the database. \n\n There are currently " + topicManager.count() + " topics in the database. \n\n There are currently " + summariesManager.count() + " summaries in the database.\n\n There are currently " + articleManager.getUnlabelledArticles().size() + " unlabelled articles, " + topicManager.getClusteringTopics().size() + " unclustered topics, and " + summariesManager.getUnsummarisedClusters().size() + " unsummarised clusters.");
+            message.setText("Hello, it's time for the latest database status report. \n\n There are currently " + articleManager.count() + " articles in the database. \n\n There are currently " + topicManager.count() + " topics in the database. \n\n There are currently " + summariesManager.count() + " summaries in the database.\n\n There are currently " + articleManager.unlabelledCount() + " unlabelled articles, " + topicManager.clusteringCount() + " unclustered topics, and " + summariesManager.unsummarisedCount() + " unsummarised clusters.");
 
             // Send message
             Transport.send(message);

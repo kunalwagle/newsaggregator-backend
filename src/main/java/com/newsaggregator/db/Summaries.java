@@ -130,6 +130,11 @@ public class Summaries {
         }
     }
 
+    public long unsummarisedCount() {
+        BasicDBObject queryObject = new BasicDBObject().append("Summaries", new Document("$eq", "{}"));
+        return collection.count(queryObject);
+    }
+
     public List<ClusterHolder> getUnsummarisedClusters() {
         BasicDBObject queryObject = new BasicDBObject().append("Summaries", new Document("$eq", "{}"));
         MongoCursor<Document> iterator = collection.find(queryObject).iterator();
