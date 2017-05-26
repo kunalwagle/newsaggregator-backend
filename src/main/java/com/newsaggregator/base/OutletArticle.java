@@ -57,12 +57,12 @@ public class OutletArticle extends Article implements DatabaseStorage {
         return _id;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public void set_id(ObjectId _id) {
         this._id = _id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setId(String id) {
@@ -83,6 +83,7 @@ public class OutletArticle extends Article implements DatabaseStorage {
             Document doc = new Document();
             if (_id == null) {
                 this._id = new ObjectId();
+                this.id = _id.toHexString();
             }
             doc.put("_id", _id);
             doc.put("Title", title);
