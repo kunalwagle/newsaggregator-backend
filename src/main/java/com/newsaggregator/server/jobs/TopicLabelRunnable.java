@@ -16,9 +16,7 @@ import org.restlet.service.TaskService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -59,7 +57,7 @@ public class TopicLabelRunnable implements Runnable {
                     continue;
                 }
 
-                ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+                TaskService executor = TaskServiceSingleton.getInstance();
                 final Future<List<String>> handler = executor.submit(() -> {
                     Topic topic = modelling.getModel(article);
                     return TopicLabelling.generateTopicLabel(topic, article);
