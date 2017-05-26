@@ -82,8 +82,10 @@ public class TopicModelling {
 
         try {
 
-            File file = new File("./model");
-            model = ParallelTopicModel.read(file);
+            if (model == null) {
+                File file = new File("./model");
+                model = ParallelTopicModel.read(file);
+            }
 
             String document = article.getBody();
 
