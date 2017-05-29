@@ -11,12 +11,14 @@ public class ExtractSentenceTypes {
     private SentenceDetection sentenceDetector;
     private POSTagger tagger;
     private Chunker chunker;
+    private NameFinder nameFinder;
 
     public ExtractSentenceTypes() {
         tokeniser = new Tokenisation();
         sentenceDetector = new SentenceDetection();
         tagger = new POSTagger();
         chunker = new Chunker();
+        nameFinder = new NameFinder();
     }
 
     public String nounifyDocument(String document) {
@@ -85,8 +87,7 @@ public class ExtractSentenceTypes {
         String sentences[] = sentenceDetector.detectSentences(document);
         List<String> tokens = tokeniser.findTokens(sentences);
         String toks[] = new String[tokens.size()];
-        List<String> strings = new NameFinder().findNames(tokens.toArray(toks));
-        return strings;
+        return nameFinder.findNames(tokens.toArray(toks));
     }
 
 

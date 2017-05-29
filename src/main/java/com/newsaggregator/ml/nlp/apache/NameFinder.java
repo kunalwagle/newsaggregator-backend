@@ -16,36 +16,52 @@ import java.util.List;
  */
 class NameFinder {
 
-    NameFinder() {
+    private List<NameFinderME> models = new ArrayList<>();
 
+    NameFinder() {
+        List<String> fileNames = Lists.newArrayList("location", "organization", "person");
+        for (String fileName : fileNames) {
+            NameFinderME nameFinderME = getModel("/en-ner-" + fileName + ".bin");
+            if (nameFinderME != null) {
+                models.add(nameFinderME);
+            }
+        }
     }
 
     List<String> findNames(String[] sentence) {
-        List<String> fileNames = Lists.newArrayList("date", "location", "money", "organization", "person", "time");
         List<String> names = new ArrayList<>();
-        for (String fileName : fileNames) {
-            names.addAll(getNames(sentence, "/en-ner-" + fileName + ".bin"));
+        for (NameFinderME file : models) {
+            names.addAll(getNames(sentence, file));
         }
         return names;
     }
 
-    private List<String> getNames(String[] sentence, String fileName) {
+    private NameFinderME getModel(String fileName) {
         InputStream is = getClass().getResourceAsStream(fileName);
 
-        TokenNameFinderModel model = null;
+        TokenNameFinderModel model;
         try {
             model = new TokenNameFinderModel(is);
 
             is.close();
 
-            NameFinderME nameFinder = new NameFinderME(model);
+            return new NameFinderME(model);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            Span nameSpans[] = nameFinder.find(sentence);
+        return null;
+    }
+
+    private List<String> getNames(String[] sentence, NameFinderME file) {
+
+        try {
+            Span nameSpans[] = file.find(sentence);
 
             return Arrays.asList(Span.spansToStrings(nameSpans, sentence));
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
