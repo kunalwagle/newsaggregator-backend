@@ -30,11 +30,14 @@ public class TopicModelling {
 
     public TopicModelling() throws Exception {
         if (model == null) {
-            System.out.println("I'm reading in the model now");
+            logger.info("I'm reading in the model now");
             File file = new File("./model");
             model = ParallelTopicModel.read(file);
+            logger.info("The model has been read");
         }
+        logger.info("Starting up the nounifier");
         nounifier = NLPSingleton.getInstance();
+        logger.info("Started up the nounifier");
     }
 
     public void trainTopics(List<OutletArticle> articleList) throws Exception {

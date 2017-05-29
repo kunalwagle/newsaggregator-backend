@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
-    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="It seems to be fine, but adding logging statements">
+    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="More logging statements">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -64,14 +64,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopicModelling.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TopicModelling.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1103">
-              <caret line="101" column="66" lean-forward="false" selection-start-line="101" selection-start-column="66" selection-end-line="101" selection-end-column="66" />
+            <state relative-caret-position="245">
+              <caret line="35" column="51" lean-forward="true" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
               <folding>
-                <element signature="method#TopicModelling#0;class#TopicModelling#0" expanded="true" />
                 <element signature="method#trainTopics#0;class#TopicModelling#0" expanded="true" />
+                <element signature="method#getModel#0;class#TopicModelling#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Modeller.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Modeller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+            <state relative-caret-position="180">
+              <caret line="14" column="45" lean-forward="true" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -261,11 +261,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/TaskServiceSingleton.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/ExtractSentenceTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NameFinder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" />
       </list>
     </option>
   </component>
@@ -1393,14 +1393,7 @@
       <workItem from="1494247395281" duration="107312000" />
       <workItem from="1495394225541" duration="28660000" />
       <workItem from="1495556575194" duration="5860000" />
-      <workItem from="1495904644054" duration="6106000" />
-    </task>
-    <task id="LOCAL-00421" summary="New clusterer constructor">
-      <created>1495359210471</created>
-      <option name="number" value="00421" />
-      <option name="presentableId" value="LOCAL-00421" />
-      <option name="project" value="LOCAL" />
-      <updated>1495359210471</updated>
+      <workItem from="1495904644054" duration="6659000" />
     </task>
     <task id="LOCAL-00422" summary="Update to runnable">
       <created>1495377277826</created>
@@ -1738,7 +1731,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496053875093</updated>
     </task>
-    <option name="localTasksCounter" value="470" />
+    <task id="LOCAL-00470" summary="More logging statements">
+      <created>1496054215565</created>
+      <option name="number" value="00470" />
+      <option name="presentableId" value="LOCAL-00470" />
+      <option name="project" value="LOCAL" />
+      <updated>1496054215565</updated>
+    </task>
+    <option name="localTasksCounter" value="471" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1772,7 +1772,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="760801000" />
+    <option name="totallyTimeSpent" value="761354000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1859,7 +1859,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Deploying new outlets to server" />
     <MESSAGE value="Changing threshold on clustering" />
     <MESSAGE value="Changing number of topic labels developed" />
     <MESSAGE value="New topic labelling style, and new clustering with categorisation" />
@@ -1884,7 +1883,8 @@
     <MESSAGE value="Using topic modelling singleton" />
     <MESSAGE value="Removing runnable to keep server going" />
     <MESSAGE value="It seems to be fine, but adding logging statements" />
-    <option name="LAST_COMMIT_MESSAGE" value="It seems to be fine, but adding logging statements" />
+    <MESSAGE value="More logging statements" />
+    <option name="LAST_COMMIT_MESSAGE" value="More logging statements" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -2345,17 +2345,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1103">
-          <caret line="101" column="66" lean-forward="false" selection-start-line="101" selection-start-column="66" selection-end-line="101" selection-end-column="66" />
-          <folding>
-            <element signature="method#TopicModelling#0;class#TopicModelling#0" expanded="true" />
-            <element signature="method#trainTopics#0;class#TopicModelling#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -2366,9 +2355,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        <state relative-caret-position="180">
+          <caret line="14" column="45" lean-forward="true" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="35" column="51" lean-forward="true" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+          <folding>
+            <element signature="method#trainTopics#0;class#TopicModelling#0" expanded="true" />
+            <element signature="method#getModel#0;class#TopicModelling#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
