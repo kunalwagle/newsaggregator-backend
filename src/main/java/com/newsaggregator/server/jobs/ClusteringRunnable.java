@@ -87,10 +87,12 @@ public class ClusteringRunnable implements Runnable {
                                 brandNewClusters.add(clusterHolder);
                                 labelHolder.addCluster(clusterHolder);
                                 summaries.saveSummaries(Lists.newArrayList(clusterHolder));
+                                topics.saveTopic(labelHolder);
                             } else {
                                 labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());
+                                topics.saveTopic(labelHolder);
                             }
-                            topics.saveTopic(labelHolder);
+
                         }
                     }
                     labelHolder.setNeedsClustering(false);
