@@ -110,11 +110,13 @@ public class TopicLabelling {
 
     private static String stripArticleBodies(CandidateLabel label, ExtractSentenceTypes extractor) {
         try {
-            return extractor.nounifyDocument(label.getArticleBody());
+            if (label.getArticleBody() != null) {
+                return extractor.nounifyDocument(label.getArticleBody());
+            }
         } catch (Exception e) {
             Logger.getLogger(TopicLabelling.class).error("An error stripping article bodies", e);
-            return "";
         }
+        return "";
     }
 
     private static double racoScore(CandidateLabel secondaryLabel, List<CandidateLabel> primaryLabels) {
