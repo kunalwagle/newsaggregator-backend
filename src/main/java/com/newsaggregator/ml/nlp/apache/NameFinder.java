@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
 import opennlp.tools.util.Span;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +22,7 @@ class NameFinder {
     NameFinder() {
         List<String> fileNames = Lists.newArrayList("location", "organization", "person");
         for (String fileName : fileNames) {
+            Logger.getLogger(getClass()).info("Now creating the model for " + fileName);
             NameFinderME nameFinderME = getModel("/en-ner-" + fileName + ".bin");
             if (nameFinderME != null) {
                 models.add(nameFinderME);

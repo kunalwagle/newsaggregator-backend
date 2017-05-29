@@ -4,7 +4,7 @@
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
     <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="More logging statements">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NameFinder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NameFinder.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -64,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopicModelling.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TopicModelling.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="35" column="51" lean-forward="true" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+            <state relative-caret-position="215">
+              <caret line="38" column="38" lean-forward="false" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
               <folding>
                 <element signature="method#trainTopics#0;class#TopicModelling#0" expanded="true" />
                 <element signature="method#getModel#0;class#TopicModelling#0" expanded="true" />
@@ -110,10 +110,9 @@
       <file leaf-file-name="ExtractSentenceTypes.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/ExtractSentenceTypes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="10" column="14" lean-forward="false" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+            <state relative-caret-position="230">
+              <caret line="20" column="29" lean-forward="true" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
               <folding>
-                <element signature="method#ExtractSentenceTypes#0;class#ExtractSentenceTypes#0" expanded="true" />
                 <element signature="method#chunk#0;class#ExtractSentenceTypes#0" expanded="true" />
                 <element signature="method#nameFinder#0;class#ExtractSentenceTypes#0" expanded="true" />
               </folding>
@@ -121,13 +120,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NameFinder.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NameFinder.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NameFinder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="31" column="47" lean-forward="true" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
+            <state relative-caret-position="180">
+              <caret line="24" column="88" lean-forward="false" selection-start-line="24" selection-start-column="88" selection-end-line="24" selection-end-column="88" />
               <folding>
-                <element signature="method#NameFinder#0;class#NameFinder#0" expanded="true" />
+                <element signature="method#findNames#0;class#NameFinder#0" expanded="true" />
                 <element signature="method#getModel#0;class#NameFinder#0" expanded="true" />
                 <element signature="method#getNames#0;class#NameFinder#0" expanded="true" />
               </folding>
@@ -260,12 +259,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/TaskServiceSingleton.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/ExtractSentenceTypes.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NameFinder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ArticleFetchRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NameFinder.java" />
       </list>
     </option>
   </component>
@@ -1393,14 +1392,7 @@
       <workItem from="1494247395281" duration="107312000" />
       <workItem from="1495394225541" duration="28660000" />
       <workItem from="1495556575194" duration="5860000" />
-      <workItem from="1495904644054" duration="6659000" />
-    </task>
-    <task id="LOCAL-00422" summary="Update to runnable">
-      <created>1495377277826</created>
-      <option name="number" value="00422" />
-      <option name="presentableId" value="LOCAL-00422" />
-      <option name="project" value="LOCAL" />
-      <updated>1495377277827</updated>
+      <workItem from="1495904644054" duration="6822000" />
     </task>
     <task id="LOCAL-00423" summary="New Article Fetch">
       <created>1495381126080</created>
@@ -1738,7 +1730,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496054215565</updated>
     </task>
-    <option name="localTasksCounter" value="471" />
+    <task id="LOCAL-00471" summary="More logging statements">
+      <created>1496055032740</created>
+      <option name="number" value="00471" />
+      <option name="presentableId" value="LOCAL-00471" />
+      <option name="project" value="LOCAL" />
+      <updated>1496055032740</updated>
+    </task>
+    <option name="localTasksCounter" value="472" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1772,7 +1771,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="761354000" />
+    <option name="totallyTimeSpent" value="761517000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -2281,38 +2280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NLPSingleton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="49" lean-forward="false" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/ExtractSentenceTypes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" column="14" lean-forward="false" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
-          <folding>
-            <element signature="method#ExtractSentenceTypes#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#chunk#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#nameFinder#0;class#ExtractSentenceTypes#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NameFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="31" column="47" lean-forward="true" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
-          <folding>
-            <element signature="method#NameFinder#0;class#NameFinder#0" expanded="true" />
-            <element signature="method#getModel#0;class#NameFinder#0" expanded="true" />
-            <element signature="method#getNames#0;class#NameFinder#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -2363,11 +2330,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="35" column="51" lean-forward="true" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+        <state relative-caret-position="215">
+          <caret line="38" column="38" lean-forward="false" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
           <folding>
             <element signature="method#trainTopics#0;class#TopicModelling#0" expanded="true" />
             <element signature="method#getModel#0;class#TopicModelling#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NLPSingleton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="49" lean-forward="false" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/ExtractSentenceTypes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="20" column="29" lean-forward="true" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+          <folding>
+            <element signature="method#chunk#0;class#ExtractSentenceTypes#0" expanded="true" />
+            <element signature="method#nameFinder#0;class#ExtractSentenceTypes#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NameFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="24" column="88" lean-forward="false" selection-start-line="24" selection-start-column="88" selection-end-line="24" selection-end-column="88" />
+          <folding>
+            <element signature="method#findNames#0;class#NameFinder#0" expanded="true" />
+            <element signature="method#getModel#0;class#NameFinder#0" expanded="true" />
+            <element signature="method#getNames#0;class#NameFinder#0" expanded="true" />
           </folding>
         </state>
       </provider>
