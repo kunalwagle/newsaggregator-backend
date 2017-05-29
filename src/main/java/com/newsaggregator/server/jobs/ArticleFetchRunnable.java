@@ -23,6 +23,8 @@ public class ArticleFetchRunnable implements Runnable {
 
         Logger logger = Logger.getLogger(getClass());
 
+        logger.info("Current thread count is " + Thread.activeCount());
+
         List<OutletArticle> articleList = new ArrayList<>();
 
         MongoDatabase db = Utils.getDatabase();

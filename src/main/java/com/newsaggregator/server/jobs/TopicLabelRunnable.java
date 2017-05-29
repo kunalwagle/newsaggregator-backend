@@ -36,6 +36,8 @@ public class TopicLabelRunnable implements Runnable {
 
         Logger logger = Logger.getLogger(getClass());
 
+        logger.info("Current thread count is " + Thread.activeCount());
+
         logger.info("Starting up the Topic Labelling runnable");
 
         MongoDatabase db = Utils.getDatabase();

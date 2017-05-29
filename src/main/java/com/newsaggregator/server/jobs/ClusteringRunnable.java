@@ -36,6 +36,8 @@ public class ClusteringRunnable implements Runnable {
 
         Logger logger = Logger.getLogger(getClass());
 
+        logger.info("Current thread count is " + Thread.activeCount());
+
         MongoDatabase db = Utils.getDatabase();
         Topics topics = new Topics(db);
         Summaries summaries = new Summaries(db);
@@ -77,7 +79,7 @@ public class ClusteringRunnable implements Runnable {
                                 logger.info("Summarising");
                                 Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
                                 List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
-                                List<Summary> summs = extractives.parallelStream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
+                                List<Summary> summs = extractives.stream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
                                 logger.info("Summarising");
                                 clusterHolder.setSummary(summs);
                                 clusters.add(clusterHolder);
