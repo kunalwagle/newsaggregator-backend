@@ -1,5 +1,6 @@
 package com.newsaggregator.server.jobs;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
@@ -85,15 +86,17 @@ public class ClusteringRunnable implements Runnable {
                                 clusters.add(clusterHolder);
                                 brandNewClusters.add(clusterHolder);
                                 labelHolder.addCluster(clusterHolder);
+                                summaries.saveSummaries(Lists.newArrayList(clusterHolder));
                             } else {
                                 labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());
                             }
+                            topics.saveTopic(labelHolder);
                         }
                     }
                     labelHolder.setNeedsClustering(false);
                     if (brandNewClusters.size() > 0) {
                         logger.info("Saving clusters");
-                        summaries.saveSummaries(brandNewClusters);
+//                        summaries.saveSummaries(brandNewClusters);
                         List<String> categories = Wikipedia.getCategories(labelHolder.getLabel());
                         for (String cat : categories) {
                             LabelHolder catLabelHolder = topics.getTopic(cat);
