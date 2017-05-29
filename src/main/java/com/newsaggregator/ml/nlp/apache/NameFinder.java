@@ -56,7 +56,7 @@ class NameFinder {
         return null;
     }
 
-    private List<String> getNames(String[] sentence, NameFinderME file) {
+    private synchronized List<String> getNames(String[] sentence, NameFinderME file) {
 
         try {
             Span nameSpans[] = file.find(sentence);

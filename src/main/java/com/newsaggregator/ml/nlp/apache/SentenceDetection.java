@@ -39,7 +39,7 @@ public class SentenceDetection {
 
     }
 
-    public String[] detectSentences(String content) {
+    public synchronized String[] detectSentences(String content) {
 
         if (sentenceDetector != null) {
             return sentenceDetector.sentDetect(content);

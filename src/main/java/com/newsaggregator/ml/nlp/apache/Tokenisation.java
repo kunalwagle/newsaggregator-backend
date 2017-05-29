@@ -42,7 +42,7 @@ public class Tokenisation {
         }
     }
 
-    public List<String> findTokens(String[] sentences) {
+    public synchronized List<String> findTokens(String[] sentences) {
 
         List<String> sentenceList = Arrays.asList(sentences);
 
