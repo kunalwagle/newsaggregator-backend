@@ -29,6 +29,12 @@ public class TopicModelling {
     private Logger logger = Logger.getLogger(getClass());
 
     public TopicModelling() throws Exception {
+        if (model == null) {
+            System.out.println("I'm reading in the model now");
+            File file = new File("./model");
+            model = ParallelTopicModel.read(file);
+        }
+
         nounifier = NLPSingleton.getInstance();
     }
 
@@ -81,11 +87,6 @@ public class TopicModelling {
     public Topic getModel(OutletArticle article) {
 
         try {
-
-            if (model == null) {
-                File file = new File("./model");
-                model = ParallelTopicModel.read(file);
-            }
 
             String document = article.getBody();
 
