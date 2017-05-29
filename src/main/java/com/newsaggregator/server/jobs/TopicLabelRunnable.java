@@ -36,7 +36,7 @@ public class TopicLabelRunnable implements Runnable {
 
         Logger logger = Logger.getLogger(getClass());
 
-        logger.info("Current thread count is " + Thread.activeCount());
+        Utils.printActiveThreads();
 
         logger.info("Starting up the Topic Labelling runnable");
 

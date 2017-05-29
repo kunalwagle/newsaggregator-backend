@@ -23,7 +23,7 @@ public class ArticleFetchRunnable implements Runnable {
 
         Logger logger = Logger.getLogger(getClass());
 
-        logger.info("Current thread count is " + Thread.activeCount());
+        Utils.printActiveThreads();
 
         List<OutletArticle> articleList = new ArrayList<>();
 

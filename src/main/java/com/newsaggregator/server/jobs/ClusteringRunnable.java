@@ -36,7 +36,7 @@ public class ClusteringRunnable implements Runnable {
 
         Logger logger = Logger.getLogger(getClass());
 
-        logger.info("Current thread count is " + Thread.activeCount());
+        Utils.printActiveThreads();
 
         MongoDatabase db = Utils.getDatabase();
         Topics topics = new Topics(db);

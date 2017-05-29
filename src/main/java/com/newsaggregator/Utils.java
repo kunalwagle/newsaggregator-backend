@@ -6,6 +6,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.base.Outlet;
 import com.newsaggregator.server.Connection;
+import org.apache.log4j.Logger;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -116,6 +117,14 @@ public class Utils {
 
     public static String getWebAddress() {
         return "http://kunalnewsaggregator.co.uk";
+    }
+
+    public static void printActiveThreads() {
+        int nbRunning = 0;
+        for (Thread t : Thread.getAllStackTraces().keySet()) {
+            if (t.getState() == Thread.State.RUNNABLE) nbRunning++;
+        }
+        Logger.getLogger(Utils.class).info("Number of active threads is " + nbRunning);
     }
 
 
