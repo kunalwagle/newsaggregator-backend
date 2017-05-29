@@ -14,11 +14,11 @@ public class ExtractSentenceTypes {
     private NameFinder nameFinder;
 
     public ExtractSentenceTypes() {
-        tokeniser = new Tokenisation();
-        sentenceDetector = new SentenceDetection();
-        tagger = new POSTagger();
-        chunker = new Chunker();
-        nameFinder = new NameFinder();
+//        tokeniser = new Tokenisation();
+//        sentenceDetector = new SentenceDetection();
+//        tagger = new POSTagger();
+//        chunker = new Chunker();
+//        nameFinder = new NameFinder();
     }
 
     public String nounifyDocument(String document) {
@@ -27,6 +27,15 @@ public class ExtractSentenceTypes {
     }
 
     public List<String> individualNouns(String document) {
+        if (sentenceDetector == null) {
+            sentenceDetector = new SentenceDetection();
+        }
+        if (tokeniser == null) {
+            tokeniser = new Tokenisation();
+        }
+        if (tagger == null) {
+            tagger = new POSTagger();
+        }
         String[] sentences = sentenceDetector.detectSentences(document);
         List<String> tokens = tokeniser.findTokens(sentences);
         String[] tags = tagger.tagWords(tokens);
@@ -34,6 +43,15 @@ public class ExtractSentenceTypes {
     }
 
     public List<String> individualPronouns(String document) {
+        if (sentenceDetector == null) {
+            sentenceDetector = new SentenceDetection();
+        }
+        if (tokeniser == null) {
+            tokeniser = new Tokenisation();
+        }
+        if (tagger == null) {
+            tagger = new POSTagger();
+        }
         String[] sentences = sentenceDetector.detectSentences(document);
         List<String> tokens = tokeniser.findTokens(sentences);
         String[] tags = tagger.tagWords(tokens);
@@ -41,26 +59,56 @@ public class ExtractSentenceTypes {
     }
 
     public boolean pronounsExist(String document) {
+        if (sentenceDetector == null) {
+            sentenceDetector = new SentenceDetection();
+        }
+        if (tokeniser == null) {
+            tokeniser = new Tokenisation();
+        }
+        if (tagger == null) {
+            tagger = new POSTagger();
+        }
         String[] sentences = sentenceDetector.detectSentences(document);
         List<String> tokens = tokeniser.findTokens(sentences);
         String[] tags = tagger.tagWords(tokens);
         return tagger.pronounsExist(tags);
     }
 
-    public boolean isPronoun(String word) {
+    private boolean isPronoun(String word) {
+        if (tagger == null) {
+            tagger = new POSTagger();
+        }
         return tagger.pronounsExist(new String[]{word});
     }
 
     public List<String> allWords(String document) {
+        if (sentenceDetector == null) {
+            sentenceDetector = new SentenceDetection();
+        }
+        if (tokeniser == null) {
+            tokeniser = new Tokenisation();
+        }
         String[] sentences = sentenceDetector.detectSentences(document);
         return tokeniser.findTokens(sentences);
     }
 
     public String[] tag(String document) {
+        if (tagger == null) {
+            tagger = new POSTagger();
+        }
         return tagger.tagWords(allWords(document));
     }
 
     public String[] chunk(String string) {
+        if (chunker == null) {
+            chunker = new Chunker();
+        }
+        if (tokeniser == null) {
+            tokeniser = new Tokenisation();
+        }
+        if (tagger == null) {
+            tagger = new POSTagger();
+        }
         List<String> tokens = tokeniser.findTokens(new String[]{string});
         String[] pos = tagger.tagWords(tokens);
         return chunker.chunk(tokens.toArray(new String[tokens.size()]), pos);
@@ -84,6 +132,15 @@ public class ExtractSentenceTypes {
     }
 
     public List<String> nameFinder(String document) {
+        if (sentenceDetector == null) {
+            sentenceDetector = new SentenceDetection();
+        }
+        if (tokeniser == null) {
+            tokeniser = new Tokenisation();
+        }
+        if (nameFinder == null) {
+            nameFinder = new NameFinder();
+        }
         String sentences[] = sentenceDetector.detectSentences(document);
         List<String> tokens = tokeniser.findTokens(sentences);
         String toks[] = new String[tokens.size()];

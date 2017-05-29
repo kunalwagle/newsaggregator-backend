@@ -22,8 +22,8 @@ class NameFinder {
     NameFinder() {
         List<String> fileNames = Lists.newArrayList("location", "organization", "person");
         for (String fileName : fileNames) {
-            Logger.getLogger(getClass()).info("Now creating the model for " + fileName);
             NameFinderME nameFinderME = getModel("/en-ner-" + fileName + ".bin");
+            Logger.getLogger(getClass()).info("Now creating the model for " + fileName);
             if (nameFinderME != null) {
                 models.add(nameFinderME);
             }
