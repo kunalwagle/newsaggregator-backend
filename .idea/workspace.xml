@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
-    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Making a small change to clustering runnable">
+    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="New clusterer">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" />
     </list>
@@ -46,24 +46,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClusteringRunnable.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClusteringRunnable.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="84" column="52" lean-forward="false" selection-start-line="84" selection-start-column="52" selection-end-line="84" selection-end-column="52" />
+            <state relative-caret-position="305">
+              <caret line="99" column="21" lean-forward="true" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClusterHolder.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClusterHolder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="149" column="37" lean-forward="true" selection-start-line="149" selection-start-column="37" selection-end-line="149" selection-end-column="37" />
+            <state relative-caret-position="90">
+              <caret line="90" column="55" lean-forward="true" selection-start-line="90" selection-start-column="55" selection-end-line="90" selection-end-column="55" />
               <folding>
                 <element signature="method#initialise#0;class#ClusterHolder#0" expanded="true" />
-                <element signature="method#setSummary#0;class#ClusterHolder#0" expanded="true" />
                 <element signature="method#createDocument#0;class#ClusterHolder#0" expanded="true" />
               </folding>
             </state>
@@ -1431,14 +1430,7 @@
       <workItem from="1494247395281" duration="107312000" />
       <workItem from="1495394225541" duration="28660000" />
       <workItem from="1495556575194" duration="5860000" />
-      <workItem from="1495904644054" duration="11235000" />
-    </task>
-    <task id="LOCAL-00430" summary="Pushing all into one port">
-      <created>1495403769133</created>
-      <option name="number" value="00430" />
-      <option name="presentableId" value="LOCAL-00430" />
-      <option name="project" value="LOCAL" />
-      <updated>1495403769134</updated>
+      <workItem from="1495904644054" duration="11749000" />
     </task>
     <task id="LOCAL-00431" summary="Splitting into three separate runnables that are called by eachother">
       <created>1495442271992</created>
@@ -1776,7 +1768,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496068762325</updated>
     </task>
-    <option name="localTasksCounter" value="479" />
+    <task id="LOCAL-00479" summary="New clusterer">
+      <created>1496071582775</created>
+      <option name="number" value="00479" />
+      <option name="presentableId" value="LOCAL-00479" />
+      <option name="project" value="LOCAL" />
+      <updated>1496071582775</updated>
+    </task>
+    <option name="localTasksCounter" value="480" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1810,7 +1809,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="765930000" />
+    <option name="totallyTimeSpent" value="766444000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1897,7 +1896,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Switch all uses of NLP to use singleton pattern" />
     <MESSAGE value="Creating new parser" />
     <MESSAGE value="Unveiling the new topic labelling style, and a new model" />
     <MESSAGE value="Adding send email runnable" />
@@ -1922,7 +1920,8 @@
     <MESSAGE value="Added more thread possibilities" />
     <MESSAGE value="Added thread counts" />
     <MESSAGE value="Making a small change to clustering runnable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Making a small change to clustering runnable" />
+    <MESSAGE value="New clusterer" />
+    <option name="LAST_COMMIT_MESSAGE" value="New clusterer" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -2272,10 +2271,10 @@
         <state relative-caret-position="210">
           <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
-            <element signature="method#NameFinder#0;class#NameFinder#0" expanded="true" />
-            <element signature="method#findNames#0;class#NameFinder#0" expanded="true" />
-            <element signature="method#getModel#0;class#NameFinder#0" expanded="true" />
-            <element signature="method#getNames#0;class#NameFinder#0" expanded="true" />
+            <element signature="method#NameFinder#0;class#NameFinder#0" expanded="false" />
+            <element signature="method#findNames#0;class#NameFinder#0" expanded="false" />
+            <element signature="method#getModel#0;class#NameFinder#0" expanded="false" />
+            <element signature="method#getNames#0;class#NameFinder#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2301,18 +2300,18 @@
         <state relative-caret-position="290">
           <caret line="38" column="49" lean-forward="false" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
           <folding>
-            <element signature="method#ExtractSentenceTypes#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#nounifyDocument#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#individualPronouns#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#pronounsExist#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#isPronoun#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#allWords#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#tag#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#chunk#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="e#3733#3734#0" expanded="true" />
-            <element signature="e#3777#3778#0" expanded="true" />
-            <element signature="method#isNonFirstPersonPronoun#0;class#ExtractSentenceTypes#0" expanded="true" />
-            <element signature="method#nameFinder#0;class#ExtractSentenceTypes#0" expanded="true" />
+            <element signature="method#ExtractSentenceTypes#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="method#nounifyDocument#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="method#individualPronouns#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="method#pronounsExist#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="method#isPronoun#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="method#allWords#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="method#tag#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="method#chunk#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="e#3733#3734#0" expanded="false" />
+            <element signature="e#3777#3778#0" expanded="false" />
+            <element signature="method#isNonFirstPersonPronoun#0;class#ExtractSentenceTypes#0" expanded="false" />
+            <element signature="method#nameFinder#0;class#ExtractSentenceTypes#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2322,8 +2321,8 @@
         <state relative-caret-position="135">
           <caret line="16" column="31" lean-forward="true" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
           <folding>
-            <element signature="method#SentenceDetection#0;class#SentenceDetection#0" expanded="true" />
-            <element signature="method#detectSentences#0;class#SentenceDetection#0" expanded="true" />
+            <element signature="method#SentenceDetection#0;class#SentenceDetection#0" expanded="false" />
+            <element signature="method#detectSentences#0;class#SentenceDetection#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2333,8 +2332,8 @@
         <state relative-caret-position="330">
           <caret line="172" column="52" lean-forward="false" selection-start-line="172" selection-start-column="52" selection-end-line="172" selection-end-column="52" />
           <folding>
-            <element signature="method#generateTopicLabel#0;class#TopicLabelling#0" expanded="true" />
-            <element signature="method#stripArticleBodies#0;class#TopicLabelling#0" expanded="true" />
+            <element signature="method#generateTopicLabel#0;class#TopicLabelling#0" expanded="false" />
+            <element signature="method#stripArticleBodies#0;class#TopicLabelling#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2408,6 +2407,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="90" column="55" lean-forward="true" selection-start-line="90" selection-start-column="55" selection-end-line="90" selection-end-column="55" />
+          <folding>
+            <element signature="method#initialise#0;class#ClusterHolder#0" expanded="true" />
+            <element signature="method#createDocument#0;class#ClusterHolder#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
@@ -2420,21 +2430,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="84" column="52" lean-forward="false" selection-start-line="84" selection-start-column="52" selection-end-line="84" selection-end-column="52" />
+        <state relative-caret-position="305">
+          <caret line="99" column="21" lean-forward="true" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="149" column="37" lean-forward="true" selection-start-line="149" selection-start-column="37" selection-end-line="149" selection-end-column="37" />
-          <folding>
-            <element signature="method#initialise#0;class#ClusterHolder#0" expanded="true" />
-            <element signature="method#setSummary#0;class#ClusterHolder#0" expanded="true" />
-            <element signature="method#createDocument#0;class#ClusterHolder#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

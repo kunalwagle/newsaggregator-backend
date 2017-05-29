@@ -73,26 +73,29 @@ public class ClusteringRunnable implements Runnable {
                         labelHolder.setClusters(new ArrayList<>());
                         List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
                         for (Cluster<ArticleVector> cluster : newClusters) {
-                            List<OutletArticle> articles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
-                            if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(articles))) {
-                                ClusterHolder clusterHolder = new ClusterHolder(articles);
-                                Set<OutletArticle> clusterArticles = new HashSet<>(articles);
-                                logger.info("Summarising");
-                                Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
-                                List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
-                                List<Summary> summs = extractives.stream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
-                                logger.info("Summarising");
-                                clusterHolder.setSummary(summs);
-                                clusters.add(clusterHolder);
-                                brandNewClusters.add(clusterHolder);
-                                labelHolder.addCluster(clusterHolder);
-                                summaries.saveSummaries(Lists.newArrayList(clusterHolder));
-                                topics.saveTopic(labelHolder);
-                            } else {
-                                labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());
-                                topics.saveTopic(labelHolder);
+                            try {
+                                List<OutletArticle> articles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
+                                if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(articles))) {
+                                    ClusterHolder clusterHolder = new ClusterHolder(articles);
+                                    Set<OutletArticle> clusterArticles = new HashSet<>(articles);
+                                    logger.info("Summarising");
+                                    Set<Set<OutletArticle>> permutations = Sets.powerSet(clusterArticles).stream().filter(set -> set.size() > 0).collect(Collectors.toSet());
+                                    List<Extractive> extractives = permutations.stream().map(permutation -> new Extractive(new ArrayList<>(permutation))).collect(Collectors.toList());
+                                    List<Summary> summs = extractives.stream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
+                                    logger.info("Summarising");
+                                    clusterHolder.setSummary(summs);
+                                    clusters.add(clusterHolder);
+                                    brandNewClusters.add(clusterHolder);
+                                    labelHolder.addCluster(clusterHolder);
+                                    summaries.saveSummaries(Lists.newArrayList(clusterHolder));
+                                    topics.saveTopic(labelHolder);
+                                } else {
+                                    labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());
+                                    topics.saveTopic(labelHolder);
+                                }
+                            } catch (Exception e) {
+                                logger.error("Caught an error saving an individual cluster", e);
                             }
-
                         }
                     }
                     labelHolder.setNeedsClustering(false);
