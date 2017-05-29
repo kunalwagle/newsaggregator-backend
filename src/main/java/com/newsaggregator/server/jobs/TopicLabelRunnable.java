@@ -8,6 +8,7 @@ import com.newsaggregator.base.Topic;
 import com.newsaggregator.db.Articles;
 import com.newsaggregator.db.Topics;
 import com.newsaggregator.ml.labelling.TopicLabelling;
+import com.newsaggregator.ml.modelling.Modeller;
 import com.newsaggregator.ml.modelling.TopicModelling;
 import com.newsaggregator.server.LabelHolder;
 import com.newsaggregator.server.TaskServiceSingleton;
@@ -45,7 +46,7 @@ public class TopicLabelRunnable implements Runnable {
 
             int counter = 0;
 
-            TopicModelling modelling = new TopicModelling();
+            TopicModelling modelling = Modeller.getInstance();
 
             for (OutletArticle article : articleList) {
                 counter++;

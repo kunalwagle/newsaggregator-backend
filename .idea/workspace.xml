@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
-    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="New name finder with space saving principles">
+    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Moving around things in topic modelling">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -24,16 +25,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ClusteringRunnable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="106" column="21" lean-forward="false" selection-start-line="106" selection-start-column="20" selection-end-line="106" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TopicLabelling.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/labelling/TopicLabelling.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -54,6 +45,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="TopicLabelRunnable.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="40" column="39" lean-forward="true" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ClusteringScheduleRunnable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringScheduleRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -64,25 +65,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopicModelling.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TopicModelling.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+            <state relative-caret-position="360">
+              <caret line="48" column="70" lean-forward="true" selection-start-line="48" selection-start-column="70" selection-end-line="48" selection-end-column="70" />
               <folding>
                 <element signature="method#TopicModelling#0;class#TopicModelling#0" expanded="true" />
-                <element signature="method#trainTopics#0;class#TopicModelling#0" expanded="true" />
                 <element signature="method#getModel#0;class#TopicModelling#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="POSTagger.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/POSTagger.java">
+      <file leaf-file-name="Modeller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <state relative-caret-position="225">
+              <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -216,7 +216,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Users.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SummarisingScheduleRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SummarisationRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/DigestRunnable.java" />
@@ -262,11 +261,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SendEmailRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/OutletArticle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/TaskServiceSingleton.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/ExtractSentenceTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/nlp/apache/NameFinder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" />
       </list>
     </option>
   </component>
@@ -1394,14 +1394,7 @@
       <workItem from="1494247395281" duration="107312000" />
       <workItem from="1495394225541" duration="28660000" />
       <workItem from="1495556575194" duration="5860000" />
-      <workItem from="1495904644054" duration="3575000" />
-    </task>
-    <task id="LOCAL-00417" summary="Added timestamp text file">
-      <created>1495194209400</created>
-      <option name="number" value="00417" />
-      <option name="presentableId" value="LOCAL-00417" />
-      <option name="project" value="LOCAL" />
-      <updated>1495194209400</updated>
+      <workItem from="1495904644054" duration="3964000" />
     </task>
     <task id="LOCAL-00418" summary="Added timestamp text file">
       <created>1495195296858</created>
@@ -1739,7 +1732,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496050098330</updated>
     </task>
-    <option name="localTasksCounter" value="466" />
+    <task id="LOCAL-00466" summary="Moving around things in topic modelling">
+      <created>1496051185944</created>
+      <option name="number" value="00466" />
+      <option name="presentableId" value="LOCAL-00466" />
+      <option name="project" value="LOCAL" />
+      <updated>1496051185944</updated>
+    </task>
+    <option name="localTasksCounter" value="467" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1773,7 +1773,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="758270000" />
+    <option name="totallyTimeSpent" value="758659000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1860,7 +1860,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Four Four Two" />
     <MESSAGE value="WashingtonPost" />
     <MESSAGE value="New Fetch articles" />
     <MESSAGE value="Ready for new deployment" />
@@ -1885,7 +1884,8 @@
     <MESSAGE value="Changing the number of threads in a memory save attempt" />
     <MESSAGE value="In a memory save attempt, changing the way modelling works" />
     <MESSAGE value="New name finder with space saving principles" />
-    <option name="LAST_COMMIT_MESSAGE" value="New name finder with space saving principles" />
+    <MESSAGE value="Moving around things in topic modelling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moving around things in topic modelling" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1894,12 +1894,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java</url>
-          <line>30</line>
-          <properties />
-          <option name="timeStamp" value="846" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java</url>
           <line>59</line>
@@ -1931,13 +1925,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/WashingtonPost.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/api/outlets/FourFourTwo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -1949,6 +1936,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="27" column="58" lean-forward="true" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2244,18 +2232,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#TopicLabelRunnable#0" expanded="false" />
-            <element signature="e#937#938#0" expanded="false" />
-            <element signature="e#983#984#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/TaskServiceSingleton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -2369,13 +2345,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/TopicModelling.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+        <state relative-caret-position="360">
+          <caret line="48" column="70" lean-forward="true" selection-start-line="48" selection-start-column="70" selection-end-line="48" selection-end-column="70" />
           <folding>
             <element signature="method#TopicModelling#0;class#TopicModelling#0" expanded="true" />
-            <element signature="method#trainTopics#0;class#TopicModelling#0" expanded="true" />
             <element signature="method#getModel#0;class#TopicModelling#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/ml/modelling/Modeller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="40" column="39" lean-forward="true" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
