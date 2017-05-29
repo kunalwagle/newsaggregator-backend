@@ -21,12 +21,12 @@ public class ExtractSentenceTypes {
 //        nameFinder = new NameFinder();
     }
 
-    public String nounifyDocument(String document) {
+    public synchronized String nounifyDocument(String document) {
         List<String> nouns = individualNouns(document);
         return String.join(" ", nouns);
     }
 
-    public List<String> individualNouns(String document) {
+    public synchronized List<String> individualNouns(String document) {
         if (sentenceDetector == null) {
             sentenceDetector = new SentenceDetection();
         }
@@ -42,7 +42,7 @@ public class ExtractSentenceTypes {
         return tagger.filterNouns(tokens, tags);
     }
 
-    public List<String> individualPronouns(String document) {
+    public synchronized List<String> individualPronouns(String document) {
         if (sentenceDetector == null) {
             sentenceDetector = new SentenceDetection();
         }
@@ -58,7 +58,7 @@ public class ExtractSentenceTypes {
         return tagger.filterPronouns(tokens, tags);
     }
 
-    public boolean pronounsExist(String document) {
+    public synchronized boolean pronounsExist(String document) {
         if (sentenceDetector == null) {
             sentenceDetector = new SentenceDetection();
         }
@@ -74,14 +74,14 @@ public class ExtractSentenceTypes {
         return tagger.pronounsExist(tags);
     }
 
-    private boolean isPronoun(String word) {
+    private synchronized boolean isPronoun(String word) {
         if (tagger == null) {
             tagger = new POSTagger();
         }
         return tagger.pronounsExist(new String[]{word});
     }
 
-    public List<String> allWords(String document) {
+    public synchronized List<String> allWords(String document) {
         if (sentenceDetector == null) {
             sentenceDetector = new SentenceDetection();
         }
@@ -92,14 +92,14 @@ public class ExtractSentenceTypes {
         return tokeniser.findTokens(sentences);
     }
 
-    public String[] tag(String document) {
+    public synchronized String[] tag(String document) {
         if (tagger == null) {
             tagger = new POSTagger();
         }
         return tagger.tagWords(allWords(document));
     }
 
-    public String[] chunk(String string) {
+    public synchronized String[] chunk(String string) {
         if (chunker == null) {
             chunker = new Chunker();
         }
@@ -115,23 +115,23 @@ public class ExtractSentenceTypes {
     }
 
 
-    public boolean isPossessivePronoun(String pronoun) {
+    public synchronized boolean isPossessivePronoun(String pronoun) {
         return pronoun.contains("$");
     }
 
-    public boolean isNonFirstPersonPronoun(String token, String s) {
+    public synchronized boolean isNonFirstPersonPronoun(String token, String s) {
         return isPronoun(token) && !s.toLowerCase().equals("i") && !s.toLowerCase().equals("we");
     }
 
-    public boolean isNoun(String tag) {
+    public synchronized boolean isNoun(String tag) {
         return tag.startsWith("N");
     }
 
-    public boolean isVerb(String tag) {
+    public synchronized boolean isVerb(String tag) {
         return tag.startsWith("V");
     }
 
-    public List<String> nameFinder(String document) {
+    public synchronized List<String> nameFinder(String document) {
         if (sentenceDetector == null) {
             sentenceDetector = new SentenceDetection();
         }
