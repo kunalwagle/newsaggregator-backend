@@ -11,7 +11,7 @@ public class TaskServiceSingleton {
 
     public static TaskService getInstance() {
         if (taskService == null) {
-            taskService = new TaskService();
+            taskService = new TaskService(8);
         }
         return taskService;
     }
