@@ -34,7 +34,6 @@ public class TopicModelling {
             File file = new File("./model");
             model = ParallelTopicModel.read(file);
         }
-
         nounifier = NLPSingleton.getInstance();
     }
 

@@ -48,6 +48,8 @@ public class ArticleFetchRunnable implements Runnable {
             logger.error("Caught an exception in ArticleFetchRunnable", e);
         }
 
+        logger.info("There are " + articleList.size() + " new articles");
+
         TaskService taskService = TaskServiceSingleton.getInstance();
         taskService.schedule(new ArticleFetchRunnable(), 3L, TimeUnit.MINUTES);
 
