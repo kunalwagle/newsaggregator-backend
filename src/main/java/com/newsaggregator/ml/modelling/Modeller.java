@@ -17,6 +17,10 @@ public class Modeller {
                 Logger.getLogger(Modeller.class).error("Error getting topic modeller", e);
             }
         }
+        Logger.getLogger(Modeller.class).info("Got the modeller");
+        if (topicModelling == null) {
+            Logger.getLogger(Modeller.class).info("The modeller is null!");
+        }
         return topicModelling;
     }
 
