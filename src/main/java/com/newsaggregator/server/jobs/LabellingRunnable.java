@@ -1,7 +1,11 @@
 package com.newsaggregator.server.jobs;
 
+import com.newsaggregator.Utils;
+import com.newsaggregator.base.OutletArticle;
+import com.newsaggregator.db.Articles;
 import com.newsaggregator.server.TaskServiceSingleton;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -12,7 +16,9 @@ public class LabellingRunnable implements Runnable {
 
     @Override
     public void run() {
-        TaskServiceSingleton.getInstance().schedule(new TopicLabelRunnable(null), 1L, TimeUnit.SECONDS);
+        Articles articles = new Articles(Utils.getDatabase());
+        List<OutletArticle> articleList = articles.getUnlabelledArticles();
+        TaskServiceSingleton.getInstance().schedule(new TopicLabelRunnable(articleList), 1L, TimeUnit.SECONDS);
     }
 
 }

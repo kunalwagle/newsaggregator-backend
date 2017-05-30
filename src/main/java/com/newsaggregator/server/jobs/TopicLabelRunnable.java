@@ -10,6 +10,7 @@ import com.newsaggregator.db.Topics;
 import com.newsaggregator.ml.labelling.TopicLabelling;
 import com.newsaggregator.ml.modelling.Modeller;
 import com.newsaggregator.ml.modelling.TopicModelling;
+import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import com.newsaggregator.server.LabelHolder;
 import com.newsaggregator.server.TaskServiceSingleton;
 import org.apache.log4j.Logger;
@@ -92,6 +93,8 @@ public class TopicLabelRunnable implements Runnable {
         }
 
         TaskService taskService = TaskServiceSingleton.getInstance();
+
+        NLPSingleton.removeInstance();
 
         if (labelStrings.size() > 0) {
             taskService.schedule(new ClusteringRunnable(labelStrings), 1L, TimeUnit.SECONDS);

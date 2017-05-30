@@ -11,6 +11,7 @@ import com.newsaggregator.db.Summaries;
 import com.newsaggregator.db.Topics;
 import com.newsaggregator.ml.clustering.Cluster;
 import com.newsaggregator.ml.clustering.Clusterer;
+import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.ClusterHolder;
@@ -124,6 +125,8 @@ public class ClusteringRunnable implements Runnable {
         } catch (Exception e) {
             logger.error("Caught an exception clustering", e);
         }
+
+        NLPSingleton.removeInstance();
 
     }
 

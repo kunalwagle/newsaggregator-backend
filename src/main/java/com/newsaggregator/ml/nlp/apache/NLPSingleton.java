@@ -5,13 +5,16 @@ package com.newsaggregator.ml.nlp.apache;
  */
 public class NLPSingleton {
 
-    private static ExtractSentenceTypes extractSentenceTypes;
+    private static ThreadLocal<ExtractSentenceTypes> extractSentenceTypes = ThreadLocal.withInitial(ExtractSentenceTypes::new);
 
     public static synchronized ExtractSentenceTypes getInstance() {
-        if (extractSentenceTypes == null) {
-            extractSentenceTypes = new ExtractSentenceTypes();
+        return extractSentenceTypes.get();
+    }
+
+    public static synchronized void removeInstance() {
+        if (extractSentenceTypes != null) {
+            extractSentenceTypes.remove();
         }
-        return extractSentenceTypes;
     }
 
 }

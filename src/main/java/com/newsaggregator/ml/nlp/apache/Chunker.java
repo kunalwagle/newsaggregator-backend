@@ -37,7 +37,7 @@ public class Chunker {
         }
     }
 
-    public synchronized String[] chunk(String[] tokens, String[] pos) {
+    public String[] chunk(String[] tokens, String[] pos) {
         if (chunkerModel == null) {
             return null;
         }

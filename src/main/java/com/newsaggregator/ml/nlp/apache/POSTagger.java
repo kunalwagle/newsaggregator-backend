@@ -40,7 +40,7 @@ public class POSTagger {
         }
     }
 
-    public synchronized String[] tagWords(List<String> tokens) {
+    public String[] tagWords(List<String> tokens) {
 
         String[] tokenArray = new String[tokens.size()];
 

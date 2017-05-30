@@ -129,7 +129,7 @@ public class Articles {
         List<OutletArticle> articles = new ArrayList<>();
 
         try {
-            MongoCursor<Document> iterator = collection.find(queryObject).iterator();
+            MongoCursor<Document> iterator = collection.find(queryObject).limit(15).iterator();
             while (iterator.hasNext()) {
                 Document item = iterator.next();
                 articles.add(new OutletArticle(item));
