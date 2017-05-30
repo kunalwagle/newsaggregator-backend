@@ -16,9 +16,11 @@ import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.ClusterHolder;
 import com.newsaggregator.server.LabelHolder;
+import com.newsaggregator.server.TaskServiceSingleton;
 import org.apache.log4j.Logger;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -27,9 +29,11 @@ import java.util.stream.Collectors;
 public class ClusteringRunnable implements Runnable {
 
     private List<String> labelStrings;
+    private boolean oldArticles;
 
-    public ClusteringRunnable(List<String> labelStrings) {
+    public ClusteringRunnable(List<String> labelStrings, boolean oldArticles) {
         this.labelStrings = labelStrings;
+        this.oldArticles = oldArticles;
     }
 
 
@@ -44,9 +48,10 @@ public class ClusteringRunnable implements Runnable {
         Topics topics = new Topics(db);
         Summaries summaries = new Summaries(db);
 
+        int counter = 0;
+
         try {
 
-            int counter = 0;
 
             labelStrings = labelStrings.stream().distinct().collect(Collectors.toList());
 
@@ -127,6 +132,12 @@ public class ClusteringRunnable implements Runnable {
         }
 
         NLPSingleton.removeInstance();
+
+        logger.info("Completed " + counter + " clusters out of " + labelStrings.size());
+
+        if (oldArticles) {
+            TaskServiceSingleton.getInstance().schedule(new LabellingRunnable(), 1L, TimeUnit.MINUTES);
+        }
 
     }
 

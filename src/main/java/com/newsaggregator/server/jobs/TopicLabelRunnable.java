@@ -26,9 +26,11 @@ import java.util.concurrent.TimeUnit;
 public class TopicLabelRunnable implements Runnable {
 
     private List<OutletArticle> articleList;
+    private boolean oldArticles;
 
-    public TopicLabelRunnable(List<OutletArticle> articleList) {
+    public TopicLabelRunnable(List<OutletArticle> articleList, boolean oldArticles) {
         this.articleList = articleList;
+        this.oldArticles = oldArticles;
     }
 
     @Override
@@ -97,7 +99,7 @@ public class TopicLabelRunnable implements Runnable {
         NLPSingleton.removeInstance();
 
         if (labelStrings.size() > 0) {
-            taskService.schedule(new ClusteringRunnable(labelStrings), 1L, TimeUnit.SECONDS);
+            taskService.schedule(new ClusteringRunnable(labelStrings, oldArticles), 1L, TimeUnit.SECONDS);
         }
 
     }

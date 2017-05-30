@@ -18,7 +18,7 @@ public class LabellingRunnable implements Runnable {
     public void run() {
         Articles articles = new Articles(Utils.getDatabase());
         List<OutletArticle> articleList = articles.getUnlabelledArticles();
-        TaskServiceSingleton.getInstance().schedule(new TopicLabelRunnable(articleList), 1L, TimeUnit.SECONDS);
+        TaskServiceSingleton.getInstance().schedule(new TopicLabelRunnable(articleList, true), 1L, TimeUnit.SECONDS);
     }
 
 }

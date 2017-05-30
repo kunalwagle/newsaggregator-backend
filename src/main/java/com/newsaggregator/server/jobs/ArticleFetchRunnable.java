@@ -56,7 +56,7 @@ public class ArticleFetchRunnable implements Runnable {
         taskService.schedule(new ArticleFetchRunnable(), 3L, TimeUnit.MINUTES);
 
         if (articleList.size() > 0) {
-            taskService.schedule(new TopicLabelRunnable(articleList), 1L, TimeUnit.SECONDS);
+            taskService.schedule(new TopicLabelRunnable(articleList, false), 1L, TimeUnit.SECONDS);
         }
 
 //        List<String> labelStrings = new ArrayList<>();
