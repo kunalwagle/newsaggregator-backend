@@ -3,7 +3,7 @@
  */
 
 export const getIPAddress = () => {
-    return "http://178.62.27.53:8182/api/";
+    return "http://127.0.0.1:8183/api/";
 };
 
 export const getColour = (source) => {
@@ -11,7 +11,7 @@ export const getColour = (source) => {
         case "the-guardian-uk":
             return "teal";
         case "independent":
-            return "yellow";
+            return "salmon";
         case "associated-press":
             return "lightgreen";
         case "reuters":

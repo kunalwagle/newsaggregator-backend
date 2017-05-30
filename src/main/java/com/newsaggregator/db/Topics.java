@@ -97,6 +97,19 @@ public class Topics {
         return null;
     }
 
+    public int getArticleCount(String id) {
+        try {
+            BasicDBObject queryObject = new BasicDBObject().append("_id", new ObjectId(id));
+            Document document = collection.find(queryObject).first();
+            JSONObject jsonObject = new JSONObject(document);
+            JSONArray jsonArray = jsonObject.getJSONArray("Clusters");
+            return jsonArray.length();
+        } catch (Exception e) {
+            logger.error("An error occurred whilst getting a single topic", e);
+        }
+        return 0;
+    }
+
     private LabelHolder getLabelHolderFromIterator(MongoCursor<Document> iterator, Articles articleManager, Summaries summaryManager) {
         if (iterator.hasNext()) {
             Document document = iterator.next();

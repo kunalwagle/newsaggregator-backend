@@ -2,7 +2,6 @@ package com.newsaggregator.base;
 
 import com.newsaggregator.Utils;
 import com.newsaggregator.db.Topics;
-import com.newsaggregator.server.LabelHolder;
 
 /**
  * Created by kunalwagle on 31/01/2017.
@@ -25,8 +24,7 @@ public class WikipediaArticle extends Article {
     public void set_id(String _id) {
         this._id = _id;
         Topics topics = new Topics(Utils.getDatabase());
-        LabelHolder labelHolder = topics.getTopicById(_id);
-        articleCount = labelHolder.getClusters().size();
+        articleCount = topics.getArticleCount(_id);
     }
 
     public String getExtract() {
