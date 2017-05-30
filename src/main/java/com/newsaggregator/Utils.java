@@ -120,11 +120,15 @@ public class Utils {
     }
 
     public static void printActiveThreads() {
+        Logger.getLogger(Utils.class).info("Number of active threads is " + getActiveThreads());
+    }
+
+    public static int getActiveThreads() {
         int nbRunning = 0;
         for (Thread t : Thread.getAllStackTraces().keySet()) {
             if (t.getState() == Thread.State.RUNNABLE) nbRunning++;
         }
-        Logger.getLogger(Utils.class).info("Number of active threads is " + nbRunning);
+        return nbRunning;
     }
 
 

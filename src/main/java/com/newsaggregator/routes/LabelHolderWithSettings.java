@@ -15,8 +15,11 @@ import java.util.stream.Collectors;
  */
 public class LabelHolderWithSettings {
 
-    Comparator<ClusterHolder> byLastPublished = (left, right) -> {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+    private Comparator<ClusterHolder> byLastPublished = (left, right) -> {
+
+        ThreadLocal<SimpleDateFormat> simpleDateFormatThreadLocal = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"));
+
+        SimpleDateFormat formatter = simpleDateFormatThreadLocal.get();
         try {
 
             Date leftDate = formatter.parse(left.getLastPublished().replaceAll("Z$", "+0000"));

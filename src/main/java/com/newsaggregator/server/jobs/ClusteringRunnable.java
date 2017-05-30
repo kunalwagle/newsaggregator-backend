@@ -133,7 +133,9 @@ public class ClusteringRunnable implements Runnable {
 
         NLPSingleton.removeInstance();
 
-        logger.info("Completed " + counter + " clusters out of " + labelStrings.size());
+        TaskServiceSingleton.getInstance().execute(new SendEmailRunnable(labelStrings, counter));
+
+        logger.info("Completed " + counter + " topics out of " + labelStrings.size());
 
         if (oldArticles) {
             TaskServiceSingleton.getInstance().schedule(new LabellingRunnable(), 1L, TimeUnit.MINUTES);
