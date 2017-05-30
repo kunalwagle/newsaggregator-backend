@@ -35,10 +35,10 @@ const thumbnails = (row, idx, topicId, handleArticleClick) => {
             {row.map((article, index) => {
                 return (
                     <Col md={3} key={index}>
-                        <Thumbnail src={article.clusterHolder.imageUrl}>
-                            <h4>{article.clusterHolder.title}</h4>
+                        <Thumbnail src={article.imageUrl}>
+                            <h4>{article.title}</h4>
                             <Button
-                                onClick={(event) => handleArticleClick(event, article.topicId, article.clusterHolder.id)}
+                                onClick={(event) => handleArticleClick(event, article.topicId, article.articleId)}
                                 bsStyle="default">
                                 View
                             </Button>
@@ -59,13 +59,13 @@ const md = (articles, handleArticleClick) => {
             <div>
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.clusterHolder.imageUrl != undefined) {
-                        imageUrl = article.clusterHolder.imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-md-12" key={index}>
-                            <ExtraLargePanel key={index} title={article.clusterHolder.title} image={imageUrl}
-                                             onClick={(event) => handleArticleClick(event, article.topicId, article.clusterHolder.id)}/>
+                            <ExtraLargePanel key={index} title={article.title} image={imageUrl}
+                                             onClick={(event) => handleArticleClick(event, article.topicId, article.articleId)}/>
                         </div>
                     )
                 })}
@@ -74,13 +74,13 @@ const md = (articles, handleArticleClick) => {
             <div>
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.clusterHolder.imageUrl != undefined) {
-                        imageUrl = article.clusterHolder.imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-md-6 col-sm-6 col-lg-6" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.clusterHolder.title}
-                                   onClick={(event) => handleArticleClick(event, article.topicId, article.clusterHolder.id)}/>
+                            <Panel image={imageUrl} key={index} title={article.title}
+                                   onClick={(event) => handleArticleClick(event, article.topicId, article.articleId)}/>
                         </div>
                     )
                 })}
@@ -98,14 +98,14 @@ const lg = (articles, handleArticleClick) => {
             <div className="row">
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.clusterHolder.imageUrl != undefined) {
-                        imageUrl = article.clusterHolder.imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
 
                         <div className="col-lg-6" key={index}>
-                            <ExtraLargePanel key={index} title={article.clusterHolder.title} image={imageUrl}
-                                             onClick={(event) => handleArticleClick(event, article.topicId, article.clusterHolder.id)}/>
+                            <ExtraLargePanel key={index} title={article.title} image={imageUrl}
+                                             onClick={(event) => handleArticleClick(event, article.topicId, article.articleId)}/>
                         </div>
                     )
                 })}
@@ -114,13 +114,13 @@ const lg = (articles, handleArticleClick) => {
             <div className="row">
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.clusterHolder.imageUrl != undefined) {
-                        imageUrl = article.clusterHolder.imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-lg-3 col-md-6" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.clusterHolder.title}
-                                   onClick={(event) => handleArticleClick(event, article.topicId, article.clusterHolder.id)}/>
+                            <Panel image={imageUrl} key={index} title={article.title}
+                                   onClick={(event) => handleArticleClick(event, article.topicId, article.articleId)}/>
                         </div>
                     )
                 })}
@@ -138,13 +138,13 @@ const sm = (articles, handleArticleClick) => {
             <div>
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.clusterHolder.imageUrl != undefined) {
-                        imageUrl = article.clusterHolder.imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-sm-12" key={index}>
-                            <ExtraLargePanel key={index} title={article.clusterHolder.title} image={imageUrl}
-                                             onClick={(event) => handleArticleClick(event, article.topicId, article.clusterHolder.id)}/>
+                            <ExtraLargePanel key={index} title={article.title} image={imageUrl}
+                                             onClick={(event) => handleArticleClick(event, article.topicId, article.articleId)}/>
                         </div>
                     )
                 })}
@@ -153,13 +153,13 @@ const sm = (articles, handleArticleClick) => {
             <div>
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.clusterHolder.imageUrl != undefined) {
-                        imageUrl = article.clusterHolder.imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-sm-6" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.clusterHolder.title}
-                                   onClick={(event) => handleArticleClick(event, article.topicId, article.clusterHolder.id)}/>
+                            <Panel image={imageUrl} key={index} title={article.title}
+                                   onClick={(event) => handleArticleClick(event, article.topicId, article.articleId)}/>
                         </div>
                     )
                 })}
@@ -177,13 +177,13 @@ const xs = (articles, handleArticleClick) => {
             <div className="row">
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.clusterHolder.imageUrl != undefined) {
-                        imageUrl = article.clusterHolder.imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-xs-12" key={index}>
-                            <Panel key={index} title={article.clusterHolder.title} image={imageUrl}
-                                   onClick={(event) => handleArticleClick(event, article.topicId, article.clusterHolder.id)}/>
+                            <Panel key={index} title={article.title} image={imageUrl}
+                                   onClick={(event) => handleArticleClick(event, article.topicId, article.articleId)}/>
                         </div>
                     )
                 })}
@@ -192,13 +192,13 @@ const xs = (articles, handleArticleClick) => {
             <div className="row">
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.clusterHolder.imageUrl != undefined) {
-                        imageUrl = article.clusterHolder.imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-xs-12" key={index}>
-                            <ListPanel image={imageUrl} key={index} title={article.clusterHolder.title}
-                                       onClick={(event) => handleArticleClick(event, article.topicId, article.clusterHolder.id)}/>
+                            <ListPanel image={imageUrl} key={index} title={article.title}
+                                       onClick={(event) => handleArticleClick(event, article.topicId, article.articleId)}/>
                         </div>
                     )
                 })}

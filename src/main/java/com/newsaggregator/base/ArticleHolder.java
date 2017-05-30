@@ -8,7 +8,10 @@ import com.newsaggregator.server.ClusterHolder;
 public class ArticleHolder {
 
     private String topicId;
-    private ClusterHolder clusterHolder;
+    private String articleId;
+    private String title;
+    private String imageUrl;
+    private String lastPublished;
 
     public ArticleHolder() {
 
@@ -16,15 +19,29 @@ public class ArticleHolder {
 
     public ArticleHolder(String topicId, ClusterHolder clusterHolder) {
         this.topicId = topicId;
-        this.clusterHolder = clusterHolder;
+        this.articleId = clusterHolder.getId();
+        this.title = clusterHolder.getTitle();
+        this.imageUrl = clusterHolder.getImageUrl();
+        this.lastPublished = clusterHolder.getLastPublished();
     }
 
     public String getTopicId() {
         return topicId;
     }
 
-    public ClusterHolder getClusterHolder() {
-        return clusterHolder;
+    public String getArticleId() {
+        return articleId;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getLastPublished() {
+        return lastPublished;
+    }
 }

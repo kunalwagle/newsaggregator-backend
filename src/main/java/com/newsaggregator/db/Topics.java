@@ -1,5 +1,6 @@
 package com.newsaggregator.db;
 
+import com.google.common.collect.Lists;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
@@ -99,11 +100,17 @@ public class Topics {
 
     public int getArticleCount(String id) {
         try {
-            BasicDBObject queryObject = new BasicDBObject().append("_id", new ObjectId(id));
-            Document document = collection.find(queryObject).first();
-            JSONObject jsonObject = new JSONObject(document);
-            JSONArray jsonArray = jsonObject.getJSONArray("Clusters");
-            return jsonArray.length();
+            BasicDBObject firstMatch = new BasicDBObject("$match", new BasicDBObject("_id", new ObjectId(id)));
+            BasicDBObject unwind = new BasicDBObject("$unwind", "$Clusters");
+            BasicDBObject lookup = new BasicDBObject("$lookup", new BasicDBObject("from", "summaries")
+                    .append("localField", "Clusters")
+                    .append("foreignField", "_id")
+                    .append("as", "clusts"));
+            BasicDBObject secondMatch = new BasicDBObject("$match", new BasicDBObject("clusts.Summaries", new BasicDBObject("$ne", "{}")));
+            BasicDBObject group = new BasicDBObject("$group", new BasicDBObject("_id", null).append("count", new BasicDBObject("$sum", 1)));
+            List<BasicDBObject> dbObjects = Lists.newArrayList(firstMatch, unwind, lookup, secondMatch, group);
+            Document output = collection.aggregate(dbObjects).first();
+            return output.getInteger("count");
         } catch (Exception e) {
             logger.error("An error occurred whilst getting a single topic", e);
         }

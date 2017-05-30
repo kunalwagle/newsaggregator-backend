@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -27,20 +26,6 @@ public class DigestHolder implements DatabaseStorage {
     private String emailAddress;
     private int topicCount;
     private List<ArticleHolder> articleHolders;
-    private Comparator<ArticleHolder> byLastPublished = (left, right) -> {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        try {
-
-            Date leftDate = formatter.parse(left.getClusterHolder().getLastPublished().replaceAll("Z$", "+0000"));
-            Date rightDate = formatter.parse(right.getClusterHolder().getLastPublished().replaceAll("Z$", "+0000"));
-
-            return leftDate.compareTo(rightDate);
-
-        } catch (ParseException e) {
-            Logger.getLogger(getClass()).error("Error in last published", e);
-        }
-        return 1;
-    };
 
     public DigestHolder() {
 
@@ -61,7 +46,42 @@ public class DigestHolder implements DatabaseStorage {
         }
 
 
-        this.articleHolders = articleHolders.stream().sorted(byLastPublished).limit(10).collect(Collectors.toList());
+        Comparator<ArticleHolder> byLastPublished = (left, right) -> {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+            try {
+
+                int ldidx = left.getLastPublished().indexOf(".");
+                int rdidx = right.getLastPublished().indexOf(".");
+
+                String ld = left.getLastPublished();
+                String rd = right.getLastPublished();
+
+                if (ldidx != -1) {
+                    ld = ld.substring(0, ldidx).concat("+0000");
+                } else {
+                    ld = ld.replaceAll("Z$", "+0000");
+                }
+                if (rdidx != -1) {
+                    rd = rd.substring(0, rdidx).concat("+0000");
+                } else {
+                    rd = rd.replaceAll("Z$", "+0000");
+                }
+
+                ld = ld.replace("+00:00", "+0000");
+                rd = rd.replace("+00:00", "+0000");
+
+
+                Date leftDate = formatter.parse(ld);
+                Date rightDate = formatter.parse(rd);
+
+                return leftDate.compareTo(rightDate);
+
+            } catch (Exception e) {
+                Logger.getLogger(getClass()).error("Error in last published", e);
+            }
+            return 1;
+        };
+        this.articleHolders = articleHolders.stream().sorted(byLastPublished.reversed()).limit(10).collect(Collectors.toList());
         this.emailAddress = user.getEmailAddress();
         this.topicCount = subs.size();
     }
@@ -69,7 +89,7 @@ public class DigestHolder implements DatabaseStorage {
     private List<ArticleHolder> distinct(List<ArticleHolder> articleHolders) {
         List<ArticleHolder> newArticleHolders = new ArrayList<>();
         for (ArticleHolder articleHolder : articleHolders) {
-            if (newArticleHolders.stream().noneMatch(a -> a.getClusterHolder().getId().equals(articleHolder.getClusterHolder().getId()))) {
+            if (newArticleHolders.stream().noneMatch(a -> a.getArticleId().equals(articleHolder.getArticleId()))) {
                 newArticleHolders.add(articleHolder);
             }
         }

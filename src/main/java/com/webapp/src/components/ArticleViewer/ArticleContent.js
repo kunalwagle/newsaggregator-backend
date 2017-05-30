@@ -6,6 +6,7 @@ import {PageHeader, Image, OverlayTrigger} from "react-bootstrap";
 import {pluck, isEmpty, isEqual, uniq} from "underscore";
 import {getColour} from "../../UtilityMethods";
 import SentenceSourcesComponent from "./SentenceSourcesComponent";
+import moment from "moment";
 
 export const ArticleContent = ({article, sources, topicId, annotations, fetchInProgressCalled, handleReloadNeeded}) => {
 
@@ -93,6 +94,7 @@ export const ArticleContent = ({article, sources, topicId, annotations, fetchInP
             <h1>
                 {article.articles[0].title}
             </h1>
+            <h4>{moment(new Date(article.lastPublished)).format("LLLL")}</h4>
             <img src={article.articles[0].imageUrl} className="image-width"/>
             <br/><br/>
             {paragraph()}

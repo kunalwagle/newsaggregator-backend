@@ -138,7 +138,9 @@ public class Main {
 //                scheduleManager.scheduleAtFixedRate(new TopicLabelRunnable(Lists.newArrayList(article)), 1L, 1L, TimeUnit.SECONDS);
                 scheduleManager.execute(new ArticleRunnable());
                 scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
-//                scheduleManager.execute(new LabellingRunnable());
+
+//                scheduleManager.execute(new DigestRunnable());
+//                scheduleManager.execute(new Labelli∞ngRunnable());
 
 //                scheduleManager.execute(new ClusteringRunnable(Lists.newArrayList(new Topics(Utils.getDatabase()).getTopicById("5925559bacea8273ab02efbb").getLabel())));
 
