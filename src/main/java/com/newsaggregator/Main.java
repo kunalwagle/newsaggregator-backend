@@ -4,7 +4,6 @@ import com.newsaggregator.routes.RouterApplication;
 import com.newsaggregator.server.TaskServiceSingleton;
 import com.newsaggregator.server.jobs.ArticleRunnable;
 import com.newsaggregator.server.jobs.DigestRunnable;
-import com.newsaggregator.server.jobs.LabellingRunnable;
 import com.newsaggregator.server.jobs.SendEmailRunnable;
 import org.apache.log4j.Logger;
 import org.restlet.Component;
@@ -139,7 +138,7 @@ public class Main {
 //                scheduleManager.scheduleAtFixedRate(new TopicLabelRunnable(Lists.newArrayList(article)), 1L, 1L, TimeUnit.SECONDS);
                 scheduleManager.execute(new ArticleRunnable());
                 scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
-                scheduleManager.execute(new LabellingRunnable());
+//                scheduleManager.execute(new LabellingRunnable());
 
 //                scheduleManager.execute(new ClusteringRunnable(Lists.newArrayList(new Topics(Utils.getDatabase()).getTopicById("5925559bacea8273ab02efbb").getLabel())));
 
