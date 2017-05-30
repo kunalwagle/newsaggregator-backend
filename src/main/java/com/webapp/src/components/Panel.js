@@ -18,7 +18,12 @@ export default class Panel extends Component {
         if (this.props.largePanel) {
             return (
                 <div>
-                    <h6>{this.props.text}</h6>
+                    <div>
+                        <h6>{this.props.text}</h6>
+                    </div>
+                    <div>
+                        <h6>{"Number of articles: " + this.props.count}</h6>
+                    </div>
                 </div>
             )
         } else {
