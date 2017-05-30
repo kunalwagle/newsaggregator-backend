@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
-    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Added favicon">
+    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Ready for new deployment">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/ArticleHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/ArticleHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/DigestHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/DigestHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/DigestRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/DigestRunnable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/package.json" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticleContent.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticleContent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Digest/DigestPanelView.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Digest/DigestPanelView.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js" afterPath="$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -49,7 +42,6 @@
             <state relative-caret-position="2221">
               <caret line="207" column="2" lean-forward="false" selection-start-line="207" selection-start-column="2" selection-end-line="207" selection-end-column="2" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
                 <element signature="e#889#1550#0" expanded="true" />
                 <element signature="e#969#1525#0" expanded="true" />
                 <element signature="e#1598#3082#0" expanded="true" />
@@ -85,9 +77,8 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticleContent.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+              <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
                 <element signature="e#464#3758#0" expanded="true" />
                 <element signature="e#1685#3110#0" expanded="true" />
               </folding>
@@ -108,11 +99,9 @@
       <file leaf-file-name="Topics.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="106" column="53" lean-forward="true" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="660">
+              <caret line="105" column="53" lean-forward="false" selection-start-line="105" selection-start-column="53" selection-end-line="105" selection-end-column="53" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -127,13 +116,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1215">
               <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UtilityMethods.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="102" column="52" lean-forward="false" selection-start-line="102" selection-start-column="52" selection-end-line="102" selection-end-column="52" />
+              <folding>
+                <element signature="e#83#143#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -159,19 +160,6 @@
                 <element signature="e#4103#4104#0" expanded="true" />
                 <element signature="method#printActiveThreads#0;class#Utils#0" expanded="true" />
                 <element signature="method#getActiveThreads#0;class#Utils#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DigestHolder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/DigestHolder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="68" column="17" lean-forward="false" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
-              <folding>
-                <element signature="method#distinct#0;class#DigestHolder#0" expanded="true" />
-                <element signature="method#createDocument#0;class#DigestHolder#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -297,7 +285,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/SendEmailRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/base/WikipediaArticle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/Panel.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/components/SearchResults/SearchResult.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/webapp/public/index.html" />
@@ -309,6 +296,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Utils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js" />
       </list>
     </option>
   </component>
@@ -430,6 +418,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newsaggregator-backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1190,14 +1212,7 @@
       <workItem from="1495556575194" duration="5860000" />
       <workItem from="1495904644054" duration="14961000" />
       <workItem from="1496092519163" duration="517000" />
-      <workItem from="1496128789883" duration="12183000" />
-    </task>
-    <task id="LOCAL-00443" summary="Ready for new deployment">
-      <created>1495474738671</created>
-      <option name="number" value="00443" />
-      <option name="presentableId" value="LOCAL-00443" />
-      <option name="project" value="LOCAL" />
-      <updated>1495474738671</updated>
+      <workItem from="1496128789883" duration="12267000" />
     </task>
     <task id="LOCAL-00444" summary="Deploying new outlets to server">
       <created>1495475545658</created>
@@ -1535,7 +1550,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496181328508</updated>
     </task>
-    <option name="localTasksCounter" value="492" />
+    <task id="LOCAL-00492" summary="Ready for new deployment">
+      <created>1496188381042</created>
+      <option name="number" value="00492" />
+      <option name="presentableId" value="LOCAL-00492" />
+      <option name="project" value="LOCAL" />
+      <updated>1496188381042</updated>
+    </task>
+    <option name="localTasksCounter" value="493" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1569,7 +1591,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="782356000" />
+    <option name="totallyTimeSpent" value="782440000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1656,7 +1678,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix for topic labeller" />
     <MESSAGE value="Changing the number of threads in a memory save attempt" />
     <MESSAGE value="In a memory save attempt, changing the way modelling works" />
     <MESSAGE value="New name finder with space saving principles" />
@@ -1681,7 +1702,8 @@
     <MESSAGE value="Here we go" />
     <MESSAGE value="Added article count to wikipedia search results" />
     <MESSAGE value="Added favicon" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added favicon" />
+    <MESSAGE value="Ready for new deployment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ready for new deployment" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -2025,18 +2047,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#47#0" expanded="false" />
-            <element signature="e#83#127#0" expanded="false" />
-            <element signature="e#167#1386#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/SearchResults/SearchResultPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2086,17 +2096,17 @@
         <state relative-caret-position="480">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="docComment;class#ArticleHolder#0" expanded="true" />
             <element signature="method#ArticleHolder#1;class#ArticleHolder#0" expanded="true" />
-            <element signature="e#789#790#0" expanded="true" />
-            <element signature="e#821#822#0" expanded="true" />
-            <element signature="e#853#854#0" expanded="true" />
-            <element signature="e#881#882#0" expanded="true" />
-            <element signature="e#916#917#0" expanded="true" />
-            <element signature="e#947#948#0" expanded="true" />
-            <element signature="e#987#988#0" expanded="true" />
-            <element signature="e#1023#1024#0" expanded="true" />
+            <element signature="e#765#766#0" expanded="true" />
+            <element signature="e#797#798#0" expanded="true" />
+            <element signature="e#829#830#0" expanded="true" />
+            <element signature="e#857#858#0" expanded="true" />
+            <element signature="e#892#893#0" expanded="true" />
+            <element signature="e#923#924#0" expanded="true" />
+            <element signature="e#963#964#0" expanded="true" />
+            <element signature="e#999#1000#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2128,8 +2138,9 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/base/DigestHolder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="68" column="17" lean-forward="false" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
+          <caret line="67" column="17" lean-forward="false" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#distinct#0;class#DigestHolder#0" expanded="true" />
             <element signature="method#createDocument#0;class#DigestHolder#0" expanded="true" />
           </folding>
@@ -2151,7 +2162,6 @@
         <state relative-caret-position="2221">
           <caret line="207" column="2" lean-forward="false" selection-start-line="207" selection-start-column="2" selection-end-line="207" selection-end-column="2" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
             <element signature="e#889#1550#0" expanded="true" />
             <element signature="e#969#1525#0" expanded="true" />
             <element signature="e#1598#3082#0" expanded="true" />
@@ -2183,9 +2193,8 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/components/ArticleViewer/ArticleContent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+          <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
             <element signature="e#464#3758#0" expanded="true" />
             <element signature="e#1685#3110#0" expanded="true" />
           </folding>
@@ -2241,11 +2250,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Topics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="106" column="53" lean-forward="true" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="660">
+          <caret line="105" column="53" lean-forward="false" selection-start-line="105" selection-start-column="53" selection-end-line="105" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2255,6 +2262,16 @@
           <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/webapp/src/UtilityMethods.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="102" column="52" lean-forward="false" selection-start-line="102" selection-start-column="52" selection-end-line="102" selection-end-column="52" />
+          <folding>
+            <element signature="e#83#143#0" expanded="true" />
           </folding>
         </state>
       </provider>
