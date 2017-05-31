@@ -8,6 +8,7 @@ import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import com.newsaggregator.ml.tfidf.TfIdf;
 import com.newsaggregator.ml.tfidf.TfIdfScores;
 import com.newsaggregator.server.ClusterHolder;
+import org.apache.log4j.Logger;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -43,7 +44,8 @@ public class Clusterer {
             clusteredArticles.addAll(clusterHolder.getArticles().stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList()));
             this.createNewClusterFromArticles(clusterHolder.getArticles());
         }
-        articles = articles.stream().filter(a -> clusteredArticles.contains(a.getArticleUrl())).collect(Collectors.toList());
+        articles = articles.stream().filter(a -> !clusteredArticles.contains(a.getArticleUrl())).collect(Collectors.toList());
+        Logger.getLogger(getClass()).info("There are " + articles.size() + " new articles to cluster");
         articles.forEach(this::createNewClusterFromArticle);
     }
 
