@@ -3,17 +3,12 @@
  */
 import React from "react";
 import {Checkbox} from "react-bootstrap";
-import {getColour} from "../../UtilityMethods";
+import {getColour, getPublicationName} from "../../UtilityMethods";
 import {contains} from "underscore";
 
-export const ArticlesSummarised = ({article, sources, annotations, fetchInProgressCalled, mediaType, handleAnnotationSwitch, handleDefaultCheckboxes, handleCheckboxChange}) => {
+export const ArticlesSummarised = ({article, sources, annotations, fetchInProgressCalled, mediaType, handleAnnotationSwitch, handleCheckboxChange}) => {
 
     if (!fetchInProgressCalled || article == null || article.articles[0] == null) {
-        return (<div></div>);
-    }
-
-    if (sources.length === 0) {
-        handleDefaultCheckboxes(article);
         return (<div></div>);
     }
 
@@ -41,13 +36,14 @@ export const ArticlesSummarised = ({article, sources, annotations, fetchInProgre
                         <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 margin-below">
                             <b>{art.title}</b>
                             <br/>
+                            <i>{getPublicationName(art.source)}</i>
                             <a href={art.articleUrl} target="_blank" className="link">Original Article</a>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-below">
                             <label className="switch">
                                 <input type="checkbox" checked={contains(sources, art.articleUrl)}
-                                       disabled={contains(sources, art.source) && sources.length === 1}
-                                       onChange={event => handleCheckboxChange(event, art.source)}/>
+                                       disabled={contains(sources, art.articleUrl) && sources.length === 1}
+                                       onChange={event => handleCheckboxChange(event, art.articleUrl)}/>
                                 <div className="slider round" style={{"backgroundColor": getColour(art.source)}}></div>
                             </label>
                         </div>

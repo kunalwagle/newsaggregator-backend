@@ -3,18 +3,11 @@
  */
 import {push} from "react-router-redux";
 import {find} from "underscore";
-import {defaultCheckboxes} from "../ArticleViewer/ArticleActions";
 
 export const ARTICLE_CLICKED = 'ARTICLE_CLICKED';
 
 export function articleClicked(topicId, articleId) {
-    return (dispatch, getState) => {
-        let article = find(getState().searchResults.articles, (art) => {
-            return art.id === articleId;
-        });
-        if (article != undefined) {
-            dispatch(defaultCheckboxes(article));
-        }
+    return (dispatch) => {
         dispatch(push("/topic/" + topicId + "/article/" + articleId));
         return {
             type: ARTICLE_CLICKED

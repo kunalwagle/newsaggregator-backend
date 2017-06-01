@@ -2,10 +2,13 @@
  * Created by kunalwagle on 03/05/2017.
  */
 import {map, uniq, contains} from "underscore";
+import {getIPAddress} from "../../UtilityMethods";
 
 export const ANNOTATIONS_CHANGE = "ANNOTATIONS_CHANGE";
 export const CHECKBOX_CHANGE = "CHECKBOX_CHANGE";
 export const DEFAULT_CHECKBOXES = "DEFAULT_CHECKBOXES";
+export const RECEIVED_ARTICLE = "RECEIVED_ARTICLE";
+export const FETCH_IN_PROGRESS_TOGGLE = "FETCH_IN_PROGRESS_TOGGLE";
 
 export function annotationsChange(annotations) {
     return {
@@ -46,6 +49,31 @@ export function checkboxes(finalSources) {
     return {
         type: DEFAULT_CHECKBOXES,
         finalSources
+    }
+}
+
+export function reloadArticle(topicId, articleId) {
+    return (dispatch, getState) => {
+        let title = "article/" + articleId + "/topic/" + topicId;
+        if (getState().loggedIn.loggedIn) {
+            title = title + "/user/" + getState().loggedIn.email;
+        }
+        return fetch(getIPAddress() + "topic/" + title)
+            .then(response => response.json())
+            .then(json => dispatch(articleReceived(json)))
+    }
+}
+
+export function articleReceived(json) {
+    return {
+        type: RECEIVED_ARTICLE,
+        json
+    }
+}
+
+export function fetchInProgressToggle() {
+    return {
+        type: FETCH_IN_PROGRESS_TOGGLE
     }
 }
 

@@ -30,7 +30,7 @@ public class ArticleResource extends ServerResource {
 
         ClusterHolder clusterHolder = new Summaries(Utils.getDatabase()).getSingleCluster(articleId);
 
-        String defaultString = clusterHolder.getArticles().stream().map(OutletArticle::getArticleUrl).sorted().collect(Collectors.toList()).toString().replace(" ", "");
+        List<String> defaultString = clusterHolder.getArticles().stream().map(OutletArticle::getArticleUrl).sorted().collect(Collectors.toList());
 
         if (!userId.equals("none")) {
             Users users = new Users(Utils.getDatabase());
@@ -41,7 +41,7 @@ public class ArticleResource extends ServerResource {
                     Subscription subscription = subOptional.get();
                     List<String> sources = subscription.getSources();
                     List<OutletArticle> defaults = clusterHolder.getArticles().stream().filter(a -> sources.contains(a.getSource())).collect(Collectors.toList());
-                    defaultString = defaults.stream().map(OutletArticle::getArticleUrl).sorted().collect(Collectors.toList()).toString().replace(" ", "");
+                    defaultString = defaults.stream().map(OutletArticle::getArticleUrl).sorted().collect(Collectors.toList());
                 }
             } catch (Exception e) {
                 Logger.getLogger(getClass()).error("Got an error retrieving an article", e);
@@ -63,9 +63,9 @@ public class ArticleResource extends ServerResource {
     private class ClusterWithSettings {
 
         private ClusterHolder clusterHolder;
-        private String defaultString;
+        private List<String> defaultString;
 
-        public ClusterWithSettings(ClusterHolder clusterHolder, String defaultString) {
+        public ClusterWithSettings(ClusterHolder clusterHolder, List<String> defaultString) {
             this.clusterHolder = clusterHolder;
             this.defaultString = defaultString;
         }
@@ -74,7 +74,7 @@ public class ArticleResource extends ServerResource {
             return clusterHolder;
         }
 
-        public String getDefaultString() {
+        public List<String> getDefaultString() {
             return defaultString;
         }
     }

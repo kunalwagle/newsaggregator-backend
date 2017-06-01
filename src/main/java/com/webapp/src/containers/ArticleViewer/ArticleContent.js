@@ -4,7 +4,7 @@
 import {connect} from "react-redux";
 import {ArticleContent} from "../../components/ArticleViewer/ArticleContent";
 import {find} from "underscore";
-import {articleClicked} from "../../actions/SearchResults/SearchResultsActions";
+import {reloadArticle} from "../../actions/ArticleViewer/ArticleActions";
 
 const mapStateToProps = (state, ownProps) => {
     let article = state.articleViewer.article;
@@ -14,14 +14,15 @@ const mapStateToProps = (state, ownProps) => {
         sources: state.articleViewer.sources,
         annotations: state.articleViewer.annotations,
         articleId: ownProps.articleId,
+        topicId: ownProps.topicId,
         fetchInProgressCalled
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleReloadNeeded: (topicId) => {
-            dispatch(articleClicked(topicId));
+        handleReloadNeeded: (topicId, articleId) => {
+            dispatch(reloadArticle(topicId, articleId));
         }
     }
 };
