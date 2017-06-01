@@ -10,6 +10,6 @@ import java.util.concurrent.TimeUnit;
 public class ClusteringScheduleRunnable implements Runnable {
     @Override
     public void run() {
-        TaskServiceSingleton.getInstance().schedule(new ClusteringRunnable(null, false), 1L, TimeUnit.SECONDS);
+        TaskServiceSingleton.getInstance().schedule(new ClusteringRunnable(null, null, false), 1L, TimeUnit.SECONDS);
     }
 }

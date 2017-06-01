@@ -120,6 +120,13 @@ public class Users {
         return users;
     }
 
+    public void purgeUsers() {
+        List<User> users = getAllUsers();
+        users.forEach(user -> user.setTopicIds(new ArrayList<>()));
+        users.forEach(this::updateUser);
+    }
+
+
     private MongoCollection<Document> getCollection() {
         return database.getCollection("Users");
     }

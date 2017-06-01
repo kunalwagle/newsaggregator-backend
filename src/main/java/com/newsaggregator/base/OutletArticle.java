@@ -1,5 +1,6 @@
 package com.newsaggregator.base;
 
+import com.newsaggregator.server.ArticleString;
 import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -75,6 +76,10 @@ public class OutletArticle extends Article implements DatabaseStorage {
 
     public void setLabelled(boolean labelled) {
         isLabelled = labelled;
+    }
+
+    public ArticleString getArticleString() {
+        return new ArticleString(id, articleUrl, source);
     }
 
     @Override

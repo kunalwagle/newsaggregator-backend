@@ -1,13 +1,14 @@
 package com.newsaggregator.db;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.server.ClusterHolder;
+import com.newsaggregator.server.ArticleString;
+import com.newsaggregator.server.ClusterString;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 import org.bson.Document;
@@ -41,6 +42,7 @@ public class Topics {
         List<LabelHolder> labelHolders = new ArrayList<>();
         Articles articleManager = new Articles(database);
         Summaries summaryManager = new Summaries(database);
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
             MongoCursor<Document> iterator = collection.find().iterator();
             while (iterator.hasNext()) {
@@ -48,16 +50,16 @@ public class Topics {
                 String item = document.toJson();
                 JSONObject jsonObject = new JSONObject(item);
                 JSONArray articleIds = jsonObject.getJSONArray("Articles");
-                List<OutletArticle> articles = new ArrayList<>();
+                List<ArticleString> articles = new ArrayList<>();
                 for (int i = 0; i < articleIds.length(); i++) {
                     String articleId = articleIds.getJSONObject(i).getString("$oid");
-                    articles.add(articleManager.getArticleFromId(articleId));
+                    articles.add(articleManager.getArticleFromId(articleId).getArticleString());
                 }
                 JSONArray summaryIds = jsonObject.getJSONArray("Clusters");
-                List<ClusterHolder> clusters = new ArrayList<>();
+                List<ClusterString> clusters = new ArrayList<>();
                 for (int i = 0; i < summaryIds.length(); i++) {
-                    String summaryId = summaryIds.getJSONObject(i).getString("$oid");
-                    clusters.add(summaryManager.getSingleCluster(summaryId));
+                    String summary = summaryIds.getString(i);
+                    clusters.add(objectMapper.readValue(summary, ClusterString.class));
                 }
                 LabelHolder labelHolder = new LabelHolder(jsonObject.getString("Label"), articles, clusters);
                 labelHolder.set_id(document.getObjectId("_id"));
@@ -122,23 +124,25 @@ public class Topics {
             Document document = iterator.next();
             String item = document.toJson();
             JSONObject jsonObject = new JSONObject(item);
-            List<OutletArticle> articles = new ArrayList<>();
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<ArticleString> articles = new ArrayList<>();
             boolean needsClustering = jsonObject.getBoolean("NeedsClustering");
             try {
                 JSONArray articleIds = jsonObject.getJSONArray("Articles");
                 for (int i = 0; i < articleIds.length(); i++) {
                     String articleId = articleIds.getJSONObject(i).getString("$oid");
-                    articles.add(articleManager.getArticleFromId(articleId));
+                    articles.add(articleManager.getArticleFromId(articleId).getArticleString());
                 }
+
             } catch (Exception e) {
                 logger.error("An error occurred whilst getting articles for a single topic", e);
             }
-            List<ClusterHolder> clusters = new ArrayList<>();
+            List<ClusterString> clusters = new ArrayList<>();
             try {
                 JSONArray summaryIds = jsonObject.getJSONArray("Clusters");
                 for (int i = 0; i < summaryIds.length(); i++) {
-                    String summaryId = summaryIds.getJSONObject(i).getString("$oid");
-                    clusters.add(summaryManager.getSingleCluster(summaryId));
+                    String summary = summaryIds.getString(i);
+                    clusters.add(objectMapper.readValue(summary, ClusterString.class));
                 }
             } catch (Exception e) {
                 logger.error("An error occurred whilst getting clusters for a single topic", e);
@@ -201,28 +205,29 @@ public class Topics {
             BasicDBObject queryObject = new BasicDBObject().append("NeedsClustering", true);
             MongoCursor<Document> iterator = collection.find(queryObject).iterator();
             Articles articleManager = new Articles(database);
-            Summaries summaryManager = new Summaries(database);
             List<LabelHolder> labelHolders = new ArrayList<>();
             while (iterator.hasNext()) {
                 Document document = iterator.next();
                 String item = document.toJson();
                 JSONObject jsonObject = new JSONObject(item);
-                List<OutletArticle> articles = new ArrayList<>();
+                ObjectMapper objectMapper = new ObjectMapper();
+                List<ArticleString> articles = new ArrayList<>();
                 try {
                     JSONArray articleIds = jsonObject.getJSONArray("Articles");
                     for (int i = 0; i < articleIds.length(); i++) {
                         String articleId = articleIds.getJSONObject(i).getString("$oid");
-                        articles.add(articleManager.getArticleFromId(articleId));
+                        articles.add(articleManager.getArticleFromId(articleId).getArticleString());
                     }
+
                 } catch (Exception e) {
                     logger.error("An error occurred whilst getting articles for a single topic", e);
                 }
-                List<ClusterHolder> clusters = new ArrayList<>();
+                List<ClusterString> clusters = new ArrayList<>();
                 try {
                     JSONArray summaryIds = jsonObject.getJSONArray("Clusters");
                     for (int i = 0; i < summaryIds.length(); i++) {
-                        String summaryId = summaryIds.getJSONObject(i).getString("$oid");
-                        clusters.add(summaryManager.getSingleCluster(summaryId));
+                        String summary = summaryIds.getString(i);
+                        clusters.add(objectMapper.readValue(summary, ClusterString.class));
                     }
                 } catch (Exception e) {
                     logger.error("An error occurred whilst getting clusters for a single topic", e);
