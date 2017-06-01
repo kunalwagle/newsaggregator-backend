@@ -253,4 +253,11 @@ public class Topics {
             }
         }
     }
+
+    public String getTopicFromCluster(String id) {
+        BasicDBObject basicDBObject = new BasicDBObject("Clusters", id);
+        MongoCursor<Document> iterator = collection.find(basicDBObject).iterator();
+        LabelHolder labelHolder = getLabelHolderFromIterator(iterator, new Articles(database), null);
+        return labelHolder != null ? labelHolder.getId() : null;
+    }
 }

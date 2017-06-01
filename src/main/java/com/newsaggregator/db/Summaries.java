@@ -146,4 +146,10 @@ public class Summaries {
         getClusterHolders(new ArrayList<>(), results).forEach(c -> hashMap.put(c.getId(), c));
         return hashMap;
     }
+
+    public List<ClusterHolder> getMostRecent() {
+        BasicDBObject sort = new BasicDBObject("_id", -1);
+        MongoCursor<Document> documentMongoCursor = collection.find().sort(sort).limit(10).iterator();
+        return getClusterHolders(new ArrayList<>(), documentMongoCursor);
+    }
 }
