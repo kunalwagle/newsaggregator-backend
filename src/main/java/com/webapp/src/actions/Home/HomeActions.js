@@ -3,6 +3,7 @@
  */
 import {push} from "react-router-redux";
 import {getIPAddress} from "../../UtilityMethods";
+import {fetchInProgressToggle} from "../ArticleViewer/ArticleActions";
 
 export const HOME_CLICKED = 'HOME_CLICKED';
 export const HOME_ARTICLES = 'HOME_ARTICLES';
@@ -12,6 +13,7 @@ export function digestArticleClicked(topicId, articleId) {
     return (dispatch) => {
 
         dispatch(push("/topic/" + topicId + "/article/" + articleId));
+        dispatch(fetchInProgressToggle());
         return {
             type: HOME_CLICKED
         }
