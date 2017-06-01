@@ -130,7 +130,7 @@ public class Topics {
             try {
                 JSONArray articleIds = jsonObject.getJSONArray("Articles");
                 for (int i = 0; i < articleIds.length(); i++) {
-                    String articleId = articleIds.getJSONObject(i).getString("$oid");
+                    String articleId = articleIds.getString(i);
                     articles.add(articleManager.getArticleFromId(articleId).getArticleString());
                 }
 

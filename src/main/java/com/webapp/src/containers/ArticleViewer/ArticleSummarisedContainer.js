@@ -10,8 +10,9 @@ const mapStateToProps = (state, ownProps) => {
     let article = {
         articles: [null]
     };
-    let fetchInProgressCalled = state.searchResults.fetchInProgressCalled;
+    let fetchInProgressCalled = state.articleViewer.fetchInProgressCalled;
     let sources = state.articleViewer.sources;
+
     if (fetchInProgressCalled) {
         article = find(state.searchResults.articles, (art) => {
             return art.id === ownProps.articleId;

@@ -2,7 +2,7 @@ package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
 import com.newsaggregator.server.TaskServiceSingleton;
-import com.newsaggregator.server.jobs.ArticleRunnable;
+import com.newsaggregator.server.jobs.ArticleFetchRunnable;
 import org.apache.log4j.Logger;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -133,13 +134,13 @@ public class Main {
 //                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 30L, TimeUnit.MINUTES);
 ////                scheduleManager.scheduleAtFixedRate(new TopicLabelRunnable(Lists.newArrayList(article)), 1L, 1L, TimeUnit.SECONDS);
-                scheduleManager.execute(new ArticleRunnable());
+                scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
 //                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 //                new Users(Utils.getDatabase()).purgeUsers();
 //                System.out.println("Purged users");
 
 //                scheduleManager.execute(new DigestRunnable());
-//                scheduleManager.execute(new Labelli∞ngRunnable());
+//                scheduleManager.execute(new LabellingRunnable());
 
 //                scheduleManager.execute(new ClusteringRunnable(Lists.newArrayList(new Topics(Utils.getDatabase()).getTopicById("5925559bacea8273ab02efbb").getLabel())));
 

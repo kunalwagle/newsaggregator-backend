@@ -8,10 +8,10 @@ import {getColour} from "../../UtilityMethods";
 import SentenceSourcesComponent from "./SentenceSourcesComponent";
 import moment from "moment";
 
-export const ArticleContent = ({article, sources, topicId, annotations, fetchInProgressCalled, handleReloadNeeded}) => {
+export const ArticleContent = ({article, sources, articleId, annotations, fetchInProgressCalled, handleReloadNeeded}) => {
 
     if (!fetchInProgressCalled) {
-        handleReloadNeeded(topicId);
+        handleReloadNeeded(articleId);
         return (
             <div className="loader"></div>
         )

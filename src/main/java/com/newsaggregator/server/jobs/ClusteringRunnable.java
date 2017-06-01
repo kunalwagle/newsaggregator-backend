@@ -66,7 +66,7 @@ public class ClusteringRunnable implements Runnable {
 
             List<String> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).map(ClusterString::getId).distinct().collect(Collectors.toList());
             HashMap<String, ClusterHolder> chmap = summaries.getClusters(clusters);
-            Collection<ClusterHolder> chlist = chmap.values();
+            List<ClusterHolder> chlist = new ArrayList<>(chmap.values());
 
             for (LabelHolder labelHolder : labelHolders) {
                 try {

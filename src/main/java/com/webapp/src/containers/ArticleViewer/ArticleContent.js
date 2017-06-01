@@ -7,21 +7,13 @@ import {find} from "underscore";
 import {articleClicked} from "../../actions/SearchResults/SearchResultsActions";
 
 const mapStateToProps = (state, ownProps) => {
-    let article = {};
-    let fetchInProgressCalled = state.searchResults.fetchInProgressCalled;
-    if (fetchInProgressCalled) {
-        article = find(state.searchResults.articles, (art) => {
-            return art.id === ownProps.articleId;
-        });
-    }
-    if (article == undefined || article == {}) {
-        fetchInProgressCalled = false;
-    }
+    let article = state.articleViewer.article;
+    let fetchInProgressCalled = state.articleViewer.fetchInProgressCalled;
     return {
         article,
         sources: state.articleViewer.sources,
         annotations: state.articleViewer.annotations,
-        topicId: ownProps.topicId,
+        articleId: ownProps.articleId,
         fetchInProgressCalled
     }
 };

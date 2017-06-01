@@ -34,6 +34,7 @@ public class RouterApplication extends Application {
         router.attach("/user/unsubscribe/{user}/{topic}", UnsubscribeUserResource.class);
         router.attach("/user/subscriptions/{user}", SubscriptionsResource.class);
         router.attach("/digest/{digestId}", DigestResource.class);
+        router.attach("/article/{articleId}/topic/{topicId}/user/{user}", ArticleResource.class);
         return router;
     }
 }

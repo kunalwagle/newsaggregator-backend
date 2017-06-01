@@ -45,7 +45,7 @@ export const ArticlesSummarised = ({article, sources, annotations, fetchInProgre
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-below">
                             <label className="switch">
-                                <input type="checkbox" checked={contains(sources, art.source)}
+                                <input type="checkbox" checked={contains(sources, art.articleUrl)}
                                        disabled={contains(sources, art.source) && sources.length === 1}
                                        onChange={event => handleCheckboxChange(event, art.source)}/>
                                 <div className="slider round" style={{"backgroundColor": getColour(art.source)}}></div>
