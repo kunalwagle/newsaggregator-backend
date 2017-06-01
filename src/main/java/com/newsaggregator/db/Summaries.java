@@ -15,10 +15,7 @@ import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -140,5 +137,13 @@ public class Summaries {
         MongoCursor<Document> iterator = collection.find(queryObject).iterator();
 
         return getClusterHolders(new ArrayList<>(), iterator);
+    }
+
+    public HashMap<String, ClusterHolder> getClusters(List<String> clusters) {
+        BasicDBObject dbObject = new BasicDBObject("_id", new BasicDBObject("$in", clusters.stream().map(ObjectId::new).collect(Collectors.toList())));
+        MongoCursor<Document> results = collection.find(dbObject).iterator();
+        HashMap<String, ClusterHolder> hashMap = new HashMap<>();
+        getClusterHolders(new ArrayList<>(), results).forEach(c -> hashMap.put(c.getId(), c));
+        return hashMap;
     }
 }

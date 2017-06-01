@@ -1,5 +1,6 @@
 package com.newsaggregator.server;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newsaggregator.base.DatabaseStorage;
 import com.newsaggregator.base.OutletArticle;
 import org.apache.log4j.Logger;
@@ -19,8 +20,8 @@ public class LabelHolder implements DatabaseStorage {
     private ObjectId _id;
     private String id;
     private String label;
-    private List<OutletArticle> articles = new ArrayList<>();
-    private List<ClusterHolder> clusters = new ArrayList<>();
+    private List<ArticleString> articles = new ArrayList<>();
+    private List<ClusterString> clusters = new ArrayList<>();
     private String imageUrl;
     private boolean isSubscribed = false;
     private boolean needsClustering;
@@ -29,7 +30,7 @@ public class LabelHolder implements DatabaseStorage {
         this.label = label;
     }
 
-    public LabelHolder(String label, List<OutletArticle> articles, List<ClusterHolder> clusters) {
+    public LabelHolder(String label, List<ArticleString> articles, List<ClusterString> clusters) {
         this.label = label;
         this.articles = articles;
         this.clusters = clusters;
@@ -39,31 +40,31 @@ public class LabelHolder implements DatabaseStorage {
         if (articles == null) {
             articles = new ArrayList<>();
         }
+        ArticleString articleString = new ArticleString(article.getId(), article.getArticleUrl(), article.getSource());
         if (articles.stream().anyMatch(art -> art.getArticleUrl().equals(article.getArticleUrl()))) {
-            OutletArticle oldArticle = articles.stream().filter(art -> art.getArticleUrl().equals(article.getArticleUrl())).findFirst().get();
+            ArticleString oldArticle = articles.stream().filter(art -> art.getArticleUrl().equals(article.getArticleUrl())).findFirst().get();
             articles.remove(oldArticle);
         }
-        articles.add(article);
+        articles.add(articleString);
     }
 
-    private boolean clusterExists(ClusterHolder otherCluster) {
-        List<OutletArticle> otherArticles = otherCluster.getArticles().stream().filter(Objects::nonNull).collect(Collectors.toList());
-        return clusters.stream().anyMatch(ch -> ch.sameCluster(otherArticles));
+    private boolean clusterExists(ClusterString otherCluster) {
+        return clusters.stream().anyMatch(cs -> cs.getId().equals(otherCluster.getId()));
     }
 
-    public List<OutletArticle> getArticles() {
+    public List<ArticleString> getArticles() {
         return articles;
     }
 
-    public void setArticles(List<OutletArticle> articles) {
+    public void setArticles(List<ArticleString> articles) {
         this.articles = articles;
     }
 
-    public List<ClusterHolder> getClusters() {
+    public List<ClusterString> getClusters() {
         return clusters;
     }
 
-    public void setClusters(List<ClusterHolder> clusters) {
+    public void setClusters(List<ClusterString> clusters) {
         this.clusters = clusters;
     }
 
@@ -71,8 +72,9 @@ public class LabelHolder implements DatabaseStorage {
         if (clusters == null) {
             clusters = new ArrayList<>();
         }
-        if (!clusterExists(articlesForSummary)) {
-            clusters.add(articlesForSummary);
+        ClusterString clusterString = articlesForSummary.getClusterString();
+        if (!clusterExists(clusterString)) {
+            clusters.add(clusterString);
         }
     }
 
@@ -114,8 +116,8 @@ public class LabelHolder implements DatabaseStorage {
             }
             document.put("_id", _id);
             document.put("Label", label);
-            document.put("Articles", articles.stream().map(OutletArticle::get_id).filter(Objects::nonNull).collect(Collectors.toList()));
-            document.put("Clusters", clusters.stream().map(ClusterHolder::get_id).filter(Objects::nonNull).collect(Collectors.toList()));
+            document.put("Articles", articles.stream().map(ArticleString::getId).filter(Objects::nonNull).collect(Collectors.toList()));
+            document.put("Clusters", getClusterList());
             document.put("NeedsClustering", needsClustering);
             if (imageUrl != null) {
                 document.put("imageUrl", imageUrl);
@@ -135,9 +137,7 @@ public class LabelHolder implements DatabaseStorage {
             articles = new ArrayList<>();
         }
         for (OutletArticle art : value) {
-            if (articles.stream().noneMatch(a -> a.getArticleUrl().equals(art.getArticleUrl()))) {
-                articles.add(art);
-            }
+            addArticle(art);
         }
     }
 
@@ -150,9 +150,21 @@ public class LabelHolder implements DatabaseStorage {
     }
 
     public void addClusters(List<ClusterHolder> brandNewClusters) {
-        if (clusters == null) {
-            clusters = new ArrayList<>();
+        for (ClusterHolder clusterHolder : brandNewClusters) {
+            addCluster(clusterHolder);
         }
-        clusters.addAll(brandNewClusters);
+    }
+
+    public List<String> getClusterList() {
+        List<String> strings = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        for (ClusterString clusterString : clusters) {
+            try {
+                strings.add(objectMapper.writeValueAsString(clusterString));
+            } catch (Exception e) {
+                Logger.getLogger(getClass()).error("Unable to parse JSON", e);
+            }
+        }
+        return strings;
     }
 }

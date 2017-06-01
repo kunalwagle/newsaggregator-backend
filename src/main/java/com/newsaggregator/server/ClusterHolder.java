@@ -86,8 +86,8 @@ public class ClusterHolder implements DatabaseStorage {
 
     public void setSummary(List<Summary> summaries) {
         for (Summary summary : summaries) {
-            List<String> sources = summary.getArticles().stream().map(OutletArticle::getSource).collect(Collectors.toList());
-            String source = sources.stream().sorted().collect(Collectors.toList()).toString().replace(" ", "");
+            List<String> articleUrls = summary.getArticles().stream().map(OutletArticle::getArticleUrl).collect(Collectors.toList());
+            String source = articleUrls.stream().sorted().collect(Collectors.toList()).toString().replace(" ", "");
             summaryMap.put(source, summary.getNodes());
         }
     }
@@ -163,5 +163,9 @@ public class ClusterHolder implements DatabaseStorage {
             return null;
         }
         return document;
+    }
+
+    public ClusterString getClusterString() {
+        return new ClusterString(id, title, imageUrl);
     }
 }

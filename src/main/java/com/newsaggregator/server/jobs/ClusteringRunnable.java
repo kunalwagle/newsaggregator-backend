@@ -15,6 +15,7 @@ import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.ml.summarisation.Summary;
 import com.newsaggregator.server.ClusterHolder;
+import com.newsaggregator.server.ClusterString;
 import com.newsaggregator.server.LabelHolder;
 import com.newsaggregator.server.TaskServiceSingleton;
 import org.apache.log4j.Logger;
@@ -29,11 +30,13 @@ import java.util.stream.Collectors;
 public class ClusteringRunnable implements Runnable {
 
     private List<String> labelStrings;
+    private Map<String, OutletArticle> articleMap = new HashMap<>();
     private boolean oldArticles;
 
-    public ClusteringRunnable(List<String> labelStrings, boolean oldArticles) {
+    public ClusteringRunnable(List<String> labelStrings, List<OutletArticle> articleList, boolean oldArticles) {
         this.labelStrings = labelStrings;
         this.oldArticles = oldArticles;
+        articleList.forEach(a -> articleMap.put(a.getId(), a));
     }
 
 
@@ -61,7 +64,8 @@ public class ClusteringRunnable implements Runnable {
                 labelHolders.add(labelHolder);
             }
 
-            List<ClusterHolder> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).collect(Collectors.toList());
+            List<String> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).map(ClusterString::getId).distinct().collect(Collectors.toList());
+            HashMap<String, ClusterHolder> chmap = summaries.getClusters(clusters);
 
             for (LabelHolder labelHolder : labelHolders) {
                 try {
@@ -92,8 +96,8 @@ public class ClusteringRunnable implements Runnable {
                                     clusterHolder.setSummary(summs);
                                     clusters.add(clusterHolder);
                                     brandNewClusters.add(clusterHolder);
-                                    labelHolder.addCluster(clusterHolder);
                                     summaries.saveSummaries(Lists.newArrayList(clusterHolder));
+                                    labelHolder.addCluster(clusterHolder);
                                     topics.saveTopic(labelHolder);
                                 } else {
                                     labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());

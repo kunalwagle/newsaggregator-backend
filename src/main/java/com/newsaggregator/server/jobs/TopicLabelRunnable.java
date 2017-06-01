@@ -99,7 +99,7 @@ public class TopicLabelRunnable implements Runnable {
         NLPSingleton.removeInstance();
 
         if (labelStrings.size() > 0) {
-            taskService.schedule(new ClusteringRunnable(labelStrings, oldArticles), 1L, TimeUnit.SECONDS);
+            taskService.schedule(new ClusteringRunnable(labelStrings, articleList, oldArticles), 1L, TimeUnit.SECONDS);
         }
 
     }
