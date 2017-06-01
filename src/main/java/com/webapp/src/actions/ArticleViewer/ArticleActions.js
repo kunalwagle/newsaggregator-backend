@@ -57,6 +57,8 @@ export function reloadArticle(topicId, articleId) {
         let title = "article/" + articleId + "/topic/" + topicId;
         if (getState().loggedIn.loggedIn) {
             title = title + "/user/" + getState().loggedIn.email;
+        } else {
+            title = title + "/user/none";
         }
         return fetch(getIPAddress() + title)
             .then(response => response.json())
