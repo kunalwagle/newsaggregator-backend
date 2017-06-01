@@ -10,7 +10,7 @@ export default class ListPanel extends Component {
         if (this.props.image !== "thumbnail") {
             return this.props.image;
         } else {
-            return "http://support.yumpu.com/en/wp-content/themes/qaengine/img/default-thumbnail.jpg";
+            return "/LogoFullForm.png";
         }
     };
 
