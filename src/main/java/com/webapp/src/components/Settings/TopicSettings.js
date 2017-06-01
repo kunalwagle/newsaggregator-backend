@@ -13,7 +13,7 @@ export const TopicSettings = ({chosenOutlets, digest, topic, handleOutletChange,
 
     const outlets = allOutlets.map((outlet, index) => {
 
-        let selected = "outletBox col-lg-3 col-md-3 col-sm-3 col-xs-3";
+        let selected = "outletBox col-lg-2 col-md-2 col-sm-2 col-xs-2";
 
         if (contains(chosenOutlets, outlet)) {
             selected = selected + " selected";
@@ -34,7 +34,9 @@ export const TopicSettings = ({chosenOutlets, digest, topic, handleOutletChange,
             <h1>{topic.labelHolder.label}</h1>
             <br/>
             <h3>Default sources for summaries</h3>
-            {outlets}
+            <div className="row">
+                {outlets}
+            </div>
             <br/><br/>
             <div className="row">
                 <div className="col-lg-8 col-md-8 col-xs-8 col-sm-8">
@@ -50,10 +52,13 @@ export const TopicSettings = ({chosenOutlets, digest, topic, handleOutletChange,
             </div>
             <br/><br/>
             <div className="row">
-                <button className="danger-button col-lg-5 col-md-5 col-xs-5 col-sm-5"
+                <button className="danger-button col-lg-3 col-md-3 col-xs-3 col-sm-3"
                         onClick={() => handleUnsubscribe(topic.labelHolder.id)}>Unsubscribe
                 </button>
-                <button className="search-bar-button col-lg-5 col-md-5 col-xs-5 col-sm-5"
+                <button className="standard-button col-lg-3 col-md-3 col-xs-3 col-sm-3"
+                        onClick={() => handleSave()}>Apply to All
+                </button>
+                <button className="standard-button col-lg-3 col-md-3 col-xs-3 col-sm-3"
                         onClick={() => handleSave(topic.labelHolder.id)}>
                     Save
                 </button>

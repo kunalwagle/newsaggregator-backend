@@ -33,7 +33,7 @@ public class DigestRunnable implements Runnable {
 
             logger.info("It's time");
 
-            digestHolders = users.stream().map(DigestHolder::new).filter(d -> d.getTopicCount() > 0).collect(Collectors.toList());
+            digestHolders = users.stream().map(u -> new DigestHolder(u, true)).filter(d -> d.getTopicCount() > 0).collect(Collectors.toList());
 
             logger.info("Number of digests is " + digestHolders.size());
 

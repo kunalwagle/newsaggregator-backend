@@ -225,7 +225,7 @@ const HomePanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCal
 
     if (articles.length === 0) {
         return (
-            <div className="nothing">There is no recent news in your digest</div>
+            <div className="nothing">There is no recent news available</div>
         )
     }
 

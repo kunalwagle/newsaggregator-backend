@@ -57,12 +57,14 @@ export const setup = (user) => {
 
 export const save = (topicId) => {
     return (dispatch, getState) => {
-        const value = {
+        let value = {
             "sources": getState().settings.chosenOutlets,
             "digest": getState().settings.digest,
-            "user": getState().loggedIn.user.emailAddress,
-            "topicId": topicId
+            "user": getState().loggedIn.user.emailAddress
         };
+        if (topicId !== undefined) {
+            value.topicId = topicId;
+        }
         const data = JSON.stringify(value);
         return fetch(getIPAddress() + "settings", {
             method: "POST",

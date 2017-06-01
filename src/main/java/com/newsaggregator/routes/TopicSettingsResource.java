@@ -1,5 +1,6 @@
 package com.newsaggregator.routes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
@@ -31,7 +32,6 @@ public class TopicSettingsResource extends ServerResource {
             MongoDatabase db = Utils.getDatabase();
             Users userManager = new Users(db);
             String user = jsonObject.getString("user");
-            String topic = jsonObject.getString("topicId");
             boolean digest = jsonObject.getBoolean("digest");
             List<String> sources = Lists.newArrayList();
             JSONArray sourcesJSON = jsonObject.getJSONArray("sources");
@@ -39,7 +39,8 @@ public class TopicSettingsResource extends ServerResource {
                 sources.add(sourcesJSON.getString(i));
             }
             User currentUser = userManager.getSingleUser(user);
-            if (!topic.equals("ALL")) {
+            if (jsonObject.has("topicId")) {
+                String topic = jsonObject.getString("topicId");
                 Subscription subscription = currentUser.getTopicIds().stream().filter(Objects::nonNull).filter(sub -> sub.getTopicId().equals(topic)).findFirst().get();
                 subscription.setDigests(digest);
                 subscription.setSources(sources);
@@ -50,8 +51,9 @@ public class TopicSettingsResource extends ServerResource {
                 }
             }
             userManager.writeUser(currentUser);
-            getResponse().setStatus(Status.SUCCESS_NO_CONTENT);
-            return null;
+            currentUser = userManager.getSingleUser(user);
+            List<Subscription> topics = currentUser.getTopicIds();
+            return new ObjectMapper().writeValueAsString(new UserHolder(currentUser.getId(), currentUser.getEmailAddress(), topics));
         } catch (Exception e) {
             logger.error("An error occurred whilst retrieving a topic", e);
             getResponse().setStatus(Status.SERVER_ERROR_INTERNAL);

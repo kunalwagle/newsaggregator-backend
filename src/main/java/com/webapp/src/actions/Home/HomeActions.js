@@ -19,9 +19,13 @@ export function digestArticleClicked(topicId, articleId) {
 }
 
 export function reloadDigest() {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch(digestReloadStarted());
-        return fetch(getIPAddress() + "home/none")
+        let addendum = "none";
+        if (getState().loggedIn.loggedIn) {
+            addendum = getState().loggedIn.email;
+        }
+        return fetch(getIPAddress() + "home/" + addendum)
             .then(response => response.json())
             .then(json => dispatch(gotArticles(json)))
     }

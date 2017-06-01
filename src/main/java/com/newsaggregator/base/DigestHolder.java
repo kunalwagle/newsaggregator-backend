@@ -31,8 +31,11 @@ public class DigestHolder implements DatabaseStorage {
 
     }
 
-    public DigestHolder(User user) {
-        List<Subscription> subs = user.getTopicIds().stream().filter(Subscription::isDigests).collect(Collectors.toList());
+    public DigestHolder(User user, boolean forDigests) {
+        List<Subscription> subs = user.getTopicIds();
+        if (forDigests) {
+            subs = subs.stream().filter(Subscription::isDigests).collect(Collectors.toList());
+        }
         List<ArticleHolder> articleHolders = new ArrayList<>();
         Topics topics = new Topics(Utils.getDatabase());
         for (Subscription sub : subs) {
