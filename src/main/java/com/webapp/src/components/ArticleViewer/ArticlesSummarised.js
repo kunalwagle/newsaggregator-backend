@@ -8,7 +8,7 @@ import {contains} from "underscore";
 
 export const ArticlesSummarised = ({article, sources, annotations, fetchInProgressCalled, mediaType, handleAnnotationSwitch, handleCheckboxChange}) => {
 
-    if (!fetchInProgressCalled || article == null || article.articles[0] == null) {
+    if (!fetchInProgressCalled) {
         return (<div></div>);
     }
 
@@ -34,9 +34,10 @@ export const ArticlesSummarised = ({article, sources, annotations, fetchInProgre
                             <img src={imageSource} className="outlet-icon"/>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 margin-below">
-                            <b>{art.title}</b>
+                            <b>{getPublicationName(art.source)}</b>
                             <br/>
-                            <i>{getPublicationName(art.source)}</i>
+                            <i>{art.title}</i>
+                            <br/>
                             <a href={art.articleUrl} target="_blank" className="link">Original Article</a>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-below">

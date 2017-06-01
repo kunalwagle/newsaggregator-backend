@@ -35,8 +35,8 @@ const thumbnails = (row, idx, topicId, handleArticleClick) => {
             {row.map((article, index) => {
                 return (
                     <Col md={3} key={index}>
-                        <Thumbnail src={article.articles[0].imageUrl}>
-                            <h4>{article.articles[0].title}</h4>
+                        <Thumbnail src={article.imageUrl}>
+                            <h4>{article.title}</h4>
                             <Button onClick={(event) => handleArticleClick(event, topicId, article.id)}
                                     bsStyle="default">
                                 View
@@ -58,12 +58,12 @@ const md = (articles, handleArticleClick, topicId) => {
             <div>
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.articles[0].imageUrl != undefined) {
-                        imageUrl = article.articles[0].imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-md-12" key={index}>
-                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}
+                            <ExtraLargePanel key={index} title={article.title} image={imageUrl}
                                              onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
@@ -73,12 +73,12 @@ const md = (articles, handleArticleClick, topicId) => {
             <div>
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.articles[0].imageUrl != undefined) {
-                        imageUrl = article.articles[0].imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-md-6 col-sm-6 col-lg-6" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.articles[0].title}
+                            <Panel image={imageUrl} key={index} title={article.title}
                                    onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
@@ -97,13 +97,13 @@ const lg = (articles, handleArticleClick, topicId) => {
             <div className="row">
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.articles[0].imageUrl != undefined) {
-                        imageUrl = article.articles[0].imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
 
                         <div className="col-lg-6" key={index}>
-                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}
+                            <ExtraLargePanel key={index} title={article.title} image={imageUrl}
                                              onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
@@ -113,12 +113,12 @@ const lg = (articles, handleArticleClick, topicId) => {
             <div className="row">
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.articles[0].imageUrl != undefined) {
-                        imageUrl = article.articles[0].imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-lg-3 col-md-6" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.articles[0].title}
+                            <Panel image={imageUrl} key={index} title={article.title}
                                    onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
@@ -137,12 +137,12 @@ const sm = (articles, handleArticleClick, topicId) => {
             <div>
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.articles[0].imageUrl != undefined) {
-                        imageUrl = article.articles[0].imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-sm-12" key={index}>
-                            <ExtraLargePanel key={index} title={article.articles[0].title} image={imageUrl}
+                            <ExtraLargePanel key={index} title={article.title} image={imageUrl}
                                              onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
@@ -152,12 +152,12 @@ const sm = (articles, handleArticleClick, topicId) => {
             <div>
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.articles[0].imageUrl != undefined) {
-                        imageUrl = article.articles[0].imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-sm-6" key={index}>
-                            <Panel image={imageUrl} key={index} title={article.articles[0].title}
+                            <Panel image={imageUrl} key={index} title={article.title}
                                    onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
@@ -176,12 +176,12 @@ const xs = (articles, handleArticleClick, topicId) => {
             <div className="row">
                 {largePanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.articles[0].imageUrl != undefined) {
-                        imageUrl = article.articles[0].imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-xs-12" key={index}>
-                            <Panel key={index} title={article.articles[0].title} image={imageUrl}
+                            <Panel key={index} title={article.title} image={imageUrl}
                                    onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
@@ -191,12 +191,12 @@ const xs = (articles, handleArticleClick, topicId) => {
             <div className="row">
                 {smallPanels.map((article, index) => {
                     let imageUrl = "thumbnail";
-                    if (article.articles[0].imageUrl != undefined) {
-                        imageUrl = article.articles[0].imageUrl;
+                    if (article.imageUrl != undefined) {
+                        imageUrl = article.imageUrl;
                     }
                     return (
                         <div className="col-xs-12" key={index}>
-                            <ListPanel image={imageUrl} key={index} title={article.articles[0].title}
+                            <ListPanel image={imageUrl} key={index} title={article.title}
                                        onClick={(event) => handleArticleClick(event, topicId, article.id)}/>
                         </div>
                     )
@@ -221,11 +221,6 @@ const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCa
             <div className="loader"></div>
         )
     }
-
-
-    articles = filter(articles, function (article) {
-        return article.articles.length && article.articles[0] != null;
-    });
 
     if (articles.length === 0) {
         return (

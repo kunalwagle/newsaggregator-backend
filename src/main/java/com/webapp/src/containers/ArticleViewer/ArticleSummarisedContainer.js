@@ -6,34 +6,12 @@ import {ArticlesSummarised} from "../../components/ArticleViewer/ArticlesSummari
 import {annotationsChange, defaultCheckboxes, checkboxChange} from "../../actions/ArticleViewer/ArticleActions";
 import {find, uniq, map} from "underscore";
 
-const mapStateToProps = (state, ownProps) => {
-    let article = {
-        articles: [null]
-    };
+const mapStateToProps = (state) => {
+
     let fetchInProgressCalled = state.articleViewer.fetchInProgressCalled;
     let sources = state.articleViewer.sources;
-
-    if (fetchInProgressCalled) {
-        article = find(state.searchResults.articles, (art) => {
-            return art.id === ownProps.articleId;
-        });
-        if (article == undefined) {
-            fetchInProgressCalled = false;
-        } else {
-            // let newSources = map(article.articles, (art) => {
-            //     return art.source;
-            // });
-            // newSources = uniq(newSources);
-            // const sourceString = "[" + newSources.sort().toString() + "]";
-            // const oldSourceString = "[" + sources.sort().toString() + "]"
-            // if (sourceString !== oldSourceString) {
-            //     sources = [];
-            // }
-
-        }
-    }
     return {
-        article,
+        article: state.articleViewer.article,
         sources: sources,
         fetchInProgressCalled,
         annotations: state.articleViewer.annotations,

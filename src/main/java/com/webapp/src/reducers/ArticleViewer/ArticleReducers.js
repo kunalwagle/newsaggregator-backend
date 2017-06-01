@@ -50,7 +50,8 @@ export default function articleViewer(state, action) {
         case RECEIVED_ARTICLE:
             return Object.assign({}, state, {
                 sources: action.json.defaultString,
-                article: action.json.clusterHolder
+                article: action.json.clusterHolder,
+                fetchInProgressCalled: true
             });
 
     }

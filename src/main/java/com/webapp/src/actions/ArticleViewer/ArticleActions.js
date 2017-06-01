@@ -58,7 +58,7 @@ export function reloadArticle(topicId, articleId) {
         if (getState().loggedIn.loggedIn) {
             title = title + "/user/" + getState().loggedIn.email;
         }
-        return fetch(getIPAddress() + "topic/" + title)
+        return fetch(getIPAddress() + title)
             .then(response => response.json())
             .then(json => dispatch(articleReceived(json)))
     }

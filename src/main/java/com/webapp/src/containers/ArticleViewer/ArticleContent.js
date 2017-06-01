@@ -22,7 +22,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleReloadNeeded: (topicId, articleId) => {
-            dispatch(reloadArticle(topicId, articleId));
+            dispatch(reloadArticle(articleId, topicId));
         }
     }
 };
