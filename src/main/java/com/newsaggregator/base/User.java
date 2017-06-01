@@ -22,7 +22,7 @@ public class User implements DatabaseStorage {
     private String id;
 
     public User(String emailAddress, List<Subscription> topicIds) {
-        this.emailAddress = emailAddress;
+        this.emailAddress = emailAddress.toLowerCase();
         this.topicIds = topicIds;
     }
 
@@ -41,12 +41,12 @@ public class User implements DatabaseStorage {
         return emailAddress;
     }
 
-    public List<Subscription> getTopicIds() {
-        return topicIds;
-    }
-
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public List<Subscription> getTopicIds() {
+        return topicIds;
     }
 
     public void setTopicIds(List<Subscription> topicIds) {
