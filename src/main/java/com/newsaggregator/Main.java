@@ -3,6 +3,9 @@ package com.newsaggregator;
 import com.newsaggregator.routes.RouterApplication;
 import com.newsaggregator.server.TaskServiceSingleton;
 import com.newsaggregator.server.jobs.ArticleFetchRunnable;
+import com.newsaggregator.server.jobs.DigestRunnable;
+import com.newsaggregator.server.jobs.LabellingRunnable;
+import com.newsaggregator.server.jobs.SendEmailRunnable;
 import org.apache.log4j.Logger;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
@@ -122,7 +125,7 @@ public class Main {
                 ZoneId currentZone = ZoneId.of("Europe/London");
                 ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
                 ZonedDateTime zonedNext5;
-                zonedNext5 = zonedNow.withHour(11).withMinute(15).withSecond(0);
+                zonedNext5 = zonedNow.withHour(5).withMinute(0).withSecond(0);
                 if (zonedNow.compareTo(zonedNext5) > 0)
                     zonedNext5 = zonedNext5.plusDays(1);
 
@@ -132,10 +135,10 @@ public class Main {
                 Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
 //                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
-//                scheduleManager.scheduleAtFixedRate(new SendEmailRunnable(), 1L, 30L, TimeUnit.MINUTES);
-////                scheduleManager.scheduleAtFixedRate(new TopicLabelRunnable(Lists.newArrayList(article)), 1L, 1L, TimeUnit.SECONDS);
+                scheduleManager.schedule(new SendEmailRunnable(), 1L, TimeUnit.MINUTES);
+                scheduleManager.schedule(new LabellingRunnable(), 1L, TimeUnit.MINUTES);
                 scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
-//                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
+                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 //                new Users(Utils.getDatabase()).purgeUsers();
 //                System.out.println("Purged users");
 

@@ -3,6 +3,7 @@ package com.newsaggregator.server.jobs;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
+import com.newsaggregator.db.Articles;
 import com.newsaggregator.db.Summaries;
 import org.apache.log4j.Logger;
 
@@ -42,6 +43,7 @@ public class SendEmailRunnable implements Runnable {
 
         MongoDatabase db = Utils.getDatabase();
         Summaries summariesManager = new Summaries(db);
+        Articles articlesManager = new Articles(db);
 
         String to = "kmw13@ic.ac.uk";
 
@@ -81,6 +83,7 @@ public class SendEmailRunnable implements Runnable {
             }
 
             stringBuilder.append("There are now ").append(summariesManager.count() - summariesManager.unsummarisedCount()).append(" summaries in the database\n\n");
+            stringBuilder.append("There are now ").append(articlesManager.unlabelledCount()).append("unlabelled articles in the database, out of a total of").append(articlesManager.count()).append("\n\n");
 
             stringBuilder.append("Thanks. That's all for now.");
 
