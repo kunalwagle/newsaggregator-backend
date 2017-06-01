@@ -1,6 +1,6 @@
 package com.newsaggregator.base;
 
-import com.newsaggregator.server.ClusterHolder;
+import com.newsaggregator.server.ClusterString;
 
 /**
  * Created by kunalwagle on 17/05/2017.
@@ -17,7 +17,7 @@ public class ArticleHolder {
 
     }
 
-    public ArticleHolder(String topicId, ClusterHolder clusterHolder) {
+    public ArticleHolder(String topicId, ClusterString clusterHolder) {
         this.topicId = topicId;
         this.articleId = clusterHolder.getId();
         this.title = clusterHolder.getTitle();

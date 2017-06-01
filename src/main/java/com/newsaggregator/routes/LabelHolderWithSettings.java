@@ -1,13 +1,15 @@
 package com.newsaggregator.routes;
 
-import com.newsaggregator.base.OutletArticle;
-import com.newsaggregator.server.ClusterHolder;
+import com.newsaggregator.server.ClusterString;
 import com.newsaggregator.server.LabelHolder;
 import org.apache.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -15,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class LabelHolderWithSettings {
 
-    private Comparator<ClusterHolder> byLastPublished = (left, right) -> {
+    private Comparator<ClusterString> byLastPublished = (left, right) -> {
 
         ThreadLocal<SimpleDateFormat> simpleDateFormatThreadLocal = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"));
 
@@ -38,15 +40,14 @@ public class LabelHolderWithSettings {
 
     public LabelHolderWithSettings(LabelHolder labelHolder, boolean digests, List<String> sources) {
         this.labelHolder = distinct(labelHolder);
-        this.labelHolder.setClusters(this.labelHolder.getClusters().stream().filter(c -> c.getSummaryMap().size() > 0).collect(Collectors.toList()));
         this.digests = digests;
         this.sources = sources;
     }
 
     private LabelHolder distinct(LabelHolder labelHolder) {
-        List<ClusterHolder> clusterHolders = labelHolder.getClusters();
-        List<ClusterHolder> newClusterHolders = new ArrayList<>();
-        for (ClusterHolder clusterHolder : clusterHolders) {
+        List<ClusterString> clusterHolders = labelHolder.getClusters();
+        List<ClusterString> newClusterHolders = new ArrayList<>();
+        for (ClusterString clusterHolder : clusterHolders) {
             if (!clusterExists(newClusterHolders, clusterHolder)) {
                 newClusterHolders.add(clusterHolder);
             }
@@ -56,9 +57,8 @@ public class LabelHolderWithSettings {
         return labelHolder;
     }
 
-    private boolean clusterExists(List<ClusterHolder> clusters, ClusterHolder otherCluster) {
-        List<OutletArticle> otherArticles = otherCluster.getArticles().stream().filter(Objects::nonNull).collect(Collectors.toList());
-        return clusters.stream().anyMatch(ch -> ch.sameCluster(otherArticles));
+    private boolean clusterExists(List<ClusterString> clusters, ClusterString otherCluster) {
+        return clusters.stream().anyMatch(c -> c.getId().equals(otherCluster.getId()));
     }
 
     public LabelHolder getLabelHolder() {

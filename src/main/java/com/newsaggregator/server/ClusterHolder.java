@@ -166,6 +166,6 @@ public class ClusterHolder implements DatabaseStorage {
     }
 
     public ClusterString getClusterString() {
-        return new ClusterString(id, title, imageUrl);
+        return new ClusterString(id, title, imageUrl, lastPublished);
     }
 }

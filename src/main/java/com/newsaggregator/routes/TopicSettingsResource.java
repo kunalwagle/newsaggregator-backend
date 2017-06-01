@@ -39,9 +39,16 @@ public class TopicSettingsResource extends ServerResource {
                 sources.add(sourcesJSON.getString(i));
             }
             User currentUser = userManager.getSingleUser(user);
-            Subscription subscription = currentUser.getTopicIds().stream().filter(Objects::nonNull).filter(sub -> sub.getTopicId().equals(topic)).findFirst().get();
-            subscription.setDigests(digest);
-            subscription.setSources(sources);
+            if (!topic.equals("ALL")) {
+                Subscription subscription = currentUser.getTopicIds().stream().filter(Objects::nonNull).filter(sub -> sub.getTopicId().equals(topic)).findFirst().get();
+                subscription.setDigests(digest);
+                subscription.setSources(sources);
+            } else {
+                for (Subscription subscription : currentUser.getTopicIds()) {
+                    subscription.setDigests(digest);
+                    subscription.setSources(sources);
+                }
+            }
             userManager.writeUser(currentUser);
             getResponse().setStatus(Status.SUCCESS_NO_CONTENT);
             return null;

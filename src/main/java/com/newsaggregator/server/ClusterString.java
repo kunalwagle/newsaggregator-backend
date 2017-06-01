@@ -8,11 +8,13 @@ public class ClusterString {
     private String id;
     private String title;
     private String imageUrl;
+    private String lastPublished;
 
-    public ClusterString(String id, String title, String imageUrl) {
+    public ClusterString(String id, String title, String imageUrl, String lastPublished) {
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
+        this.lastPublished = lastPublished;
     }
 
     public ClusterString() {
@@ -28,5 +30,9 @@ public class ClusterString {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public String getLastPublished() {
+        return lastPublished;
     }
 }

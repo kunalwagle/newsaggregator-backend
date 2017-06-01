@@ -15,7 +15,7 @@ public class WikipediaSearchResource extends ServerResource {
     public String articles() {
         String searchTerm = (String) getRequestAttributes().get("searchTerm");
         try {
-            return new ObjectMapper().writeValueAsString(Wikipedia.getArticles(searchTerm, 25));
+            return new ObjectMapper().writeValueAsString(Wikipedia.getArticles(searchTerm, 10));
         } catch (JsonProcessingException e) {
             //e.printStackTrace();
             return null;
