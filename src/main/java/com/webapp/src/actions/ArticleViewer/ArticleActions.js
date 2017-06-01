@@ -3,6 +3,7 @@
  */
 import {map, uniq, contains} from "underscore";
 import {getIPAddress} from "../../UtilityMethods";
+import {toastr} from "react-redux-toastr";
 
 export const ANNOTATIONS_CHANGE = "ANNOTATIONS_CHANGE";
 export const CHECKBOX_CHANGE = "CHECKBOX_CHANGE";
@@ -18,6 +19,7 @@ export function annotationsChange(annotations) {
 }
 
 export function checkboxChange(on, source) {
+    toastr.info("Your summary has been changed, in line with your request");
     return {
         type: CHECKBOX_CHANGE,
         source,

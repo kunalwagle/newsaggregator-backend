@@ -4,6 +4,7 @@
 import {push} from "react-router-redux";
 import {getIPAddress} from "../../UtilityMethods";
 import {login} from "../LoginModalActions";
+import {toastr} from "react-redux-toastr";
 
 export const DIGEST_CHANGE = "DIGEST_CHANGE";
 export const OUTLET_CHANGE = "OUTLET_CHANGE";
@@ -67,12 +68,12 @@ export const save = (topicId) => {
             method: "POST",
             body: data
         })
-            .then(response => response.json())
-            .then(json => dispatch(saveComplete()))
+            .then(response => dispatch(saveComplete()));
     }
 };
 
 export const saveComplete = () => {
+    toastr.success("Your settings have been saved");
     return {
         type: SAVE
     }
