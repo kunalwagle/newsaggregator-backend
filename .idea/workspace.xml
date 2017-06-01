@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f5daf3ef-cf46-4c44-92d0-1021913ec9d8" name="Default" comment="" />
-    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Trying something in clustering">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleString.java" />
+    <list default="true" id="43e42c0c-64dd-4896-9323-b4a5ad6f6b49" name="Main" comment="Running through most runnables for switch to Cluster Strings">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterString.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ClusterString.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" afterPath="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -64,9 +57,10 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="585">
-              <caret line="55" column="51" lean-forward="true" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
+              <caret line="54" column="51" lean-forward="false" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
               <folding>
                 <element signature="method#clusterExists#0;class#LabelHolderWithSettings#0" expanded="true" />
+                <marker date="1496318437000" expanded="false" signature="43:332" ph="..." />
               </folding>
             </state>
           </provider>
@@ -75,25 +69,25 @@
       <file leaf-file-name="LabelHolder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1665">
-              <caret line="139" column="41" lean-forward="true" selection-start-line="139" selection-start-column="41" selection-end-line="139" selection-end-column="41" />
+            <state relative-caret-position="81">
+              <caret line="122" column="51" lean-forward="true" selection-start-line="122" selection-start-column="51" selection-end-line="122" selection-end-column="51" />
               <folding>
                 <element signature="docComment;class#LabelHolder#0" expanded="true" />
-                <element signature="e#894#895#0" expanded="true" />
-                <element signature="e#928#929#0" expanded="true" />
+                <element signature="e#835#836#0" expanded="true" />
+                <element signature="e#869#870#0" expanded="true" />
                 <element signature="method#LabelHolder#1;class#LabelHolder#0" expanded="true" />
                 <element signature="method#addArticle#0;class#LabelHolder#0" expanded="true" />
                 <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
-                <element signature="e#1935#1936#0" expanded="true" />
-                <element signature="e#1966#1967#0" expanded="true" />
-                <element signature="e#2027#2028#0" expanded="true" />
-                <element signature="e#2067#2068#0" expanded="true" />
-                <element signature="e#2115#2116#0" expanded="true" />
-                <element signature="e#2146#2147#0" expanded="true" />
-                <element signature="e#2207#2208#0" expanded="true" />
-                <element signature="e#2247#2248#0" expanded="true" />
+                <element signature="e#1876#1877#0" expanded="true" />
+                <element signature="e#1907#1908#0" expanded="true" />
+                <element signature="e#1968#1969#0" expanded="true" />
+                <element signature="e#2008#2009#0" expanded="true" />
+                <element signature="e#2056#2057#0" expanded="true" />
+                <element signature="e#2087#2088#0" expanded="true" />
+                <element signature="e#2148#2149#0" expanded="true" />
+                <element signature="e#2188#2189#0" expanded="true" />
                 <element signature="method#addCluster#0;class#LabelHolder#0" expanded="true" />
-                <element signature="method#createDocument#0;class#LabelHolder#0" expanded="true" />
+                <element signature="method#addArticles#0;class#LabelHolder#0" expanded="true" />
                 <element signature="method#addClusters#0;class#LabelHolder#0" expanded="true" />
                 <element signature="method#getClusterList#0;class#LabelHolder#0" expanded="true" />
               </folding>
@@ -125,7 +119,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleString.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
-              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
                 <element signature="method#ArticleString#0;class#ArticleString#0" expanded="true" />
                 <element signature="e#388#389#0" expanded="true" />
@@ -149,11 +143,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClusteringRunnable.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClusteringRunnable.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="67" column="68" lean-forward="true" selection-start-line="67" selection-start-column="68" selection-end-line="67" selection-end-column="68" />
+            <state relative-caret-position="1215">
+              <caret line="105" column="65" lean-forward="false" selection-start-line="105" selection-start-column="65" selection-end-line="105" selection-end-column="65" />
               <folding>
                 <element signature="method#ClusteringRunnable#0;class#ClusteringRunnable#0" expanded="true" />
               </folding>
@@ -161,7 +155,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Summaries.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Summaries.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="600">
@@ -303,8 +297,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleString.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/TopicLabelRunnable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/db/Summaries.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java" />
       </list>
     </option>
   </component>
@@ -1398,14 +1392,7 @@
       <workItem from="1495904644054" duration="14961000" />
       <workItem from="1496092519163" duration="517000" />
       <workItem from="1496128789883" duration="13955000" />
-      <workItem from="1496266722299" duration="3166000" />
-    </task>
-    <task id="LOCAL-00446" summary="Changing number of topic labels developed">
-      <created>1495488151440</created>
-      <option name="number" value="00446" />
-      <option name="presentableId" value="LOCAL-00446" />
-      <option name="project" value="LOCAL" />
-      <updated>1495488151440</updated>
+      <workItem from="1496266722299" duration="4186000" />
     </task>
     <task id="LOCAL-00447" summary="New topic labelling style, and new clustering with categorisation">
       <created>1495491267760</created>
@@ -1743,7 +1730,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496215447574</updated>
     </task>
-    <option name="localTasksCounter" value="495" />
+    <task id="LOCAL-00495" summary="Running through most runnables for switch to Cluster Strings">
+      <created>1496318438866</created>
+      <option name="number" value="00495" />
+      <option name="presentableId" value="LOCAL-00495" />
+      <option name="project" value="LOCAL" />
+      <updated>1496318438866</updated>
+    </task>
+    <option name="localTasksCounter" value="496" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1777,7 +1771,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="787294000" />
+    <option name="totallyTimeSpent" value="788314000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1864,7 +1858,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="In a memory save attempt, changing the way modelling works" />
     <MESSAGE value="New name finder with space saving principles" />
     <MESSAGE value="Moving around things in topic modelling" />
     <MESSAGE value="Using topic modelling singleton" />
@@ -1889,7 +1882,8 @@
     <MESSAGE value="Added favicon" />
     <MESSAGE value="Ready for new deployment" />
     <MESSAGE value="Trying something in clustering" />
-    <option name="LAST_COMMIT_MESSAGE" value="Trying something in clustering" />
+    <MESSAGE value="Running through most runnables for switch to Cluster Strings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Running through most runnables for switch to Cluster Strings" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1918,19 +1912,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java</url>
-          <line>71</line>
+          <line>72</line>
           <properties />
           <option name="timeStamp" value="999" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java</url>
-          <line>128</line>
+          <line>131</line>
           <properties />
           <option name="timeStamp" value="1000" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java</url>
-          <line>110</line>
+          <line>113</line>
           <properties />
           <option name="timeStamp" value="1001" />
         </line-breakpoint>
@@ -2338,12 +2332,12 @@
           <folding>
             <element signature="method#ClusterString#0;class#ClusterString#0" expanded="true" />
             <element signature="method#ClusterString#1;class#ClusterString#0" expanded="true" />
+            <element signature="e#415#416#0" expanded="true" />
+            <element signature="e#440#441#0" expanded="true" />
+            <element signature="e#472#473#0" expanded="true" />
             <element signature="e#500#501#0" expanded="true" />
-            <element signature="e#525#526#0" expanded="true" />
-            <element signature="e#557#558#0" expanded="true" />
-            <element signature="e#585#586#0" expanded="true" />
-            <element signature="e#620#621#0" expanded="true" />
-            <element signature="e#651#652#0" expanded="true" />
+            <element signature="e#535#536#0" expanded="true" />
+            <element signature="e#566#567#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2361,9 +2355,10 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/routes/LabelHolderWithSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
-          <caret line="55" column="51" lean-forward="true" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
+          <caret line="54" column="51" lean-forward="false" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
           <folding>
             <element signature="method#clusterExists#0;class#LabelHolderWithSettings#0" expanded="true" />
+            <marker date="1496318437000" expanded="false" signature="43:332" ph="..." />
           </folding>
         </state>
       </provider>
@@ -2379,7 +2374,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/ArticleString.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
             <element signature="method#ArticleString#0;class#ArticleString#0" expanded="true" />
             <element signature="e#388#389#0" expanded="true" />
@@ -2388,33 +2383,6 @@
             <element signature="e#483#484#0" expanded="true" />
             <element signature="e#516#517#0" expanded="true" />
             <element signature="e#545#546#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1665">
-          <caret line="139" column="41" lean-forward="true" selection-start-line="139" selection-start-column="41" selection-end-line="139" selection-end-column="41" />
-          <folding>
-            <element signature="docComment;class#LabelHolder#0" expanded="true" />
-            <element signature="e#894#895#0" expanded="true" />
-            <element signature="e#928#929#0" expanded="true" />
-            <element signature="method#LabelHolder#1;class#LabelHolder#0" expanded="true" />
-            <element signature="method#addArticle#0;class#LabelHolder#0" expanded="true" />
-            <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
-            <element signature="e#1935#1936#0" expanded="true" />
-            <element signature="e#1966#1967#0" expanded="true" />
-            <element signature="e#2027#2028#0" expanded="true" />
-            <element signature="e#2067#2068#0" expanded="true" />
-            <element signature="e#2115#2116#0" expanded="true" />
-            <element signature="e#2146#2147#0" expanded="true" />
-            <element signature="e#2207#2208#0" expanded="true" />
-            <element signature="e#2247#2248#0" expanded="true" />
-            <element signature="method#addCluster#0;class#LabelHolder#0" expanded="true" />
-            <element signature="method#createDocument#0;class#LabelHolder#0" expanded="true" />
-            <element signature="method#addClusters#0;class#LabelHolder#0" expanded="true" />
-            <element signature="method#getClusterList#0;class#LabelHolder#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2432,16 +2400,6 @@
         <state relative-caret-position="636">
           <caret line="101" column="83" lean-forward="false" selection-start-line="101" selection-start-column="83" selection-end-line="101" selection-end-column="83" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="67" column="68" lean-forward="true" selection-start-line="67" selection-start-column="68" selection-end-line="67" selection-end-column="68" />
-          <folding>
-            <element signature="method#ClusteringRunnable#0;class#ClusteringRunnable#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2466,6 +2424,43 @@
           <caret line="149" column="0" lean-forward="true" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
           <folding>
             <element signature="method#getClusters#0;class#Summaries#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/LabelHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="122" column="51" lean-forward="true" selection-start-line="122" selection-start-column="51" selection-end-line="122" selection-end-column="51" />
+          <folding>
+            <element signature="docComment;class#LabelHolder#0" expanded="true" />
+            <element signature="e#835#836#0" expanded="true" />
+            <element signature="e#869#870#0" expanded="true" />
+            <element signature="method#LabelHolder#1;class#LabelHolder#0" expanded="true" />
+            <element signature="method#addArticle#0;class#LabelHolder#0" expanded="true" />
+            <element signature="method#clusterExists#0;class#LabelHolder#0" expanded="true" />
+            <element signature="e#1876#1877#0" expanded="true" />
+            <element signature="e#1907#1908#0" expanded="true" />
+            <element signature="e#1968#1969#0" expanded="true" />
+            <element signature="e#2008#2009#0" expanded="true" />
+            <element signature="e#2056#2057#0" expanded="true" />
+            <element signature="e#2087#2088#0" expanded="true" />
+            <element signature="e#2148#2149#0" expanded="true" />
+            <element signature="e#2188#2189#0" expanded="true" />
+            <element signature="method#addCluster#0;class#LabelHolder#0" expanded="true" />
+            <element signature="method#addArticles#0;class#LabelHolder#0" expanded="true" />
+            <element signature="method#addClusters#0;class#LabelHolder#0" expanded="true" />
+            <element signature="method#getClusterList#0;class#LabelHolder#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/newsaggregator/server/jobs/ClusteringRunnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1215">
+          <caret line="105" column="65" lean-forward="false" selection-start-line="105" selection-start-column="65" selection-end-line="105" selection-end-column="65" />
+          <folding>
+            <element signature="method#ClusteringRunnable#0;class#ClusteringRunnable#0" expanded="true" />
           </folding>
         </state>
       </provider>

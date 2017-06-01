@@ -66,6 +66,7 @@ public class ClusteringRunnable implements Runnable {
 
             List<String> clusters = labelHolders.stream().map(LabelHolder::getClusters).filter(Objects::nonNull).collect(Collectors.toList()).stream().flatMap(Collection::stream).map(ClusterString::getId).distinct().collect(Collectors.toList());
             HashMap<String, ClusterHolder> chmap = summaries.getClusters(clusters);
+            Collection<ClusterHolder> chlist = chmap.values();
 
             for (LabelHolder labelHolder : labelHolders) {
                 try {
@@ -75,17 +76,19 @@ public class ClusteringRunnable implements Runnable {
                     if (labelHolder.getArticles().size() > 0) {
                         logger.info("Label id:" + labelHolder.getId());
                         Clusterer clusterer;
+                        List<OutletArticle> articleList = labelHolder.getArticles().stream().map(a -> articleMap.get(a.getId())).collect(Collectors.toList());
                         if (labelHolder.getClusters().size() > 0) {
-                            clusterer = new Clusterer(labelHolder.getClusters(), labelHolder.getArticles());
+                            List<ClusterHolder> clusterHolders = labelHolder.getClusters().stream().map(c -> chmap.get(c.getId())).collect(Collectors.toList());
+                            clusterer = new Clusterer(clusterHolders, articleList);
                         } else {
-                            clusterer = new Clusterer(labelHolder.getArticles());
+                            clusterer = new Clusterer(articleList);
                         }
                         labelHolder.setClusters(new ArrayList<>());
                         List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
                         for (Cluster<ArticleVector> cluster : newClusters) {
                             try {
                                 List<OutletArticle> articles = cluster.getClusterItems().stream().filter(Objects::nonNull).map(ArticleVector::getArticle).filter(Objects::nonNull).collect(Collectors.toList());
-                                if (clusters.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(articles))) {
+                                if (chlist.stream().noneMatch(clusterHolder -> clusterHolder.sameCluster(articles))) {
                                     ClusterHolder clusterHolder = new ClusterHolder(articles);
                                     Set<OutletArticle> clusterArticles = new HashSet<>(articles);
                                     logger.info("Summarising");
@@ -94,13 +97,13 @@ public class ClusteringRunnable implements Runnable {
                                     List<Summary> summs = extractives.stream().map(Extractive::summarise).filter(Objects::nonNull).collect(Collectors.toList());
                                     logger.info("Summarising");
                                     clusterHolder.setSummary(summs);
-                                    clusters.add(clusterHolder);
+                                    chlist.add(clusterHolder);
                                     brandNewClusters.add(clusterHolder);
                                     summaries.saveSummaries(Lists.newArrayList(clusterHolder));
                                     labelHolder.addCluster(clusterHolder);
                                     topics.saveTopic(labelHolder);
                                 } else {
-                                    labelHolder.addCluster(clusters.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());
+                                    labelHolder.addCluster(chlist.stream().filter(clusterHolder -> clusterHolder.sameCluster(articles)).findAny().get());
                                     topics.saveTopic(labelHolder);
                                 }
                             } catch (Exception e) {
