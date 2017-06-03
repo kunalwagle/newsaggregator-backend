@@ -117,28 +117,31 @@ public class Main {
 //
 //                System.out.println(tokens);
 
-                TaskService scheduleManager = TaskServiceSingleton.getInstance();
+                if (args[0].equals("8182")) {
 
-                Utils.sendServerRestartEmail(port);
+                    TaskService scheduleManager = TaskServiceSingleton.getInstance();
 
-                LocalDateTime localNow = LocalDateTime.now();
-                ZoneId currentZone = ZoneId.of("Europe/London");
-                ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
-                ZonedDateTime zonedNext5;
-                zonedNext5 = zonedNow.withHour(5).withMinute(0).withSecond(0);
-                if (zonedNow.compareTo(zonedNext5) > 0)
-                    zonedNext5 = zonedNext5.plusDays(1);
+                    Utils.sendServerRestartEmail(port);
 
-                Duration duration = Duration.between(zonedNow, zonedNext5);
-                long initialDelay = duration.getSeconds();
+                    LocalDateTime localNow = LocalDateTime.now();
+                    ZoneId currentZone = ZoneId.of("Europe/London");
+                    ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
+                    ZonedDateTime zonedNext5;
+                    zonedNext5 = zonedNow.withHour(5).withMinute(0).withSecond(0);
+                    if (zonedNow.compareTo(zonedNext5) > 0)
+                        zonedNext5 = zonedNext5.plusDays(1);
 
-                Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
+                    Duration duration = Duration.between(zonedNow, zonedNext5);
+                    long initialDelay = duration.getSeconds();
+
+                    Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
 //                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
-                scheduleManager.schedule(new SendEmailRunnable(), 1L, TimeUnit.MINUTES);
-                scheduleManager.schedule(new LabellingRunnable(), 1L, TimeUnit.MINUTES);
-                scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
-                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
+                    scheduleManager.schedule(new SendEmailRunnable(), 1L, TimeUnit.MINUTES);
+                    scheduleManager.schedule(new LabellingRunnable(), 1L, TimeUnit.MINUTES);
+                    scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
+                    scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
+                }
 //                new Users(Utils.getDatabase()).purgeUsers();
 //                System.out.println("Purged users");
 

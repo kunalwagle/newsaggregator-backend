@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -24,8 +23,29 @@ public class LabelHolderWithSettings {
         SimpleDateFormat formatter = simpleDateFormatThreadLocal.get();
         try {
 
-            Date leftDate = formatter.parse(left.getLastPublished().replaceAll("Z$", "+0000"));
-            Date rightDate = formatter.parse(right.getLastPublished().replaceAll("Z$", "+0000"));
+            int ldidx = left.getLastPublished().indexOf(".");
+            int rdidx = right.getLastPublished().indexOf(".");
+
+            String ld = left.getLastPublished();
+            String rd = right.getLastPublished();
+
+            if (ldidx != -1) {
+                ld = ld.substring(0, ldidx).concat("+0000");
+            } else {
+                ld = ld.replaceAll("Z$", "+0000");
+            }
+            if (rdidx != -1) {
+                rd = rd.substring(0, rdidx).concat("+0000");
+            } else {
+                rd = rd.replaceAll("Z$", "+0000");
+            }
+
+            ld = ld.replace("+00:00", "+0000");
+            rd = rd.replace("+00:00", "+0000");
+
+
+            Date leftDate = formatter.parse(ld);
+            Date rightDate = formatter.parse(rd);
 
             return leftDate.compareTo(rightDate);
 
@@ -46,14 +66,18 @@ public class LabelHolderWithSettings {
 
     private LabelHolder distinct(LabelHolder labelHolder) {
         List<ClusterString> clusterHolders = labelHolder.getClusters();
-        List<ClusterString> newClusterHolders = new ArrayList<>();
-        for (ClusterString clusterHolder : clusterHolders) {
-            if (!clusterExists(newClusterHolders, clusterHolder)) {
-                newClusterHolders.add(clusterHolder);
-            }
+//        List<ClusterString> newClusterHolders = new ArrayList<>();
+//        for (ClusterString clusterHolder : clusterHolders) {
+//            if (!clusterExists(newClusterHolders, clusterHolder)) {
+//                newClusterHolders.add(clusterHolder);
+//            }
+//        }
+        try {
+            clusterHolders = clusterHolders.stream().sorted(byLastPublished.reversed()).collect(Collectors.toList());
+        } catch (Exception e) {
+            Logger.getLogger(getClass()).error("Had an issue parsing dates", e);
         }
-        newClusterHolders = newClusterHolders.stream().sorted(byLastPublished.reversed()).collect(Collectors.toList());
-        labelHolder.setClusters(newClusterHolders);
+        labelHolder.setClusters(clusterHolders.stream().limit(20).collect(Collectors.toList()));
         return labelHolder;
     }
 

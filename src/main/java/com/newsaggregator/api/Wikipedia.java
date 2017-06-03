@@ -145,7 +145,7 @@ public class Wikipedia {
     private static WikipediaArticle extractArticleFromJSON(JSONObject article) {
         String title = article.getString("title");
         String extract = article.getString("extract");
-        String imageUrl = "http://localhost:3000/LogoFullForm.png";
+        String imageUrl = "http://kunalnewsaggregator.co.uk/LogoFullForm.png";
         try {
             imageUrl = article.getJSONObject("thumbnail").getString("original");
         } catch (JSONException e) {
