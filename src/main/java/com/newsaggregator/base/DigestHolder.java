@@ -50,7 +50,9 @@ public class DigestHolder implements DatabaseStorage {
 
 
         Comparator<ArticleHolder> byLastPublished = (left, right) -> {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+            ThreadLocal<SimpleDateFormat> simpleDateFormatThreadLocal = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"));
+
+            SimpleDateFormat formatter = simpleDateFormatThreadLocal.get();
             try {
 
                 int ldidx = left.getLastPublished().indexOf(".");

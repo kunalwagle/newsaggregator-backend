@@ -14,12 +14,10 @@ import com.newsaggregator.ml.clustering.Clusterer;
 import com.newsaggregator.ml.nlp.apache.NLPSingleton;
 import com.newsaggregator.ml.summarisation.Extractive.Extractive;
 import com.newsaggregator.ml.summarisation.Summary;
-import com.newsaggregator.server.ClusterHolder;
-import com.newsaggregator.server.ClusterString;
-import com.newsaggregator.server.LabelHolder;
-import com.newsaggregator.server.TaskServiceSingleton;
+import com.newsaggregator.server.*;
 import org.apache.log4j.Logger;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -32,13 +30,50 @@ public class ClusteringRunnable implements Runnable {
     private List<String> labelStrings;
     private Map<String, OutletArticle> articleMap = new HashMap<>();
     private boolean oldArticles;
+    private int limit = 10;
+    private Comparator<ClusterHolder> byLastPublished = (left, right) -> {
+        ThreadLocal<SimpleDateFormat> simpleDateFormatThreadLocal = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"));
+
+        SimpleDateFormat formatter = simpleDateFormatThreadLocal.get();
+        try {
+
+            int ldidx = left.getLastPublished().indexOf(".");
+            int rdidx = right.getLastPublished().indexOf(".");
+
+            String ld = left.getLastPublished();
+            String rd = right.getLastPublished();
+
+            if (ldidx != -1) {
+                ld = ld.substring(0, ldidx).concat("+0000");
+            } else {
+                ld = ld.replaceAll("Z$", "+0000");
+            }
+            if (rdidx != -1) {
+                rd = rd.substring(0, rdidx).concat("+0000");
+            } else {
+                rd = rd.replaceAll("Z$", "+0000");
+            }
+
+            ld = ld.replace("+00:00", "+0000");
+            rd = rd.replace("+00:00", "+0000");
+
+
+            Date leftDate = formatter.parse(ld);
+            Date rightDate = formatter.parse(rd);
+
+            return leftDate.compareTo(rightDate);
+
+        } catch (Exception e) {
+            Logger.getLogger(getClass()).error("Error in last published", e);
+        }
+        return 1;
+    };
 
     public ClusteringRunnable(List<String> labelStrings, List<OutletArticle> articleList, boolean oldArticles) {
         this.labelStrings = labelStrings;
         this.oldArticles = oldArticles;
         articleList.forEach(a -> articleMap.put(a.getId(), a));
     }
-
 
     @Override
     public void run() {
@@ -79,11 +114,28 @@ public class ClusteringRunnable implements Runnable {
                         List<OutletArticle> articleList = labelHolder.getArticles().stream().map(a -> articleMap.get(a.getId())).collect(Collectors.toList());
                         if (labelHolder.getClusters().size() > 0) {
                             List<ClusterHolder> clusterHolders = labelHolder.getClusters().stream().map(c -> chmap.get(c.getId())).collect(Collectors.toList());
-                            clusterer = new Clusterer(clusterHolders, articleList);
+                            if (clusterHolders.size() > limit) {
+                                List<String> articleIds = labelHolder.getArticles().stream().map(ArticleString::getId).collect(Collectors.toList());
+                                List<OutletArticle> articles = clusterHolders.stream().map(ClusterHolder::getArticles).flatMap(Collection::stream).filter(Objects::nonNull).collect(Collectors.toList());
+                                List<String> usedIds = articles.stream().map(OutletArticle::getId).collect(Collectors.toList());
+                                articleIds = articleIds.stream().filter(a -> !usedIds.contains(a)).distinct().collect(Collectors.toList());
+                                clusterHolders = clusterHolders.stream().sorted(byLastPublished.reversed()).collect(Collectors.toList());
+                                List<ClusterHolder> fixedClusters = new ArrayList<>(clusterHolders.subList(limit, clusterHolders.size()));
+                                clusterHolders = clusterHolders.stream().limit(limit).collect(Collectors.toList());
+                                labelHolder.setClusters(new ArrayList<>());
+                                labelHolder.addClusters(fixedClusters);
+                                articles = clusterHolders.stream().map(ClusterHolder::getArticles).flatMap(Collection::stream).filter(Objects::nonNull).collect(Collectors.toList());
+                                articleIds.addAll(articles.stream().map(OutletArticle::getId).distinct().collect(Collectors.toList()));
+                                List<OutletArticle> outletArticles = articleIds.stream().map(articleMap::get).collect(Collectors.toList());
+
+                                clusterer = new Clusterer(clusterHolders, outletArticles);
+                            } else {
+                                clusterer = new Clusterer(clusterHolders, articleList);
+                            }
                         } else {
                             clusterer = new Clusterer(articleList);
+                            labelHolder.setClusters(new ArrayList<>());
                         }
-                        labelHolder.setClusters(new ArrayList<>());
                         List<Cluster<ArticleVector>> newClusters = clusterer.cluster();
                         for (Cluster<ArticleVector> cluster : newClusters) {
                             try {

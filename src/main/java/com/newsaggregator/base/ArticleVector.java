@@ -65,7 +65,6 @@ public class ArticleVector implements ClusterItem {
                 differenceRunningTotal += word.getCalculation();
             }
         }
-        //differenceRunningTotal = differenceRunningTotal / total;
         double multiplicationFactor = totalSimilarWords / averageWords;
         similarityRunningTotal = Math.pow(similarityRunningTotal, 0.5) * multiplicationFactor;
         return similarityRunningTotal / differenceRunningTotal;
