@@ -15,7 +15,10 @@ export function viewClicked(title, topic, page, articleCount) {
     return (dispatch, getState) => {
         dispatch(viewStarted());
         if (title == undefined) {
-            dispatch(push("/topic/" + title));
+            dispatch(push("/topic/" + topic));
+            if (topic !== undefined) {
+                title = topic;
+            }
         }
         if (getState().loggedIn.loggedIn) {
             title = title + "/user/" + getState().loggedIn.email + "/" + page;
