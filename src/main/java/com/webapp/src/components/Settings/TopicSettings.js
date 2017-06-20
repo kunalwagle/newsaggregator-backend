@@ -31,7 +31,7 @@ export const TopicSettings = ({chosenOutlets, digest, topic, handleOutletChange,
 
     return (
         <div className="white">
-            <h1>{topic.labelHolder.label}</h1>
+            <h1>{topic.labelName}</h1>
             <br/>
             <h3>Default sources for summaries</h3>
             <div className="row">
@@ -53,13 +53,13 @@ export const TopicSettings = ({chosenOutlets, digest, topic, handleOutletChange,
             <br/><br/>
             <div className="row">
                 <button className="danger-button col-lg-3 col-md-3 col-xs-3 col-sm-3"
-                        onClick={() => handleUnsubscribe(topic.labelHolder.id)}>Unsubscribe
+                        onClick={() => handleUnsubscribe(topic.topicId)}>Unsubscribe
                 </button>
                 <button className="standard-button col-lg-3 col-md-3 col-xs-3 col-sm-3"
                         onClick={() => handleSave()}>Apply to All
                 </button>
                 <button className="standard-button col-lg-3 col-md-3 col-xs-3 col-sm-3"
-                        onClick={() => handleSave(topic.labelHolder.id)}>
+                        onClick={() => handleSave(topic.topicId)}>
                     Save
                 </button>
             </div>

@@ -11,6 +11,7 @@ import com.newsaggregator.base.User;
 import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -68,19 +69,25 @@ public class Users {
             if (iterator.hasNext()) {
                 Document document = iterator.next();
                 String address = document.getString("emailAddress");
-                JSONArray topicIds = new JSONObject(document.toJson()).getJSONArray("topicIds");
                 List<Subscription> subs = new ArrayList<>();
-                for (int i = 0; i < topicIds.length(); i++) {
-                    JSONObject object = topicIds.getJSONObject(i);
-                    String topicId = object.getString("topicId");
-                    String labelName = object.getString("labelName");
-                    boolean digests = object.getBoolean("digests");
-                    List<String> sources = new ArrayList<>();
-                    JSONArray sourceArray = object.getJSONArray("sources");
-                    for (int j = 0; j < sourceArray.length(); j++) {
-                        sources.add(sourceArray.getString(j));
+                try {
+                    JSONArray topicIds = new JSONObject(document.toJson()).getJSONArray("topicIds");
+                    for (int i = 0; i < topicIds.length(); i++) {
+                        JSONObject object = topicIds.getJSONObject(i);
+                        String topicId = object.getString("topicId");
+                        String labelName = object.getString("labelName");
+                        boolean digests = object.getBoolean("digests");
+                        List<String> sources = new ArrayList<>();
+                        JSONArray sourceArray = object.getJSONArray("sources");
+                        for (int j = 0; j < sourceArray.length(); j++) {
+                            sources.add(sourceArray.getString(j));
+                        }
+                        subs.add(new Subscription(topicId, labelName, sources, digests));
                     }
-                    subs.add(new Subscription(topicId, labelName, sources, digests));
+                } catch (JSONException e) {
+                    String topicIds = document.getString("topicIds");
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    subs = objectMapper.readValue(topicIds, objectMapper.getTypeFactory().constructCollectionType(List.class, Subscription.class));
                 }
                 User user = new User(address, subs);
                 user.set_id(document.getObjectId("_id"));

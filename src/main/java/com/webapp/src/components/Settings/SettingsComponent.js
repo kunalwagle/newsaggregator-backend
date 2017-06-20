@@ -6,7 +6,7 @@ import {Tab, NavItem, Row, Col, Nav, OverlayTrigger} from "react-bootstrap";
 import LoginModal from "../LoginModal";
 import TopicSettingsContainer from "../../containers/Settings/TopicSettingsContainer";
 
-export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLoginCalled, fetchInProgressCalled, user, index, handleLogout, handleReloadLogin, handleTopicChange, handleLoginClicked, handleSettingsSearch, handleReloadNeeded}) => {
+export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLoginCalled, fetchInProgressCalled, topics, index, handleLogout, handleReloadLogin, handleTopicChange, handleLoginClicked, handleSettingsSearch, handleReloadNeeded}) => {
 
     const loginPopover = (handleLoginClicked, action) => {
         return (
@@ -31,7 +31,7 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLog
         )
     }
 
-    if (!fetchInProgressLoginCalled || user == undefined) {
+    if (!fetchInProgressLoginCalled || topics == undefined) {
         handleReloadLogin();
         return (
             <div className="loader"></div>
@@ -39,7 +39,7 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLog
     }
 
     if (!fetchInProgressCalled) {
-        handleReloadNeeded(user.topics[0]);
+        handleReloadNeeded(topics[0]);
         return (
             <div className="loader"></div>
         )
@@ -51,7 +51,7 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLog
         )
     }
 
-    if (user.topics.length === 0) {
+    if (topics.length === 0) {
         return (
             <div>
                 <div className="nothing">You have no subscriptions</div>
@@ -64,10 +64,10 @@ export const SettingsComponent = ({loggedIn, fetchInProgress, fetchInProgressLog
         )
     }
 
-    const tabMap = user.topics.map((topic, index) => {
+    const tabMap = topics.map((topic, index) => {
         return (
             <NavItem onSelect={() => handleTopicChange(topic, index)} eventKey={index} key={index}>
-                <div className="white">{topic.labelHolder.label}</div>
+                <div className="white">{topic.labelName}</div>
             </NavItem>
         )
     });

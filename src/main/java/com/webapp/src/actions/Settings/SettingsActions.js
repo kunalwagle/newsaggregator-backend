@@ -3,7 +3,7 @@
  */
 import {push} from "react-router-redux";
 import {getIPAddress} from "../../UtilityMethods";
-import {login} from "../LoginModalActions";
+import {getSubscriptions, populateSubscriptions} from "../LoginModalActions";
 import {toastr} from "react-redux-toastr";
 
 export const DIGEST_CHANGE = "DIGEST_CHANGE";
@@ -38,19 +38,20 @@ export const initialise = () => {
     return (dispatch, getState) => {
         dispatch(push("/settings"));
         if (getState().loggedIn.loggedIn) {
-            return dispatch(login(getState().loggedIn.email, setup));
+            dispatch(getSubscriptions(true));
+            return dispatch(setup());
         }
     }
 };
 
-export const setup = (user) => {
+export const setup = (topics) => {
     return (dispatch, getState) => {
-        if (user == undefined) {
-            user = getState().loggedIn.user;
+        if (topics == undefined) {
+            topics = getState().loggedIn.topics;
         }
         return {
             type: INITIALISE,
-            topic: user.topics[0]
+            topic: topics[0]
         }
     }
 };
@@ -60,7 +61,7 @@ export const save = (topicId) => {
         let value = {
             "sources": getState().settings.chosenOutlets,
             "digest": getState().settings.digest,
-            "user": getState().loggedIn.user.emailAddress
+            "user": getState().loggedIn.email
         };
         if (topicId !== undefined) {
             value.topicId = topicId;
@@ -70,7 +71,9 @@ export const save = (topicId) => {
             method: "POST",
             body: data
         })
-            .then(response => dispatch(saveComplete()));
+            .then(response => response.json())
+            .then(json => dispatch(populateSubscriptions(json)))
+            .then(dispatch(saveComplete()));
     }
 };
 
