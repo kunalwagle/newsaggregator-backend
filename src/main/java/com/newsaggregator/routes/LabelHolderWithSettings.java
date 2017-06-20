@@ -58,26 +58,28 @@ public class LabelHolderWithSettings {
     private boolean digests;
     private List<String> sources;
 
-    public LabelHolderWithSettings(LabelHolder labelHolder, boolean digests, List<String> sources) {
-        this.labelHolder = distinct(labelHolder);
+    public LabelHolderWithSettings(LabelHolder labelHolder, int page, boolean digests, List<String> sources) {
+        this.labelHolder = distinct(labelHolder, page);
         this.digests = digests;
         this.sources = sources;
     }
 
-    private LabelHolder distinct(LabelHolder labelHolder) {
+    private LabelHolder distinct(LabelHolder labelHolder, int page) {
         List<ClusterString> clusterHolders = labelHolder.getClusters();
 //        List<ClusterString> newClusterHolders = new ArrayList<>();
 //        for (ClusterString clusterHolder : clusterHolders) {
 //            if (!clusterExists(newClusterHolders, clusterHolder)) {
 //                newClusterHolders.add(clusterHolder);
 //            }
-//        }
+        int start = Math.max(clusterHolders.size() - 10 * page, 0);
+        int end = clusterHolders.size() - 10 * page + 10;
+        clusterHolders = clusterHolders.subList(start, end);
         try {
             clusterHolders = clusterHolders.stream().sorted(byLastPublished.reversed()).collect(Collectors.toList());
         } catch (Exception e) {
             Logger.getLogger(getClass()).error("Had an issue parsing dates", e);
         }
-        labelHolder.setClusters(clusterHolders.stream().limit(20).collect(Collectors.toList()));
+        labelHolder.setClusters(clusterHolders);
         return labelHolder;
     }
 

@@ -24,7 +24,7 @@ public class UserHolder {
         for (Subscription topic : topics) {
             LabelHolder labelHolder = topicManager.getTopicById(topic.getTopicId());
             if (labelHolder != null) {
-                labelHolders.add(new LabelHolderWithSettings(labelHolder, topic.isDigests(), topic.getSources()));
+                labelHolders.add(new LabelHolderWithSettings(labelHolder, 1, topic.isDigests(), topic.getSources()));
             }
         }
         this.topics = labelHolders;

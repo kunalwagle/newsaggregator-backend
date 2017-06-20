@@ -23,11 +23,12 @@ public class TopicUserResource extends ServerResource {
     public String topic() {
         String searchTerm = (String) getRequestAttributes().get("topic");
         String user = (String) getRequestAttributes().get("user");
+        String page = (String) getRequestAttributes().get("page");
         try {
             MongoDatabase db = Utils.getDatabase();
             Topics topicManager = new Topics(db);
             LabelHolder labelHolder = topicManager.getTopicById(searchTerm);
-            LabelHolderWithSettings labelHolderWithSettings = new LabelHolderWithSettings(labelHolder, false, Utils.allSources());
+            LabelHolderWithSettings labelHolderWithSettings = new LabelHolderWithSettings(labelHolder, Integer.parseInt(page), false, Utils.allSources());
             if (user != null) {
                 Users userManager = new Users(db);
                 User currentUser = userManager.getSingleUser(user);

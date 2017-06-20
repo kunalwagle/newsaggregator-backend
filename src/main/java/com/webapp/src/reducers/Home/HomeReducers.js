@@ -32,6 +32,6 @@ export default function home(state, action) {
 
     }
 
-    return initialState;
+    return state;
 
 }
