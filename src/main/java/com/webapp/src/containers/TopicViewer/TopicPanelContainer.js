@@ -33,8 +33,8 @@ const mapDispatchToProps = (dispatch) => {
             event.preventDefault();
             dispatch(articleClicked(topicId, articleId));
         },
-        handleReloadNeeded: (topicId, topic) => {
-            dispatch(viewClicked(topicId, topic));
+        handleReloadNeeded: (topicId, topic, page) => {
+            dispatch(viewClicked(topicId, topic, page));
         }
     }
 };

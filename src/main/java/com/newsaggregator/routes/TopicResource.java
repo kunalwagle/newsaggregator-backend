@@ -23,7 +23,7 @@ public class TopicResource extends ServerResource {
         try {
             MongoDatabase db = Utils.getDatabase();
             Topics topicManager = new Topics(db);
-            LabelHolder labelHolder = topicManager.getTopicById(searchTerm);
+            LabelHolder labelHolder = topicManager.getPaginatedTopic(searchTerm, page);
             LabelHolderWithSettings labelHolderWithSettings = new LabelHolderWithSettings(labelHolder, Integer.parseInt(page), false, Utils.allSources());
             return new ObjectMapper().writeValueAsString(labelHolderWithSettings);
         } catch (Exception e) {

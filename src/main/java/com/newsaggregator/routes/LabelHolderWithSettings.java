@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by kunalwagle on 15/05/2017.
@@ -59,7 +58,7 @@ public class LabelHolderWithSettings {
     private List<String> sources;
 
     public LabelHolderWithSettings(LabelHolder labelHolder, int page, boolean digests, List<String> sources) {
-        this.labelHolder = distinct(labelHolder, page);
+        this.labelHolder = labelHolder;//distinct(labelHolder, page);
         this.digests = digests;
         this.sources = sources;
     }
@@ -74,11 +73,11 @@ public class LabelHolderWithSettings {
         int start = Math.max(clusterHolders.size() - 10 * page, 0);
         int end = clusterHolders.size() - 10 * page + 10;
         clusterHolders = clusterHolders.subList(start, end);
-        try {
-            clusterHolders = clusterHolders.stream().sorted(byLastPublished.reversed()).collect(Collectors.toList());
-        } catch (Exception e) {
-            Logger.getLogger(getClass()).error("Had an issue parsing dates", e);
-        }
+//        try {
+//            clusterHolders = clusterHolders.stream().sorted(byLastPublished.reversed()).collect(Collectors.toList());
+//        } catch (Exception e) {
+//            Logger.getLogger(getClass()).error("Had an issue parsing dates", e);
+//        }
         labelHolder.setClusters(clusterHolders);
         return labelHolder;
     }

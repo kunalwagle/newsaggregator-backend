@@ -5,8 +5,10 @@ import com.google.common.collect.Sets;
 import com.mongodb.client.MongoDatabase;
 import com.newsaggregator.Utils;
 import com.newsaggregator.api.Wikipedia;
+import com.newsaggregator.base.ArticleHolder;
 import com.newsaggregator.base.ArticleVector;
 import com.newsaggregator.base.OutletArticle;
+import com.newsaggregator.db.HomeArticles;
 import com.newsaggregator.db.Summaries;
 import com.newsaggregator.db.Topics;
 import com.newsaggregator.ml.clustering.Cluster;
@@ -87,6 +89,8 @@ public class ClusteringRunnable implements Runnable {
         Summaries summaries = new Summaries(db);
 
         int counter = 0;
+
+        List<ArticleHolder> newSummaries = new ArrayList<>();
 
         try {
 
@@ -179,6 +183,7 @@ public class ClusteringRunnable implements Runnable {
                         }
 //                    summaryClusters.addAll(brandNewClusters);
                     }
+                    newSummaries.addAll(brandNewClusters.stream().map(b -> new ArticleHolder(labelHolder.getId(), b.getClusterString())).collect(Collectors.toList()));
                     topics.saveTopic(labelHolder);
                 } catch (Exception e) {
                     logger.error("Caught an exception clustering within a topic but will continue", e);
@@ -198,6 +203,9 @@ public class ClusteringRunnable implements Runnable {
 
         if (oldArticles) {
             TaskServiceSingleton.getInstance().schedule(new LabellingRunnable(), 1L, TimeUnit.MINUTES);
+        } else {
+            HomeArticles homeArticles = new HomeArticles(Utils.getDatabase());
+            homeArticles.saveHomeArticles(newSummaries);
         }
 
     }

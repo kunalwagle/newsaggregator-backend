@@ -216,7 +216,7 @@ const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCa
     }
 
     if (!fetchInProgressCalled) {
-        handleReloadNeeded(topicId, topic);
+        handleReloadNeeded(topicId, topic, 1);
         return (
             <div className="loader"></div>
         )

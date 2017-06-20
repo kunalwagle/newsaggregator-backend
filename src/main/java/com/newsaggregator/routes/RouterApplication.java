@@ -27,8 +27,8 @@ public class RouterApplication extends Application {
         Router router = new Router(getContext());
         router.attach("/wikipedia/{searchTerm}", WikipediaSearchResource.class);
         router.attach("/summarise/", SummaryEvaluationResource.class);
-        router.attach("/topic/{topic}", TopicResource.class);
-        router.attach("/topic/{topic}/user/{user}", TopicUserResource.class);
+        router.attach("/topic/{topic}/{page}", TopicResource.class);
+        router.attach("/topic/{topic}/user/{user}/{page}", TopicUserResource.class);
         router.attach("/settings", TopicSettingsResource.class);
         router.attach("/user/subscribe/{user}/{topic}", SubscribeUserResource.class);
         router.attach("/user/unsubscribe/{user}/{topic}", UnsubscribeUserResource.class);

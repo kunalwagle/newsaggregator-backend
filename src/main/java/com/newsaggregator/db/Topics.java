@@ -100,6 +100,35 @@ public class Topics {
         return null;
     }
 
+    public LabelHolder getPaginatedTopic(String id, String page) {
+        try {
+            List<ClusterString> clusterStrings = new ArrayList<>();
+            ObjectMapper objectMapper = new ObjectMapper();
+            BasicDBObject match = new BasicDBObject("$match", new BasicDBObject("_id", new ObjectId(id)));
+            BasicDBList slice = new BasicDBList();
+            slice.add("$Clusters");
+            slice.add(-10);
+            BasicDBObject projection = new BasicDBObject("_id", 0).append("Label", 1).append("Clusters", new BasicDBObject("$slice", slice));
+            BasicDBObject project = new BasicDBObject("$project", projection);
+            List<BasicDBObject> dbObjects = Lists.newArrayList(match, project);
+            MongoCursor<Document> docs = collection.aggregate(dbObjects).iterator();
+            String label = "";
+            while (docs.hasNext()) {
+                Document document = docs.next();
+                label = document.getString("Label");
+                JSONArray summaryIds = new JSONObject(document.toJson()).getJSONArray("Clusters");
+                for (int i = 0; i < summaryIds.length(); i++) {
+                    String summary = summaryIds.getString(i);
+                    clusterStrings.add(objectMapper.readValue(summary, ClusterString.class));
+                }
+            }
+            return new LabelHolder(label, new ArrayList<>(), clusterStrings);
+        } catch (Exception e) {
+            logger.error("An error occurred whilst getting clusters for a single topic", e);
+        }
+        return null;
+    }
+
     public int getArticleCount(String id) {
         try {
             BasicDBObject firstMatch = new BasicDBObject("$match", new BasicDBObject("_id", new ObjectId(id)));

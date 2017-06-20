@@ -41,7 +41,7 @@ public class DigestHolder implements DatabaseStorage {
         for (Subscription sub : subs) {
             String topicId = sub.getTopicId();
             LabelHolder labelHolder = topics.getTopicById(topicId);
-            List<ArticleHolder> articles = labelHolder.getClusters().stream().map(c -> new ArticleHolder(topicId, c)).collect(Collectors.toList());
+            List<ArticleHolder> articles = labelHolder.getClusters().stream().limit(5).map(c -> new ArticleHolder(topicId, c)).collect(Collectors.toList());
             if (articles != null && articles.size() > 0) {
                 articleHolders.addAll(articles);
                 articleHolders = distinct(articleHolders);

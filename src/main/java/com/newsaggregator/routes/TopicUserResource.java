@@ -27,7 +27,7 @@ public class TopicUserResource extends ServerResource {
         try {
             MongoDatabase db = Utils.getDatabase();
             Topics topicManager = new Topics(db);
-            LabelHolder labelHolder = topicManager.getTopicById(searchTerm);
+            LabelHolder labelHolder = topicManager.getPaginatedTopic(searchTerm, page);
             LabelHolderWithSettings labelHolderWithSettings = new LabelHolderWithSettings(labelHolder, Integer.parseInt(page), false, Utils.allSources());
             if (user != null) {
                 Users userManager = new Users(db);

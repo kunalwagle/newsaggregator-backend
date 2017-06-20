@@ -10,14 +10,16 @@ export const ARTICLES_RECEIVED = 'ARTICLES_RECEIVED';
 export const SUBSCRIPTION_TAB_SELECTED = 'SUBSCRIPTION_TAB_SELECTED';
 
 
-export function viewClicked(title, topic) {
+export function viewClicked(title, topic, page) {
     return (dispatch, getState) => {
         dispatch(viewStarted());
         if (topic == undefined) {
             dispatch(push("/topic/" + title));
         }
         if (getState().loggedIn.loggedIn) {
-            title = title + "/user/" + getState().loggedIn.email;
+            title = title + "/user/" + getState().loggedIn.email + "/" + page;
+        } else {
+            title = title + "/" + page;
         }
         return fetch(getIPAddress() + "topic/" + title)
             .then(response => response.json())
