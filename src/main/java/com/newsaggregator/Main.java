@@ -2,10 +2,6 @@ package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
 import com.newsaggregator.server.TaskServiceSingleton;
-import com.newsaggregator.server.jobs.ArticleFetchRunnable;
-import com.newsaggregator.server.jobs.DigestRunnable;
-import com.newsaggregator.server.jobs.LabellingRunnable;
-import com.newsaggregator.server.jobs.SendEmailRunnable;
 import org.apache.log4j.Logger;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
@@ -15,7 +11,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -121,7 +116,7 @@ public class Main {
 
                     TaskService scheduleManager = TaskServiceSingleton.getInstance();
 
-                    Utils.sendServerRestartEmail(port);
+//                    Utils.sendServerRestartEmail(port);
 
                     LocalDateTime localNow = LocalDateTime.now();
                     ZoneId currentZone = ZoneId.of("Europe/London");
@@ -137,11 +132,17 @@ public class Main {
                     Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
 //                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
-                    scheduleManager.schedule(new SendEmailRunnable(), 1L, TimeUnit.MINUTES);
-                    scheduleManager.schedule(new LabellingRunnable(), 1L, TimeUnit.MINUTES);
-                    scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
-                    scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
+//                    scheduleManager.schedule(new SendEmailRunnable(), 1L, TimeUnit.MINUTES);
+//                    scheduleManager.schedule(new LabellingRunnable(), 1L, TimeUnit.MINUTES);
+//                    scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
+//                    scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 //                }
+
+//                HomeArticles homeArticles = new HomeArticles(Utils.getDatabase());
+//
+//                homeArticles.initialise();
+//
+//                System.out.println("Initialised");
 
 //                TaskServiceSingleton.getInstance().execute(new ClusteringRunnable(Lists.newArrayList("James Comey"), new ArrayList<>(), false));
 

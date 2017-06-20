@@ -5,7 +5,6 @@ import com.newsaggregator.base.Outlet;
 import com.newsaggregator.base.Outlink;
 import com.newsaggregator.base.WikipediaArticle;
 import com.newsaggregator.db.Topics;
-import com.newsaggregator.server.LabelHolder;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -28,15 +27,11 @@ public class Wikipedia {
         List<WikipediaArticle> articles = titles.stream().limit(total).collect(Collectors.toList()).stream().map(Wikipedia::convertToArticle).filter(Objects::nonNull).collect(Collectors.toList());
         Topics topicManager = new Topics(Utils.getDatabase());
         for (WikipediaArticle article : articles) {
-            LabelHolder labelHolder = topicManager.getTopic(article.getTitle());
-            if (labelHolder == null) {
-                labelHolder = topicManager.createBlankTopic(article.getTitle());
+            String id = topicManager.topicExists(article.getTitle());
+            if (id == null) {
+                id = topicManager.createBlankTopic(article.getTitle()).getId();
             }
-            if (labelHolder.getImageUrl() == null) {
-                labelHolder.setImageUrl(article.getImageUrl());
-                topicManager.saveTopic(labelHolder);
-            }
-            article.set_id(labelHolder.get_id().toString());
+            article.set_id(id);
         }
         return articles;
     }

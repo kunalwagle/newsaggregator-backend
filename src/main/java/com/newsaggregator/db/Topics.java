@@ -7,6 +7,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Projections;
 import com.newsaggregator.server.ArticleString;
 import com.newsaggregator.server.ClusterString;
 import com.newsaggregator.server.LabelHolder;
@@ -86,6 +87,19 @@ public class Topics {
         return null;
     }
 
+    public String topicExists(String label) {
+        try {
+            BasicDBObject match = new BasicDBObject("Label", label);
+            Document doc = collection.find(match).projection(Projections.include("_id")).limit(1).first();
+            if (doc != null) {
+                return doc.getObjectId("_id").toHexString();
+            }
+        } catch (Exception e) {
+            logger.error("An error occurred whilst getting a blank topic", e);
+        }
+        return null;
+    }
+
     public LabelHolder getTopicById(String id) {
         try {
             BasicDBObject queryObject = new BasicDBObject().append("_id", new ObjectId(id));
@@ -132,16 +146,10 @@ public class Topics {
     public int getArticleCount(String id) {
         try {
             BasicDBObject firstMatch = new BasicDBObject("$match", new BasicDBObject("_id", new ObjectId(id)));
-            BasicDBObject unwind = new BasicDBObject("$unwind", "$Clusters");
-            BasicDBObject lookup = new BasicDBObject("$lookup", new BasicDBObject("from", "summaries")
-                    .append("localField", "Clusters")
-                    .append("foreignField", "_id")
-                    .append("as", "clusts"));
-            BasicDBObject secondMatch = new BasicDBObject("$match", new BasicDBObject("clusts.Summaries", new BasicDBObject("$ne", "{}")));
-            BasicDBObject group = new BasicDBObject("$group", new BasicDBObject("_id", null).append("count", new BasicDBObject("$sum", 1)));
-            List<BasicDBObject> dbObjects = Lists.newArrayList(firstMatch, unwind, lookup, secondMatch, group);
+            BasicDBObject project = new BasicDBObject("$project", new BasicDBObject("clusters", new BasicDBObject("$size", "$Clusters")));
+            List<BasicDBObject> dbObjects = Lists.newArrayList(firstMatch, project);
             Document output = collection.aggregate(dbObjects).first();
-            return output.getInteger("count");
+            return output.getInteger("clusters");
         } catch (Exception e) {
             logger.error("An error occurred whilst getting a single topic", e);
         }
