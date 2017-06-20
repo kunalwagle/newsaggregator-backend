@@ -11,16 +11,12 @@ const mapStateToProps = (state) => {
     let index = 0;
 
     const fetchInProgressLoginCalled = state.loggedIn.fetchInProgressCalled;
-    let topics = [];
-    if (state.loggedIn.user != undefined) {
-        topics = pluck(state.loggedIn.user.topics, "labelHolder");
-    }
     if (state.searchResults.activeIndex != undefined) {
         index = state.searchResults.activeIndex;
     }
     return {
         fetchInProgress: state.loggedIn.fetchInProgress,
-        topics,
+        topics: state.loggedIn.topics,
         user: state.loggedIn.user,
         loggedIn: state.loggedIn.loggedIn,
         fetchInProgressLoginCalled,
@@ -31,7 +27,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleTopicChange: (articles, index) => {
-            dispatch(subscriptionTabSelected(articles, index));
+            dispatch(subscriptionTabSelected(index));
         },
         handleReloadLogin: () => {
             dispatch(login());
@@ -40,7 +36,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(login(email, action));
         },
         handleSubscriptionSearch: () => {
-            dispatch(getSubscriptions())
+            dispatch(getSubscriptions(true))
         }
     }
 };

@@ -10,11 +10,13 @@ import java.util.List;
 public class Subscription {
 
     private String topicId;
+    private String labelName;
     private List<String> sources;
     private boolean digests;
 
-    public Subscription(String topicId, List<String> sources, boolean digests) {
+    public Subscription(String topicId, String labelName, List<String> sources, boolean digests) {
         this.topicId = topicId;
+        this.labelName = labelName;
         this.sources = sources;
         this.digests = digests;
     }
@@ -22,22 +24,11 @@ public class Subscription {
     public Subscription() {
     }
 
-    public Subscription(String topicId) {
+    public Subscription(String topicId, String labelName) {
         this.topicId = topicId;
+        this.labelName = labelName;
         this.sources = Utils.allSources();
         this.digests = false;
-    }
-
-    public void setTopicId(String topicId) {
-        this.topicId = topicId;
-    }
-
-    public void setSources(List<String> sources) {
-        this.sources = sources;
-    }
-
-    public void setDigests(boolean digests) {
-        this.digests = digests;
     }
 
     public String getTopicId() {
@@ -47,11 +38,31 @@ public class Subscription {
         return topicId;
     }
 
+    public void setTopicId(String topicId) {
+        this.topicId = topicId;
+    }
+
     public List<String> getSources() {
         return sources;
     }
 
+    public void setSources(List<String> sources) {
+        this.sources = sources;
+    }
+
+    public String getLabelName() {
+        return labelName;
+    }
+
+    public void setLabelName(String labelName) {
+        this.labelName = labelName;
+    }
+
     public boolean isDigests() {
         return digests;
+    }
+
+    public void setDigests(boolean digests) {
+        this.digests = digests;
     }
 }

@@ -207,15 +207,15 @@ const xs = (articles, handleArticleClick, topicId) => {
 };
 
 
-const TopicPanelView = ({articles, mediaType, activePage, articleCount, fetchInProgress, fetchInProgressCalled, topicId, topic, handleReloadNeeded, handleArticleClick}) => {
+const TopicPanelView = ({articles, mediaType, activePage, articleCount, fetchInProgress, fetchInProgressCalled, topicId, topic, handleChangePage, handleReloadNeeded, handleArticleClick}) => {
 
-    if (fetchInProgress) {
+    if (fetchInProgress || articles === undefined) {
         return (
             <div className="loader"></div>
         )
     }
 
-    if (!fetchInProgressCalled) {
+    if (!fetchInProgressCalled && topicId !== undefined) {
         handleReloadNeeded(topicId, topic, 1);
         return (
             <div className="loader"></div>
@@ -247,7 +247,7 @@ const TopicPanelView = ({articles, mediaType, activePage, articleCount, fetchInP
     return (
         <div>
             {panels()}
-            <div className="centred-div">
+            <div className="centred-div pager">
                 <Pagination
                     prev
                     next
@@ -255,10 +255,10 @@ const TopicPanelView = ({articles, mediaType, activePage, articleCount, fetchInP
                     last
                     ellipsis
                     boundaryLinks
-                    items={articleCount / 10}
+                    items={Math.floor(articleCount / 10)}
                     maxButtons={20}
                     activePage={activePage}
-                    onSelect={(eventKey) => handleReloadNeeded(topicId, topic, eventKey)}
+                    onSelect={(eventKey) => handleChangePage(topicId, topic, eventKey)}
                 />
             </div>
         </div>

@@ -15,7 +15,7 @@ const initialState = {
     fetchInProgress: false,
     fetchInProgressCalled: false,
     articles: [],
-    activeIndex: 1,
+    activeIndex: 0,
     activePage: 1,
     articleCount: 0,
     isSubscribed: false,
@@ -37,6 +37,7 @@ export default function searchResults(state, action) {
         case ARTICLES_RECEIVED:
             return Object.assign({}, state, {
                 fetchInProgress: false,
+                fetchInProgressCalled: true,
                 label: action.json.labelHolder.label,
                 articles: action.json.labelHolder.clusters,
                 isSubscribed: action.json.labelHolder.subscribed,
@@ -46,8 +47,8 @@ export default function searchResults(state, action) {
             });
         case SUBSCRIPTION_TAB_SELECTED:
             return Object.assign({}, state, {
-                articles: action.articles,
-                activeIndex: action.index
+                activeIndex: action.index,
+                fetchInProgressCalled: false
             });
         case SUBSCRIBE_COMPLETE:
             return Object.assign({}, state, {

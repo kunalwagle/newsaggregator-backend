@@ -4,7 +4,7 @@
 import {connect} from "react-redux";
 import TopicPanelView from "../../components/TopicViewer/TopicPanelView";
 import {articleClicked} from "../../actions/TopicViewer/TopicViewerActions";
-import {viewClicked} from "../../actions/SearchResults/SearchResultsActions";
+import {viewClicked, changePage} from "../../actions/SearchResults/SearchResultsActions";
 
 const mapStateToProps = (state, ownProps) => {
     let articles = state.searchResults.articles;
@@ -37,7 +37,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleReloadNeeded: (topicId, topic, page) => {
             dispatch(viewClicked(topicId, topic, page));
+        },
+        handleChangePage: (topicId, topic, page) => {
+            dispatch(changePage(topicId, topic, page));
         }
+
     }
 };
 

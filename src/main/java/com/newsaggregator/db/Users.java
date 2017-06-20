@@ -10,6 +10,8 @@ import com.newsaggregator.base.Subscription;
 import com.newsaggregator.base.User;
 import org.apache.log4j.Logger;
 import org.bson.Document;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,7 @@ public class Users {
             user = new User(email, new ArrayList<>());
         }
         if (user.getTopicIds().stream().noneMatch(sub -> sub.getTopicId().equals(topicId))) {
-            user.getTopicIds().add(new Subscription(topicId));
+            user.getTopicIds().add(new Subscription(topicId, new Topics(database).getTopicName(topicId)));
         }
         writeUser(user);
     }
@@ -66,9 +68,20 @@ public class Users {
             if (iterator.hasNext()) {
                 Document document = iterator.next();
                 String address = document.getString("emailAddress");
-                String topicIds = document.getString("topicIds");
-                ObjectMapper objectMapper = new ObjectMapper();
-                List<Subscription> subs = objectMapper.readValue(topicIds, objectMapper.getTypeFactory().constructCollectionType(List.class, Subscription.class));
+                JSONArray topicIds = new JSONObject(document.toJson()).getJSONArray("topicIds");
+                List<Subscription> subs = new ArrayList<>();
+                for (int i = 0; i < topicIds.length(); i++) {
+                    JSONObject object = topicIds.getJSONObject(i);
+                    String topicId = object.getString("topicId");
+                    String labelName = object.getString("labelName");
+                    boolean digests = object.getBoolean("digests");
+                    List<String> sources = new ArrayList<>();
+                    JSONArray sourceArray = object.getJSONArray("sources");
+                    for (int j = 0; j < sourceArray.length(); j++) {
+                        sources.add(sourceArray.getString(j));
+                    }
+                    subs.add(new Subscription(topicId, labelName, sources, digests));
+                }
                 User user = new User(address, subs);
                 user.set_id(document.getObjectId("_id"));
                 user.setId(user.get_id().toHexString());

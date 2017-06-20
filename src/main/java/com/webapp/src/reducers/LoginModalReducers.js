@@ -26,8 +26,7 @@ export default function loggedIn(state, action) {
         case LOG_IN:
             return Object.assign({}, state, {
                 loggedIn: action.loggedIn,
-                user: action.user,
-                email: action.user.emailAddress,
+                email: action.email,
                 fetchInProgressCalled: true,
                 fetchInProgress: false
             });
@@ -44,7 +43,7 @@ export default function loggedIn(state, action) {
             });
         case FETCH_ENDED:
             return Object.assign({}, state, {
-                topics: action.json,
+                topics: action.json.topics,
                 fetchInProgress: false
             });
         case REHYDRATE:

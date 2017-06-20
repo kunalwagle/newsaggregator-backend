@@ -1,11 +1,7 @@
 package com.newsaggregator.routes;
 
-import com.newsaggregator.Utils;
 import com.newsaggregator.base.Subscription;
-import com.newsaggregator.db.Topics;
-import com.newsaggregator.server.LabelHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,19 +11,11 @@ public class UserHolder {
 
     private String id;
     private String emailAddress;
-    private List<LabelHolderWithSettings> topics;
+    private List<Subscription> topics;
 
     public UserHolder(String id, String emailAddress, List<Subscription> topics) {
         this.id = id;
-        Topics topicManager = new Topics(Utils.getDatabase());
-        List<LabelHolderWithSettings> labelHolders = new ArrayList<>();
-        for (Subscription topic : topics) {
-            LabelHolder labelHolder = topicManager.getTopicById(topic.getTopicId());
-            if (labelHolder != null) {
-                labelHolders.add(new LabelHolderWithSettings(labelHolder, 1, topic.isDigests(), topic.getSources()));
-            }
-        }
-        this.topics = labelHolders;
+        this.topics = topics;
         this.emailAddress = emailAddress;
     }
 
@@ -39,7 +27,7 @@ public class UserHolder {
         return id;
     }
 
-    public List<LabelHolderWithSettings> getTopics() {
+    public List<Subscription> getTopics() {
         return topics;
     }
 

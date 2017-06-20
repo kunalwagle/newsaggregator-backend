@@ -32,7 +32,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgressLoginCalled, han
     }
 
     if (!fetchInProgressLoginCalled) {
-        handleReloadLogin();
+        handleSubscriptionSearch();
         return (
             <div className="loader"></div>
         )
@@ -53,7 +53,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgressLoginCalled, han
     const tabMap = topics.map((topic, index) => {
         return (
             <NavItem onSelect={() => handleTopicChange(topic, index)} eventKey={index} key={index}>
-                <div className="white">{topic.label}</div>
+                <div className="white">{topic.labelName}</div>
             </NavItem>
         )
     });
@@ -67,7 +67,7 @@ export const SubscriptionComponent = ({loggedIn, fetchInProgressLoginCalled, han
                     </Nav>
                 </Col>
                 <Col sm={8}>
-                    <TopicViewerPage params={{topicId: topics[index].id, topic: topics[index]}}/>
+                    <TopicViewerPage params={{topicId: topics[index].topicId}}/>
                 </Col>
             </Row>
         </Tab.Container>

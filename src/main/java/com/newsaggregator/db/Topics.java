@@ -304,4 +304,14 @@ public class Topics {
         LabelHolder labelHolder = getLabelHolderFromIterator(iterator, new Articles(database), null);
         return labelHolder != null ? labelHolder.getId() : null;
     }
+
+    public String getTopicName(String topicId) {
+        BasicDBObject match = new BasicDBObject("_id", new ObjectId(topicId));
+        Document doc = collection.find(match).projection(Projections.include("Label")).limit(1).first();
+        if (doc != null) {
+            return doc.getString("Label");
+        } else {
+            return null;
+        }
+    }
 }

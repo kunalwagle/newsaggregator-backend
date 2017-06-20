@@ -2,7 +2,7 @@
  * Created by kunalwagle on 20/04/2017.
  */
 import fetch from "isomorphic-fetch";
-import {subscriptionTabSelected} from "./SearchResults/SearchResultsActions";
+import {subscriptionTabSelected, nothing} from "./SearchResults/SearchResultsActions";
 import {push} from "react-router-redux";
 import {getIPAddress} from "../UtilityMethods";
 import {toastr} from "react-redux-toastr";
@@ -26,29 +26,22 @@ export function login(email, action) {
     return (dispatch, getState) => {
         if (!email) {
             email = getState().loggedIn.email;
+        } else {
+            dispatch(logged(email));
         }
-        dispatch(startSubscriptionFetch());
-        return fetch(getIPAddress() + "user/subscriptions/" + email)
-            .then(response => response.json())
-            .then(json => dispatch(logged(json)))
-            .then(() => {
-                if (action) action(email)
-            });
+        if (action) action(email);
+        return {
+            type: FETCH_STARTED
+        };
     }
 }
 
-export function logged(user) {
-    let loggedIn = true;
-    if (user.length > 0) {
-        loggedIn = false;
-        toastr.error("Failure", "Unable to log in for some reason. Sorry about that");
-    } else {
-        toastr.success('Success', 'Logged in succesfully');
-    }
+export function logged(email) {
+    toastr.success('Success', 'Logged in succesfully');
     return {
         type: LOG_IN,
-        user,
-        loggedIn
+        email,
+        loggedIn: true
     }
 }
 
@@ -93,9 +86,12 @@ export function subscribeComplete(json, subscribeType) {
     }
 }
 
-export function getSubscriptions() {
+export function getSubscriptions(alreadyLoaded) {
     return (dispatch, getState) => {
         dispatch(startSubscriptionFetch());
+        if (!alreadyLoaded) {
+            dispatch(push("/subscription"));
+        }
         const email = getState().loggedIn.email;
         return fetch(getIPAddress() + "user/subscriptions/" + email)
             .then(response => response.json())
@@ -111,19 +107,12 @@ export function startSubscriptionFetch() {
 
 export function fetchedSubscriptions(json) {
     return (dispatch, getState) => {
-        let articles = [];
+        dispatch(populateSubscriptions(json));
         if (json.id !== undefined) {
-            dispatch(push("/subscription/" + json.id));
-            if (json.topics.length > 0) {
-                articles = json.topics[0].clusterHolder;
-            }
-            if (getState().loggedIn.loggedIn) {
-                return dispatch(login(getState().loggedIn.email, subscriptionTabSelected));
-            } else {
-                dispatch(subscriptionTabSelected(articles));
-            }
+            dispatch(subscriptionTabSelected());
         }
-        return dispatch(populateSubscriptions(json));
+        return dispatch(nothing())
+
     };
 }
 

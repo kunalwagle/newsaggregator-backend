@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(emailAddressChanged(event.target.value));
         },
         handleSubscriptionSearch: () => {
-            dispatch(getSubscriptions())
+            dispatch(getSubscriptions(false))
         },
         handleSettingsSearch: () => {
             dispatch(initialise());

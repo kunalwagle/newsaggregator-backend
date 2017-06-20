@@ -69,7 +69,7 @@ class AppProvider extends React.Component {
                             <Route path="summaryEvaluation" component={SummaryEvaluation}/>
                             <Route path="topic/:topicId" component={TopicViewerPage}/>
                             <Route path="topic/:topicId/article/:articleId" component={ArticleViewerPage}/>
-                            <Route path="subscription/:userId" component={SubscriptionPage}/>
+                            <Route path="subscription" component={SubscriptionPage}/>
                             <Route path="settings" component={TopicsList}/>
                             <Route path="digest/:digestId" component={DigestViewerPage}/>
                             <Route path="*" component={NotFound}/>
