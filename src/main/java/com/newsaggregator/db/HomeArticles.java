@@ -83,6 +83,7 @@ public class HomeArticles {
             List<ObjectId> objectIds = new ArrayList<>();
             while (docs.hasNext() && numberToRemove > 0) {
                 objectIds.add(docs.next().getObjectId("_id"));
+                numberToRemove--;
             }
             try {
                 collection.deleteMany(new BasicDBObject("_id", new BasicDBObject("$in", objectIds)));

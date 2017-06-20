@@ -15,7 +15,9 @@ const initialState = {
     fetchInProgress: false,
     fetchInProgressCalled: false,
     articles: [],
-    activeIndex: 0,
+    activeIndex: 1,
+    activePage: 1,
+    articleCount: 0,
     isSubscribed: false,
     defaultCheckbox: allOutlets
 };
@@ -38,6 +40,8 @@ export default function searchResults(state, action) {
                 label: action.json.labelHolder.label,
                 articles: action.json.labelHolder.clusters,
                 isSubscribed: action.json.labelHolder.subscribed,
+                activePage: action.page,
+                articleCount: action.json.labelHolder.articleCount,
                 defaultCheckbox: action.json.sources
             });
         case SUBSCRIPTION_TAB_SELECTED:

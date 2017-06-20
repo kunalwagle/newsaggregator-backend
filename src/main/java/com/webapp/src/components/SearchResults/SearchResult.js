@@ -30,7 +30,7 @@ const thumbnails = (loggedIn, user, carousel, handleViewClicked, handleSubscribe
                        largePanel={true}
                        text={"WIKIPEDIA intro: " + searchResult.extract.substring(0, 100) + "..."}
                        count={searchResult.articleCount}
-                       onClick={(event) => handleViewClicked(event, searchResult._id)}/>
+                       onClick={(event) => handleViewClicked(event, searchResult._id, searchResult.articleCount)}/>
 
             </div>
 

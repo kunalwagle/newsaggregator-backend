@@ -10,7 +10,7 @@ export const ARTICLES_RECEIVED = 'ARTICLES_RECEIVED';
 export const SUBSCRIPTION_TAB_SELECTED = 'SUBSCRIPTION_TAB_SELECTED';
 
 
-export function viewClicked(title, topic, page) {
+export function viewClicked(title, topic, page, articleCount) {
     return (dispatch, getState) => {
         dispatch(viewStarted());
         if (topic == undefined) {
@@ -23,7 +23,7 @@ export function viewClicked(title, topic, page) {
         }
         return fetch(getIPAddress() + "topic/" + title)
             .then(response => response.json())
-            .then(json => dispatch(articlesReceived(json)))
+            .then(json => dispatch(articlesReceived(json, page, articleCount)))
     }
 }
 
@@ -45,10 +45,12 @@ export function viewStarted() {
     }
 }
 
-export function articlesReceived(json) {
+export function articlesReceived(json, page, articleCount) {
     return {
         type: ARTICLES_RECEIVED,
-        json
+        json,
+        page,
+        articleCount
     }
 }
 

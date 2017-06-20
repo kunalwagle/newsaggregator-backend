@@ -23,6 +23,7 @@ public class LabelHolder implements DatabaseStorage {
     private List<ArticleString> articles = new ArrayList<>();
     private List<ClusterString> clusters = new ArrayList<>();
     private String imageUrl;
+    private int articleCount;
     private boolean isSubscribed = false;
     private boolean needsClustering;
 
@@ -34,6 +35,12 @@ public class LabelHolder implements DatabaseStorage {
         this.label = label;
         this.articles = articles;
         this.clusters = clusters;
+    }
+
+    public LabelHolder(String label, List<ClusterString> clusterStrings, int total) {
+        this.label = label;
+        this.clusters = clusterStrings;
+        this.articleCount = total;
     }
 
     public void addArticle(OutletArticle article) {
@@ -74,7 +81,7 @@ public class LabelHolder implements DatabaseStorage {
         }
         ClusterString clusterString = articlesForSummary.getClusterString();
         if (!clusterExists(clusterString)) {
-            clusters.add(clusterString);
+            clusters.add(0, clusterString);
         }
     }
 
@@ -85,6 +92,14 @@ public class LabelHolder implements DatabaseStorage {
     public void set_id(ObjectId _id) {
         this._id = _id;
         this.id = _id.toHexString();
+    }
+
+    public int getArticleCount() {
+        return articleCount;
+    }
+
+    public void setArticleCount(int articleCount) {
+        this.articleCount = articleCount;
     }
 
     public String getId() {

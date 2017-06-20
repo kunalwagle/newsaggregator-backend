@@ -20,9 +20,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleViewClicked: (event, title) => {
+        handleViewClicked: (event, title, articleCount) => {
             event.preventDefault();
-            dispatch(viewClicked(title));
+            dispatch(viewClicked(title, undefined, 1, articleCount));
         },
         handleSubscribeClicked: (topic) => {
             dispatch(subscribe(topic));

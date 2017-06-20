@@ -3,7 +3,7 @@
  */
 import {map, filter, size} from "underscore";
 import React from "react";
-import {Button, Image, Label, Thumbnail, Grid, Row, Col} from "react-bootstrap";
+import {Button, Image, Label, Thumbnail, Grid, Row, Col, Pagination} from "react-bootstrap";
 import {Link} from "react-router";
 import ExtraLargePanel from "./ExtraLargePanel";
 import Panel from "../Panel";
@@ -207,7 +207,7 @@ const xs = (articles, handleArticleClick, topicId) => {
 };
 
 
-const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCalled, topicId, topic, handleReloadNeeded, handleArticleClick}) => {
+const TopicPanelView = ({articles, mediaType, activePage, articleCount, fetchInProgress, fetchInProgressCalled, topicId, topic, handleReloadNeeded, handleArticleClick}) => {
 
     if (fetchInProgress) {
         return (
@@ -228,17 +228,41 @@ const TopicPanelView = ({articles, mediaType, fetchInProgress, fetchInProgressCa
         )
     }
 
-    switch (mediaType) {
-        case "extraSmall":
-        case "small":
-            return xs(articles, handleArticleClick, topicId);
-        case "medium":
-            return sm(articles, handleArticleClick, topicId);
-        case "large":
-            return md(articles, handleArticleClick, topicId);
-        default:
-            return lg(articles, handleArticleClick, topicId);
-    }
+    const panels = () => {
+
+        switch (mediaType) {
+            case "extraSmall":
+            case "small":
+                return xs(articles, handleArticleClick, topicId);
+            case "medium":
+                return sm(articles, handleArticleClick, topicId);
+            case "large":
+                return md(articles, handleArticleClick, topicId);
+            default:
+                return lg(articles, handleArticleClick, topicId);
+        }
+
+    };
+
+    return (
+        <div>
+            {panels()}
+            <div className="centred-div">
+                <Pagination
+                    prev
+                    next
+                    first
+                    last
+                    ellipsis
+                    boundaryLinks
+                    items={articleCount / 10}
+                    maxButtons={20}
+                    activePage={activePage}
+                    onSelect={(eventKey) => handleReloadNeeded(topicId, topic, eventKey)}
+                />
+            </div>
+        </div>
+    );
 
     // let rows = [];
     // for (let i = 0; i < articles.length; i += 4) {

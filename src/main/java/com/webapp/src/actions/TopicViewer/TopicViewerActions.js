@@ -6,6 +6,7 @@ import {find} from "underscore";
 import {fetchInProgressToggle} from "../ArticleViewer/ArticleActions";
 
 export const ARTICLE_CLICKED = 'ARTICLE_CLICKED';
+export const PAGE_CHANGE = 'PAGE_CHANGE';
 
 export function articleClicked(topicId, articleId) {
     return (dispatch) => {
@@ -16,3 +17,6 @@ export function articleClicked(topicId, articleId) {
         }
     }
 }
+
+
+

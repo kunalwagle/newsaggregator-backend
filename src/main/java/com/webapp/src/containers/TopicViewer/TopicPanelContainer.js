@@ -21,6 +21,8 @@ const mapStateToProps = (state, ownProps) => {
         topicId,
         articles,
         topic,
+        articleCount: state.searchResults.articleCount,
+        activePage: state.searchResults.activePage,
         fetchInProgress: state.searchResults.fetchInProgress,
         fetchInProgressCalled,
         mediaType: state.browser.mediaType

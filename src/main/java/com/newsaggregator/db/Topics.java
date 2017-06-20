@@ -118,10 +118,17 @@ public class Topics {
         try {
             List<ClusterString> clusterStrings = new ArrayList<>();
             ObjectMapper objectMapper = new ObjectMapper();
+            int total = getArticleCount(id);
+            int start = Integer.parseInt(page) * 10 - 9;
+            int end = 10;
+            if (start + end > total) {
+                end = total;
+            }
             BasicDBObject match = new BasicDBObject("$match", new BasicDBObject("_id", new ObjectId(id)));
             BasicDBList slice = new BasicDBList();
             slice.add("$Clusters");
-            slice.add(-10);
+            slice.add(start);
+            slice.add(end);
             BasicDBObject projection = new BasicDBObject("_id", 0).append("Label", 1).append("Clusters", new BasicDBObject("$slice", slice));
             BasicDBObject project = new BasicDBObject("$project", projection);
             List<BasicDBObject> dbObjects = Lists.newArrayList(match, project);
@@ -136,7 +143,7 @@ public class Topics {
                     clusterStrings.add(objectMapper.readValue(summary, ClusterString.class));
                 }
             }
-            return new LabelHolder(label, new ArrayList<>(), clusterStrings);
+            return new LabelHolder(label, clusterStrings, total);
         } catch (Exception e) {
             logger.error("An error occurred whilst getting clusters for a single topic", e);
         }
