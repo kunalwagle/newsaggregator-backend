@@ -1,21 +1,8 @@
 package com.newsaggregator;
 
 import com.newsaggregator.routes.RouterApplication;
-import com.newsaggregator.server.TaskServiceSingleton;
-import com.newsaggregator.server.jobs.ArticleFetchRunnable;
-import com.newsaggregator.server.jobs.DigestRunnable;
-import com.newsaggregator.server.jobs.LabellingRunnable;
-import com.newsaggregator.server.jobs.SendEmailRunnable;
-import org.apache.log4j.Logger;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
-import org.restlet.service.TaskService;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -119,28 +106,28 @@ public class Main {
 
 //                if (args[0].equals("8182")) {
 
-                    TaskService scheduleManager = TaskServiceSingleton.getInstance();
-
-//                    Utils.sendServerRestartEmail(port);
-
-                    LocalDateTime localNow = LocalDateTime.now();
-                    ZoneId currentZone = ZoneId.of("Europe/London");
-                    ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
-                    ZonedDateTime zonedNext5;
-                    zonedNext5 = zonedNow.withHour(5).withMinute(0).withSecond(0);
-                    if (zonedNow.compareTo(zonedNext5) > 0)
-                        zonedNext5 = zonedNext5.plusDays(1);
-
-                    Duration duration = Duration.between(zonedNow, zonedNext5);
-                    long initialDelay = duration.getSeconds();
-
-                    Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
+//                TaskService scheduleManager = TaskServiceSingleton.getInstance();
+//
+////                    Utils.sendServerRestartEmail(port);
+//
+//                LocalDateTime localNow = LocalDateTime.now();
+//                ZoneId currentZone = ZoneId.of("Europe/London");
+//                ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
+//                ZonedDateTime zonedNext5;
+//                zonedNext5 = zonedNow.withHour(5).withMinute(0).withSecond(0);
+//                if (zonedNow.compareTo(zonedNext5) > 0)
+//                    zonedNext5 = zonedNext5.plusDays(1);
+//
+//                Duration duration = Duration.between(zonedNow, zonedNext5);
+//                long initialDelay = duration.getSeconds();
+//
+//                Logger.getLogger(Main.class).info("The initial delay will be " + initialDelay);
 //                scheduleManager.scheduleAtFixedRate(new ClusteringScheduleRunnable(), 3L, 15L, TimeUnit.MINUTES);
 //                scheduleManager.scheduleAtFixedRate(new SummarisingScheduleRunnable(), 2L, 15L, TimeUnit.MINUTES);
-                scheduleManager.schedule(new SendEmailRunnable(), 1L, TimeUnit.MINUTES);
-                scheduleManager.schedule(new LabellingRunnable(), 1L, TimeUnit.MINUTES);
-                scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
-                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
+//                scheduleManager.schedule(new SendEmailRunnable(), 1L, TimeUnit.MINUTES);
+//                scheduleManager.schedule(new LabellingRunnable(), 1L, TimeUnit.MINUTES);
+//                scheduleManager.schedule(new ArticleFetchRunnable(), 1L, TimeUnit.SECONDS);
+//                scheduleManager.scheduleAtFixedRate(new DigestRunnable(), initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
 //                }
 
 //                HomeArticles homeArticles = new HomeArticles(Utils.getDatabase());
@@ -182,6 +169,39 @@ public class Main {
 //                scheduleManager.execute(new DigestRunnable());
 
                 serverInitialised = true;
+
+//                List<String> articleUrls = Lists.newArrayList(
+//                        "http://www.dailymail.co.uk/sport/football/article-4614042/Cristiano-Ronaldo-cost-350m-summer.html",
+//                        "http://uk.businessinsider.com/cristiano-ronaldo-reportedly-wants-to-leave-real-madrid-2017-6",
+//                        "http://timesofindia.indiatimes.com/sports/football/top-stories/cristiano-ronaldo-willing-to-leave-real-madrid-say-reports/articleshow/59182797.cms",
+//                        "http://metro.co.uk/2017/06/16/cristiano-ronaldo-tells-real-madrid-president-he-wants-to-leave-this-summer-6712631/",
+//                        "https://www.fourfourtwo.com/news/ronaldo-seems-very-serious-amid-real-madrid-exit-storm-says-silva",
+//                        "https://www.washingtonpost.com/news/early-lead/wp/2017/06/16/will-christiano-ronaldo-leave-real-madrid-because-of-his-spanish-tax-problems/?utm_term=.a88c84cf61e1",
+//                        "https://www.theguardian.com/football/2017/jun/16/cristiano-ronaldo-quit-real-madrid-spain-tax",
+//                        "http://www.espn.co.uk/football/story/3144359/cristiano-ronaldo-wants-real-madrid-exit-amid-tax-accusations-source",
+//                        "http://edition.cnn.com/2017/06/16/football/cristiano-ronaldo-real-madrid-rumours/index.html",
+//                        "http://www.telegraph.co.uk/football/2017/06/16/cristiano-ronaldo-makes-irreversible-decision-leave-real-madrid/",
+//                        "http://www.bbc.co.uk/sport/football/40302296"
+//                );
+//
+//                List<OutletArticle> articles = Lists.newArrayList(
+//                        new OutletArticle("Title", new DailyMail().getSingleArticle(articleUrls.get(0)), "", articleUrls.get(0), Outlet.DailyMail.getSourceString(), ""),
+//                        new OutletArticle("Title", new BusinessInsiderUK().getSingleArticle(articleUrls.get(1)), "", articleUrls.get(1), Outlet.BusinessInsiderUK.getSourceString(), ""),
+//                        new OutletArticle("Title", new TOI().getSingleArticle(articleUrls.get(2)), "", articleUrls.get(2), Outlet.TOI.getSourceString(), ""),
+//                        new OutletArticle("Title", new Metro().getSingleArticle(articleUrls.get(3)), "", articleUrls.get(3), Outlet.Metro.getSourceString(), ""),
+//                        new OutletArticle("Title", new FourFourTwo().getSingleArticle(articleUrls.get(4)), "", articleUrls.get(4), Outlet.FourFourTwo.getSourceString(), ""),
+//                        new OutletArticle("Title", new WashingtonPost().getSingleArticle(articleUrls.get(5)), "", articleUrls.get(5), Outlet.WashingtonPost.getSourceString(), ""),
+//                        new OutletArticle("Title", new ESPN().getSingleArticle(articleUrls.get(7)), "", articleUrls.get(7), Outlet.ESPN.getSourceString(), ""),
+//                        new OutletArticle("Title", new CNN().getSingleArticle(articleUrls.get(8)), "", articleUrls.get(8), Outlet.CNN.getSourceString(), ""),
+//                        new OutletArticle("Title", new Telegraph().getSingleArticle(articleUrls.get(9)), "", articleUrls.get(9), Outlet.Telegraph.getSourceString(), ""),
+//                        new OutletArticle("Title", new BBCSport().getSingleArticle(articleUrls.get(10)), "", articleUrls.get(10), Outlet.BBCSport.getSourceString(), "")
+//                );
+//
+//                Extractive extractive = new Extractive(articles);
+//
+//                Summary summary = extractive.summarise();
+//
+//                System.out.println(summary.getNodes().stream().map(Node::getSource).collect(Collectors.toList()).toString());
 
 //                Topics topics = new Topics(Utils.getDatabase());
 //                LabelHolder labelHolder = topics.getTopicById("58ff77a2acea826a39311a26");
