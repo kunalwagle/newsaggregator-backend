@@ -255,7 +255,7 @@ const TopicPanelView = ({articles, mediaType, activePage, articleCount, fetchInP
                     last
                     ellipsis
                     boundaryLinks
-                    items={Math.floor(articleCount / 10)}
+                    items={Math.ceil(articleCount / 10)}
                     maxButtons={20}
                     activePage={activePage}
                     onSelect={(eventKey) => handleChangePage(topicId, topic, eventKey)}
